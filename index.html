@@ -204,10 +204,66 @@
     .fq-t{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;font-weight:400;color:var(--t1);text-align:left;line-height:1.35;}
     .fq-i{color:var(--teal);font-size:17px;flex-shrink:0;transition:transform 0.3s;line-height:1;}
     .fq-i.open{transform:rotate(45deg);}
-    .fa{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;background:white;padding:0 26px;}
-    .fa.open{max-height:280px;padding:2px 26px 20px;}
+    .fa{max-height:0;overflow:hidden;transition:max-height 0.5s ease,padding 0.3s;background:white;padding:0 26px;}
+    .fa.open{max-height:600px;padding:2px 26px 22px;}
     .fa p{font-size:14px;font-weight:300;color:var(--t2);line-height:1.78;}
-    .fa p+p{margin-top:8px;}
+    .fa p+p{margin-top:10px;}
+    .fa-highlight{background:var(--teal-light);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:14px 18px;margin:14px 0;}
+    .fa-highlight p{color:var(--t1);font-weight:400;}
+    .fa-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0;}
+    .fa-card{background:var(--bg);border-radius:10px;padding:14px 16px;border:1px solid var(--border);}
+    .fa-card-title{font-size:12px;font-weight:600;color:var(--t1);margin-bottom:4px;letter-spacing:0.02em;}
+    .fa-card-body{font-size:12px;font-weight:300;color:var(--t3);line-height:1.6;}
+    .faq-divider{padding:14px 26px 6px;background:white;}
+    .faq-divider-label{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);}
+
+    /* DEEP DIVE */
+    .deep-section{background:var(--bg);padding:88px 52px;}
+    .deep-section .s-label{color:var(--teal);}
+    .deep-tabs{display:flex;gap:8px;margin-top:40px;flex-wrap:wrap;}
+    .dtab{background:white;border:1.5px solid var(--border);border-radius:100px;padding:9px 20px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:var(--t3);cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+    .dtab.active{background:var(--teal);border-color:var(--teal);color:white;}
+    .dtab:hover:not(.active){border-color:var(--teal);color:var(--teal);}
+    .deep-content{margin-top:32px;}
+    .deep-panel{display:none;}
+    .deep-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;animation:up 0.5s ease both;}
+    .dp-left{}
+    .dp-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,3.5vw,42px);font-weight:300;color:var(--t1);line-height:1.15;letter-spacing:-0.015em;margin-bottom:16px;}
+    .dp-body{font-size:15px;font-weight:300;color:var(--t2);line-height:1.82;margin-bottom:20px;}
+    .dp-body+.dp-body{margin-top:-8px;}
+    .dp-callout{background:white;border:1px solid var(--border);border-radius:14px;padding:22px;margin-top:4px;}
+    .dp-callout-label{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;}
+    .dp-callout-text{font-size:14px;font-weight:300;color:var(--t2);line-height:1.7;}
+    .dp-right{}
+    .dp-visual{background:white;border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+    .dp-visual-header{background:var(--teal);padding:18px 22px;}
+    .dp-visual-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:300;color:white;}
+    .dp-visual-sub{font-size:12px;color:rgba(255,255,255,0.65);margin-top:3px;font-family:'Outfit',sans-serif;}
+    .dp-visual-body{padding:20px 22px;}
+    .dp-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+    .dp-row:last-child{border-bottom:none;}
+    .dp-row-icon{font-size:18px;flex-shrink:0;width:32px;text-align:center;}
+    .dp-row-name{font-size:13px;font-weight:500;color:var(--t1);flex:1;}
+    .dp-row-detail{font-size:12px;color:var(--t3);text-align:right;}
+    .dp-score-compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+    .dp-score-box{border-radius:12px;padding:16px;text-align:center;}
+    .dp-score-num{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;font-weight:300;line-height:1;}
+    .dp-score-lbl{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;}
+    .dp-score-detail{font-size:11px;margin-top:6px;line-height:1.4;}
+    .dp-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+    .dp-bar-name{font-size:12px;color:var(--t2);width:88px;flex-shrink:0;}
+    .dp-bar-track{flex:1;height:5px;background:#F0EDE8;border-radius:3px;overflow:hidden;}
+    .dp-bar-fill{height:100%;border-radius:3px;background:var(--teal);}
+    .dp-bar-pct{font-size:11px;color:var(--t3);width:28px;text-align:right;flex-shrink:0;}
+    .dp-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .dp-type-card{border-radius:10px;padding:14px;position:relative;overflow:hidden;}
+    .dp-type-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:15px;color:white;margin-bottom:4px;}
+    .dp-type-q{font-size:10px;color:rgba(255,255,255,0.68);font-style:italic;line-height:1.45;}
+    .dp-vital-list{display:flex;flex-direction:column;gap:8px;}
+    .dp-vital-item{display:flex;align-items:center;gap:12px;background:var(--bg);border-radius:10px;padding:12px 14px;border:1px solid var(--border);}
+    .dp-vital-icon{font-size:20px;flex-shrink:0;}
+    .dp-vital-name{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:2px;}
+    .dp-vital-desc{font-size:12px;color:var(--t3);line-height:1.5;}
 
     /* BOTTOM CTA */
     .cta-s{background:var(--teal);padding:96px 52px;text-align:center;position:relative;overflow:hidden;}
@@ -265,10 +321,13 @@
       .manifesto-s{padding:72px 28px;}
       .manifesto-wrap{grid-template-columns:1fr;gap:40px;}
       .manifesto-left{position:static;}
-      .offer-section,.dark-s,.arch-section,.faq-section{padding:72px 28px;}
+      .offer-section,.dark-s,.arch-section,.faq-section,.deep-section{padding:72px 28px;}
       .offer-grid{grid-template-columns:1fr 1fr;}
       .arch-grid{grid-template-columns:repeat(3,1fr);}
       .stats-grid{grid-template-columns:1fr 1fr;}
+      .deep-panel.active{grid-template-columns:1fr;}
+      .fa-grid{grid-template-columns:1fr;}
+      .dp-type-grid{grid-template-columns:1fr 1fr;}
       .cta-s{padding:72px 28px;}
       footer{padding:36px 24px 24px;}
     }
@@ -474,40 +533,40 @@
 <!-- WHAT WE OFFER -->
 <section class="offer-section" id="offer">
   <div class="section-inner">
-    <p class="s-label r">What we offer</p>
-    <h2 class="s-head r d1" style="max-width:480px;">Everything your financial life actually needs.</h2>
-    <p class="s-body r d2">Most apps give you one tool. munē gives you a complete system — built around who you are, not just what you spend.</p>
+    <p class="s-label r">What's inside</p>
+    <h2 class="s-head r d1" style="max-width:520px;">Six things working together. Nothing you don't need.</h2>
+    <p class="s-body r d2">Most apps give you one tool and leave you to figure out the rest. munē gives you a complete system — six parts, all connected, all built around who you actually are.</p>
 
     <div class="offer-grid">
       <div class="oc r d1">
         <div class="oc-num">01</div>
-        <div class="oc-title">The Archetype System</div>
-        <div class="oc-body">Six financial archetypes determine your personalized plan, tone, and path forward. Before munē shows you a single number — it understands who you are.</div>
+        <div class="oc-title">Your Financial Type</div>
+        <div class="oc-body">Think of it like a financial love language. munē figures out who you actually are with money first — six types, one of them is you — then builds your entire plan around that. Before a single number. Before a single recommendation.</div>
       </div>
       <div class="oc r d2">
         <div class="oc-num">02</div>
         <div class="oc-title">The Munē Score</div>
-        <div class="oc-body">A 300–850 score across six categories — Cash, Income, Debt, Credit, Build, and Behavior. The first score that sees your whole financial life.</div>
+        <div class="oc-body">Your credit score measures one thing — how well you borrow. The Munē Score measures six. Cash, Income, Debt, Credit, Build, and Behavior. The first score that tells you the truth about your whole financial life.</div>
       </div>
       <div class="oc r d3">
         <div class="oc-num">03</div>
         <div class="oc-title">The 90-Day Foundation Plan</div>
-        <div class="oc-body">One action per day. Built on behavioral science. The Floor number, daily check-ins, and pre-commitments that actually change behavior — not just track it.</div>
+        <div class="oc-body">One action per day. That's it. Built on real behavioral science — the kind that actually changes habits instead of just tracking them. Your plan. Your pace. Nobody else's.</div>
       </div>
       <div class="oc r d1">
         <div class="oc-num">04</div>
-        <div class="oc-title">Financial Vitals</div>
-        <div class="oc-body">Five real-time health signals — Flow, Stress Level, Breathing Room, Debt Weight, and Build. A complete picture that updates every day.</div>
+        <div class="oc-title">The Financial Vitals</div>
+        <div class="oc-body">Five real-time signals — Flow, Stress Level, Breathing Room, Debt Weight, and Build — that together tell you exactly how your financial health looks right now. Like a doctor's visit for your money. Every day.</div>
       </div>
       <div class="oc r d2">
         <div class="oc-num">05</div>
         <div class="oc-title">The Munē Advisor</div>
-        <div class="oc-body">An AI advisor that already knows your archetype, your score, and your plan. The financial conversation nobody was ever willing to have with you.</div>
+        <div class="oc-body">An AI advisor that already knows your financial type, your score, and your plan before you say a word. The financial conversation nobody in your life was ever willing to have with you — honest, specific, and yours.</div>
       </div>
       <div class="oc r d3">
         <div class="oc-num">06</div>
-        <div class="oc-title">Knowledge Library</div>
-        <div class="oc-body">107+ financial terms in plain language. Not a glossary — a conversation. What it is, why it matters for your life, and the one thing to do about it.</div>
+        <div class="oc-title">The Knowledge Library</div>
+        <div class="oc-body">Over 100 financial concepts explained the way a trusted friend would explain them — not a textbook. What it is, why it matters for your life right now, and the one thing to do about it.</div>
       </div>
     </div>
   </div>
@@ -532,9 +591,9 @@
 <!-- ARCHETYPES -->
 <section class="arch-section">
   <div class="section-inner" style="text-align:center;">
-    <p class="s-label r" style="text-align:center;">Who are you with money?</p>
-    <h2 class="s-head r d1" style="margin:0 auto;max-width:440px;">Six archetypes. One of them is you.</h2>
-    <p class="s-body r d2" style="margin:14px auto 0;">Before munē shows you a single number — it understands who you are. Most people read their result and say "how did it know that."</p>
+    <p class="s-label r" style="text-align:center;">Your financial type</p>
+    <h2 class="s-head r d1" style="margin:0 auto;max-width:480px;">Which one sounds like you?</h2>
+    <p class="s-body r d2" style="margin:14px auto 0;">Before munē gives you a single recommendation — it figures out who you actually are with money. Six types. One short quiz. Most people read their result and say "how did it know that."</p>
 
     <div class="arch-grid r d3">
       <div class="ac" style="background:#7B9BAF;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">🌫️</span><div class="ac-n">The Fog</div><div class="ac-q">"I know something's wrong. I just can't bring myself to look."</div></div>
@@ -547,18 +606,261 @@
   </div>
 </section>
 
+<!-- DEEP DIVE — Understanding munē -->
+<section class="deep-section" id="understand">
+  <div class="section-inner">
+    <p class="s-label r">Understand munē</p>
+    <h2 class="s-head r d1" style="max-width:560px;">New to munē? Here's what each part actually does.</h2>
+    <p class="s-body r d2">These aren't just features. Each one was built to solve a specific problem that every other financial tool skips over. Click any tab to learn more.</p>
+
+    <div class="deep-tabs r d3">
+      <button class="dtab active" onclick="showPanel('score')">The Munē Score</button>
+      <button class="dtab" onclick="showPanel('vitals')">The Financial Vitals</button>
+      <button class="dtab" onclick="showPanel('type')">Your Financial Type</button>
+      <button class="dtab" onclick="showPanel('plan')">The Foundation Plan</button>
+      <button class="dtab" onclick="showPanel('advisor')">The Munē Advisor</button>
+    </div>
+
+    <div class="deep-content r d4">
+
+      <!-- MUNĒ SCORE -->
+      <div class="deep-panel active" id="panel-score">
+        <div class="dp-left">
+          <h3 class="dp-title">The Munē Score</h3>
+          <p class="dp-body">Your credit score was invented in 1989 to answer one question for banks — will this person repay a loan? That's a useful question for lenders. It's not the same as asking whether you're actually good with money.</p>
+          <p class="dp-body">The Munē Score measures six categories that together tell the truth about your complete financial health. Cash, Income, Debt, Credit, Build, and Behavior. Each one scored separately. Weighted into one number between 300 and 850.</p>
+          <p class="dp-body">The same scale as a credit score — intentional. So you can hold both numbers side by side and finally see the full picture.</p>
+          <div class="dp-callout">
+            <div class="dp-callout-label">The real difference</div>
+            <div class="dp-callout-text">A person with a 588 credit score due to a late payment three years ago might have $6,200 in savings, zero current debt, and an active retirement account. Their credit score says "Fair." Their Munē Score says "Strong." Same person. The credit score was never designed to see the whole truth. munē is.</div>
+          </div>
+        </div>
+        <div class="dp-right">
+          <div class="dp-visual">
+            <div class="dp-visual-header">
+              <div class="dp-visual-title">Munē Score · 701</div>
+              <div class="dp-visual-sub">Strong · Updated today</div>
+            </div>
+            <div class="dp-visual-body">
+              <div class="dp-score-compare">
+                <div class="dp-score-box" style="background:#FDF4EC;">
+                  <div class="dp-score-num" style="color:#C4723A;">588</div>
+                  <div class="dp-score-lbl" style="color:#C4723A;">Credit Score</div>
+                  <div class="dp-score-detail" style="color:#9B9087;">Fair · One old late payment</div>
+                </div>
+                <div class="dp-score-box" style="background:var(--teal-light);">
+                  <div class="dp-score-num" style="color:var(--teal);">701</div>
+                  <div class="dp-score-lbl" style="color:var(--teal);">Munē Score</div>
+                  <div class="dp-score-detail" style="color:#9B9087;">Strong · Full picture</div>
+                </div>
+              </div>
+              <div class="dp-bar-row"><span class="dp-bar-name">Cash Health</span><div class="dp-bar-track"><div class="dp-bar-fill" style="width:82%"></div></div><span class="dp-bar-pct">82%</span></div>
+              <div class="dp-bar-row"><span class="dp-bar-name">Income</span><div class="dp-bar-track"><div class="dp-bar-fill" style="width:76%"></div></div><span class="dp-bar-pct">76%</span></div>
+              <div class="dp-bar-row"><span class="dp-bar-name">Debt Health</span><div class="dp-bar-track"><div class="dp-bar-fill" style="width:91%"></div></div><span class="dp-bar-pct">91%</span></div>
+              <div class="dp-bar-row"><span class="dp-bar-name">Credit</span><div class="dp-bar-track"><div class="dp-bar-fill" style="width:58%;background:#E8965A;"></div></div><span class="dp-bar-pct">58%</span></div>
+              <div class="dp-bar-row"><span class="dp-bar-name">Build Health</span><div class="dp-bar-track"><div class="dp-bar-fill" style="width:71%"></div></div><span class="dp-bar-pct">71%</span></div>
+              <div class="dp-bar-row"><span class="dp-bar-name">Behavior</span><div class="dp-bar-track"><div class="dp-bar-fill" style="width:88%"></div></div><span class="dp-bar-pct">88%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINANCIAL VITALS -->
+      <div class="deep-panel" id="panel-vitals">
+        <div class="dp-left">
+          <h3 class="dp-title">The Financial Vitals</h3>
+          <p class="dp-body">When you go to the doctor they don't just weigh you and send you home. They check five things — blood pressure, heart rate, temperature, oxygen, and breathing. Together those five signals tell the story of how your body is actually doing right now.</p>
+          <p class="dp-body">The Financial Vitals do the same thing for your money. Five signals, updated every day, that together give you a real-time picture of your financial health — not just your account balance.</p>
+          <p class="dp-body">Each vital has a status — Critical, Low, Building, Steady, Strong, or Excellent — and shows you the one action that would move it in the right direction.</p>
+          <div class="dp-callout">
+            <div class="dp-callout-label">Why this matters</div>
+            <div class="dp-callout-text">Most people only check their finances when something is wrong — usually when the balance is low or a bill is due. The Vitals give you a reason to check in daily because they show progress even when your bank balance hasn't moved yet. Behavior Health goes up every time you show up. That's visible momentum on Day 7, not just Day 90.</div>
+          </div>
+        </div>
+        <div class="dp-right">
+          <div class="dp-visual">
+            <div class="dp-visual-header">
+              <div class="dp-visual-title">Your Financial Vitals</div>
+              <div class="dp-visual-sub">Updated today · Day 14</div>
+            </div>
+            <div class="dp-visual-body">
+              <div class="dp-vital-list">
+                <div class="dp-vital-item"><span class="dp-vital-icon">❤️</span><div><div class="dp-vital-name">Flow</div><div class="dp-vital-desc">The rhythm of money moving through your life. Income arriving, bills paid on time, healthy pattern between earning and spending.</div></div></div>
+                <div class="dp-vital-item"><span class="dp-vital-icon">😮‍💨</span><div><div class="dp-vital-name">Stress Level</div><div class="dp-vital-desc">How much financial weight you're carrying. Measured through spending patterns, check-in consistency, and behavioral signals.</div></div></div>
+                <div class="dp-vital-item"><span class="dp-vital-icon">🫁</span><div><div class="dp-vital-name">Breathing Room</div><div class="dp-vital-desc">The space between you and a financial emergency. Your emergency fund, monthly margin, and days of savings coverage.</div></div></div>
+                <div class="dp-vital-item"><span class="dp-vital-icon">⚖️</span><div><div class="dp-vital-name">Debt Weight</div><div class="dp-vital-desc">How heavy your debt load is relative to your income. Whether total debt is growing or shrinking.</div></div></div>
+                <div class="dp-vital-item"><span class="dp-vital-icon">🌱</span><div><div class="dp-vital-name">Build</div><div class="dp-vital-desc">Whether your financial future is actually getting stronger. Net worth growth, investments, retirement pace.</div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINANCIAL TYPE -->
+      <div class="deep-panel" id="panel-type">
+        <div class="dp-left">
+          <h3 class="dp-title">Your Financial Type</h3>
+          <p class="dp-body">Think about the 5 Love Languages. The reason that idea spread so fast is that it gave people a framework to understand something they already felt but couldn't name. "I'm an acts of service person" immediately explains years of miscommunication.</p>
+          <p class="dp-body">Your financial type works the same way. It names the pattern you've always had with money — the way you feel when you get paid, the way you avoid or engage with your finances, the reason every budgeting app you've tried lasted three weeks.</p>
+          <p class="dp-body">There are six types. You take a five-question quiz. munē identifies your primary type and secondary trait. Everything from that moment forward — your plan, your communication style, your daily actions — is built around that combination.</p>
+          <div class="dp-callout">
+            <div class="dp-callout-label">Why this changes everything</div>
+            <div class="dp-callout-text">Generic financial advice fails because it assumes everyone has the same relationship with money. A Fog and a Current are completely different people. Giving them the same plan is like giving two people the same glasses. One of them can finally see. The other one is squinting through the wrong prescription.</div>
+          </div>
+        </div>
+        <div class="dp-right">
+          <div class="dp-visual">
+            <div class="dp-visual-header">
+              <div class="dp-visual-title">The Six Financial Types</div>
+              <div class="dp-visual-sub">One short quiz · Two minutes</div>
+            </div>
+            <div class="dp-visual-body">
+              <div class="dp-type-grid">
+                <div class="dp-type-card" style="background:#7B9BAF;"><div class="dp-type-name">The Fog</div><div class="dp-type-q">"I know something's wrong. I just can't bring myself to look."</div></div>
+                <div class="dp-type-card" style="background:#E8965A;"><div class="dp-type-name">The Spark</div><div class="dp-type-q">"I spend it before my bills see it."</div></div>
+                <div class="dp-type-card" style="background:#D97B5F;"><div class="dp-type-name">The Flame</div><div class="dp-type-q">"I save everything but I'm still scared."</div></div>
+                <div class="dp-type-card" style="background:#2A9D8F;"><div class="dp-type-name">The Current</div><div class="dp-type-q">"I'm building. I want to make sure I'm building right."</div></div>
+                <div class="dp-type-card" style="background:#5B8DB8;"><div class="dp-type-name">The Wave</div><div class="dp-type-q">"My income varies. My system can't."</div></div>
+                <div class="dp-type-card" style="background:#7C6BAF;"><div class="dp-type-name">The Tide</div><div class="dp-type-q">"Steady check. Never seems like enough."</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOUNDATION PLAN -->
+      <div class="deep-panel" id="panel-plan">
+        <div class="dp-left">
+          <h3 class="dp-title">The 90-Day Foundation Plan</h3>
+          <p class="dp-body">Research on habit formation is clear — the average person needs 66 days to build an automatic habit. Not 21. Not willpower. Consistent, small actions repeated long enough that the behavior stops requiring a decision.</p>
+          <p class="dp-body">The Foundation Plan is 90 days. Three phases. One action per day. Not five things to fix — one. The most impactful single action for where you are right now. Complete it. Come back tomorrow.</p>
+          <p class="dp-body">The streak is the mechanism. Once you've shown up for 14 days in a row, missing Day 15 feels wrong. That discomfort is the habit forming. munē tracks it, celebrates it, and protects it — including a streak shield so one missed day doesn't undo two weeks of progress.</p>
+          <div class="dp-callout">
+            <div class="dp-callout-label">The Floor number</div>
+            <div class="dp-callout-text">Before your Foundation Plan starts, munē asks one question — what's the lowest your bank balance can go before your stomach drops? That number is your Floor. munē never suggests any action that pushes you below it. Ever. It's the wall between financial engagement and financial paralysis.</div>
+          </div>
+        </div>
+        <div class="dp-right">
+          <div class="dp-visual">
+            <div class="dp-visual-header">
+              <div class="dp-visual-title">Foundation Plan · The Fog</div>
+              <div class="dp-visual-sub">Phase 1 of 3 · Days 1–30</div>
+            </div>
+            <div class="dp-visual-body">
+              <div class="dp-row"><div class="dp-row-icon">1️⃣</div><div class="dp-row-name">Day 1 — Set your Floor number</div><div class="dp-row-detail" style="color:var(--teal);">Done ✓</div></div>
+              <div class="dp-row"><div class="dp-row-icon">3️⃣</div><div class="dp-row-name">Day 3 — First check-in. One number.</div><div class="dp-row-detail" style="color:var(--teal);">Done ✓</div></div>
+              <div class="dp-row"><div class="dp-row-icon">7️⃣</div><div class="dp-row-name">Day 7 — Identify your 3 most urgent bills</div><div class="dp-row-detail" style="color:var(--teal);">Done ✓</div></div>
+              <div class="dp-row"><div class="dp-row-icon">🔟</div><div class="dp-row-name">Day 10 — Transfer $25 to savings</div><div class="dp-row-detail" style="color:#E8965A;">Today</div></div>
+              <div class="dp-row"><div class="dp-row-icon">📅</div><div class="dp-row-name">Day 14 — Set one bill on autopay</div><div class="dp-row-detail" style="color:var(--t3);">Upcoming</div></div>
+              <div class="dp-row"><div class="dp-row-icon">🏆</div><div class="dp-row-name">Day 30 — Phase 1 complete</div><div class="dp-row-detail" style="color:var(--t3);">Upcoming</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MUNĒ ADVISOR -->
+      <div class="deep-panel" id="panel-advisor">
+        <div class="dp-left">
+          <h3 class="dp-title">The Munē Advisor</h3>
+          <p class="dp-body">Every other financial chatbot starts from zero. You type your question. It gives you a generic answer. You could have Googled it.</p>
+          <p class="dp-body">The Munē Advisor starts from everything. Before you type a word — it already knows your financial type, your score, your vitals, your Foundation Plan day, your Floor number, and the thing you said keeps you up at night. Every response is calibrated to you specifically.</p>
+          <p class="dp-body">It speaks in the munē voice throughout — the calm, trusted person who knows your situation and tells you the truth. And when a question genuinely requires a licensed professional, it says so clearly and helps you prepare for that conversation instead of pretending it can answer something it can't.</p>
+          <div class="dp-callout">
+            <div class="dp-callout-label">What it can and can't do</div>
+            <div class="dp-callout-text">The Advisor explains how things work, what your numbers mean, and what your options are. It doesn't tell you which specific stocks to buy or give you legal or tax advice — those decisions need a licensed professional. It goes as far as education allows — which is further than most people realize — then builds the bridge to the right professional when needed.</div>
+          </div>
+        </div>
+        <div class="dp-right">
+          <div class="dp-visual">
+            <div class="dp-visual-header">
+              <div class="dp-visual-title">The Munē Advisor</div>
+              <div class="dp-visual-sub">Knows your full picture · Always in your corner</div>
+            </div>
+            <div class="dp-visual-body">
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div style="background:var(--bg);border-radius:10px 10px 10px 2px;padding:12px 14px;border:1px solid var(--border);">
+                  <div style="font-size:11px;color:var(--teal);font-weight:600;margin-bottom:5px;">You</div>
+                  <div style="font-size:13px;color:var(--t1);line-height:1.55;">Why does my score keep going up even though my balance hasn't changed?</div>
+                </div>
+                <div style="background:var(--teal-light);border-radius:10px 10px 2px 10px;padding:12px 14px;border:1px solid rgba(42,157,143,0.15);">
+                  <div style="font-size:11px;color:var(--teal);font-weight:600;margin-bottom:5px;">Munē Advisor</div>
+                  <div style="font-size:13px;color:var(--t2);line-height:1.6;">Because your Behavior Health is climbing. You've checked in 14 days in a row and completed 11 of 14 daily actions. munē is recognizing that you're building the habit — and that matters before the bank balance moves. Keep going. The balance follows the behavior.</div>
+                </div>
+                <div style="background:var(--bg);border-radius:10px 10px 10px 2px;padding:12px 14px;border:1px solid var(--border);">
+                  <div style="font-size:11px;color:var(--teal);font-weight:600;margin-bottom:5px;">You</div>
+                  <div style="font-size:13px;color:var(--t1);line-height:1.55;">Should I open a Roth IRA?</div>
+                </div>
+                <div style="background:var(--teal-light);border-radius:10px 10px 2px 10px;padding:12px 14px;border:1px solid rgba(42,157,143,0.15);">
+                  <div style="font-size:11px;color:var(--teal);font-weight:600;margin-bottom:5px;">Munē Advisor</div>
+                  <div style="font-size:13px;color:var(--t2);line-height:1.6;">Based on where your Breathing Room vital is right now — your emergency fund isn't fully funded yet. I'd focus there first. Once it hits $1,000, opening a Roth is the exact right next move. Here's why, and here's how it works when you're ready.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="faq-section" id="faq">
   <div class="section-inner">
-    <p class="s-label r" style="text-align:center;">Answered honestly</p>
-    <h2 class="s-head r d1" style="text-align:center;margin:0 auto;max-width:380px;">Everything you want to know.</h2>
+    <p class="s-label r" style="text-align:center;">Questions answered honestly</p>
+    <h2 class="s-head r d1" style="text-align:center;margin:0 auto;max-width:420px;">Everything you want to know.</h2>
 
     <div class="faq-list r d2">
-      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">Is this a real app or just a landing page?</span><span class="fq-i">+</span></button><div class="fa"><p>The app is in active development. The complete product framework exists — all six archetype systems, a production-ready database, interactive prototype screens, and the full Advisor system. The waitlist builds the founding community before public launch. We're targeting Q3 2026 for the first alpha users.</p></div></div>
-      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">What does it cost?</span><span class="fq-i">+</span></button><div class="fa"><p>munē has a free tier with genuine core functionality and a paid tier — munē Personal — at $9.99/month or $79.99/year. Founding members from the waitlist lock in $49 lifetime access. Pay once. Full access forever. That offer is available to the first 100 people who convert.</p></div></div>
-      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">Is my financial data safe?</span><span class="fq-i">+</span></button><div class="fa"><p>Your data is yours. Bank connections run through Plaid — the same infrastructure behind Venmo and Robinhood. munē reads transactions and balances. We never store your credentials. All data is encrypted at rest and in transit. We never sell your data. Manual mode is always available if you prefer not to connect accounts.</p></div></div>
-      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">Is this financial advice?</span><span class="fq-i">+</span></button><div class="fa"><p>munē provides financial education — not licensed advice. We explain how the system works, what your numbers mean, and what options exist. The decision is always yours. When a question genuinely requires a licensed professional, we say so clearly and help you prepare for that conversation.</p></div></div>
-      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">I'm a freelancer / creator / self-employed. Is this for me?</span><span class="fq-i">+</span></button><div class="fa"><p>Yes. Explicitly. The Wave archetype covers quarterly taxes, business credit building, income smoothing, self-employment deductions, and creator-specific financial architecture — in plain language with no judgment about your income source.</p></div></div>
+
+      <div class="faq-divider"><div class="faq-divider-label">About munē</div></div>
+
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">Is this a real app or just a landing page?</span><span class="fq-i">+</span></button><div class="fa"><p>The app is in active development. Everything is designed and built — all six financial types, a production-ready database, interactive prototype screens, and the full Advisor. The waitlist builds the founding community before public launch. We're targeting Q3 2026 for the first users.</p></div></div>
+
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">What does it cost?</span><span class="fq-i">+</span></button><div class="fa"><p>munē has a free tier with genuine core features and a paid tier — munē Personal — at $9.99/month or $79.99/year. Founding members from the waitlist lock in $49 lifetime access. Pay once. Full access forever. That offer is available to the first 100 people who join.</p></div></div>
+
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">Is my financial data safe?</span><span class="fq-i">+</span></button><div class="fa"><p>Your data is yours. Bank connections run through Plaid — the same infrastructure behind Venmo and Robinhood. munē reads your transactions and balances. We never store your bank login. Everything is encrypted. Manual mode is always available if you prefer not to connect accounts at all.</p></div></div>
+
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">Is this financial advice?</span><span class="fq-i">+</span></button><div class="fa"><p>munē teaches you how money works — it doesn't tell you what to do with yours. We explain concepts, show you what your numbers mean, and lay out your options. The decision is always yours. When something genuinely needs a licensed professional, we say so clearly and help you get ready for that conversation.</p></div></div>
+
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">I'm a freelancer / creator / self-employed. Is this for me?</span><span class="fq-i">+</span></button><div class="fa"><p>Yes. Explicitly. If your income doesn't come from a regular paycheck — munē was built for you too. Quarterly taxes, building business credit, smoothing out variable income, knowing what you can deduct — all of it covered in plain language with no judgment about how you earn.</p></div></div>
+
+      <div class="faq-divider" style="margin-top:4px;"><div class="faq-divider-label">Understanding munē terms</div></div>
+
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">What is the Munē Score and how is it different from my credit score?</span><span class="fq-i">+</span></button><div class="fa">
+        <p>Your credit score was built in 1989 to answer one question for lenders — will this person repay a loan? It does that well. But it says nothing about your savings, your income stability, your investment activity, or whether you're actually making financial progress.</p>
+        <div class="fa-highlight"><p>The Munē Score measures six things: Cash Health, Income Health, Debt Health, Credit Health, Build Health, and Behavior Health. Each scored separately. Weighted into a single number from 300 to 850 — the same scale as a credit score, so you can hold both side by side.</p></div>
+        <p>Someone with a 588 credit score from one late payment three years ago might have $6,200 in savings and no current debt. Their credit score says "Fair." Their Munē Score might say "Strong." Same person. More truth.</p>
+      </div></div>
+
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">What are the Financial Vitals?</span><span class="fq-i">+</span></button><div class="fa">
+        <p>Think of a doctor's visit. They don't just weigh you and send you home — they check five signals that together tell the story of how you're actually doing. The Financial Vitals work the same way. Five signals, updated every day.</p>
+        <div class="fa-grid">
+          <div class="fa-card"><div class="fa-card-title">❤️ Flow</div><div class="fa-card-body">The rhythm of money moving through your life — income arriving, bills paid, healthy patterns.</div></div>
+          <div class="fa-card"><div class="fa-card-title">😮‍💨 Stress Level</div><div class="fa-card-body">How much financial weight you're carrying emotionally, measured through behavioral signals.</div></div>
+          <div class="fa-card"><div class="fa-card-title">🫁 Breathing Room</div><div class="fa-card-body">The space between you and a financial emergency — your emergency fund and monthly margin.</div></div>
+          <div class="fa-card"><div class="fa-card-title">⚖️ Debt Weight</div><div class="fa-card-body">How heavy your debt load is relative to your income and whether it's growing or shrinking.</div></div>
+        </div>
+        <p>Plus <strong>🌱 Build</strong> — whether your financial future is actually getting stronger through net worth growth and investment activity. Together they replace the anxiety of checking your balance with a complete daily picture.</p>
+      </div></div>
+
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">What is my Financial Type and how does munē figure it out?</span><span class="fq-i">+</span></button><div class="fa">
+        <p>Your financial type is the pattern you've always had with money — the way you think about it, avoid it, spend it, save it, or stress about it. Most people have never had a name for it. munē gives you one.</p>
+        <p>You answer five questions — honest questions about how money feels, not what you know about it. munē identifies your primary type and a secondary trait. That combination determines your personalized plan, your communication style, your daily actions, and the path forward that actually fits how you're wired.</p>
+        <div class="fa-highlight"><p>There are six financial types: The Fog, The Spark, The Flame, The Current, The Wave, and The Tide. Each one describes a real, specific relationship with money. Most people read their result and say "how did it know that."</p></div>
+      </div></div>
+
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">What is the Floor number?</span><span class="fq-i">+</span></button><div class="fa">
+        <p>Your Floor is the lowest your bank account balance can go before your stomach drops. It's personal — some people's Floor is $200, some people's is $2,000. Neither is wrong.</p>
+        <p>munē asks you to set it before anything else. Then it protects it. Every recommendation, every action, every suggestion from munē takes your Floor into account. We will never tell you to do something that pushes you below it.</p>
+        <div class="fa-highlight"><p>The Floor isn't a minimum balance requirement. It's a psychological safety line. When your balance is above it — you can look at your finances without anxiety. Below it — the stress spikes and the avoidance kicks in. Protecting the Floor protects your ability to stay engaged with your money.</p></div>
+      </div></div>
+
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">What is the 90-Day Foundation Plan?</span><span class="fq-i">+</span></button><div class="fa">
+        <p>The Foundation Plan is a 90-day daily action system built specifically for your financial type. One action per day. Not a list of everything wrong — the single most impactful move for where you are right now.</p>
+        <p>Three phases. Phase 1 makes it safe to look at your finances and builds the daily check-in habit. Phase 2 builds real financial stability — emergency fund, automated bills, reduced debt weight. Phase 3 starts building wealth — investments, income growth, the next level specific to your type.</p>
+        <div class="fa-highlight"><p>Research shows the average person needs 66 days to build an automatic habit. The Foundation Plan is 90 days for a reason. By Day 90 the daily check-in isn't a task anymore — it's part of who you are.</p></div>
+      </div></div>
+
     </div>
   </div>
 </section>
@@ -592,7 +894,8 @@
       <div class="ftag">The knowledge you were never given. Finally made for you.</div>
     </div>
     <div class="flinks">
-      <a href="#offer" class="fl">What we offer</a>
+      <a href="#offer" class="fl">What's inside</a>
+      <a href="#understand" class="fl">How it works</a>
       <a href="#faq" class="fl">FAQ</a>
       <a href="#waitlist" class="fl">Join waitlist</a>
       <a href="#privacy" class="fl" id="privacy">Privacy Policy</a>
@@ -606,6 +909,13 @@
 </footer>
 
 <script>
+  function showPanel(id){
+    document.querySelectorAll('.deep-panel').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('active'));
+    document.getElementById('panel-'+id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
   window.addEventListener('scroll',()=>{
     document.getElementById('nav').style.boxShadow=window.scrollY>50?'0 2px 20px rgba(0,0,0,0.06)':'none';
   });
