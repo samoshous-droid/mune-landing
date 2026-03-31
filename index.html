@@ -1,369 +1,896 @@
-// ── SUPABASE WAITLIST ──
-const SUPABASE_URL = "https://maolkyrlfojkmiuppcsy.supabase.co";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>munē — Finally built for you.</title>
+  <meta name="description" content="The first financial wellness platform built around who you actually are with money. Not a tracker. Not a budget. A complete system — personalized to you."/>
+  <meta property="og:title" content="munē — Finally built for you."/>
+  <meta property="og:description" content="The first financial platform that understands who you are before it tells you what to do. Join the waitlist."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --teal:#1B8F82;--teal-dark:#136B61;--teal-light:#E0F5F2;
+      --espresso:#3A2318;--bg:#F4EFE6;--white:#fff;
+      --border:#D8D0C3;--dark:#1E1E1E;
+      --t1:#1A1A1A;--t2:#4A3F38;--t3:#8A7D74;
+      --gold:#C9A96E;--gold-light:#E8D5A3;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6;}
 
-async function saveToWaitlist(email, source) {
-  try {
-    const res = await fetch(`${SUPABASE_URL}/functions/v1/waitlist-signup`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, source }),
-    });
-    const data = await res.json();
-    return data.success === true;
-  } catch (err) {
-    console.error("Waitlist error:", err);
-    return false;
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.03'/%3E%3C/svg%3E");opacity:0.4;}
+
+    #spotlight{position:fixed;pointer-events:none;z-index:0;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(27,143,130,0.06) 0%,transparent 65%);transform:translate(-50%,-50%);transition:left 0.8s cubic-bezier(0.23,1,0.32,1),top 0.8s cubic-bezier(0.23,1,0.32,1);left:60%;top:40%;}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 52px;display:flex;align-items:center;justify-content:space-between;background:rgba(244,239,230,0.72);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid rgba(255,255,255,0.6);box-shadow:0 1px 0 rgba(201,169,110,0.15),inset 0 1px 0 rgba(255,255,255,0.8);transition:box-shadow 0.3s;}
+    .mark{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:400;letter-spacing:-0.02em;text-decoration:none;}
+    .mark .mun{color:var(--espresso);}
+    .mark .eb{color:var(--teal);}
+    .nav-cta{background:linear-gradient(135deg,#1B8F82 0%,#136B61 50%,#1B8F82 100%);background-size:200% 200%;color:white;border:none;border-radius:10px;padding:10px 22px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:all 0.3s;letter-spacing:0.01em;box-shadow:0 1px 0 rgba(255,255,255,0.2) inset,0 2px 8px rgba(27,143,130,0.3);position:relative;overflow:hidden;}
+    .nav-cta::after{content:'';position:absolute;top:-50%;left:-60%;width:40%;height:200%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);transform:skewX(-20deg);transition:left 0.5s;}
+    .nav-cta:hover{background-position:right center;transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,0.2) inset,0 4px 16px rgba(27,143,130,0.4);}
+    .nav-cta:hover::after{left:120%;}
+
+    .hero-outer{max-width:1200px;margin:0 auto;}
+    .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:110px 52px 64px;gap:0;position:relative;}
+    .bg-arc{position:fixed;border-radius:50%;pointer-events:none;z-index:0;transform-origin:center center;}
+    .bg-arc-1{border:1px solid rgba(27,143,130,0.08);animation:breathe 8s ease-in-out infinite;}
+    .bg-arc-2{border:1px solid rgba(27,143,130,0.06);animation:breathe2 11s ease-in-out infinite;}
+    .bg-arc-3{border:1px solid rgba(27,143,130,0.04);animation:breathe3 14s ease-in-out infinite;}
+    .bg-glow{position:fixed;pointer-events:none;z-index:0;border-radius:50%;background:radial-gradient(circle,rgba(27,143,130,0.09) 0%,transparent 70%);animation:glowpulse 9s ease-in-out infinite;}
+    .hero-left{position:relative;z-index:2;padding-right:52px;}
+    .hero-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;opacity:0;animation:up 0.8s ease 0.1s forwards;}
+    .e-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:blink 2.5s ease-in-out infinite;}
+    .e-text{font-size:11px;font-weight:500;color:var(--t3);letter-spacing:0.12em;text-transform:uppercase;}
+    h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(50px,5.8vw,76px);font-weight:300;line-height:1.06;letter-spacing:-0.028em;color:var(--t1);margin-bottom:20px;opacity:0;animation:up 0.9s ease 0.2s forwards;}
+    h1 em{font-style:italic;color:var(--teal);}
+    .hero-sub{font-size:17px;font-weight:300;color:var(--t2);line-height:1.76;margin-bottom:36px;max-width:420px;opacity:0;animation:up 0.9s ease 0.3s forwards;}
+    .form-wrap{opacity:0;animation:up 0.9s ease 0.4s forwards;}
+    .email-row{display:flex;gap:8px;margin-bottom:11px;}
+    .email-input{flex:1;background:rgba(255,255,255,0.9);border:1px solid rgba(201,169,110,0.25);border-radius:11px;padding:14px 18px;font-family:'Outfit',sans-serif;font-size:15px;color:var(--t1);outline:none;transition:all 0.2s;box-shadow:inset 0 1px 3px rgba(0,0,0,0.06),0 1px 0 rgba(255,255,255,0.9);}
+    .email-input::placeholder{color:var(--t3);}
+    .email-input:focus{border-color:var(--teal);box-shadow:inset 0 1px 3px rgba(0,0,0,0.04),0 0 0 3px rgba(27,143,130,0.1);}
+    .submit-btn{background:linear-gradient(135deg,#1B8F82 0%,#136B61 50%,#1B8F82 100%);background-size:200% 200%;color:white;border:none;border-radius:11px;padding:14px 26px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all 0.3s;position:relative;overflow:hidden;box-shadow:0 1px 0 rgba(255,255,255,0.15) inset,0 4px 16px rgba(27,143,130,0.35);}
+    .submit-btn::after{content:'';position:absolute;top:-50%;left:-60%;width:40%;height:200%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transform:skewX(-20deg);transition:left 0.5s;}
+    .submit-btn:hover{background-position:right center;transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,0.15) inset,0 6px 20px rgba(27,143,130,0.45);}
+    .submit-btn:hover::after{left:120%;}
+    .form-note{font-size:12px;color:var(--t3);line-height:1.6;}
+    .form-note a{color:var(--teal);text-decoration:none;}
+    .form-success{display:none;align-items:center;gap:12px;background:var(--teal-light);border:1px solid rgba(42,157,143,0.18);border-radius:11px;padding:16px 20px;}
+    .form-success.show{display:flex;animation:up 0.5s ease both;}
+    .s-icon{width:30px;height:30px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+    .s-text{font-size:14px;color:var(--t2);line-height:1.5;}
+    .s-text strong{color:var(--t1);font-weight:600;display:block;margin-bottom:1px;}
+    .email-row.hide{display:none;}
+    .trust{display:flex;align-items:center;gap:20px;margin-top:20px;flex-wrap:wrap;opacity:0;animation:up 0.9s ease 0.5s forwards;}
+    .ti{font-size:12px;color:var(--t3);display:flex;align-items:center;gap:5px;}
+    .ti::before{content:'';width:3px;height:3px;border-radius:50%;background:var(--teal);flex-shrink:0;}
+
+    .phones{position:relative;width:100%;max-width:480px;height:560px;opacity:0;animation:up 1s ease 0.35s forwards;}
+    .phone{position:absolute;border-radius:34px;overflow:hidden;border:1px solid rgba(0,0,0,0.07);}
+    .phone-c{width:224px;height:456px;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;box-shadow:0 36px 88px rgba(0,0,0,0.2),0 8px 24px rgba(0,0,0,0.1);}
+    .phone-l{width:194px;height:396px;left:2px;top:50%;transform:translateY(-52%) rotate(-6deg);z-index:2;box-shadow:0 20px 56px rgba(0,0,0,0.14);filter:brightness(0.86);}
+    .phone-r{width:194px;height:396px;right:2px;top:50%;transform:translateY(-48%) rotate(6deg);z-index:2;box-shadow:0 20px 56px rgba(0,0,0,0.14);filter:brightness(0.86);}
+    .ps{width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden;}
+    .s-reveal{background:#7B9BAF;}
+    .sr-head{background:#7B9BAF;padding:22px 18px 16px;position:relative;overflow:hidden;flex-shrink:0;}
+    .sr-arc{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,0.11);pointer-events:none;}
+    .sr-eye{font-size:7px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.58);font-family:'Outfit',sans-serif;margin-bottom:7px;}
+    .sr-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:21px;font-weight:400;color:white;display:flex;align-items:center;gap:7px;margin-bottom:6px;}
+    .sr-q{font-family:'Cormorant Garamond',Georgia,serif;font-size:9px;font-style:italic;color:rgba(255,255,255,0.76);line-height:1.5;}
+    .sr-body{background:#EEF3F7;flex:1;padding:13px 15px;display:flex;flex-direction:column;gap:9px;overflow:hidden;}
+    .sr-lbl{font-size:6.5px;letter-spacing:0.12em;text-transform:uppercase;color:#4A7A95;font-family:'Outfit',sans-serif;margin-bottom:2px;}
+    .sr-txt{font-family:'Outfit',sans-serif;font-size:8px;line-height:1.65;color:#2C2C2C;font-weight:300;}
+    .sr-truth{background:white;border-radius:7px;padding:9px;border-left:3px solid #7B9BAF;}
+    .sr-what{background:#7B9BAF;border-radius:7px;padding:8px 10px;}
+    .sr-cta{background:#7B9BAF;border-radius:7px;padding:8px;text-align:center;font-family:'Outfit',sans-serif;font-size:7.5px;font-weight:600;color:white;margin-top:auto;}
+    .s-home{background:#F7F4EF;}
+    .sh-head{background:#2A9D8F;padding:16px 14px 12px;}
+    .sh-greet{font-family:'Cormorant Garamond',Georgia,serif;font-size:15px;font-weight:300;color:white;margin-bottom:2px;}
+    .sh-sub{font-size:7px;color:rgba(255,255,255,0.7);font-family:'Outfit',sans-serif;}
+    .sh-score{background:rgba(255,255,255,0.14);border-radius:6px;padding:7px 9px;margin-top:9px;display:flex;align-items:center;justify-content:space-between;}
+    .sh-snum{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;color:white;font-weight:300;}
+    .sh-slbl{font-size:6.5px;color:rgba(255,255,255,0.6);font-family:'Outfit',sans-serif;text-align:right;}
+    .sh-body{padding:11px 12px;display:flex;flex-direction:column;gap:6px;flex:1;overflow:hidden;}
+    .sh-sec{font-size:6.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);font-family:'Outfit',sans-serif;margin-bottom:3px;}
+    .vrow{display:flex;align-items:center;gap:7px;background:white;border-radius:7px;padding:6px 8px;border:1px solid #F0EDE8;}
+    .vi{font-size:10px;flex-shrink:0;}
+    .vn{font-family:'Outfit',sans-serif;font-size:7px;color:var(--t2);flex:1;}
+    .vd{display:flex;gap:2px;}
+    .vdot{width:5px;height:5px;border-radius:50%;background:#E8E2D9;}
+    .vdot.on{background:#2A9D8F;}
+    .vdot.w{background:#E8965A;}
+    .sh-action{background:#2A9D8F;border-radius:7px;padding:8px 9px;margin-top:1px;}
+    .sha-lbl{font-family:'Outfit',sans-serif;font-size:6.5px;color:rgba(255,255,255,0.7);}
+    .sha-txt{font-family:'Outfit',sans-serif;font-size:7.5px;font-weight:500;color:white;line-height:1.4;margin-top:2px;}
+    .s-score{background:#F7F4EF;}
+    .ss-head{background:#2C2C2C;padding:16px 14px 12px;}
+    .ss-eye{font-size:6.5px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.45);font-family:'Outfit',sans-serif;margin-bottom:7px;}
+    .ss-num{font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;font-weight:300;color:white;line-height:1;}
+    .ss-rat{font-size:7.5px;font-weight:600;color:var(--teal);font-family:'Outfit',sans-serif;margin-top:3px;letter-spacing:0.05em;text-transform:uppercase;}
+    .ss-body{padding:11px 12px;flex:1;overflow:hidden;}
+    .sc-sec{font-size:6.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);font-family:'Outfit',sans-serif;margin-bottom:8px;}
+    .sc-row{display:flex;align-items:center;gap:6px;margin-bottom:6px;}
+    .sc-name{font-size:7px;color:var(--t2);font-family:'Outfit',sans-serif;width:62px;flex-shrink:0;}
+    .sc-track{flex:1;height:4px;background:#F0EDE8;border-radius:2px;overflow:hidden;}
+    .sc-fill{height:100%;border-radius:2px;background:var(--teal);}
+    .sc-pct{font-size:6.5px;color:var(--t3);font-family:'Outfit',sans-serif;width:20px;text-align:right;flex-shrink:0;}
+    .sc-vs{background:white;border-radius:7px;padding:7px 9px;margin-top:7px;border:1px solid #F0EDE8;}
+    .vs-lbl{font-size:6.5px;color:var(--t3);font-family:'Outfit',sans-serif;margin-bottom:4px;}
+    .vs-row{display:flex;align-items:center;justify-content:space-between;}
+    .vs-a{font-family:'Cormorant Garamond',Georgia,serif;font-size:12px;color:#C4723A;}
+    .vs-b{font-family:'Cormorant Garamond',Georgia,serif;font-size:12px;color:var(--teal);}
+    .vs-mid{font-size:6.5px;color:var(--t3);font-family:'Outfit',sans-serif;}
+
+    .manifesto-s{background:#111111;padding:96px 52px;position:relative;}
+    .manifesto-s::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.5),transparent);}
+    .manifesto-s::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.3),transparent);}
+    .manifesto-wrap{display:grid;grid-template-columns:1fr 1.6fr;gap:72px;align-items:start;max-width:1100px;margin:0 auto;}
+    .manifesto-left{position:sticky;top:120px;}
+    .manifesto-headline{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(32px,4vw,48px);font-weight:300;line-height:1.15;letter-spacing:-0.02em;color:white;margin-top:12px;}
+    .manifesto-right{display:flex;flex-direction:column;gap:36px;}
+    .manifesto-statement{display:flex;gap:20px;align-items:flex-start;}
+    .ms-marker{width:2px;height:auto;min-height:100%;background:linear-gradient(180deg,#C9A96E,rgba(201,169,110,0.3));flex-shrink:0;border-radius:2px;align-self:stretch;}
+    .ms-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:21px;font-weight:400;color:white;line-height:1.3;margin-bottom:10px;letter-spacing:-0.01em;}
+    .ms-body{font-size:15px;font-weight:300;color:rgba(255,255,255,0.52);line-height:1.8;}
+    .manifesto-pull{border-top:1px solid rgba(201,169,110,0.2);padding-top:32px;margin-top:4px;}
+    .manifesto-pull p{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(19px,2.4vw,25px);font-weight:300;font-style:italic;color:rgba(201,169,110,0.75);line-height:1.6;}
+
+    .offer-section{background:white;padding:88px 52px;}
+    .section-inner{max-width:1100px;margin:0 auto;}
+    .s-label{font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;}
+    .s-head{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(30px,4.2vw,48px);font-weight:300;line-height:1.15;letter-spacing:-0.015em;color:var(--t1);margin-bottom:16px;}
+    .s-body{font-size:16px;font-weight:300;color:var(--t2);line-height:1.8;max-width:560px;}
+    .offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:48px;}
+    .oc{background:linear-gradient(160deg,rgba(255,255,255,0.95) 0%,rgba(244,239,230,0.9) 100%);border:1px solid rgba(201,169,110,0.2);border-radius:16px;padding:28px;transition:all 0.3s;position:relative;overflow:hidden;box-shadow:0 1px 0 rgba(255,255,255,1) inset,0 2px 12px rgba(0,0,0,0.06);}
+    .oc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.4),transparent);}
+    .oc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--teal);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+    .oc:hover{border-color:rgba(27,143,130,0.3);box-shadow:0 1px 0 rgba(255,255,255,1) inset,0 8px 32px rgba(27,143,130,0.12);transform:translateY(-3px);}
+    .oc:hover::after{transform:scaleX(1);}
+    .oc-num{font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;font-weight:300;color:rgba(27,143,130,0.15);line-height:1;margin-bottom:14px;}
+    .oc-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:400;color:var(--t1);margin-bottom:9px;letter-spacing:-0.01em;}
+    .oc-body{font-size:13px;font-weight:300;color:var(--t3);line-height:1.72;}
+
+    .dark-s{background:#141414;padding:88px 52px;position:relative;}
+    .dark-s::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.4),transparent);}
+    .dark-s .s-label{color:#1DBFAE;}
+    .dark-s .s-head{color:white;}
+    .dark-s .s-body{color:rgba(255,255,255,0.52);}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:48px;border-radius:14px;overflow:hidden;}
+    .sc-card{background:rgba(255,255,255,0.06);padding:28px 22px;transition:background 0.2s;}
+    .sc-card:hover{background:rgba(255,255,255,0.1);}
+    .sc-n{font-family:'Cormorant Garamond',Georgia,serif;font-size:46px;font-weight:300;color:white;line-height:1;margin-bottom:8px;letter-spacing:-0.02em;}
+    .sc-n span{color:#1DBFAE;}
+    .sc-l{font-size:13px;font-weight:300;color:rgba(255,255,255,0.46);line-height:1.55;}
+    .sc-src{font-size:10px;color:rgba(255,255,255,0.2);margin-top:8px;}
+
+    .arch-section{background:var(--bg);padding:88px 52px;}
+    .arch-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:44px;}
+    .ac{border-radius:14px;padding:20px 14px;position:relative;overflow:hidden;transition:transform 0.25s,box-shadow 0.25s;box-shadow:0 2px 8px rgba(0,0,0,0.15),inset 0 1px 0 rgba(255,255,255,0.25);}
+    .ac::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);}
+    .ac:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,0.2),inset 0 1px 0 rgba(255,255,255,0.25);}
+    .ac-arc{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,0.15);pointer-events:none;}
+    .ac-e{font-size:20px;display:block;margin-bottom:10px;}
+    .ac-n{font-family:'Cormorant Garamond',Georgia,serif;font-size:15px;font-weight:400;color:white;margin-bottom:5px;text-shadow:0 1px 2px rgba(0,0,0,0.2);}
+    .ac-q{font-size:10px;font-weight:300;color:rgba(255,255,255,0.75);line-height:1.5;font-style:italic;}
+
+    .faq-section{background:white;padding:88px 52px;}
+    .faq-list{margin-top:44px;border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+    .fi{border-bottom:1px solid var(--border);}
+    .fi:last-child{border-bottom:none;}
+    .fq{width:100%;background:white;border:none;padding:18px 26px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:16px;transition:background 0.15s;}
+    .fq:hover{background:#FAFAF8;}
+    .fq-t{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;font-weight:400;color:var(--t1);text-align:left;line-height:1.35;}
+    .fq-i{color:var(--teal);font-size:17px;flex-shrink:0;transition:transform 0.3s;line-height:1;}
+    .fq-i.open{transform:rotate(45deg);}
+    .fa{max-height:0;overflow:hidden;transition:max-height 0.5s ease,padding 0.3s;background:white;padding:0 26px;}
+    .fa.open{max-height:600px;padding:2px 26px 22px;}
+    .fa p{font-size:14px;font-weight:300;color:var(--t2);line-height:1.78;}
+    .fa p+p{margin-top:10px;}
+    .fa-highlight{background:var(--teal-light);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:14px 18px;margin:14px 0;}
+    .fa-highlight p{color:var(--t1);font-weight:400;}
+    .fa-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0;}
+    .fa-card{background:var(--bg);border-radius:10px;padding:14px 16px;border:1px solid var(--border);}
+    .fa-card-title{font-size:12px;font-weight:600;color:var(--t1);margin-bottom:4px;letter-spacing:0.02em;}
+    .fa-card-body{font-size:12px;font-weight:300;color:var(--t3);line-height:1.6;}
+    .faq-divider{padding:14px 26px 6px;background:white;}
+    .faq-divider-label{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);}
+
+    .cta-s{background:#136B61;padding:96px 52px;text-align:center;position:relative;overflow:hidden;}
+    .cta-arc{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,0.07);pointer-events:none;}
+    .ci{position:relative;z-index:2;max-width:520px;margin:0 auto;}
+    .cta-h{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(38px,5.5vw,62px);font-weight:300;color:white;line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;}
+    .cta-h em{font-style:italic;color:rgba(255,255,255,0.8);}
+    .cta-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,0.72);margin-bottom:34px;line-height:1.7;}
+    .cta-form{display:flex;gap:8px;max-width:400px;margin:0 auto 11px;}
+    .cta-in{flex:1;background:rgba(255,255,255,0.13);border:1.5px solid rgba(255,255,255,0.27);border-radius:11px;padding:14px 18px;font-family:'Outfit',sans-serif;font-size:14px;color:white;outline:none;transition:border-color 0.2s;}
+    .cta-in::placeholder{color:rgba(255,255,255,0.43);}
+    .cta-in:focus{border-color:rgba(255,255,255,0.62);}
+    .cta-btn{background:linear-gradient(135deg,rgba(255,255,255,1) 0%,rgba(244,239,230,1) 100%);color:var(--teal);border:none;border-radius:11px;padding:14px 22px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.3s;position:relative;overflow:hidden;box-shadow:0 1px 0 rgba(255,255,255,0.9) inset,0 4px 16px rgba(0,0,0,0.15);}
+    .cta-btn::after{content:'';position:absolute;top:-50%;left:-60%;width:40%;height:200%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);transform:skewX(-20deg);transition:left 0.5s;}
+    .cta-btn:hover{transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,0.9) inset,0 6px 20px rgba(0,0,0,0.2);}
+    .cta-btn:hover::after{left:120%;}
+    .cta-note{font-size:12px;color:rgba(255,255,255,0.4);}
+    .cta-ok{display:none;flex-direction:column;align-items:center;gap:8px;}
+    .cta-ok.show{display:flex;animation:up 0.5s ease both;}
+    .cta-ok-badge{background:rgba(255,255,255,0.13);border:1.5px solid rgba(255,255,255,0.32);border-radius:100px;padding:11px 24px;font-size:14px;color:white;font-weight:500;}
+    .cta-ok-sub{font-size:12px;color:rgba(255,255,255,0.5);}
+
+    footer{background:#2A1810;padding:44px 52px 28px;}
+    .ft{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:28px;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.1);flex-wrap:wrap;}
+    .fw{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:300;text-decoration:none;}
+    .fw .mun{color:rgba(255,255,255,0.75);}
+    .fw .eb{color:var(--teal);}
+    .ftag{font-size:13px;font-weight:300;color:rgba(255,255,255,0.32);margin-top:5px;}
+    .flinks{display:flex;gap:22px;flex-wrap:wrap;align-items:center;}
+    .fl{font-size:13px;color:rgba(255,255,255,0.36);text-decoration:none;transition:color 0.2s;}
+    .fl:hover{color:rgba(255,255,255,0.72);}
+    .fb{max-width:1100px;margin:22px auto 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+    .fc{font-size:11px;color:rgba(255,255,255,0.22);}
+    .fd{font-size:11px;color:rgba(255,255,255,0.18);max-width:500px;line-height:1.65;}
+    .social-links{display:flex;gap:16px;margin-top:14px;}
+    .social-link{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.36);text-decoration:none;transition:color 0.2s;}
+    .social-link:hover{color:rgba(255,255,255,0.72);}
+
+    .r{opacity:0;transform:translateY(14px);transition:opacity 0.65s ease,transform 0.65s ease;}
+    .r.on{opacity:1;transform:translateY(0);}
+    .d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.3s;}.d4{transition-delay:0.4s;}
+
+    @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.45;transform:scale(0.72)}}
+    @keyframes breathe{0%,100%{transform:scale(1);opacity:0.055}50%{transform:scale(1.06);opacity:0.09}}
+    @keyframes breathe2{0%,100%{transform:scale(1.06);opacity:0.04}50%{transform:scale(1);opacity:0.07}}
+    @keyframes breathe3{0%,100%{transform:scale(1);opacity:0.03}50%{transform:scale(1.04);opacity:0.055}}
+    @keyframes glowpulse{0%,100%{opacity:0.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:0.65;transform:translate(-50%,-50%) scale(1.08)}}
+
+    @media(max-width:920px){
+      nav{padding:14px 24px;}
+      .hero{grid-template-columns:1fr;padding:100px 28px 56px;text-align:center;}
+      .hero-left{padding-right:0;}
+      .hero-sub{margin-left:auto;margin-right:auto;}
+      .trust{justify-content:center;}
+      .hero-right{display:none;}
+      .manifesto-s{padding:72px 28px;}
+      .manifesto-wrap{grid-template-columns:1fr;gap:40px;}
+      .manifesto-left{position:static;}
+      .offer-section,.dark-s,.arch-section,.faq-section{padding:72px 28px;}
+      .offer-grid{grid-template-columns:1fr 1fr;}
+      .arch-grid{grid-template-columns:repeat(3,1fr);}
+      .stats-grid{grid-template-columns:1fr 1fr;}
+      .fa-grid{grid-template-columns:1fr;}
+      .cta-s{padding:72px 28px;}
+      footer{padding:36px 24px 24px;}
+    }
+    @media(max-width:540px){
+      .offer-grid{grid-template-columns:1fr;}
+      .arch-grid{grid-template-columns:repeat(2,1fr);}
+      .email-row,.cta-form{flex-direction:column;}
+      .submit-btn,.cta-btn{width:100%;}
+    }
+  </style>
+</head>
+<body>
+
+<div id="spotlight"></div>
+<div class="bg-glow" style="width:800px;height:800px;right:-200px;top:-200px;"></div>
+<div class="bg-arc bg-arc-1" style="width:560px;height:560px;right:-180px;top:-180px;"></div>
+<div class="bg-arc bg-arc-2" style="width:840px;height:840px;right:-320px;top:-320px;"></div>
+<div class="bg-arc bg-arc-3" style="width:1100px;height:1100px;right:-460px;top:-460px;"></div>
+
+<nav id="nav">
+  <a href="#" class="mark"><span class="mun">mun</span><span class="eb">ē</span></a>
+  <a href="#waitlist" class="nav-cta">Join the waitlist</a>
+</nav>
+
+<div class="hero-outer">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="eyebrow">
+        <span class="e-dot"></span>
+        <span class="e-text">A new category &nbsp;·&nbsp; Launching 2026</span>
+      </div>
+      <h1>Finally built<br>for <em>you.</em></h1>
+      <p class="hero-sub">munē is the first financial platform that understands who you are with money before it tells you what to do with it. Not a tracker. Not a budget. A complete system — personalized to you.</p>
+      <div class="form-wrap" id="hw">
+        <div class="email-row" id="er">
+          <input type="email" class="email-input" placeholder="Your email address" id="he"/>
+          <button class="submit-btn" id="hero-btn">Get early access →</button>
+        </div>
+        <div class="form-success" id="hs">
+          <div class="s-icon">✓</div>
+          <div class="s-text">
+            <strong>You're on the list.</strong>
+            Founding member pricing reserved. We'll be in touch before launch.
+          </div>
+        </div>
+        <p class="form-note">No spam. No selling your data. <a href="#privacy">Privacy Policy</a>.</p>
+      </div>
+      <div class="trust">
+        <span class="ti">iOS & Android</span>
+        <span class="ti">Free to start</span>
+        <span class="ti">Cancel anytime</span>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="phones">
+        <div class="phone phone-l">
+          <div class="ps s-home">
+            <div class="sh-head">
+              <div class="sh-greet">Good morning, Jordan.</div>
+              <div class="sh-sub">Day 14 · 🔥 14 day streak</div>
+              <div class="sh-score">
+                <div><div class="sh-snum">634</div><div style="font-size:6px;color:rgba(255,255,255,0.55);font-family:'Outfit',sans-serif;margin-top:1px;">↑ 22 pts this month</div></div>
+                <div class="sh-slbl">Munē<br>Score</div>
+              </div>
+            </div>
+            <div class="sh-body">
+              <div class="sh-sec">Financial Vitals</div>
+              <div class="vrow"><span class="vi">❤️</span><span class="vn">Flow</span><div class="vd"><div class="vdot on"></div><div class="vdot on"></div><div class="vdot on"></div><div class="vdot on"></div><div class="vdot"></div></div></div>
+              <div class="vrow"><span class="vi">🫁</span><span class="vn">Breathing Room</span><div class="vd"><div class="vdot on"></div><div class="vdot on"></div><div class="vdot on"></div><div class="vdot"></div><div class="vdot"></div></div></div>
+              <div class="vrow"><span class="vi">⚖️</span><span class="vn">Debt Weight</span><div class="vd"><div class="vdot w"></div><div class="vdot w"></div><div class="vdot"></div><div class="vdot"></div><div class="vdot"></div></div></div>
+              <div class="vrow"><span class="vi">🌱</span><span class="vn">Build</span><div class="vd"><div class="vdot on"></div><div class="vdot on"></div><div class="vdot"></div><div class="vdot"></div><div class="vdot"></div></div></div>
+              <div class="sh-action"><div class="sha-lbl">Today · Day 14</div><div class="sha-txt">Set one bill on autopay. The smallest one.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone phone-c">
+          <div class="ps s-reveal">
+            <div class="sr-head">
+              <div class="sr-arc" style="width:110px;height:110px;right:-18px;top:-18px;"></div>
+              <div class="sr-arc" style="width:72px;height:72px;right:-10px;top:-10px;"></div>
+              <div class="sr-eye">Your Financial Archetype</div>
+              <div class="sr-name">🌫️&nbsp;The Fog</div>
+              <div class="sr-q">"I know something's wrong. I just can't bring myself to look."</div>
+            </div>
+            <div class="sr-body">
+              <div>
+                <div class="sr-lbl">Who You Are</div>
+                <div class="sr-txt">You're not broken. You're someone who learned that looking at the numbers felt worse than not knowing. The not-knowing became its own kind of weight.</div>
+              </div>
+              <div class="sr-truth">
+                <div class="sr-lbl">The Truth</div>
+                <div class="sr-txt">The avoidance isn't the problem — it's the protection. munē is going to make looking feel safe, one number at a time.</div>
+              </div>
+              <div class="sr-what">
+                <div class="sr-lbl" style="color:rgba(255,255,255,0.62);">What This Means For You</div>
+                <div class="sr-txt" style="color:white;font-weight:400;">Your first 30 days aren't about fixing anything. They're about making it safe to see.</div>
+              </div>
+              <div class="sr-cta">Start my Foundation Plan →</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone phone-r">
+          <div class="ps s-score">
+            <div class="ss-head">
+              <div class="ss-eye">Munē Score · Full Breakdown</div>
+              <div class="ss-num">701</div>
+              <div class="ss-rat">Strong</div>
+            </div>
+            <div class="ss-body">
+              <div class="sc-sec">Six categories</div>
+              <div class="sc-row"><span class="sc-name">Cash Health</span><div class="sc-track"><div class="sc-fill" style="width:82%"></div></div><span class="sc-pct">82%</span></div>
+              <div class="sc-row"><span class="sc-name">Income</span><div class="sc-track"><div class="sc-fill" style="width:76%"></div></div><span class="sc-pct">76%</span></div>
+              <div class="sc-row"><span class="sc-name">Debt Health</span><div class="sc-track"><div class="sc-fill" style="width:91%"></div></div><span class="sc-pct">91%</span></div>
+              <div class="sc-row"><span class="sc-name">Credit</span><div class="sc-track"><div class="sc-fill" style="width:58%;background:#E8965A;"></div></div><span class="sc-pct">58%</span></div>
+              <div class="sc-row"><span class="sc-name">Build Health</span><div class="sc-track"><div class="sc-fill" style="width:71%"></div></div><span class="sc-pct">71%</span></div>
+              <div class="sc-row"><span class="sc-name">Behavior</span><div class="sc-track"><div class="sc-fill" style="width:88%"></div></div><span class="sc-pct">88%</span></div>
+              <div class="sc-vs">
+                <div class="vs-lbl">Same person. Two pictures.</div>
+                <div class="vs-row">
+                  <div><div style="font-size:6.5px;color:var(--t3);font-family:'Outfit',sans-serif;">Credit score</div><div class="vs-a">588 · Fair</div></div>
+                  <div class="vs-mid">vs</div>
+                  <div style="text-align:right;"><div style="font-size:6.5px;color:var(--t3);font-family:'Outfit',sans-serif;">Munē Score</div><div class="vs-b">701 · Strong</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="manifesto-s">
+  <div class="section-inner">
+    <div class="manifesto-wrap">
+      <div class="manifesto-left r">
+        <p class="s-label" style="color:var(--teal);">A new category</p>
+        <h2 class="manifesto-headline">This isn't another financial app.</h2>
+      </div>
+      <div class="manifesto-right">
+        <div class="manifesto-statement r d1">
+          <div class="ms-marker"></div>
+          <div><p class="ms-title">Every other tool starts with your money.</p><p class="ms-body">They show you your balance. They categorize your spending. They track where it went. Then they leave you exactly where you started — with data and no direction. munē starts somewhere different. It starts with you.</p></div>
+        </div>
+        <div class="manifesto-statement r d2">
+          <div class="ms-marker"></div>
+          <div><p class="ms-title">The problem was never the math.</p><p class="ms-body">You know you should save more. You know you should look at your account. You know what you're supposed to do. The reason it hasn't happened isn't intelligence — it's that nobody ever built a system around how you actually think, feel, and live. Until now.</p></div>
+        </div>
+        <div class="manifesto-statement r d3">
+          <div class="ms-marker"></div>
+          <div><p class="ms-title">munē is the first platform built on identity.</p><p class="ms-body">Before a single number. Before a single recommendation. munē understands who you are with money — your psychology, your patterns, your emotional reality. Then it builds everything around that. Your plan. Your tone. Your path. Yours.</p></div>
+        </div>
+        <div class="manifesto-statement r d4">
+          <div class="ms-marker"></div>
+          <div><p class="ms-title">Financial transformation is an identity shift.</p><p class="ms-body">People don't change their financial behavior by learning new information. They change it when they start seeing themselves differently. munē is the only platform built around that truth. Your financial type isn't a label — it's a starting point. The plan moves you forward. The habits build the new identity. By Day 90 you're not the same person who downloaded the app.</p></div>
+        </div>
+        <div class="manifesto-pull r" style="transition-delay:0.5s;">
+          <p>"The cycle stops here — not because of what you learn, but because of who you become."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="offer-section" id="offer">
+  <div class="section-inner">
+    <p class="s-label r">What's inside</p>
+    <h2 class="s-head r d1" style="max-width:520px;">Six tools. One system. Built around you.</h2>
+    <p class="s-body r d2">Most apps give you one tool and leave you to figure out the rest. munē gives you a complete system — six parts, all connected, all built around who you actually are.</p>
+    <div class="offer-grid">
+      <div class="oc r d1"><div class="oc-num">01</div><div class="oc-title">Your Financial Type</div><div class="oc-body">Think of it like a financial love language. munē figures out who you actually are with money first — six types, one of them is you — then builds your entire plan around that. Before a single number. Before a single recommendation.</div></div>
+      <div class="oc r d2"><div class="oc-num">02</div><div class="oc-title">The Munē Score</div><div class="oc-body">Your credit score measures one thing — how well you borrow. The Munē Score measures six. Cash, Income, Debt, Credit, Build, and Behavior. The first score that tells you the truth about your whole financial life.</div></div>
+      <div class="oc r d3"><div class="oc-num">03</div><div class="oc-title">The 90-Day Foundation Plan</div><div class="oc-body">One action per day. That's it. Built on real behavioral science — the kind that actually changes habits instead of just tracking them. Your plan. Your pace. Nobody else's.</div></div>
+      <div class="oc r d1"><div class="oc-num">04</div><div class="oc-title">The Financial Vitals</div><div class="oc-body">Five real-time signals — Flow, Stress Level, Breathing Room, Debt Weight, and Build — that together tell you exactly how your financial health looks right now. Like a doctor's visit for your money. Every day.</div></div>
+      <div class="oc r d2"><div class="oc-num">05</div><div class="oc-title">The Munē Advisor</div><div class="oc-body">An AI advisor that already knows your financial type, your score, and your plan before you say a word. The financial conversation nobody in your life was ever willing to have with you — honest, specific, and yours.</div></div>
+      <div class="oc r d3"><div class="oc-num">06</div><div class="oc-title">The Knowledge Library</div><div class="oc-body">Over 100 financial concepts explained the way a trusted friend would explain them — not a textbook. What it is, why it matters for your life right now, and the one thing to do about it.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark-s">
+  <div class="section-inner">
+    <p class="s-label r">The gap nobody closes</p>
+    <h2 class="s-head r d1">The knowledge that transforms financial lives has always existed.</h2>
+    <p class="s-body r d2">It just wasn't available to everyone. The banks don't teach it. The schools barely cover it. And the apps that exist track your spending without changing your relationship with money.</p>
+    <div class="stats-grid r d3">
+      <div class="sc-card"><div class="sc-n"><span>63</span>%</div><div class="sc-l">of Americans can't cover a $400 emergency</div><div class="sc-src">Federal Reserve, 2023</div></div>
+      <div class="sc-card"><div class="sc-n"><span>72</span>%</div><div class="sc-l">say money is their #1 source of anxiety</div><div class="sc-src">AAAA, 2023</div></div>
+      <div class="sc-card"><div class="sc-n"><span>57</span>M</div><div class="sc-l">Americans underserved by traditional finance</div><div class="sc-src">FDIC, 2022</div></div>
+      <div class="sc-card"><div class="sc-n"><span>52</span>%</div><div class="sc-l">average financial literacy score across US adults</div><div class="sc-src">FINRA, 2022</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="arch-section">
+  <div class="section-inner" style="text-align:center;">
+    <p class="s-label r" style="text-align:center;">Your financial type</p>
+    <h2 class="s-head r d1" style="margin:0 auto;max-width:480px;">Which one sounds like you?</h2>
+    <p class="s-body r d2" style="margin:14px auto 0;">Before munē gives you a single recommendation — it figures out who you actually are with money. Six types. One short quiz. Most people read their result and say "how did it know that."</p>
+    <div class="arch-grid r d3">
+      <div class="ac" style="background:#5A8599;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">🌫️</span><div class="ac-n">The Fog</div><div class="ac-q">"I know something's wrong. I just can't bring myself to look."</div></div>
+      <div class="ac" style="background:#D4762E;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">✨</span><div class="ac-n">The Spark</div><div class="ac-q">"I know what I make. I just spend it before my bills see it."</div></div>
+      <div class="ac" style="background:#B85C3A;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">🔥</span><div class="ac-n">The Flame</div><div class="ac-q">"I save everything but I'm still scared I won't have enough."</div></div>
+      <div class="ac" style="background:#1B8F82;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">🌊</span><div class="ac-n">The Current</div><div class="ac-q">"I'm building. I just want to make sure I'm building right."</div></div>
+      <div class="ac" style="background:#3A72A8;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">〰️</span><div class="ac-n">The Wave</div><div class="ac-q">"My income isn't predictable. My system has to be."</div></div>
+      <div class="ac" style="background:#5E4E9E;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">🌙</span><div class="ac-n">The Tide</div><div class="ac-q">"I have a steady check. It just never seems like enough."</div></div>
+    </div>
+    <p class="r" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;font-weight:300;font-style:italic;color:var(--t2);text-align:center;margin:28px auto 0;max-width:520px;line-height:1.65;transition-delay:0.4s;">These aren't permanent labels. They're starting points. munē moves you forward — and the person you become by Day 90 isn't the same one who started.</p>
+  </div>
+</section>
+
+<section id="quiz-section" style="background:#111111;padding:88px 52px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.4),transparent);"></div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.3),transparent);"></div>
+  <div style="position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(27,143,130,0.06) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+  <div style="max-width:640px;margin:0 auto;position:relative;z-index:2;">
+    <div id="quiz-intro" style="text-align:center;">
+      <p style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(201,169,110,0.7);margin-bottom:14px;">Find your financial type</p>
+      <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(32px,5vw,52px);font-weight:300;color:white;line-height:1.15;letter-spacing:-0.02em;margin-bottom:16px;">Which one are you?</h2>
+      <p style="font-size:16px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.7;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;">Five honest questions. Two minutes. Most people read their result and say "how did it know that."</p>
+      <button id="start-quiz-btn" style="background:linear-gradient(135deg,#1B8F82,#136B61);color:white;border:none;border-radius:12px;padding:16px 36px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;cursor:pointer;letter-spacing:0.02em;box-shadow:0 1px 0 rgba(255,255,255,0.15) inset,0 4px 20px rgba(27,143,130,0.4);transition:all 0.3s;">Find my type →</button>
+      <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:14px;">No account needed. No email required. Just your result.</p>
+    </div>
+    <div id="quiz-active" style="display:none;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;">
+        <div style="display:flex;gap:8px;" id="quiz-dots"></div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.35);font-family:'Outfit',sans-serif;" id="quiz-counter">1 of 5</p>
+      </div>
+      <div id="quiz-question-wrap" style="transition:opacity 0.3s,transform 0.3s;">
+        <p style="font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,169,110,0.65);margin-bottom:16px;" id="quiz-q-label">Question 1</p>
+        <h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(24px,4vw,36px);font-weight:300;color:white;line-height:1.25;letter-spacing:-0.015em;margin-bottom:10px;" id="quiz-q-text"></h3>
+        <p style="font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:32px;font-weight:300;" id="quiz-q-sub"></p>
+        <div id="quiz-options" style="display:flex;flex-direction:column;gap:10px;"></div>
+      </div>
+    </div>
+    <div id="quiz-reveal" style="display:none;"></div>
+  </div>
+</section>
+
+<section class="faq-section" id="realtalk">
+  <div class="section-inner">
+    <p class="s-label r" style="text-align:center;">Real talk</p>
+    <h2 class="s-head r d1" style="text-align:center;margin:0 auto;max-width:380px;">You have questions. Here are honest answers.</h2>
+    <div class="faq-list r d2">
+      <div class="faq-divider"><div class="faq-divider-label">About munē</div></div>
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">Is this a real app or just a landing page?</span><span class="fq-i">+</span></button><div class="fa"><p>The app is in active development. Everything is designed and built — all six financial types, a production-ready database, interactive prototype screens, and the full Advisor. The waitlist builds the founding community before public launch. We're targeting Q3 2026 for the first users.</p></div></div>
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">What does it cost?</span><span class="fq-i">+</span></button><div class="fa"><p>munē has a free tier with genuine core features and a paid tier — munē Personal — at $9.99/month or $79.99/year. Founding members from the waitlist lock in $49 lifetime access. Pay once. Full access forever. That offer is available to the first 100 people who join.</p></div></div>
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">Is my financial data safe?</span><span class="fq-i">+</span></button><div class="fa"><p>Your data is yours. Bank connections run through Plaid — the same infrastructure behind Venmo and Robinhood. munē reads your transactions and balances. We never store your bank login. Everything is encrypted. Manual mode is always available if you prefer not to connect accounts at all.</p></div></div>
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">Is this financial advice?</span><span class="fq-i">+</span></button><div class="fa"><p>munē teaches you how money works — not what to do with yours. We explain concepts, show you what your numbers mean, and lay out your options. The decision is always yours. When something genuinely needs a licensed professional, we say so clearly.</p></div></div>
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">I'm a freelancer, creator, or self-employed. Is this for me?</span><span class="fq-i">+</span></button><div class="fa"><p>Yes. Explicitly. If your income doesn't come from a regular paycheck — munē was built for you too. Quarterly taxes, business credit, variable income, deductions — all covered in plain language with no judgment about how you earn.</p></div></div>
+      <div class="faq-divider" style="margin-top:4px;"><div class="faq-divider-label">Understanding the terms</div></div>
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">What is the Munē Score — and why does it matter more than my credit score?</span><span class="fq-i">+</span></button><div class="fa"><p>Your credit score measures one thing — how well you've repaid loans. That's useful for lenders. It tells you almost nothing about your actual financial health.</p><div class="fa-highlight"><p>The Munē Score measures six: Cash Health, Income Health, Debt Health, Credit Health, Build Health, and Behavior Health. Same 300–850 scale as a credit score — intentional, so you can hold both side by side and see the difference.</p></div><p>A person with a 588 credit score from one old late payment might have $6,200 saved, zero debt, and an active Roth IRA. Credit score says Fair. Munē Score says Strong. Same person. More truth.</p></div></div>
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">What is my Financial Type?</span><span class="fq-i">+</span></button><div class="fa"><p>Think of it like the 5 Love Languages — but for money. It's the pattern you've always had with your finances. The way you avoid it, spend it, save it, or stress about it. munē gives it a name.</p><div class="fa-highlight"><p>Six types: The Fog, The Spark, The Flame, The Current, The Wave, and The Tide. Five questions. Two minutes. Most people read their result and say "how did it know that."</p></div></div></div>
+      <div class="fi"><button class="fq" onclick="faq(this)"><span class="fq-t">What are the Financial Vitals?</span><span class="fq-i">+</span></button><div class="fa"><div class="fa-grid"><div class="fa-card"><div class="fa-card-title">❤️ Flow</div><div class="fa-card-body">Income arriving, bills paid, healthy money patterns.</div></div><div class="fa-card"><div class="fa-card-title">😮‍💨 Stress Level</div><div class="fa-card-body">How much financial weight you're carrying right now.</div></div><div class="fa-card"><div class="fa-card-title">🫁 Breathing Room</div><div class="fa-card-body">The space between you and a financial emergency.</div></div><div class="fa-card"><div class="fa-card-title">⚖️ Debt Weight</div><div class="fa-card-body">Whether your debt is growing or shrinking.</div></div></div><p style="margin-top:10px;">Plus <strong>🌱 Build</strong> — whether your financial future is actually getting stronger. Five signals, updated every day.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-s" id="waitlist">
+  <div class="cta-arc" style="width:560px;height:560px;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+  <div class="cta-arc" style="width:880px;height:880px;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+  <div class="ci">
+    <h2 class="cta-h">The cycle<br><em>stops here.</em></h2>
+    <p class="cta-sub">Join the waitlist. Founding members lock in $49 lifetime access — first 100 only.</p>
+    <div id="cw">
+      <div class="cta-form">
+        <input type="email" class="cta-in" placeholder="Your email address" id="ce"/>
+        <button class="cta-btn" id="cta-btn">Join waitlist →</button>
+      </div>
+      <p class="cta-note">No spam. No selling your data. Cancel anytime after launch.</p>
+    </div>
+    <div class="cta-ok" id="co">
+      <div class="cta-ok-badge">✓ &nbsp;You're in. Welcome.</div>
+      <div class="cta-ok-sub">Founding member pricing reserved. Q3 2026 launch — you'll hear first.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div>
+      <a href="#" class="fw"><span class="mun">mun</span><span class="eb">ē</span></a>
+      <div class="ftag">The knowledge you were never given. Finally made for you.</div>
+      <div class="social-links">
+        <a href="https://instagram.com/getmuneapp" target="_blank" rel="noopener" class="social-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          @getmuneapp
+        </a>
+        <a href="https://tiktok.com/@getmuneapp" target="_blank" rel="noopener" class="social-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+          getmuneapp
+        </a>
+        <a href="https://x.com/Getmuneapp" target="_blank" rel="noopener" class="social-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          @Getmuneapp
+        </a>
+      </div>
+    </div>
+    <div class="flinks">
+      <a href="#offer" class="fl">What's inside</a>
+      <a href="#realtalk" class="fl">Real talk</a>
+      <a href="#waitlist" class="fl">Join waitlist</a>
+      <a href="#" class="fl" id="privacy">Privacy Policy</a>
+      <a href="#" class="fl" id="terms">Terms</a>
+    </div>
+  </div>
+  <div class="fb">
+    <p class="fc">© 2026 Mune Technologies Inc. · getmune.com</p>
+    <p class="fd">munē provides financial education only. Nothing here constitutes financial, investment, legal, or tax advice. Consult a qualified professional for decisions specific to your situation.</p>
+  </div>
+</footer>
+
+<script>
+(function() {
+
+  // ── SUPABASE ──
+  var SUPABASE_URL = "https://maolkyrlfojkmiuppcsy.supabase.co";
+
+  async function saveToWaitlist(email, source) {
+    try {
+      var res = await fetch(SUPABASE_URL + "/functions/v1/waitlist-signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, source: source })
+      });
+      var data = await res.json();
+      return data.success === true;
+    } catch(e) {
+      console.error("Waitlist error:", e);
+      return false;
+    }
   }
-}
 
-// ── QUIZ ENGINE ──
-const QUESTIONS = [
-  {
-    q: "When money comes in — what happens first?",
-    sub: "Be honest. There's no wrong answer.",
-    options: [
+  // ── HERO FORM ──
+  document.getElementById("hero-btn").addEventListener("click", async function() {
+    var email = document.getElementById("he").value.trim();
+    if (!email || !email.includes("@")) return;
+    this.disabled = true;
+    this.textContent = "One second...";
+    var ok = await saveToWaitlist(email, "hero");
+    if (ok) {
+      document.getElementById("er").classList.add("hide");
+      document.getElementById("hs").classList.add("show");
+    } else {
+      this.disabled = false;
+      this.textContent = "Get early access →";
+    }
+  });
+
+  // ── BOTTOM CTA FORM ──
+  document.getElementById("cta-btn").addEventListener("click", async function() {
+    var email = document.getElementById("ce").value.trim();
+    if (!email || !email.includes("@")) return;
+    this.disabled = true;
+    this.textContent = "One second...";
+    var ok = await saveToWaitlist(email, "bottom_cta");
+    if (ok) {
+      document.getElementById("cw").style.display = "none";
+      document.getElementById("co").classList.add("show");
+    } else {
+      this.disabled = false;
+      this.textContent = "Join waitlist →";
+    }
+  });
+
+  // ── QUIZ ──
+  var QUESTIONS = [
+    { q: "When money comes in — what happens first?", sub: "Be honest. There's no wrong answer.", options: [
       {text:"Relief. I can breathe for a minute.", scores:{fog:3,tide:2}},
       {text:"Excitement. I'm already thinking about spending it.", scores:{spark:3,wave:1}},
       {text:"Calm. It's going where it's supposed to go.", scores:{flame:2,current:3}},
       {text:"It depends — some months feel fine, others like starting over.", scores:{wave:3,spark:1}},
-      {text:"Not much. I have more than I need right now.", scores:{current:2,flame:2}},
-    ]
-  },
-  {
-    q: "How does money actually come into your life?",
-    sub: "Pick the one that fits most.",
-    options: [
+      {text:"Not much. I have more than I need right now.", scores:{current:2,flame:2}}
+    ]},
+    { q: "How does money actually come into your life?", sub: "Pick the one that fits most.", options: [
       {text:"Regular paycheck — same amount, same schedule.", scores:{tide:3,fog:1}},
       {text:"It varies — freelance, gig, self-employed.", scores:{wave:3,spark:1}},
       {text:"A mix — steady income plus other sources.", scores:{wave:2,tide:1}},
       {text:"Fixed payments — Social Security, pension, disability.", scores:{tide:2,flame:2}},
-      {text:"I live off what I've built — investments, savings.", scores:{current:3,flame:2}},
-    ]
-  },
-  {
-    q: "What's taking up the most space in your mind financially?",
-    sub: "The thing that comes up when you're quiet.",
-    options: [
+      {text:"I live off what I've built — investments, savings.", scores:{current:3,flame:2}}
+    ]},
+    { q: "What's taking up the most space in your mind financially?", sub: "The thing that comes up when you're quiet.", options: [
       {text:"Whether I have enough to cover everything this month.", scores:{fog:3,tide:2}},
       {text:"Where my money goes — it disappears and I don't know why.", scores:{spark:3,tide:2}},
       {text:"Whether I'm doing enough with what I have.", scores:{flame:3,current:1}},
       {text:"Managing the complexity — taxes, accounts, income streams.", scores:{wave:3,current:2}},
-      {text:"Making sure what I've built lasts.", scores:{current:3,flame:2}},
-    ]
-  },
-  {
-    q: "When you think about your savings right now —",
-    sub: "Pick the one that feels closest.",
-    options: [
+      {text:"Making sure what I've built lasts.", scores:{current:3,flame:2}}
+    ]},
+    { q: "When you think about your savings right now —", sub: "Pick the one that feels closest.", options: [
       {text:"What savings? I'm not there yet.", scores:{fog:3,spark:2}},
       {text:"I have some but it doesn't feel like enough.", scores:{tide:3,flame:1}},
       {text:"I save consistently but I'm scared to invest it.", scores:{flame:3}},
       {text:"I'm actively investing and building.", scores:{current:3,wave:1}},
-      {text:"My income changes so much it's hard to save consistently.", scores:{wave:3}},
-    ]
-  },
-  {
-    q: "Who does this financial plan need to work for?",
-    sub: "Your financial life has to fit your actual life.",
-    options: [
+      {text:"My income changes so much it's hard to save consistently.", scores:{wave:3}}
+    ]},
+    { q: "Who does this financial plan need to work for?", sub: "Your financial life has to fit your actual life.", options: [
       {text:"Just me.", scores:{}},
       {text:"Me and a partner.", scores:{current:1}},
       {text:"Me and my children.", scores:{flame:1,fog:1}},
       {text:"Me, a partner, and children.", scores:{flame:1}},
-      {text:"I support family beyond my household.", scores:{tide:1,fog:1}},
-    ]
-  }
-];
+      {text:"I support family beyond my household.", scores:{tide:1,fog:1}}
+    ]}
+  ];
 
-const TYPES = {
-  fog:{
-    name:"The Fog",emoji:"🌫️",color:"#5A8599",light:"#EEF3F7",
-    tagline:"I know something's wrong. I just can't bring myself to look.",
-    truth:"You're not broken. You've just been waiting for something safe to start with. munē makes looking feel safe — one number at a time.",
-    plan:[
-      {day:"Day 1",action:"Set your Floor number.",detail:"The one number that makes looking feel safe. We protect it always."},
-      {day:"Day 2",action:"Open one account. Just look.",detail:"No judgment. No action required. Just see the number."},
-      {day:"Day 3",action:"Name your biggest financial worry.",detail:"One sentence. That's your starting point. munē builds from there."},
-    ]
-  },
-  spark:{
-    name:"The Spark",emoji:"✨",color:"#D4762E",light:"#FDF4EC",
-    tagline:"I know what I make. I just spend it before my bills see it.",
-    truth:"You don't need restriction. You need a system that makes spending guilt-free. munē builds that around you.",
-    plan:[
-      {day:"Day 1",action:"Calculate your Guilt Free Number.",detail:"The portion of your income that is genuinely, completely yours to spend."},
-      {day:"Day 2",action:"Automate your most urgent bill.",detail:"One obligation handled without thinking. The system starts here."},
-      {day:"Day 3",action:"Open a separate spending account.",detail:"Your Guilt Free Number goes here. Spend it without guilt. That's the point."},
-    ]
-  },
-  flame:{
-    name:"The Flame",emoji:"🔥",color:"#B85C3A",light:"#FCF1EE",
-    tagline:"I save everything but I'm still scared I won't have enough.",
-    truth:"Your discipline is real and rare. Nobody ever showed you that growth is just protection with a longer timeline. munē changes that.",
-    plan:[
-      {day:"Day 1",action:"Move your emergency fund to a HYSA.",detail:"Same safety. 4–5% interest instead of 0.01%. Your first act of growth."},
-      {day:"Day 2",action:"Calculate what you're losing to inflation.",detail:"Money sitting still is losing value. munē shows you the exact number."},
-      {day:"Day 3",action:"Open a Roth IRA — even with $0 inside.",detail:"The account existing is the first step. Funding it comes next."},
-    ]
-  },
-  current:{
-    name:"The Current",emoji:"🌊",color:"#1B8F82",light:"#E0F5F2",
-    tagline:"I'm building. I just want to make sure I'm building right.",
-    truth:"That instinct is correct. munē audits the whole picture — not to find failure, but to find the one or two things worth closing before they matter.",
-    plan:[
-      {day:"Day 1",action:"Run a full beneficiary audit.",detail:"Every account. Every designation. One wrong name can cost everything."},
-      {day:"Day 2",action:"Check your insurance coverage gaps.",detail:"Most builders are overexposed. munē shows exactly where."},
-      {day:"Day 3",action:"Review your asset allocation.",detail:"Not to change it — to understand it. The Munē Score builds from here."},
-    ]
-  },
-  wave:{
-    name:"The Wave",emoji:"〰️",color:"#3A72A8",light:"#EEF4FA",
-    tagline:"My income isn't predictable. My system has to be.",
-    truth:"Variable income isn't a financial problem — it's an architecture problem. munē builds a system designed for how you actually earn.",
-    plan:[
-      {day:"Day 1",action:"Calculate your income floor.",detail:"The minimum you've earned in any month over the last 12. That's your baseline."},
-      {day:"Day 2",action:"Build your income buffer account.",detail:"High months feed it. Low months draw from it. Consistency without a paycheck."},
-      {day:"Day 3",action:"Set your quarterly tax aside — automatically.",detail:"The number that surprises most freelancers. munē calculates it for you."},
-    ]
-  },
-  tide:{
-    name:"The Tide",emoji:"🌙",color:"#5E4E9E",light:"#F2F0F9",
-    tagline:"I have a steady check. It just never seems like enough.",
-    truth:"This isn't a willpower problem. It's lifestyle inflation — one of the most invisible forces in personal finance. munē finds exactly where it went.",
-    plan:[
-      {day:"Day 1",action:"Find your lifestyle creep number.",detail:"The difference between what you earn now and what you saved when you earned less. That gap is the story."},
-      {day:"Day 2",action:"Automate $25 to savings before you see it.",detail:"Not a budget. A system. Money you never see, you never spend."},
-      {day:"Day 3",action:"Identify your single highest recurring expense.",detail:"Not to cut it. To decide if it's intentional. That distinction changes everything."},
-    ]
-  },
-};
-
-let qIndex = 0;
-let scores = {fog:0,spark:0,flame:0,current:0,wave:0,tide:0};
-
-function startQuiz(){
-  document.getElementById('quiz-intro').style.display='none';
-  document.getElementById('quiz-active').style.display='block';
-  renderDots();
-  renderQuestion();
-}
-
-function renderDots(){
-  const el = document.getElementById('quiz-dots');
-  el.innerHTML = QUESTIONS.map((_,i)=>`
-    <div style="width:${i===qIndex?'20px':'8px'};height:8px;border-radius:4px;background:${i===qIndex?'#1B8F82':i<qIndex?'rgba(255,255,255,0.35)':'rgba(255,255,255,0.15)'};transition:all 0.3s;"></div>
-  `).join('');
-}
-
-function renderQuestion(){
-  const q = QUESTIONS[qIndex];
-  document.getElementById('quiz-q-label').textContent = `Question ${qIndex+1}`;
-  document.getElementById('quiz-q-text').textContent = q.q;
-  document.getElementById('quiz-q-sub').textContent = q.sub;
-  document.getElementById('quiz-counter').textContent = `${qIndex+1} of ${QUESTIONS.length}`;
-
-  const opts = document.getElementById('quiz-options');
-  opts.innerHTML = q.options.map((o,i)=>`
-    <button onclick="selectAnswer(${i})" style="
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.1);
-      border-radius:12px;padding:16px 20px;
-      text-align:left;cursor:pointer;
-      font-family:'Outfit',sans-serif;font-size:15px;font-weight:300;
-      color:rgba(255,255,255,0.8);
-      transition:all 0.2s;
-      opacity:0;
-      animation:fadeUp 0.4s ease ${i*0.06}s forwards;
-    "
-    onmouseover="this.style.background='rgba(27,143,130,0.15)';this.style.borderColor='rgba(27,143,130,0.4)';this.style.color='white'"
-    onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='rgba(255,255,255,0.8)'"
-    >${o.text}</button>
-  `).join('');
-}
-
-function selectAnswer(optIndex){
-  const opt = QUESTIONS[qIndex].options[optIndex];
-  Object.entries(opt.scores).forEach(([k,v])=>{ scores[k] += v; });
-
-  const wrap = document.getElementById('quiz-question-wrap');
-  wrap.style.opacity='0';
-  wrap.style.transform='translateY(-12px)';
-
-  setTimeout(()=>{
-    if(qIndex < QUESTIONS.length-1){
-      qIndex++;
-      renderDots();
-      renderQuestion();
-      wrap.style.transform='translateY(12px)';
-      setTimeout(()=>{ wrap.style.opacity='1'; wrap.style.transform='translateY(0)'; },50);
-    } else {
-      showReveal();
+  var TYPES = {
+    fog: { name:"The Fog", emoji:"🌫️", color:"#5A8599", light:"#EEF3F7",
+      tagline:"I know something's wrong. I just can't bring myself to look.",
+      truth:"You're not broken. You've just been waiting for something safe to start with. munē makes looking feel safe — one number at a time.",
+      plan:[{day:"Day 1",action:"Set your Floor number.",detail:"The one number that makes looking feel safe. We protect it always."},{day:"Day 2",action:"Open one account. Just look.",detail:"No judgment. No action required. Just see the number."},{day:"Day 3",action:"Name your biggest financial worry.",detail:"One sentence. That's your starting point. munē builds from there."}]
+    },
+    spark: { name:"The Spark", emoji:"✨", color:"#D4762E", light:"#FDF4EC",
+      tagline:"I know what I make. I just spend it before my bills see it.",
+      truth:"You don't need restriction. You need a system that makes spending guilt-free. munē builds that around you.",
+      plan:[{day:"Day 1",action:"Calculate your Guilt Free Number.",detail:"The portion of your income that is genuinely, completely yours to spend."},{day:"Day 2",action:"Automate your most urgent bill.",detail:"One obligation handled without thinking. The system starts here."},{day:"Day 3",action:"Open a separate spending account.",detail:"Your Guilt Free Number goes here. Spend it without guilt. That's the point."}]
+    },
+    flame: { name:"The Flame", emoji:"🔥", color:"#B85C3A", light:"#FCF1EE",
+      tagline:"I save everything but I'm still scared I won't have enough.",
+      truth:"Your discipline is real and rare. Nobody ever showed you that growth is just protection with a longer timeline. munē changes that.",
+      plan:[{day:"Day 1",action:"Move your emergency fund to a HYSA.",detail:"Same safety. 4–5% interest instead of 0.01%. Your first act of growth."},{day:"Day 2",action:"Calculate what you're losing to inflation.",detail:"Money sitting still is losing value. munē shows you the exact number."},{day:"Day 3",action:"Open a Roth IRA — even with $0 inside.",detail:"The account existing is the first step. Funding it comes next."}]
+    },
+    current: { name:"The Current", emoji:"🌊", color:"#1B8F82", light:"#E0F5F2",
+      tagline:"I'm building. I just want to make sure I'm building right.",
+      truth:"That instinct is correct. munē audits the whole picture — not to find failure, but to find the one or two things worth closing before they matter.",
+      plan:[{day:"Day 1",action:"Run a full beneficiary audit.",detail:"Every account. Every designation. One wrong name can cost everything."},{day:"Day 2",action:"Check your insurance coverage gaps.",detail:"Most builders are overexposed. munē shows exactly where."},{day:"Day 3",action:"Review your asset allocation.",detail:"Not to change it — to understand it. The Munē Score builds from here."}]
+    },
+    wave: { name:"The Wave", emoji:"〰️", color:"#3A72A8", light:"#EEF4FA",
+      tagline:"My income isn't predictable. My system has to be.",
+      truth:"Variable income isn't a financial problem — it's an architecture problem. munē builds a system designed for how you actually earn.",
+      plan:[{day:"Day 1",action:"Calculate your income floor.",detail:"The minimum you've earned in any month over the last 12. That's your baseline."},{day:"Day 2",action:"Build your income buffer account.",detail:"High months feed it. Low months draw from it. Consistency without a paycheck."},{day:"Day 3",action:"Set your quarterly tax aside — automatically.",detail:"The number that surprises most freelancers. munē calculates it for you."}]
+    },
+    tide: { name:"The Tide", emoji:"🌙", color:"#5E4E9E", light:"#F2F0F9",
+      tagline:"I have a steady check. It just never seems like enough.",
+      truth:"This isn't a willpower problem. It's lifestyle inflation — one of the most invisible forces in personal finance. munē finds exactly where it went.",
+      plan:[{day:"Day 1",action:"Find your lifestyle creep number.",detail:"The difference between what you earn now and what you saved when you earned less. That gap is the story."},{day:"Day 2",action:"Automate $25 to savings before you see it.",detail:"Not a budget. A system. Money you never see, you never spend."},{day:"Day 3",action:"Identify your single highest recurring expense.",detail:"Not to cut it. To decide if it's intentional. That distinction changes everything."}]
     }
-  },280);
-}
+  };
 
-function showReveal(){
-  const winner = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
-  const type = TYPES[winner];
+  var qIndex = 0;
+  var scores = {fog:0,spark:0,flame:0,current:0,wave:0,tide:0};
 
-  document.getElementById('quiz-active').style.display='none';
+  document.getElementById("start-quiz-btn").addEventListener("click", function() {
+    document.getElementById("quiz-intro").style.display = "none";
+    document.getElementById("quiz-active").style.display = "block";
+    renderDots();
+    renderQuestion();
+  });
 
-  const section = document.getElementById('quiz-section');
-  section.style.transition='background 0.8s ease';
-  section.style.background=type.light;
-
-  const reveal = document.getElementById('quiz-reveal');
-  reveal.innerHTML = `
-    <div style="text-align:center;animation:fadeUp 0.7s ease both;">
-
-      <p style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:${type.color};margin-bottom:16px;opacity:0.8;">Your financial type</p>
-      <div style="font-size:52px;margin-bottom:12px;">${type.emoji}</div>
-      <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(36px,6vw,60px);font-weight:300;color:#1A1A1A;line-height:1.1;letter-spacing:-0.025em;margin-bottom:12px;">${type.name}</h2>
-      <p style="font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-style:italic;color:#4A3F38;margin-bottom:28px;line-height:1.5;max-width:480px;margin-left:auto;margin-right:auto;">"${type.tagline}"</p>
-
-      <div style="background:white;border:1px solid rgba(0,0,0,0.08);border-radius:16px;padding:24px 28px;max-width:520px;margin:0 auto 28px;text-align:left;box-shadow:0 2px 16px rgba(0,0,0,0.06);position:relative;overflow:hidden;">
-        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,${type.color},${type.color}66);"></div>
-        <p style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:${type.color};margin-bottom:10px;">The truth</p>
-        <p style="font-size:15px;font-weight:300;color:#4A3F38;line-height:1.78;">${type.truth}</p>
-      </div>
-
-      <div style="max-width:520px;margin:0 auto 32px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-          <p style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:${type.color};margin:0;">Your Foundation Plan · First 3 days</p>
-          <p style="font-size:11px;color:#B0A89E;margin:0;">Unique to ${type.name}</p>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          ${type.plan.map((p,i)=>`
-            <div style="background:white;border:1px solid rgba(0,0,0,0.07);border-radius:12px;padding:16px 18px 16px 20px;text-align:left;position:relative;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,0.04);">
-              <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:${type.color};border-radius:3px 0 0 3px;opacity:${i===0?1:i===1?0.65:0.35};"></div>
-              <p style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:${type.color};margin:0 0 4px;opacity:${i===0?1:i===1?0.8:0.6};">${p.day}</p>
-              <p style="font-size:14px;font-weight:500;color:#1A1A1A;margin:0 0 3px;line-height:1.3;">${p.action}</p>
-              <p style="font-size:12px;font-weight:300;color:#8A7D74;margin:0;line-height:1.55;">${p.detail}</p>
-            </div>
-          `).join('')}
-        </div>
-        <div style="margin-top:8px;border:1px dashed rgba(0,0,0,0.1);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.5);">
-          <div style="display:flex;gap:4px;">
-            <div style="width:6px;height:6px;border-radius:50%;background:${type.color};opacity:0.3;"></div>
-            <div style="width:6px;height:6px;border-radius:50%;background:${type.color};opacity:0.2;"></div>
-            <div style="width:6px;height:6px;border-radius:50%;background:${type.color};opacity:0.1;"></div>
-          </div>
-          <p style="font-size:12px;font-weight:300;color:#8A7D74;margin:0;">Days 4 through 90 — built around everything you just shared.</p>
-        </div>
-      </div>
-
-      <div style="max-width:440px;margin:0 auto;" id="quiz-email-wrap">
-        <p style="font-size:16px;color:#1A1A1A;font-weight:500;line-height:1.5;margin-bottom:5px;">Want Days 4 through 90?</p>
-        <p style="font-size:13px;color:#8A7D74;font-weight:300;line-height:1.6;margin-bottom:20px;">Leave your email and we'll send your complete Foundation Plan the moment munē launches. No commitment. No spam. Just yours.</p>
-
-        <div style="display:flex;gap:8px;margin-bottom:10px;" id="quiz-email-row">
-          <input
-            type="email"
-            id="quiz-email-input"
-            placeholder="Your email address"
-            style="flex:1;background:white;border:1.5px solid rgba(0,0,0,0.12);border-radius:11px;padding:14px 18px;font-family:'Outfit',sans-serif;font-size:14px;color:#1A1A1A;outline:none;transition:border-color 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.06);"
-            onfocus="this.style.borderColor='${type.color}'"
-            onblur="this.style.borderColor='rgba(0,0,0,0.12)'"
-          />
-          <button
-            id="quiz-email-btn"
-            onclick="submitQuizEmail('${winner}','${type.name}')"
-            style="background:linear-gradient(135deg,${type.color},${type.color}cc);color:white;border:none;border-radius:11px;padding:14px 20px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all 0.3s;box-shadow:0 4px 16px ${type.color}40;"
-            onmouseover="this.style.transform='translateY(-1px)'"
-            onmouseout="this.style.transform='translateY(0)'">
-            Send my plan →
-          </button>
-        </div>
-
-        <div id="quiz-email-success" style="display:none;background:white;border:1px solid rgba(0,0,0,0.08);border-radius:11px;padding:14px 18px;text-align:left;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-          <p style="font-size:14px;font-weight:500;color:#1A1A1A;margin:0 0 3px;">You're in. Welcome, ${type.name}.</p>
-          <p style="font-size:13px;font-weight:300;color:#8A7D74;margin:0;">Your Foundation Plan will be waiting when munē launches. You'll hear first.</p>
-        </div>
-
-        <p style="margin-top:14px;font-size:13px;color:#8A7D74;">
-          Not ready yet? That's fine.
-          <button onclick="document.getElementById('quiz-email-wrap').style.opacity='0.4'" style="background:none;border:none;font-family:'Outfit',sans-serif;font-size:13px;color:${type.color};cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0;">Keep my result without signing up.</button>
-        </p>
-      </div>
-
-      <button onclick="resetQuiz()" style="margin-top:24px;background:none;border:none;font-family:'Outfit',sans-serif;font-size:12px;color:#B0A89E;cursor:pointer;letter-spacing:0.04em;">↩ Take it again</button>
-    </div>
-  `;
-  reveal.style.display='block';
-}
-
-async function submitQuizEmail(type, typeName){
-  const email = document.getElementById('quiz-email-input').value;
-  if(!email || !email.includes('@')){
-    document.getElementById('quiz-email-input').style.borderColor='#B85C3A';
-    return;
-  }
-  const btn = document.getElementById('quiz-email-btn');
-  btn.disabled = true;
-  btn.textContent = 'One second...';
-
-  const ok = await saveToWaitlist(email, 'quiz_' + type);
-
-  if(ok){
-    document.getElementById('quiz-email-row').style.display='none';
-    document.getElementById('quiz-email-success').style.display='block';
-  } else {
-    btn.disabled = false;
-    btn.textContent = 'Send my plan →';
-    document.getElementById('quiz-email-input').style.borderColor='#B85C3A';
-  }
-}
-
-function resetQuiz(){
-  qIndex=0;
-  scores={fog:0,spark:0,flame:0,current:0,wave:0,tide:0};
-  document.getElementById('quiz-reveal').style.display='none';
-  document.getElementById('quiz-reveal').innerHTML='';
-  document.getElementById('quiz-section').style.background='#111111';
-  document.getElementById('quiz-intro').style.display='block';
-}
-
-// Spotlight
-const spot = document.getElementById('spotlight');
-document.addEventListener('mousemove', e => {
-  spot.style.left = e.clientX + 'px';
-  spot.style.top = e.clientY + 'px';
-});
-
-window.addEventListener('scroll',()=>{
-  document.getElementById('nav').style.boxShadow=window.scrollY>50?'0 2px 20px rgba(0,0,0,0.06)':'none';
-});
-
-const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on');});},{threshold:0.1,rootMargin:'0px 0px -28px 0px'});
-document.querySelectorAll('.r').forEach(el=>ro.observe(el));
-
-function faq(btn){
-  const a=btn.nextElementSibling,i=btn.querySelector('.fq-i'),open=a.classList.contains('open');
-  document.querySelectorAll('.fa.open').forEach(x=>x.classList.remove('open'));
-  document.querySelectorAll('.fq-i.open').forEach(x=>x.classList.remove('open'));
-  if(!open){a.classList.add('open');i.classList.add('open');}
-}
-
-async function go(src){
-  const email = document.getElementById(src==='h'?'he':'ce').value;
-  if(!email || !email.includes('@')) return;
-
-  const btn = src==='h'
-    ? document.querySelector('#hw .submit-btn')
-    : document.querySelector('.cta-btn');
-  if(btn){ btn.disabled=true; btn.textContent='One second...'; }
-
-  const ok = await saveToWaitlist(email, src==='h' ? 'hero' : 'bottom_cta');
-
-  if(ok){
-    if(src==='h'){
-      document.getElementById('er').classList.add('hide');
-      document.getElementById('hs').classList.add('show');
-    } else {
-      document.getElementById('cw').style.display='none';
-      document.getElementById('co').classList.add('show');
+  function renderDots() {
+    var el = document.getElementById("quiz-dots");
+    var html = "";
+    for (var i = 0; i < QUESTIONS.length; i++) {
+      var w = i === qIndex ? "20px" : "8px";
+      var bg = i === qIndex ? "#1B8F82" : i < qIndex ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.15)";
+      html += '<div style="width:' + w + ';height:8px;border-radius:4px;background:' + bg + ';transition:all 0.3s;"></div>';
     }
-  } else {
-    if(btn){ btn.disabled=false; btn.textContent=src==='h'?'Get early access →':'Join waitlist →'; }
+    el.innerHTML = html;
   }
-}
+
+  function renderQuestion() {
+    var q = QUESTIONS[qIndex];
+    document.getElementById("quiz-q-label").textContent = "Question " + (qIndex + 1);
+    document.getElementById("quiz-q-text").textContent = q.q;
+    document.getElementById("quiz-q-sub").textContent = q.sub;
+    document.getElementById("quiz-counter").textContent = (qIndex + 1) + " of " + QUESTIONS.length;
+    var opts = document.getElementById("quiz-options");
+    var html = "";
+    for (var i = 0; i < q.options.length; i++) {
+      html += '<button data-idx="' + i + '" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px 20px;text-align:left;cursor:pointer;font-family:\'Outfit\',sans-serif;font-size:15px;font-weight:300;color:rgba(255,255,255,0.8);transition:all 0.2s;opacity:0;animation:fadeUp 0.4s ease ' + (i * 0.06) + 's forwards;" onmouseover="this.style.background=\'rgba(27,143,130,0.15)\';this.style.borderColor=\'rgba(27,143,130,0.4)\';this.style.color=\'white\'" onmouseout="this.style.background=\'rgba(255,255,255,0.05)\';this.style.borderColor=\'rgba(255,255,255,0.1)\';this.style.color=\'rgba(255,255,255,0.8)\'">' + q.options[i].text + '</button>';
+    }
+    opts.innerHTML = html;
+    var btns = opts.querySelectorAll("button");
+    btns.forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        selectAnswer(parseInt(this.getAttribute("data-idx")));
+      });
+    });
+  }
+
+  function selectAnswer(optIndex) {
+    var opt = QUESTIONS[qIndex].options[optIndex];
+    var keys = Object.keys(opt.scores);
+    for (var i = 0; i < keys.length; i++) {
+      scores[keys[i]] += opt.scores[keys[i]];
+    }
+    var wrap = document.getElementById("quiz-question-wrap");
+    wrap.style.opacity = "0";
+    wrap.style.transform = "translateY(-12px)";
+    setTimeout(function() {
+      if (qIndex < QUESTIONS.length - 1) {
+        qIndex++;
+        renderDots();
+        renderQuestion();
+        wrap.style.transform = "translateY(12px)";
+        setTimeout(function() { wrap.style.opacity = "1"; wrap.style.transform = "translateY(0)"; }, 50);
+      } else {
+        showReveal();
+      }
+    }, 280);
+  }
+
+  function showReveal() {
+    var entries = Object.entries(scores).sort(function(a,b){ return b[1]-a[1]; });
+    var winner = entries[0][0];
+    var type = TYPES[winner];
+
+    document.getElementById("quiz-active").style.display = "none";
+    var section = document.getElementById("quiz-section");
+    section.style.transition = "background 0.8s ease";
+    section.style.background = type.light;
+
+    var planHTML = "";
+    for (var i = 0; i < type.plan.length; i++) {
+      var p = type.plan[i];
+      var opacity = i === 0 ? 1 : i === 1 ? 0.65 : 0.35;
+      planHTML += '<div style="background:white;border:1px solid rgba(0,0,0,0.07);border-radius:12px;padding:16px 18px 16px 20px;text-align:left;position:relative;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,0.04);">'
+        + '<div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:' + type.color + ';border-radius:3px 0 0 3px;opacity:' + opacity + ';"></div>'
+        + '<p style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:' + type.color + ';margin:0 0 4px;">' + p.day + '</p>'
+        + '<p style="font-size:14px;font-weight:500;color:#1A1A1A;margin:0 0 3px;line-height:1.3;">' + p.action + '</p>'
+        + '<p style="font-size:12px;font-weight:300;color:#8A7D74;margin:0;line-height:1.55;">' + p.detail + '</p>'
+        + '</div>';
+    }
+
+    var revealHTML = '<div style="text-align:center;animation:fadeUp 0.7s ease both;">'
+      + '<p style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:' + type.color + ';margin-bottom:16px;opacity:0.8;">Your financial type</p>'
+      + '<div style="font-size:52px;margin-bottom:12px;">' + type.emoji + '</div>'
+      + '<h2 style="font-family:\'Cormorant Garamond\',Georgia,serif;font-size:clamp(36px,6vw,60px);font-weight:300;color:#1A1A1A;line-height:1.1;letter-spacing:-0.025em;margin-bottom:12px;">' + type.name + '</h2>'
+      + '<p style="font-family:\'Cormorant Garamond\',Georgia,serif;font-size:18px;font-style:italic;color:#4A3F38;margin-bottom:28px;line-height:1.5;max-width:480px;margin-left:auto;margin-right:auto;">&ldquo;' + type.tagline + '&rdquo;</p>'
+      + '<div style="background:white;border:1px solid rgba(0,0,0,0.08);border-radius:16px;padding:24px 28px;max-width:520px;margin:0 auto 28px;text-align:left;box-shadow:0 2px 16px rgba(0,0,0,0.06);position:relative;overflow:hidden;">'
+      + '<div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,' + type.color + ',' + type.color + '66);"></div>'
+      + '<p style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:' + type.color + ';margin-bottom:10px;">The truth</p>'
+      + '<p style="font-size:15px;font-weight:300;color:#4A3F38;line-height:1.78;">' + type.truth + '</p>'
+      + '</div>'
+      + '<div style="max-width:520px;margin:0 auto 32px;">'
+      + '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">'
+      + '<p style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:' + type.color + ';margin:0;">Your Foundation Plan &middot; First 3 days</p>'
+      + '<p style="font-size:11px;color:#B0A89E;margin:0;">Unique to ' + type.name + '</p>'
+      + '</div>'
+      + '<div style="display:flex;flex-direction:column;gap:8px;">' + planHTML + '</div>'
+      + '<div style="margin-top:8px;border:1px dashed rgba(0,0,0,0.1);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.5);">'
+      + '<div style="display:flex;gap:4px;"><div style="width:6px;height:6px;border-radius:50%;background:' + type.color + ';opacity:0.3;"></div><div style="width:6px;height:6px;border-radius:50%;background:' + type.color + ';opacity:0.2;"></div><div style="width:6px;height:6px;border-radius:50%;background:' + type.color + ';opacity:0.1;"></div></div>'
+      + '<p style="font-size:12px;font-weight:300;color:#8A7D74;margin:0;">Days 4 through 90 — built around everything you just shared.</p>'
+      + '</div></div>'
+      + '<div style="max-width:440px;margin:0 auto;" id="quiz-email-wrap">'
+      + '<p style="font-size:16px;color:#1A1A1A;font-weight:500;line-height:1.5;margin-bottom:5px;">Want Days 4 through 90?</p>'
+      + '<p style="font-size:13px;color:#8A7D74;font-weight:300;line-height:1.6;margin-bottom:20px;">Leave your email and we\'ll send your complete Foundation Plan the moment munē launches. No commitment. No spam. Just yours.</p>'
+      + '<div style="display:flex;gap:8px;margin-bottom:10px;" id="quiz-email-row">'
+      + '<input type="email" id="quiz-email-input" placeholder="Your email address" style="flex:1;background:white;border:1.5px solid rgba(0,0,0,0.12);border-radius:11px;padding:14px 18px;font-family:\'Outfit\',sans-serif;font-size:14px;color:#1A1A1A;outline:none;transition:border-color 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.06);" />'
+      + '<button id="quiz-email-btn" style="background:linear-gradient(135deg,' + type.color + ',' + type.color + 'cc);color:white;border:none;border-radius:11px;padding:14px 20px;font-family:\'Outfit\',sans-serif;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all 0.3s;box-shadow:0 4px 16px ' + type.color + '40;">Send my plan →</button>'
+      + '</div>'
+      + '<div id="quiz-email-success" style="display:none;background:white;border:1px solid rgba(0,0,0,0.08);border-radius:11px;padding:14px 18px;text-align:left;">'
+      + '<p style="font-size:14px;font-weight:500;color:#1A1A1A;margin:0 0 3px;">You\'re in. Welcome, ' + type.name + '.</p>'
+      + '<p style="font-size:13px;font-weight:300;color:#8A7D74;margin:0;">Your Foundation Plan will be waiting when munē launches. You\'ll hear first.</p>'
+      + '</div>'
+      + '<p style="margin-top:14px;font-size:13px;color:#8A7D74;">Not ready yet? That\'s fine. <button id="quiz-skip-btn" style="background:none;border:none;font-family:\'Outfit\',sans-serif;font-size:13px;color:' + type.color + ';cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0;">Keep my result without signing up.</button></p>'
+      + '</div>'
+      + '<button id="retake-btn" style="margin-top:24px;background:none;border:none;font-family:\'Outfit\',sans-serif;font-size:12px;color:#B0A89E;cursor:pointer;letter-spacing:0.04em;">&#8617; Take it again</button>'
+      + '</div>';
+
+    var reveal = document.getElementById("quiz-reveal");
+    reveal.innerHTML = revealHTML;
+    reveal.style.display = "block";
+
+    document.getElementById("quiz-email-btn").addEventListener("click", async function() {
+      var email = document.getElementById("quiz-email-input").value.trim();
+      if (!email || !email.includes("@")) {
+        document.getElementById("quiz-email-input").style.borderColor = "#B85C3A";
+        return;
+      }
+      this.disabled = true;
+      this.textContent = "One second...";
+      var ok = await saveToWaitlist(email, "quiz_" + winner);
+      if (ok) {
+        document.getElementById("quiz-email-row").style.display = "none";
+        document.getElementById("quiz-email-success").style.display = "block";
+      } else {
+        this.disabled = false;
+        this.textContent = "Send my plan →";
+        document.getElementById("quiz-email-input").style.borderColor = "#B85C3A";
+      }
+    });
+
+    document.getElementById("quiz-skip-btn").addEventListener("click", function() {
+      document.getElementById("quiz-email-wrap").style.opacity = "0.4";
+    });
+
+    document.getElementById("retake-btn").addEventListener("click", function() {
+      qIndex = 0;
+      scores = {fog:0,spark:0,flame:0,current:0,wave:0,tide:0};
+      reveal.style.display = "none";
+      reveal.innerHTML = "";
+      section.style.background = "#111111";
+      document.getElementById("quiz-intro").style.display = "block";
+    });
+  }
+
+  // ── SPOTLIGHT ──
+  var spot = document.getElementById("spotlight");
+  document.addEventListener("mousemove", function(e) {
+    spot.style.left = e.clientX + "px";
+    spot.style.top = e.clientY + "px";
+  });
+
+  // ── NAV SCROLL ──
+  window.addEventListener("scroll", function() {
+    document.getElementById("nav").style.boxShadow = window.scrollY > 50 ? "0 2px 20px rgba(0,0,0,0.06)" : "none";
+  });
+
+  // ── SCROLL REVEAL ──
+  var ro = new IntersectionObserver(function(entries) {
+    entries.forEach(function(x) { if (x.isIntersecting) x.target.classList.add("on"); });
+  }, { threshold: 0.1, rootMargin: "0px 0px -28px 0px" });
+  document.querySelectorAll(".r").forEach(function(el) { ro.observe(el); });
+
+  // ── FAQ ──
+  window.faq = function(btn) {
+    var a = btn.nextElementSibling;
+    var icon = btn.querySelector(".fq-i");
+    var isOpen = a.classList.contains("open");
+    document.querySelectorAll(".fa.open").forEach(function(x) { x.classList.remove("open"); });
+    document.querySelectorAll(".fq-i.open").forEach(function(x) { x.classList.remove("open"); });
+    if (!isOpen) { a.classList.add("open"); icon.classList.add("open"); }
+  };
+
+})();
+</script>
+</body>
+</html>
