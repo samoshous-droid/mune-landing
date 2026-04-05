@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>munē</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --teal:#2AAE80;--teal-dark:#1F8A62;--teal-light:#D0EDE0;
+  --espresso:#0A1F13;--espresso-deep:#040D09;
+  --amber:#BF9A3F;--amber-light:#F2E8CC;
+  --coral:#C87850;
+  --offwhite:#F2EEE6;--white:#FEFCF9;
+  --text-pri:#2C2C2C;--text-sec:#5A5248;--muted:#9B9087;
+  --border:#DDD5C8;
+  --fog:#DDD5C8;--spark:#F2E8CC;--flame:#F5E0D5;
+  --current:#D0EDE0;--wave:#F8EED5;--tide:#E8EDF5;
+  --screen-max:420px;
+  --serif:'Cormorant Garant',Georgia,serif;
+  --sans:'Outfit',sans-serif;
+}
+html,body{
+  height:100%;width:100%;
+  background:#030C08;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--sans);
+  overflow:hidden;
+}
+#phone{
+  width:100%;max-width:var(--screen-max);
+  height:100vh;max-height:860px;
+  background:var(--offwhite);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  border-radius:0;
+  box-shadow:0 0 80px rgba(0,0,0,0.5);
+}
+@media(min-width:460px){
+  #phone{border-radius:40px;height:calc(100vh - 40px);}
+}
+
+/* SCREENS */
+.screen{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.35s cubic-bezier(.4,0,.2,1),transform 0.35s cubic-bezier(.4,0,.2,1);
+  transform:translateX(30px);
+  background:var(--offwhite);
+  overflow:hidden;
+}
+.screen.active{opacity:1;pointer-events:all;transform:translateX(0);}
+.screen.exit{opacity:0;transform:translateX(-30px);}
+
+/* SPLASH */
+#splash{
+  background:linear-gradient(170deg,#040D09 0%,#061510 45%,#0A1F13 100%);
+  justify-content:space-between;
+  align-items:stretch;
+  overflow:hidden;
+}
+/* Radial glow behind arc center */
+#splash::before{
+  content:'';position:absolute;
+  width:480px;height:480px;
+  top:50%;left:50%;transform:translate(-50%,-52%);
+  background:radial-gradient(circle,rgba(42,174,128,0.1) 0%,transparent 70%);
+  pointer-events:none;
+}
+.splash-top{
+  padding:64px 32px 0;
+  animation:fadeUp 0.9s ease both;
+  position:relative;z-index:2;
+}
+.splash-wordmark{
+  font-family:var(--serif);font-size:64px;font-weight:300;
+  color:var(--white);letter-spacing:-2px;line-height:1;
+  display:block;margin-bottom:0;
+}
+.splash-wordmark span{
+  color:#BF9A3F;
+  text-shadow:0 0 60px rgba(191,154,63,0.4);
+}
+/* Arc composition — centered, takes up the middle space */
+.splash-arc-wrap{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-54%);
+  width:320px;height:320px;
+  pointer-events:none;
+}
+.splash-arc-ring{
+  position:absolute;border-radius:50%;
+  border:1px solid rgba(42,174,128,0.15);
+}
+.splash-arc-ring:nth-child(1){inset:0;animation:arcSpin 18s linear infinite;}
+.splash-arc-ring:nth-child(2){inset:28px;border-color:rgba(42,174,128,0.1);animation:arcSpin 26s linear infinite reverse;}
+.splash-arc-ring:nth-child(3){inset:56px;border-color:rgba(191,154,63,0.08);animation:arcSpin 34s linear infinite;}
+.splash-arc-ring:nth-child(4){inset:84px;border-color:rgba(42,174,128,0.06);}
+/* Small glowing node on ring 1 */
+.splash-arc-node{
+  position:absolute;top:50%;left:100%;
+  width:5px;height:5px;border-radius:50%;
+  background:#2AAE80;margin:-2px 0 0 -2px;
+  box-shadow:0 0 12px 3px rgba(29,181,132,0.6);
+}
+.splash-arc-node2{
+  position:absolute;top:0;left:50%;
+  width:4px;height:4px;border-radius:50%;
+  background:#BF9A3F;margin:0 0 0 -2px;
+  box-shadow:0 0 10px 3px rgba(191,154,63,0.4);
+}
+@keyframes arcSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+
+/* Bottom section — anchored, full width */
+.splash-bottom{
+  position:relative;z-index:2;
+  padding:0 0 48px;
+  display:flex;flex-direction:column;
+  animation:fadeUp 1s ease 0.5s both;
+}
+.splash-copy{
+  padding:0 32px 32px;
+}
+.splash-tagline{
+  font-family:var(--serif);font-size:22px;font-weight:300;
+  color:rgba(255,255,255,0.85);
+  font-style:italic;line-height:1.4;margin-bottom:8px;
+}
+.splash-sub{
+  font-size:13px;color:rgba(255,255,255,0.35);
+  font-weight:400;letter-spacing:0.3px;
+}
+.splash-btn{
+  margin:0 24px;
+  padding:18px 0;
+  background:linear-gradient(135deg,#2AAE80 0%,#1F8A62 100%);
+  color:var(--white);
+  border:none;border-radius:18px;
+  font-family:var(--sans);font-size:16px;font-weight:500;
+  cursor:pointer;
+  transition:transform 0.2s,box-shadow 0.2s;
+  letter-spacing:0.2px;
+  box-shadow:0 12px 40px rgba(42,174,128,0.32),0 4px 12px rgba(0,0,0,0.3);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.splash-btn:active{transform:scale(0.98);box-shadow:0 6px 20px rgba(42,174,128,0.25);}
+.splash-btn-arrow{
+  width:18px;height:18px;border-radius:50%;
+  background:rgba(255,255,255,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;
+}
+.splash-hint{
+  text-align:center;margin-top:14px;
+  font-size:11px;color:rgba(255,255,255,0.2);
+  letter-spacing:0.3px;
+}
+
+/* QUIZ */
+#quiz{background:linear-gradient(170deg,#040D09 0%,#0A1F13 100%);}
+.quiz-progress{
+  height:2px;background:rgba(255,255,255,0.1);position:relative;
+  flex-shrink:0;
+}
+.quiz-progress-fill{
+  height:100%;background:var(--teal);
+  transition:width 0.4s ease;
+}
+.quiz-content{
+  flex:1;display:flex;flex-direction:column;
+  padding:32px 28px 24px;overflow-y:auto;
+}
+.quiz-q-num{
+  font-size:11px;font-weight:500;color:var(--teal);
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;
+}
+.quiz-question{
+  font-family:var(--serif);font-size:28px;font-weight:300;
+  color:var(--white);line-height:1.3;margin-bottom:32px;
+  flex-shrink:0;
+}
+.quiz-options{display:flex;flex-direction:column;gap:10px;flex:1;}
+.quiz-opt{
+  padding:18px 20px;border-radius:14px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.85);
+  font-family:var(--sans);font-size:14px;line-height:1.4;
+  cursor:pointer;text-align:left;
+  transition:all 0.2s;
+}
+.quiz-opt:active,.quiz-opt.selected{
+  background:rgba(42,174,128,0.16);
+  border-color:var(--teal);
+  color:var(--white);
+}
+.quiz-floor{padding:12px 28px 28px;}
+.floor-label{
+  font-family:var(--serif);font-size:26px;color:var(--white);
+  font-weight:300;margin-bottom:8px;
+}
+.floor-sub{font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:28px;}
+.floor-val{
+  font-family:var(--serif);font-size:52px;font-weight:300;
+  color:var(--teal);text-align:center;margin-bottom:16px;
+}
+.floor-slider{width:100%;accent-color:var(--teal);cursor:pointer;height:4px;}
+.floor-hints{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.4);margin-top:8px;}
+.quiz-fear{padding:12px 28px 28px;}
+.fear-input{
+  width:100%;background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:14px;padding:16px;
+  color:var(--white);font-family:var(--sans);font-size:14px;
+  resize:none;height:100px;
+  outline:none;transition:border-color 0.2s;
+}
+.fear-input:focus{border-color:var(--teal);}
+.fear-input::placeholder{color:rgba(255,255,255,0.3);}
+.quiz-next{
+  margin:20px 28px 0;padding:16px;
+  background:linear-gradient(135deg,#2AAE80,#1F8A62);
+  color:var(--white);
+  border:none;border-radius:14px;
+  font-family:var(--sans);font-size:15px;font-weight:500;
+  cursor:pointer;transition:opacity 0.2s;width:calc(100% - 56px);
+  box-shadow:0 4px 16px rgba(42,174,128,0.16);
+}
+.quiz-next:active{opacity:0.85;}
+
+/* REVEAL */
+#reveal{justify-content:flex-end;}
+.reveal-bg{
+  position:absolute;inset:0;
+  background:linear-gradient(170deg,#040D09 0%,#0A1F13 70%,#0A2018 100%);
+}
+.reveal-arc-wrap{
+  position:absolute;top:-80px;left:50%;transform:translateX(-50%);
+  width:500px;height:500px;
+}
+.reveal-arc{
+  position:absolute;inset:0;border-radius:50%;
+  border:1px solid rgba(42,174,128,0.2);
+  animation:arcPulse 3s ease infinite;
+}
+.reveal-arc:nth-child(2){inset:40px;animation-delay:0.5s;}
+.reveal-arc:nth-child(3){inset:80px;animation-delay:1s;}
+.reveal-card{
+  position:relative;z-index:2;
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:28px 28px 0 0;
+  padding:36px 28px 52px;
+  animation:slideUp 0.6s cubic-bezier(.4,0,.2,1) both;
+}
+.reveal-label{
+  font-size:11px;font-weight:500;color:var(--teal);
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;
+}
+.reveal-name{
+  font-family:var(--serif);font-size:52px;font-weight:300;
+  line-height:1;margin-bottom:20px;
+}
+.reveal-quote{
+  font-family:var(--serif);font-size:18px;font-style:italic;
+  color:rgba(255,255,255,0.7);line-height:1.5;margin-bottom:20px;
+}
+.reveal-truth{
+  font-size:14px;color:rgba(255,255,255,0.6);
+  line-height:1.6;margin-bottom:28px;
+}
+.reveal-path{
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:32px;
+}
+.reveal-path-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;
+}
+.reveal-cta{
+  width:100%;padding:16px;
+  background:var(--teal);color:var(--white);
+  border:none;border-radius:14px;
+  font-family:var(--sans);font-size:15px;font-weight:500;
+  cursor:pointer;transition:opacity 0.2s;
+}
+.reveal-cta:active{opacity:0.85;}
+
+/* EMAIL CAPTURE */
+#capture{background:linear-gradient(160deg,#040D09 0%,#0A1F13 100%);justify-content:center;padding:28px;}
+.capture-inner{width:100%;}
+.capture-top{margin-bottom:32px;}
+.capture-title{
+  font-family:var(--serif);font-size:34px;font-weight:300;
+  color:var(--white);line-height:1.2;margin-bottom:12px;
+}
+.capture-title span{color:var(--teal);}
+.capture-sub{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.5;}
+.capture-days{
+  display:flex;flex-direction:column;gap:10px;margin-bottom:32px;
+}
+.capture-day{
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;padding:14px 16px;
+  display:flex;align-items:center;gap:12px;
+}
+.capture-day-num{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,#2AAE80,#1F8A62);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;color:var(--white);flex-shrink:0;
+}
+.capture-day-text{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.4;}
+.capture-field{
+  width:100%;padding:16px;background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);border-radius:14px;
+  color:var(--white);font-family:var(--sans);font-size:15px;
+  outline:none;transition:border-color 0.2s;margin-bottom:12px;
+}
+.capture-field:focus{border-color:var(--teal);}
+.capture-field::placeholder{color:rgba(255,255,255,0.3);}
+.capture-submit{
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,#2AAE80,#1F8A62);
+  color:var(--white);
+  border:none;border-radius:14px;font-family:var(--sans);font-size:15px;font-weight:500;
+  cursor:pointer;transition:opacity 0.2s;
+  box-shadow:0 4px 16px rgba(42,174,128,0.2);
+}
+.capture-submit:active{opacity:0.85;}
+.capture-skip{
+  width:100%;padding:12px;background:transparent;color:rgba(255,255,255,0.3);
+  border:none;font-family:var(--sans);font-size:13px;cursor:pointer;margin-top:8px;
+}
+
+/* HOME */
+#home{background:var(--offwhite);}
+.home-header{
+  background:linear-gradient(160deg,#040D09 0%,#0A1F13 100%);
+  padding:52px 24px 24px;flex-shrink:0;
+}
+.home-greeting{font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:2px;}
+.home-name{
+  font-family:var(--serif);font-size:28px;font-weight:300;
+  color:var(--white);margin-bottom:16px;
+}
+.home-archetype-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(191,154,63,0.12);border:1px solid rgba(191,154,63,0.25);
+  border-radius:100px;padding:6px 12px;
+}
+.home-archetype-badge span{font-size:12px;font-weight:500;color:#BF9A3F;}
+.home-scroll{flex:1;overflow-y:auto;padding:20px 20px 120px;}
+.home-scroll::-webkit-scrollbar{display:none;}
+
+/* SCORE RING */
+.score-card{
+  background:var(--white);border-radius:20px;
+  padding:24px;margin-bottom:16px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.05);
+}
+.score-ring-wrap{display:flex;align-items:center;gap:20px;}
+.score-ring{position:relative;width:100px;height:100px;flex-shrink:0;}
+.score-ring svg{width:100%;height:100%;transform:rotate(-90deg);}
+.score-ring-track{fill:none;stroke:#DDD5C8;stroke-width:8;}
+.score-ring-fill{fill:none;stroke:#BF9A3F;stroke-width:8;stroke-linecap:round;
+  stroke-dasharray:251;transition:stroke-dashoffset 1.5s cubic-bezier(.4,0,.2,1);}
+.score-ring-num{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+}
+.score-ring-num .num{
+  font-family:var(--serif);font-size:28px;font-weight:400;color:#0A1F13;
+  line-height:1;
+}
+.score-ring-num .lbl{font-size:9px;color:var(--muted);font-weight:500;letter-spacing:1px;}
+.score-info{flex:1;}
+.score-title{font-family:var(--serif);font-size:20px;color:var(--text-pri);margin-bottom:4px;}
+.score-sub{font-size:13px;color:var(--text-sec);line-height:1.4;margin-bottom:12px;}
+.score-cats{display:flex;flex-direction:column;gap:6px;}
+.score-cat{display:flex;align-items:center;gap:8px;}
+.score-cat-label{font-size:11px;color:var(--muted);width:68px;flex-shrink:0;}
+.score-cat-bar-wrap{flex:1;height:4px;background:#F0EDE8;border-radius:2px;overflow:hidden;}
+.score-cat-bar{height:100%;border-radius:2px;background:linear-gradient(90deg,#2AAE80,#1F8A62);}
+.score-cat-val{font-size:11px;color:var(--text-sec);font-weight:500;width:28px;text-align:right;}
+
+/* VITALS */
+.vitals-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.vital-card{
+  background:var(--white);border-radius:16px;padding:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  cursor:pointer;transition:transform 0.15s;
+}
+.vital-card:active{transform:scale(0.97);}
+.vital-emoji{font-size:22px;margin-bottom:8px;display:block;}
+.vital-name{font-size:11px;color:var(--muted);font-weight:500;margin-bottom:6px;letter-spacing:0.3px;}
+.vital-status{
+  font-size:12px;font-weight:600;margin-bottom:8px;
+}
+.vital-dots{display:flex;gap:3px;}
+.vital-dot{width:8px;height:8px;border-radius:50%;background:#DDD5C8;}
+.vital-dot.on{background:#2AAE80;}
+.vital-dot.warn{background:#BF9A3F;}
+.vital-dot.crit{background:var(--coral);}
+
+/* PLAN CARD */
+.plan-card{
+  background:linear-gradient(135deg,#0A1F13 0%,#163524 100%);
+  border-radius:20px;padding:24px;margin-bottom:16px;cursor:pointer;
+  transition:transform 0.15s;
+  box-shadow:0 8px 32px rgba(13,40,24,0.25);
+}
+.plan-card:active{transform:scale(0.98);}
+.plan-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.plan-label{font-size:11px;font-weight:500;color:#2AAE80;letter-spacing:1.5px;text-transform:uppercase;}
+.plan-day{font-size:12px;color:rgba(255,255,255,0.4);}
+.plan-action{
+  font-family:var(--serif);font-size:22px;font-weight:300;
+  color:var(--white);line-height:1.3;margin-bottom:16px;
+}
+.plan-streak{display:flex;align-items:center;gap:8px;}
+.plan-streak-dots{display:flex;gap:4px;}
+.plan-streak-dot{
+  width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.15);
+}
+.plan-streak-dot.done{background:var(--teal);}
+.plan-streak-label{font-size:12px;color:rgba(255,255,255,0.4);}
+.plan-commit-btn{
+  width:100%;padding:13px;
+  background:linear-gradient(135deg,#2AAE80,#1F8A62);
+  border:none;border-radius:12px;color:var(--white);
+  font-family:var(--sans);font-size:14px;font-weight:500;
+  cursor:pointer;transition:opacity 0.2s;margin-top:16px;
+}
+.plan-commit-btn:active{opacity:0.85;}
+
+/* SECTION HEADER */
+.section-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:12px;margin-top:4px;
+}
+.section-title{font-family:var(--serif);font-size:20px;color:var(--text-pri);}
+.section-link{font-size:13px;color:#2AAE80;font-weight:500;cursor:pointer;}
+
+/* ADVISOR */
+#advisor{background:var(--offwhite);}
+.advisor-header{
+  background:linear-gradient(160deg,#040D09 0%,#0A1F13 100%);
+  padding:52px 24px 20px;flex-shrink:0;
+}
+.advisor-hdr-top{
+  display:flex;align-items:center;gap:12px;margin-bottom:4px;
+}
+.advisor-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,#2AAE80,#1F8A62);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:20px;color:var(--white);font-weight:300;
+  box-shadow:0 4px 12px rgba(42,174,128,0.25);
+}
+.advisor-title-wrap .advisor-name{
+  font-family:var(--serif);font-size:18px;color:var(--white);font-weight:300;
+}
+.advisor-title-wrap .advisor-sub{font-size:12px;color:rgba(255,255,255,0.4);}
+.advisor-messages{flex:1;overflow-y:auto;padding:20px 20px 16px;display:flex;flex-direction:column;gap:14px;}
+.advisor-messages::-webkit-scrollbar{display:none;}
+.msg{max-width:85%;display:flex;flex-direction:column;gap:4px;}
+.msg.mune{align-self:flex-start;}
+.msg.user{align-self:flex-end;}
+.msg-bubble{
+  padding:14px 16px;border-radius:20px;
+  font-size:14px;line-height:1.55;
+}
+.msg.mune .msg-bubble{
+  background:var(--white);color:var(--text-pri);
+  border-radius:4px 20px 20px 20px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+.msg.user .msg-bubble{
+  background:var(--teal);color:var(--white);
+  border-radius:20px 20px 4px 20px;
+}
+.msg-time{font-size:11px;color:var(--muted);padding:0 4px;}
+.msg.user .msg-time{text-align:right;}
+.advisor-input-wrap{
+  padding:12px 16px;background:var(--white);
+  border-top:1px solid var(--border);flex-shrink:0;
+  display:flex;gap:10px;align-items:flex-end;
+}
+.advisor-input{
+  flex:1;background:var(--offwhite);border:1px solid var(--border);
+  border-radius:20px;padding:11px 16px;font-family:var(--sans);font-size:14px;
+  color:var(--text-pri);outline:none;resize:none;max-height:100px;
+  transition:border-color 0.2s;
+}
+.advisor-input:focus{border-color:var(--teal);}
+.advisor-send{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,#2AAE80,#1F8A62);
+  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:opacity 0.2s;
+  box-shadow:0 4px 12px rgba(42,174,128,0.25);
+}
+.advisor-send:active{opacity:0.8;}
+.advisor-send svg{width:16px;height:16px;}
+
+/* QUICK CHIPS */
+.quick-chips{
+  padding:8px 16px 0;display:flex;gap:8px;flex-wrap:nowrap;
+  overflow-x:auto;flex-shrink:0;
+}
+.quick-chips::-webkit-scrollbar{display:none;}
+.chip{
+  white-space:nowrap;padding:8px 14px;
+  background:var(--offwhite);border:1px solid var(--border);
+  border-radius:100px;font-size:12px;color:var(--text-sec);
+  cursor:pointer;transition:all 0.15s;flex-shrink:0;
+}
+.chip:active,.chip:hover{background:#D0EDE0;border-color:#2AAE80;color:#1F8A62;}
+
+/* FUTURE */
+#future{background:var(--offwhite);}
+.future-header{
+  background:linear-gradient(160deg,#040D09 0%,#0A1F13 100%);
+  padding:52px 24px 28px;flex-shrink:0;
+}
+.future-title{
+  font-family:var(--serif);font-size:30px;font-weight:300;
+  color:var(--white);margin-bottom:4px;
+}
+.future-sub{font-size:13px;color:rgba(255,255,255,0.5);}
+.future-scroll{flex:1;overflow-y:auto;padding:20px 20px 120px;}
+.future-scroll::-webkit-scrollbar{display:none;}
+.path-status{
+  background:var(--white);border-radius:20px;padding:20px;
+  margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,0.05);
+  border-left:4px solid #2AAE80;
+}
+.path-status-label{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.path-status-val{
+  font-family:var(--serif);font-size:24px;color:var(--text-pri);margin-bottom:4px;
+}
+.path-status-msg{font-size:13px;color:var(--text-sec);line-height:1.5;}
+.timeline-card{
+  background:var(--white);border-radius:20px;padding:20px;
+  margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.timeline-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 0;border-bottom:1px solid var(--border);
+}
+.timeline-item:last-child{border-bottom:none;padding-bottom:0;}
+.timeline-dot-col{display:flex;flex-direction:column;align-items:center;padding-top:4px;}
+.timeline-dot{
+  width:10px;height:10px;border-radius:50%;background:#2AAE80;flex-shrink:0;
+}
+.timeline-line{width:1px;flex:1;background:var(--border);margin-top:4px;min-height:20px;}
+.timeline-item:last-child .timeline-line{display:none;}
+.timeline-info{flex:1;}
+.timeline-event{font-size:14px;color:var(--text-pri);font-weight:500;margin-bottom:2px;}
+.timeline-date{font-size:12px;color:#2AAE80;font-weight:500;}
+.timeline-change{font-size:12px;color:var(--muted);}
+.sim-entry{
+  background:linear-gradient(135deg,#0A1F13 0%,#163524 100%);
+  border-radius:20px;padding:24px;
+  cursor:pointer;transition:transform 0.15s;
+  box-shadow:0 8px 32px rgba(13,40,24,0.2);
+}
+.sim-entry:active{transform:scale(0.98);}
+.sim-entry-label{font-size:11px;font-weight:500;color:#2AAE80;letter-spacing:1.5px;margin-bottom:8px;text-transform:uppercase;}
+.sim-entry-title{font-family:var(--serif);font-size:22px;font-weight:300;color:var(--white);margin-bottom:12px;}
+.sim-entry-cats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+.sim-cat{
+  padding:6px 12px;border-radius:100px;
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);
+  font-size:12px;color:rgba(255,255,255,0.7);cursor:pointer;
+  transition:all 0.15s;
+}
+.sim-cat.sel{background:rgba(42,174,128,0.2);border-color:var(--teal);color:var(--teal);}
+.sim-run{
+  width:100%;padding:14px;
+  background:linear-gradient(135deg,#2AAE80,#1F8A62);
+  border:none;border-radius:12px;color:var(--white);
+  font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;
+  box-shadow:0 4px 16px rgba(42,174,128,0.2);
+}
+
+/* SIMULATOR RESULT */
+#simresult{background:var(--offwhite);}
+.simresult-header{
+  background:linear-gradient(160deg,#040D09 0%,#0A1F13 100%);
+  padding:52px 24px 24px;flex-shrink:0;
+}
+.simresult-verdict{
+  font-family:var(--serif);font-size:28px;font-weight:300;
+  color:var(--white);line-height:1.3;margin-bottom:8px;
+}
+.simresult-verdict span{color:var(--teal);}
+.simresult-impact{
+  font-size:13px;color:rgba(255,255,255,0.5);
+}
+.simresult-scroll{flex:1;overflow-y:auto;padding:20px 20px 120px;}
+.simresult-scroll::-webkit-scrollbar{display:none;}
+.sim-headline{
+  background:var(--white);border-radius:20px;padding:20px;
+  margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  border-left:4px solid #2AAE80;
+}
+.sim-headline-text{
+  font-family:var(--serif);font-size:20px;color:var(--text-pri);
+  line-height:1.4;
+}
+.sim-metrics{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
+.sim-metric{
+  background:var(--white);border-radius:14px;padding:16px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.04);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.sim-metric-name{font-size:14px;color:var(--text-pri);}
+.sim-metric-change{
+  font-size:14px;font-weight:600;
+  display:flex;align-items:center;gap:4px;
+}
+.sim-metric-change.pos{color:#27AE60;}
+.sim-metric-change.neg{color:#E74C3C;}
+.sim-metric-change.neu{color:var(--muted);}
+.sim-apply{
+  background:linear-gradient(135deg,#0A1F13,#163524);
+  border-radius:20px;padding:20px;margin-bottom:12px;
+}
+.sim-apply-q{
+  font-family:var(--serif);font-size:18px;color:var(--white);
+  margin-bottom:16px;line-height:1.3;
+}
+.sim-apply-btns{display:flex;gap:10px;}
+.sim-apply-yes{
+  flex:1;padding:14px;
+  background:linear-gradient(135deg,#2AAE80,#1F8A62);
+  border:none;border-radius:12px;
+  color:var(--white);font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;
+}
+.sim-apply-no{
+  flex:1;padding:14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+  border-radius:12px;color:rgba(255,255,255,0.7);font-family:var(--sans);font-size:14px;cursor:pointer;
+}
+
+/* LEARN */
+#learn{background:var(--offwhite);}
+.learn-header{
+  background:linear-gradient(160deg,#040D09 0%,#0A1F13 100%);
+  padding:52px 24px 20px;flex-shrink:0;
+}
+.learn-title{font-family:var(--serif);font-size:28px;font-weight:300;color:var(--white);margin-bottom:4px;}
+.learn-sub{font-size:13px;color:rgba(255,255,255,0.5);}
+.learn-scroll{flex:1;overflow-y:auto;padding:20px 20px 120px;}
+.learn-scroll::-webkit-scrollbar{display:none;}
+.learn-feat{
+  background:var(--white);border-radius:20px;padding:20px;
+  margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  cursor:pointer;transition:transform 0.15s;
+}
+.learn-feat:active{transform:scale(0.98);}
+.learn-feat-tag{
+  font-size:10px;font-weight:600;color:var(--teal);
+  letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;
+}
+.learn-feat-term{font-family:var(--serif);font-size:22px;color:var(--text-pri);margin-bottom:6px;}
+.learn-feat-def{font-size:13px;color:var(--text-sec);line-height:1.5;margin-bottom:12px;}
+.learn-feat-insight{
+  background:#D0EDE0;border-radius:10px;padding:12px;
+  font-size:12px;color:#1F8A62;line-height:1.5;font-weight:500;
+}
+.learn-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.learn-term{
+  background:var(--white);border-radius:14px;padding:14px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.04);cursor:pointer;
+  transition:transform 0.15s;
+}
+.learn-term:active{transform:scale(0.97);}
+.learn-term-name{font-family:var(--serif);font-size:16px;color:var(--text-pri);margin-bottom:4px;}
+.learn-term-preview{font-size:12px;color:var(--muted);line-height:1.4;}
+
+/* BOTTOM NAV */
+#globalNav{
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(247,244,239,0.95);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-top:1px solid var(--border);
+  display:none;
+  padding:8px 0 20px;z-index:200;
+  flex-shrink:0;
+}
+#globalNav.visible{display:flex;}
+.nav-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  background:none;border:none;cursor:pointer;padding:6px 0;
+  transition:opacity 0.15s;
+}
+.nav-btn.active .nav-icon svg path,.nav-btn.active .nav-icon svg circle,
+.nav-btn.active .nav-icon svg rect,.nav-btn.active .nav-icon svg line,
+.nav-btn.active .nav-icon svg polyline{stroke:#2AAE80;}
+.nav-icon{width:22px;height:22px;}
+.nav-icon svg{width:100%;height:100%;}
+.nav-icon svg path,.nav-icon svg circle,.nav-icon svg rect,
+.nav-icon svg line,.nav-icon svg polyline{
+  stroke:var(--muted);stroke-width:1.5;fill:none;
+  transition:stroke 0.2s;
+}
+.nav-label{font-size:10px;color:var(--muted);font-weight:500;transition:color 0.2s;}
+.nav-btn.active .nav-label{color:#2AAE80;}
+
+/* COMMIT SCREEN */
+#commit{background:linear-gradient(160deg,#040D09 0%,#0A1F13 100%);}
+.commit-content{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 32px;text-align:center;}
+.commit-arc{width:180px;height:180px;position:relative;margin-bottom:32px;}
+.commit-arc svg{width:100%;height:100%;}
+.commit-check{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:48px;
+}
+.commit-title{
+  font-family:var(--serif);font-size:32px;font-weight:300;
+  color:var(--white);margin-bottom:12px;line-height:1.2;
+}
+.commit-body{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;margin-bottom:36px;}
+.commit-stmt{
+  background:rgba(42,174,128,0.1);border:1px solid rgba(42,174,128,0.2);
+  border-radius:16px;padding:20px;margin-bottom:24px;width:100%;
+}
+.commit-stmt-text{
+  font-family:var(--serif);font-size:18px;font-style:italic;
+  color:var(--white);line-height:1.4;margin-bottom:16px;
+}
+.commit-btn{
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,#2AAE80,#1F8A62);
+  border:none;
+  border-radius:14px;color:var(--white);font-family:var(--sans);
+  font-size:15px;font-weight:500;cursor:pointer;transition:opacity 0.2s;
+  box-shadow:0 6px 24px rgba(42,174,128,0.25);
+}
+.commit-btn:active{opacity:0.85;}
+.commit-success{display:none;flex-direction:column;align-items:center;text-align:center;}
+.commit-success.show{display:flex;}
+.commit-initial{display:flex;flex-direction:column;align-items:center;text-align:center;width:100%;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+@keyframes expand{from{opacity:0;transform:translateX(-50%) scale(0.8);}to{opacity:1;transform:translateX(-50%) scale(1);}}
+@keyframes arcPulse{0%,100%{opacity:0.2;}50%{opacity:0.5;}}
+@keyframes checkPop{0%{transform:scale(0);}70%{transform:scale(1.2);}100%{transform:scale(1);}}
+@keyframes confetti{0%{opacity:1;transform:translateY(0) rotate(0deg);}100%{opacity:0;transform:translateY(-80px) rotate(360deg);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.5;}}
+
+/* TYPING INDICATOR */
+.typing{display:flex;gap:4px;align-items:center;padding:14px 16px;}
+.typing span{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:pulse 1.2s infinite;}
+.typing span:nth-child(2){animation-delay:0.2s;}
+.typing span:nth-child(3){animation-delay:0.4s;}
+
+/* SHIMMER for loading */
+@keyframes shimmer{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
+
+/* CONFETTI */
+.confetti-piece{
+  position:absolute;width:8px;height:8px;border-radius:2px;
+  animation:confetti 0.8s ease forwards;pointer-events:none;
+}
+
+/* ── CONNECT SCREEN ─────────────────────────────────────────────────────── */
+#connect{background:var(--offwhite);}
+.connect-header{
+  background:linear-gradient(160deg,#040D09 0%,#0A1F13 100%);
+  padding:52px 24px 28px;flex-shrink:0;
+}
+.connect-title{
+  font-family:var(--serif);font-size:30px;font-weight:300;
+  color:var(--white);line-height:1.2;margin-bottom:6px;
+}
+.connect-sub{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.5;}
+.connect-scroll{flex:1;overflow-y:auto;padding:24px 20px 120px;}
+.connect-scroll::-webkit-scrollbar{display:none;}
+.connect-option{
+  background:var(--white);border-radius:20px;padding:22px;
+  margin-bottom:14px;cursor:pointer;
+  border:2px solid transparent;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);
+  transition:border-color 0.2s,transform 0.15s;
+}
+.connect-option:active{transform:scale(0.98);}
+.connect-option.primary{border-color:var(--teal);}
+.connect-option-header{display:flex;align-items:center;gap:14px;margin-bottom:10px;}
+.connect-option-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+}
+.connect-option-icon.teal{background:var(--teal-light);}
+.connect-option-icon.amber{background:var(--amber-light);}
+.connect-option-title{font-family:var(--serif);font-size:19px;color:var(--text-pri);}
+.connect-option-badge{
+  font-size:10px;font-weight:600;color:var(--teal);
+  background:var(--teal-light);border-radius:100px;
+  padding:3px 8px;letter-spacing:0.5px;
+}
+.connect-option-desc{font-size:13px;color:var(--text-sec);line-height:1.5;margin-bottom:14px;}
+.connect-option-features{display:flex;flex-direction:column;gap:6px;}
+.connect-feature{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-sec);}
+.connect-feature-dot{width:5px;height:5px;border-radius:50%;background:#2AAE80;flex-shrink:0;}
+.connect-btn{
+  width:100%;padding:14px;border:none;border-radius:12px;
+  font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;
+  transition:opacity 0.2s;margin-top:14px;
+}
+.connect-btn.teal{background:linear-gradient(135deg,#2AAE80,#1F8A62);color:var(--white);box-shadow:0 4px 16px rgba(42,174,128,0.2);}
+.connect-btn.outline{background:transparent;border:1.5px solid var(--border);color:var(--text-sec);}
+.connect-btn:active{opacity:0.8;}
+.connect-note{
+  font-size:12px;color:var(--muted);text-align:center;
+  padding:0 20px;line-height:1.5;margin-top:4px;
+}
+
+/* ── CONNECTING ANIMATION SCREEN ────────────────────────────────────────── */
+#connecting{background:linear-gradient(160deg,#040D09 0%,#0A1F13 100%);justify-content:center;align-items:center;}
+.connecting-inner{text-align:center;padding:40px;}
+.connecting-rings{position:relative;width:140px;height:140px;margin:0 auto 32px;}
+.connecting-ring{
+  position:absolute;border-radius:50%;border:2px solid rgba(42,174,128,0.25);
+  animation:connectPulse 2s ease infinite;
+}
+.connecting-ring:nth-child(1){inset:0;animation-delay:0s;}
+.connecting-ring:nth-child(2){inset:18px;animation-delay:0.3s;border-color:rgba(29,181,132,0.5);}
+.connecting-ring:nth-child(3){inset:36px;animation-delay:0.6s;border-color:#2AAE80;}
+.connecting-center{
+  position:absolute;inset:52px;border-radius:50%;
+  background:linear-gradient(135deg,#2AAE80,#1F8A62);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:20px;color:var(--white);font-weight:300;
+  box-shadow:0 0 30px rgba(42,174,128,0.32);
+}
+.connecting-title{
+  font-family:var(--serif);font-size:28px;font-weight:300;
+  color:var(--white);margin-bottom:8px;
+}
+.connecting-step{
+  font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:32px;
+  min-height:20px;transition:opacity 0.3s;
+}
+.connecting-steps-list{display:flex;flex-direction:column;gap:10px;text-align:left;}
+.cstep{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:rgba(255,255,255,0.04);}
+.cstep-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;}
+.cstep-icon.done{background:linear-gradient(135deg,#2AAE80,#1F8A62);}
+.cstep-icon.active{background:rgba(42,174,128,0.16);border:1.5px solid #2AAE80;}
+.cstep-icon.wait{background:rgba(255,255,255,0.06);}
+.cstep-icon .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 1s infinite;}
+.cstep-label{font-size:13px;color:rgba(255,255,255,0.7);}
+.cstep-label.wait{color:rgba(255,255,255,0.3);}
+@keyframes connectPulse{0%,100%{opacity:0.3;transform:scale(0.95);}50%{opacity:1;transform:scale(1.02);}}
+
+/* ── MANUAL MODE SCREEN ─────────────────────────────────────────────────── */
+#manual{background:linear-gradient(160deg,#040D09 0%,#0A1F13 100%);}
+.manual-header{padding:52px 24px 24px;flex-shrink:0;background:transparent;}
+.manual-title{font-family:var(--serif);font-size:30px;font-weight:300;color:var(--white);margin-bottom:6px;}
+.manual-sub{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.5;}
+.manual-scroll{flex:1;overflow-y:auto;padding:8px 20px 120px;}
+.manual-scroll::-webkit-scrollbar{display:none;}
+.manual-field-group{margin-bottom:20px;}
+.manual-label{
+  font-size:12px;font-weight:500;color:rgba(255,255,255,0.5);
+  letter-spacing:0.5px;margin-bottom:8px;
+}
+.manual-sublabel{font-size:11px;color:rgba(255,255,255,0.3);margin-bottom:8px;line-height:1.4;}
+.manual-input-wrap{
+  background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.12);
+  border-radius:14px;display:flex;align-items:center;
+  padding:0 16px;transition:border-color 0.2s;
+}
+.manual-input-wrap:focus-within{border-color:var(--teal);}
+.manual-currency{font-size:18px;color:rgba(255,255,255,0.3);margin-right:6px;font-weight:300;}
+.manual-input{
+  flex:1;background:transparent;border:none;outline:none;
+  padding:16px 0;font-family:var(--sans);font-size:22px;font-weight:300;
+  color:var(--white);
+}
+.manual-input::placeholder{color:rgba(255,255,255,0.2);}
+.manual-hint{
+  font-size:11px;color:rgba(255,255,255,0.25);margin-top:6px;line-height:1.4;
+}
+.manual-privacy{
+  background:rgba(42,174,128,0.06);border:1px solid rgba(42,174,128,0.15);
+  border-radius:12px;padding:14px;margin-bottom:20px;
+  font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5;
+  display:flex;gap:10px;align-items:flex-start;
+}
+.manual-privacy-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+.manual-submit{
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,#2AAE80,#1F8A62);
+  border:none;border-radius:14px;
+  font-family:var(--sans);font-size:15px;font-weight:500;color:var(--white);
+  cursor:pointer;transition:opacity 0.2s;
+  box-shadow:0 4px 16px rgba(42,174,128,0.2);
+}
+.manual-submit:active{opacity:0.85;}
+
+/* ── HOME DATA STATES ────────────────────────────────────────────────────── */
+/* State: no data — score placeholder */
+.score-unconnected{
+  background:var(--white);border-radius:20px;padding:22px;
+  margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,0.05);
+}
+.score-unconnected-inner{
+  border:2px dashed var(--border);border-radius:16px;
+  padding:24px 20px;text-align:center;
+}
+.score-unconnected-icon{font-size:36px;margin-bottom:10px;}
+.score-unconnected-title{
+  font-family:var(--serif);font-size:18px;color:var(--text-pri);margin-bottom:6px;
+}
+.score-unconnected-sub{font-size:13px;color:var(--text-sec);line-height:1.5;margin-bottom:16px;}
+.score-unconnected-btn{
+  display:inline-block;padding:11px 24px;
+  background:linear-gradient(135deg,#2AAE80,#1F8A62);
+  color:var(--white);border:none;border-radius:100px;
+  font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;
+  transition:opacity 0.2s;
+  box-shadow:0 4px 16px rgba(42,174,128,0.2);
+}
+.score-unconnected-btn:active{opacity:0.8;}
+/* vital unconnected */
+.vital-card.partial{opacity:0.6;}
+.vital-card.partial .vital-status{color:var(--muted)!important;}
+.vital-pending{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;color:var(--muted);margin-top:4px;
+}
+.vital-pending-dot{
+  width:5px;height:5px;border-radius:50%;background:var(--muted);
+  animation:pulse 1.5s infinite;
+}
+/* breathing room — real from floor */
+.vital-card.known{border:1.5px solid #D0EDE0;}
+.floor-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  background:#D0EDE0;border-radius:100px;
+  padding:3px 8px;font-size:10px;color:#1F8A62;font-weight:500;
+  margin-top:4px;
+}
+/* connecting shimmer */
+.shimmer{
+  background:linear-gradient(90deg,#F0ECE6 25%,#DDD5C8 50%,#F0ECE6 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.5s infinite;
+  border-radius:8px;
+}
+@keyframes shimmer{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
+/* home connect banner */
+.home-connect-banner{
+  background:linear-gradient(135deg,#0A1F13 0%,#163524 100%);
+  border-radius:16px;padding:16px 18px;
+  margin-bottom:16px;display:flex;align-items:center;gap:12px;cursor:pointer;
+  transition:opacity 0.2s;
+  box-shadow:0 6px 24px rgba(13,40,24,0.2);
+}
+.home-connect-banner:active{opacity:0.85;}
+.home-connect-banner-icon{font-size:24px;flex-shrink:0;}
+.home-connect-banner-text{flex:1;}
+.home-connect-banner-title{font-size:14px;font-weight:500;color:var(--white);margin-bottom:2px;}
+.home-connect-banner-sub{font-size:12px;color:rgba(255,255,255,0.5);}
+.home-connect-banner-arrow{font-size:16px;color:var(--teal);}
+
+/* Forest surface depth */
+#splash::after,#quiz::after,#reveal .reveal-bg::after,
+#commit::after,#connecting::after,#manual::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.4;mix-blend-mode:overlay;
+}
+/* Gold shimmer on wordmark */
+.splash-logo .wordmark span{
+  text-shadow:0 0 40px rgba(191,154,63,0.32);
+}
+/* Score ring gold glow */
+.score-ring-fill{
+  filter:drop-shadow(0 0 6px rgba(191,154,63,0.32));
+}
+/* Green glow on CTA buttons */
+.splash-btn,.reveal-cta,.commit-btn,.quiz-next,.manual-submit,.capture-submit{
+  position:relative;
+}
+
+/* ── PROTOTYPE NAVIGATION BAR — lives outside the phone frame ─────────────── */
+#protoNav{
+  position:fixed;top:0;left:0;right:0;
+  z-index:9999;
+  background:rgba(4,14,9,0.96);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(42,174,128,0.16);
+  overflow-x:auto;
+  display:flex;
+  scrollbar-width:none;
+  box-shadow:0 2px 24px rgba(0,0,0,0.4);
+}
+#protoNav::-webkit-scrollbar{display:none;}
+.pnav-inner{
+  display:flex;align-items:center;
+  gap:2px;
+  padding:8px 12px;
+  min-width:max-content;
+}
+.pnav-btn{
+  display:flex;align-items:center;gap:5px;
+  padding:6px 11px;
+  border:none;border-radius:7px;
+  font-family:var(--sans);font-size:11px;font-weight:500;
+  cursor:pointer;white-space:nowrap;
+  transition:all 0.18s;
+  letter-spacing:0.2px;
+  background:rgba(255,255,255,0.04);
+  color:rgba(255,255,255,0.4);
+  border:1px solid transparent;
+}
+.pnav-btn:hover{
+  background:rgba(42,174,128,0.08);
+  color:rgba(255,255,255,0.75);
+  border-color:rgba(42,174,128,0.16);
+}
+.pnav-btn.active{
+  background:rgba(42,174,128,0.15);
+  color:#2AAE80;
+  border-color:rgba(42,174,128,0.28);
+}
+.pnav-btn .pnav-dot{
+  width:4px;height:4px;border-radius:50%;
+  background:currentColor;opacity:0.7;flex-shrink:0;
+}
+.pnav-divider{
+  width:1px;background:rgba(255,255,255,0.08);
+  margin:6px 4px;flex-shrink:0;align-self:stretch;
+  min-height:16px;
+}
+.pnav-label{
+  font-size:9px;font-weight:600;color:rgba(255,255,255,0.18);
+  letter-spacing:1.2px;text-transform:uppercase;
+  padding:0 4px;white-space:nowrap;
+}
+/* Push body content down so proto nav doesn't cover the phone */
+body{padding-top:41px;}
+/* The phone itself is unaffected — no padding on screens */
+</style>
+</head>
+<body>
+<div id="phone">
+
+<!-- SPLASH -->
+<div class="screen active" id="splash">
+  <!-- Top: wordmark -->
+  <div class="splash-top">
+    <span class="splash-wordmark">mun<span>ē</span></span>
+  </div>
+
+  <!-- Middle: arc composition -->
+  <div class="splash-arc-wrap">
+    <div class="splash-arc-ring">
+      <div class="splash-arc-node"></div>
+    </div>
+    <div class="splash-arc-ring">
+      <div class="splash-arc-node2"></div>
+    </div>
+    <div class="splash-arc-ring"></div>
+    <div class="splash-arc-ring"></div>
+  </div>
+
+  <!-- Bottom: copy + CTA anchored to bottom -->
+  <div class="splash-bottom">
+    <div class="splash-copy">
+      <div class="splash-tagline">The knowledge you were never given.</div>
+      <div class="splash-sub">Finally made for you.</div>
+    </div>
+    <button class="splash-btn" onclick="goTo('quiz')">
+      Begin
+      <div class="splash-btn-arrow">›</div>
+    </button>
+    <div class="splash-hint">Free to start · Takes 2 minutes</div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="screen" id="quiz">
+  <div class="quiz-progress">
+    <div class="quiz-progress-fill" id="quizProgress" style="width:20%"></div>
+  </div>
+  <div id="quizInner"></div>
+</div>
+
+<!-- REVEAL -->
+<div class="screen" id="reveal">
+  <div class="reveal-bg">
+    <div class="reveal-arc-wrap">
+      <div class="reveal-arc"></div>
+      <div class="reveal-arc"></div>
+      <div class="reveal-arc"></div>
+    </div>
+  </div>
+  <div class="reveal-card" id="revealCard"></div>
+</div>
+
+<!-- EMAIL CAPTURE -->
+<div class="screen" id="capture">
+  <div class="capture-inner">
+    <div class="capture-top">
+      <div class="capture-title">Your plan is<br><span>waiting for you.</span></div>
+      <div class="capture-sub">Get your first 3 days free — no card, no account connection. Just your archetype and one action a day.</div>
+    </div>
+    <div class="capture-days" id="captureDays"></div>
+    <input class="capture-field" type="email" placeholder="Your email address" id="emailInput">
+    <button class="capture-submit" onclick="handleEmailSubmit()">Send my plan →</button>
+    <button class="capture-skip" onclick="goTo('connect')">I'll explore first</button>
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="screen" id="home">
+  <div class="home-header">
+    <div class="home-greeting">Good morning</div>
+    <div class="home-name" id="homeName">The Fog</div>
+    <div class="home-archetype-badge"><span id="homeArchBadge">The Fog</span></div>
+  </div>
+  <div class="home-scroll">
+    <div style="height:16px"></div>
+    <!-- Score -->
+    <div class="section-hdr"><div class="section-title">Munē Score</div><div class="section-link" onclick="goTo('learn')">Details</div></div>
+    <div class="score-card">
+      <div class="score-ring-wrap">
+        <div class="score-ring">
+          <svg viewBox="0 0 100 100">
+            <circle class="score-ring-track" cx="50" cy="50" r="40"/>
+            <circle class="score-ring-fill" cx="50" cy="50" r="40" id="scoreRingFill" style="stroke-dashoffset:251"/>
+          </svg>
+          <div class="score-ring-num">
+            <span class="num" id="scoreNum">—</span>
+            <span class="lbl">SCORE</span>
+          </div>
+        </div>
+        <div class="score-info">
+          <div class="score-title" id="scoreLabel">Building</div>
+          <div class="score-sub">Connect an account to see your full Munē Score across all 6 categories.</div>
+          <div class="score-cats" id="scoreCats"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Vitals -->
+    <div class="section-hdr"><div class="section-title">Financial Vitals</div><div class="section-link">See all</div></div>
+    <div class="vitals-grid" id="vitalsGrid"></div>
+    <!-- Plan -->
+    <div class="section-hdr"><div class="section-title">Today's Action</div><div class="section-link" onclick="goTo('commit')">View plan</div></div>
+    <div class="plan-card" id="planCard" onclick="goTo('commit')"></div>
+  </div>
+</div>
+
+<!-- ADVISOR -->
+<div class="screen" id="advisor">
+  <div class="advisor-header">
+    <div class="advisor-hdr-top">
+      <div class="advisor-avatar">m</div>
+      <div class="advisor-title-wrap">
+        <div class="advisor-name">Munē Advisor</div>
+        <div class="advisor-sub">Knows your full picture</div>
+      </div>
+    </div>
+  </div>
+  <div class="advisor-messages" id="advisorMessages"></div>
+  <div class="quick-chips" id="quickChips"></div>
+  <div class="advisor-input-wrap">
+    <textarea class="advisor-input" id="advisorInput" placeholder="Ask anything about your money…" rows="1"
+      oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+    <button class="advisor-send" onclick="sendAdvisorMsg()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+        <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- FUTURE -->
+<div class="screen" id="future">
+  <div class="future-header">
+    <div class="future-title">Your Future</div>
+    <div class="future-sub">Where your financial life is going</div>
+  </div>
+  <div class="future-scroll">
+    <div style="height:4px"></div>
+    <div class="path-status">
+      <div class="path-status-label">Path Status</div>
+      <div class="path-status-val" id="pathStatusVal">On Track</div>
+      <div class="path-status-msg" id="pathStatusMsg">Your current behavior is moving you toward your milestones. Nothing needs to change today.</div>
+    </div>
+    <div class="section-hdr" style="margin-top:8px"><div class="section-title">Your Timeline</div></div>
+    <div class="timeline-card" id="timelineCard"></div>
+    <div class="section-hdr" style="margin-top:4px"><div class="section-title">Impact Simulator</div></div>
+    <div class="sim-entry">
+      <div class="sim-entry-label">What happens if...</div>
+      <div class="sim-entry-title">Test a decision before you make it</div>
+      <div class="sim-entry-cats" id="simCats"></div>
+      <button class="sim-run" onclick="goTo('simresult')">Run simulation →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SIM RESULT -->
+<div class="screen" id="simresult">
+  <div class="simresult-header">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <button onclick="goTo('future')" style="background:rgba(255,255,255,0.1);border:none;border-radius:100px;padding:8px 14px;color:white;font-size:13px;cursor:pointer;">← Back</button>
+      <span style="font-size:13px;color:rgba(255,255,255,0.4)">Simulation</span>
+    </div>
+    <div class="simresult-verdict">Paying <span>$200 extra/month</span> on your debt changes everything.</div>
+    <div class="simresult-impact">Based on your current balances and behavior</div>
+  </div>
+  <div class="simresult-scroll">
+    <div class="sim-headline">
+      <div class="sim-headline-text">"You would be debt-free 2.1 years earlier. That's $1,840 in interest that stays in your life — and your financial independence date moves 3.4 years closer."</div>
+    </div>
+    <div class="sim-metrics" id="simMetrics"></div>
+    <div class="sim-apply">
+      <div class="sim-apply-q">This decision improves your financial future. Apply it to your plan?</div>
+      <div class="sim-apply-btns">
+        <button class="sim-apply-yes" onclick="goToHome()">Apply to my plan</button>
+        <button class="sim-apply-no" onclick="goTo('future')">Save for later</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LEARN -->
+<div class="screen" id="learn">
+  <div class="learn-header">
+    <div class="learn-title">Knowledge Library</div>
+    <div class="learn-sub">107 terms. Plain language. Built for you.</div>
+  </div>
+  <div class="learn-scroll">
+    <div style="height:4px"></div>
+    <div id="learnFeatured"></div>
+    <div class="section-hdr" style="margin-top:4px"><div class="section-title">Browse all terms</div></div>
+    <div class="learn-grid" id="learnGrid"></div>
+  </div>
+</div>
+
+<!-- COMMIT (Plan detail) -->
+<div class="screen" id="commit">
+  <div style="background:linear-gradient(160deg,#040D09 0%,#0A1F13 100%);padding:52px 24px 20px;flex-shrink:0;">
+    <button onclick="goTo('home')" style="background:rgba(255,255,255,0.1);border:none;border-radius:100px;padding:8px 14px;color:white;font-size:13px;cursor:pointer;margin-bottom:16px;">← Back</button>
+    <div style="font-size:11px;color:var(--teal);font-weight:500;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Foundation Plan</div>
+    <div style="font-family:var(--serif);font-size:26px;font-weight:300;color:white;line-height:1.3;">Day 1 of 30 · Phase 1</div>
+  </div>
+  <div class="commit-content">
+    <div class="commit-initial" id="commitInitial">
+      <div class="commit-arc">
+        <svg viewBox="0 0 180 180">
+          <circle fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8" cx="90" cy="90" r="70"/>
+          <circle fill="none" stroke="var(--teal)" stroke-width="8" stroke-linecap="round" cx="90" cy="90" r="70"
+            stroke-dasharray="440" stroke-dashoffset="330" transform="rotate(-90 90 90)"/>
+        </svg>
+        <div class="commit-check">🌫️</div>
+      </div>
+      <div class="commit-title" id="commitTitle">Look at your balance. Just once.</div>
+      <div class="commit-body" id="commitBody">That's it. One look. You don't have to fix anything, move anything, or do anything else. Just look. The avoidance ends here — not with a budget, not with a plan. With one look.</div>
+      <div class="commit-stmt">
+        <div class="commit-stmt-text" id="commitStmt">"I commit to looking at my balance once today."</div>
+        <button class="commit-btn" onclick="handleCommit()">I commit to this</button>
+      </div>
+    </div>
+    <div class="commit-success" id="commitSuccess">
+      <div style="font-size:64px;margin-bottom:24px;animation:checkPop 0.5s ease">✓</div>
+      <div style="font-family:var(--serif);font-size:28px;font-weight:300;color:white;margin-bottom:12px;line-height:1.3">Committed.<br>Day 1 begins.</div>
+      <div style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;margin-bottom:32px;">The cycle stops here — not because of what you learn, but because of who you become. Day 2 arrives tomorrow morning.</div>
+      <button class="commit-btn" onclick="goToHome()">Back to home</button>
+    </div>
+  </div>
+</div>
+
+<div id="globalNav"></div>
+
+<!-- CONNECT ACCOUNTS -->
+<div class="screen" id="connect">
+  <div class="connect-header">
+    <button onclick="goTo('home')" style="background:rgba(255,255,255,0.1);border:none;border-radius:100px;padding:8px 14px;color:white;font-size:13px;cursor:pointer;margin-bottom:16px;">← Skip for now</button>
+    <div class="connect-title">Connect your<br>financial picture.</div>
+    <div class="connect-sub">munē needs to see your accounts to show you your Munē Score and Financial Vitals. You choose how.</div>
+  </div>
+  <div class="connect-scroll">
+    <div class="connect-option primary" onclick="startConnecting()">
+      <div class="connect-option-header">
+        <div class="connect-option-icon teal">🔗</div>
+        <div>
+          <div class="connect-option-title">Connect accounts</div>
+          <div class="connect-option-badge">RECOMMENDED</div>
+        </div>
+      </div>
+      <div class="connect-option-desc">Securely link your bank accounts through Plaid. munē reads your transactions and balances automatically — no manual entry, always current.</div>
+      <div class="connect-option-features">
+        <div class="connect-feature"><div class="connect-feature-dot"></div>Real-time Munē Score and Vitals</div>
+        <div class="connect-feature"><div class="connect-feature-dot"></div>Automatic transaction sync</div>
+        <div class="connect-feature"><div class="connect-feature-dot"></div>Bank-level 256-bit encryption</div>
+        <div class="connect-feature"><div class="connect-feature-dot"></div>Read-only access — munē never moves money</div>
+      </div>
+      <button class="connect-btn teal" onclick="startConnecting()">Connect my accounts →</button>
+    </div>
+    <div class="connect-note">Your data is encrypted and never sold. munē has read-only access — we cannot move or access your money.</div>
+    <div style="height:12px"></div>
+    <div class="connect-option" onclick="goTo('manual')">
+      <div class="connect-option-header">
+        <div class="connect-option-icon amber">✏️</div>
+        <div class="connect-option-title">Enter manually</div>
+      </div>
+      <div class="connect-option-desc">Not ready to connect? Enter your key numbers and munē will work with what you share. Less precise — fully functional.</div>
+      <div class="connect-option-features">
+        <div class="connect-feature"><div class="connect-feature-dot" style="background:#BF9A3F"></div>Vitals calculated from your entries</div>
+        <div class="connect-feature"><div class="connect-feature-dot" style="background:#BF9A3F"></div>Foundation Plan fully active</div>
+        <div class="connect-feature"><div class="connect-feature-dot" style="background:#BF9A3F"></div>Advisor knows your situation</div>
+        <div class="connect-feature"><div class="connect-feature-dot" style="background:#BF9A3F"></div>Connect accounts anytime to unlock Score</div>
+      </div>
+      <button class="connect-btn outline" onclick="goTo('manual')">Enter my numbers manually</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECTING ANIMATION -->
+<div class="screen" id="connecting">
+  <div class="connecting-inner">
+    <div class="connecting-rings">
+      <div class="connecting-ring"></div>
+      <div class="connecting-ring"></div>
+      <div class="connecting-ring"></div>
+      <div class="connecting-center">m</div>
+    </div>
+    <div class="connecting-title">Reading your picture.</div>
+    <div class="connecting-step" id="connectingStep">Establishing secure connection…</div>
+    <div class="connecting-steps-list" id="connectingSteps"></div>
+  </div>
+</div>
+
+<!-- MANUAL MODE -->
+<div class="screen" id="manual">
+  <div class="manual-header">
+    <button onclick="goTo('connect')" style="background:rgba(255,255,255,0.1);border:none;border-radius:100px;padding:8px 14px;color:white;font-size:13px;cursor:pointer;margin-bottom:16px;">← Back</button>
+    <div class="manual-title">Your numbers,<br>your way.</div>
+    <div class="manual-sub">Approximate is fine. munē works with what you give it. You can always connect accounts later for full precision.</div>
+  </div>
+  <div class="manual-scroll">
+    <div class="manual-privacy">
+      <div class="manual-privacy-icon">🔒</div>
+      <div>These numbers stay on your device and are used only to personalize your plan. munē never shares or sells this information.</div>
+    </div>
+    <div class="manual-field-group">
+      <div class="manual-label">CHECKING ACCOUNT BALANCE</div>
+      <div class="manual-sublabel">Your main account — the one you use for daily spending and bills.</div>
+      <div class="manual-input-wrap">
+        <span class="manual-currency">$</span>
+        <input class="manual-input" type="number" placeholder="0" id="manualBalance" inputmode="numeric">
+      </div>
+      <div class="manual-hint">Approximate is fine. Even a rough number helps munē understand your breathing room.</div>
+    </div>
+    <div class="manual-field-group">
+      <div class="manual-label">MONTHLY TAKE-HOME INCOME</div>
+      <div class="manual-sublabel">After taxes. If variable, use your lowest reliable month.</div>
+      <div class="manual-input-wrap">
+        <span class="manual-currency">$</span>
+        <input class="manual-input" type="number" placeholder="0" id="manualIncome" inputmode="numeric">
+      </div>
+      <div class="manual-hint">If your income varies month to month, use the lowest amount you can count on.</div>
+    </div>
+    <div class="manual-field-group">
+      <div class="manual-label">TOTAL DEBT (APPROXIMATE)</div>
+      <div class="manual-sublabel">Credit cards, loans, student debt — everything combined. Rough number is fine.</div>
+      <div class="manual-input-wrap">
+        <span class="manual-currency">$</span>
+        <input class="manual-input" type="number" placeholder="0" id="manualDebt" inputmode="numeric">
+      </div>
+      <div class="manual-hint">Don't include your mortgage if you own a home — we'll ask about that separately later.</div>
+    </div>
+    <div class="manual-field-group">
+      <div class="manual-label">MONTHLY SAVINGS (IF ANY)</div>
+      <div class="manual-sublabel">How much do you typically save each month, if anything?</div>
+      <div class="manual-input-wrap">
+        <span class="manual-currency">$</span>
+        <input class="manual-input" type="number" placeholder="0" id="manualSavings" inputmode="numeric">
+      </div>
+    </div>
+    <button class="manual-submit" onclick="submitManual()">Build my plan with these numbers →</button>
+  </div>
+</div>
+</div><!-- end phone -->
+
+<script>
+
+// ── SUPABASE CONFIG ───────────────────────────────────────────────────────────
+const SUPABASE_URL = 'https://maolkyrlfojkmiuppcsy.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hb2xreXJsZm9qa21pdXBwY3N5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5MDA3NjAsImV4cCI6MjA5MDQ3Njc2MH0.9vOaUryX45ApTc2AazxrnvUZdxs7DiBS0LyXDqwqxlg';
+
+async function saveToWaitlist(email, archetype, floorAmount, fearText) {
+  try {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Prefer': 'resolution=merge-duplicates',
+      },
+      body: JSON.stringify({
+        email: email,
+        archetype: archetype,
+        floor_amount: floorAmount,
+        fear_text: fearText,
+      })
+    });
+    if (response.ok || response.status === 201) {
+      console.log('Saved to waitlist:', email, archetype);
+      return true;
+    } else {
+      const err = await response.text();
+      console.error('Supabase error:', response.status, err);
+      return false;
+    }
+  } catch (e) {
+    console.error('Network error saving to waitlist:', e);
+    return false;
+  }
+}
+
+// ── STATE ──────────────────────────────────────────────────────────────────
+const state = {
+  archetype: 'fog',
+  quizStep: 0,
+  floorVal: 200,
+  fearText: '',
+  committed: false,
+  selectedSimCat: 'debt',
+  // DATA STATES: 'none' | 'connecting' | 'manual' | 'connected'
+  dataState: 'none',
+  manualBalance: null,
+  manualIncome: null,
+  manualDebt: null,
+};
+
+const ARCHETYPES = {
+  fog:     { name:'The Fog',     color:'#6B6563', quote:'"I know something\'s wrong. I just can\'t bring myself to look."', truth:'That\'s not a character flaw. That\'s what happens when nobody ever made it safe to look. We will.', path:'The Fog → The Tide', emoji:'🌫️', bg:'#DDD5C8', action:'Look at your balance. Just once.', body:'That\'s it. One look. You don\'t have to fix anything or do anything else. Just look. The avoidance ends here.', stmt:'"I commit to looking at my balance once today."' },
+  spark:   { name:'The Spark',   color:'#E8965A', quote:'"I know what I make. I just spend it before my bills see it."', truth:'You\'re not irresponsible — you\'re unstructured. A system that handles obligations first gives you guilt-free spending money automatically.', path:'The Spark → The Tide → The Wave', emoji:'✨', bg:'#FAF0E6', action:'Find the three subscriptions you forgot about.', body:'Just identify them. Don\'t cancel anything yet. We\'re going to turn one into your first automated savings next week.', stmt:'"I commit to finding three forgotten subscriptions today."' },
+  flame:   { name:'The Flame',   color:'#C87850', quote:'"I save everything but I\'m still scared I won\'t have enough."', truth:'Your discipline is real. And it\'s costing you. Savings in a 0.01% account loses to inflation every year. We\'re going to fix that.', path:'The Flame → The Current', emoji:'🔥', bg:'#F8E6E6', action:'Find your savings account interest rate.', body:'Just the number. We\'ll talk about what to do with it tomorrow. Spoiler: there\'s a better place for your money that is just as safe.', stmt:'"I commit to finding my savings interest rate today."' },
+  current: { name:'The Current', color:'#2A9D8F', quote:'"I\'m building. I just want to make sure I\'m building right."', truth:'You\'re further along than most. But there are three gaps in almost every builder\'s foundation that stay invisible — until they\'re expensive. We\'ll find yours.', path:'The Current → Legacy Builder', emoji:'🌊', bg:'#D4F0ED', action:'Pull up your 401k beneficiary designations.', body:'Don\'t change anything. Just look at who\'s listed. This is the most overlooked financial protection action — and it takes 4 minutes.', stmt:'"I commit to reviewing my beneficiary designations today."' },
+  wave:    { name:'The Wave',    color:'#E8965A', quote:'"My income isn\'t predictable. My system has to be."', truth:'Everyone gives you advice built for a paycheck. We don\'t. Your system gets built around your actual income pattern — the real numbers, not the average ones.', path:'The Wave → The Current', emoji:'🌀', bg:'#F7F0E2', action:'What was your lowest income month in the last 6?', body:'Just the number. We\'re building your entire financial system from your income floor — not an average, not a hope. The real minimum.', stmt:'"I commit to finding my lowest income month today."' },
+  tide:    { name:'The Tide',    color:'#5E7090', quote:'"I have a steady check. It just never seems like enough."', truth:'The check is consistent. The lifestyle has quietly expanded to match it. That pattern has a name, a cause, and a fix — and none of it is about willpower.', path:'The Tide → The Wave or The Flame', emoji:'🌊', bg:'#E4EAF2', action:'Automate $1 per day into savings.', body:'Not $100. Not $50. One dollar. The amount isn\'t the point — the behavior is. A system that works while you live your life.', stmt:'"I commit to setting up $1/day automated savings today."' },
+};
+
+const QUIZ_STEPS = [
+  {
+    type:'choice', q:'When you think about your finances right now — what\'s the first feeling that comes up?',
+    opts:[
+      {text:'Honestly? I try not to think about it.', arch:'fog'},
+      {text:'I\'m living my life — money comes and goes.', arch:'spark'},
+      {text:'I save but I\'m scared it won\'t be enough.', arch:'flame'},
+      {text:'I\'m building — I just want to make sure I\'m doing it right.', arch:'current'},
+      {text:'My income isn\'t consistent — it\'s complicated.', arch:'wave'},
+      {text:'Steady check. Just never seems like enough.', arch:'tide'},
+    ]
+  },
+  {
+    type:'choice', q:'When you get paid — what typically happens to that money?',
+    opts:[
+      {text:'I pay what I have to and spend what\'s left.', arch:'fog'},
+      {text:'It disappears faster than I expect.', arch:'spark'},
+      {text:'I put some aside immediately then manage the rest.', arch:'flame'},
+      {text:'It goes into the system I\'ve built.', arch:'current'},
+      {text:'Depends — some months great, some rough.', arch:'wave'},
+      {text:'I cover bills but there\'s never much left.', arch:'tide'},
+    ]
+  },
+  {
+    type:'fear', q:'What\'s the financial thing you\'re most worried about right now?',
+  },
+  {
+    type:'floor', q:'What\'s the lowest your bank account can go before your stomach drops?',
+  },
+  {
+    type:'choice', q:'Who does this plan need to work for?',
+    opts:[
+      {text:'Just me', arch:''},
+      {text:'Me and a partner', arch:''},
+      {text:'Me and children', arch:''},
+      {text:'Me, a partner, and children', arch:''},
+      {text:'Me — and I support extended family', arch:'wave'},
+    ]
+  },
+];
+
+// ── NAVIGATION ──────────────────────────────────────────────────────────────
+let currentScreen = 'splash';
+let prevScreen = 'splash';
+
+function goTo(id) {
+  document.getElementById(currentScreen).classList.remove('active');
+  document.getElementById(currentScreen).classList.add('exit');
+  setTimeout(()=>{document.getElementById(prevScreen).classList.remove('exit');},400);
+  prevScreen = currentScreen;
+  currentScreen = id;
+  const next = document.getElementById(id);
+  next.classList.add('active');
+  next.classList.remove('exit');
+  if(id==='home') initHome();
+  if(id==='advisor') initAdvisor();
+  if(id==='future') initFuture();
+  if(id==='learn') initLearn();
+  if(id==='capture') initCapture();
+  renderNavs();
+  renderProtoNav();
+}
+
+function goToHome(){goTo('home');}
+
+// ── NAV ─────────────────────────────────────────────────────────────────────
+const NAV_ITEMS = [
+  {id:'home',  label:'Home',   icon:'<polyline points="3 9 12 2 21 9"/><path d="M9 22V12h6v10M3 9v13h18V9"/>'},
+  {id:'advisor',label:'Advisor',icon:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'},
+  {id:'future', label:'Future', icon:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'},
+  {id:'learn',  label:'Learn',  icon:'<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>'},
+];
+
+const NAV_SCREENS = ['home','advisor','future','learn'];
+
+function renderNavs(){
+  const showNav = NAV_SCREENS.includes(currentScreen) || currentScreen==='simresult' || currentScreen==='commit';
+  const nav = document.getElementById('globalNav');
+  if(!showNav){ nav.classList.remove('visible'); return; }
+  nav.classList.add('visible');
+  const activeId = currentScreen==='simresult'?'future': currentScreen==='commit'?'home': currentScreen;
+  nav.innerHTML = NAV_ITEMS.map(n=>`
+    <button class="nav-btn ${n.id===activeId?'active':''}" onclick="goTo('${n.id}')">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">${n.icon}</svg></div>
+      <span class="nav-label">${n.label}</span>
+    </button>
+  `).join('');
+}
+
+function buildNav(){ renderNavs(); }
+
+// ── QUIZ ────────────────────────────────────────────────────────────────────
+function renderQuiz() {
+  const step = state.quizStep;
+  const q = QUIZ_STEPS[step];
+  const pct = ((step+1)/QUIZ_STEPS.length)*100;
+  document.getElementById('quizProgress').style.width = pct+'%';
+
+  const inner = document.getElementById('quizInner');
+  inner.style.cssText = 'flex:1;display:flex;flex-direction:column;overflow:hidden;';
+
+  if (q.type==='choice') {
+    inner.innerHTML = `
+      <div class="quiz-content">
+        <div class="quiz-q-num">Question ${step+1} of ${QUIZ_STEPS.length}</div>
+        <div class="quiz-question">${q.q}</div>
+        <div class="quiz-options">
+          ${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="selectOpt('${o.arch||''}',${i})">${o.text}</button>`).join('')}
+        </div>
+      </div>`;
+  } else if (q.type==='fear') {
+    inner.innerHTML = `
+      <div class="quiz-fear" style="flex:1;display:flex;flex-direction:column;padding:32px 28px 0;">
+        <div class="quiz-q-num">Question ${step+1} of ${QUIZ_STEPS.length}</div>
+        <div class="quiz-question" style="font-size:26px;">${q.q}</div>
+        <div class="quiz-sub" style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px;line-height:1.5;">Type it out. You won't be judged for it. And we'll make sure the plan addresses it.</div>
+        <textarea class="fear-input" id="fearInput" placeholder="e.g. I'm scared I'll never get ahead no matter how hard I try…"></textarea>
+      </div>
+      <button class="quiz-next" onclick="captureFearAndAdvance()">Continue →</button>`;
+  } else if (q.type==='floor') {
+    inner.innerHTML = `
+      <div style="flex:1;display:flex;flex-direction:column;padding:32px 28px 0;">
+        <div class="quiz-q-num">Question ${step+1} of ${QUIZ_STEPS.length}</div>
+        <div class="quiz-question" style="font-size:26px;">${q.q}</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:32px;line-height:1.5;">This is your Floor. We protect this number always. Every recommendation, every plan — nothing crosses it.</div>
+        <div class="floor-val" id="floorDisplay">$${state.floorVal}</div>
+        <input type="range" class="floor-slider" min="0" max="2000" step="50" value="${state.floorVal}"
+          oninput="updateFloor(this.value)" id="floorSlider">
+        <div class="floor-hints"><span>$0</span><span>$500</span><span>$1,000</span><span>$2,000+</span></div>
+      </div>
+      <button class="quiz-next" onclick="advanceQuiz()">Set my Floor →</button>`;
+  }
+}
+
+function selectOpt(arch, idx) {
+  document.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('selected'));
+  const btns = document.querySelectorAll('.quiz-opt');
+  btns[idx].classList.add('selected');
+  if (arch) state.archetype = arch;
+  setTimeout(()=>advanceQuiz(), 300);
+}
+
+function updateFloor(val) {
+  state.floorVal = parseInt(val);
+  document.getElementById('floorDisplay').textContent = '$'+val;
+}
+
+
+function captureFearAndAdvance() {
+  const fearEl = document.getElementById('fearInput');
+  if (fearEl) {
+    state.fearText = fearEl.value.trim();
+  }
+  advanceQuiz();
+}
+
+function advanceQuiz() {
+  if (state.quizStep === QUIZ_STEPS.length-1) {
+    showReveal();
+    return;
+  }
+  state.quizStep++;
+  renderQuiz();
+}
+
+// ── REVEAL ──────────────────────────────────────────────────────────────────
+function showReveal() {
+  const arch = ARCHETYPES[state.archetype];
+  document.getElementById('revealCard').innerHTML = `
+    <div class="reveal-label">Your Financial Archetype</div>
+    <div class="reveal-name" style="color:${arch.color}">${arch.name}</div>
+    <div class="reveal-quote">${arch.quote}</div>
+    <div class="reveal-truth">${arch.truth}</div>
+    <div class="reveal-path"><div class="reveal-path-dot"></div><span>${arch.path}</span></div>
+    <button class="reveal-cta" onclick="goTo('capture')">See my first 3 days →</button>
+  `;
+  goTo('reveal');
+}
+
+// ── CAPTURE ─────────────────────────────────────────────────────────────────
+function initCapture() {
+  const arch = ARCHETYPES[state.archetype];
+  const days = [
+    {n:'1', text: arch.action},
+    {n:'2', text: 'Check in and record what happened. One sentence.'},
+    {n:'3', text: 'The next piece of your foundation plan unlocks.'},
+  ];
+  document.getElementById('captureDays').innerHTML = days.map(d=>`
+    <div class="capture-day">
+      <div class="capture-day-num">${d.n}</div>
+      <div class="capture-day-text">${d.text}</div>
+    </div>`).join('');
+}
+
+async function handleEmailSubmit() {
+  const val = document.getElementById('emailInput').value.trim();
+  if (!val || !val.includes('@')) {
+    document.getElementById('emailInput').style.borderColor = '#E74C3C';
+    setTimeout(()=>document.getElementById('emailInput').style.borderColor = '',1000);
+    return;
+  }
+
+  // Show loading state on button
+  const btn = document.querySelector('.capture-submit');
+  const original = btn.textContent;
+  btn.textContent = 'Saving...';
+  btn.disabled = true;
+
+  // Save to Supabase
+  const saved = await saveToWaitlist(
+    val,
+    state.archetype,
+    state.floorVal,
+    state.fearText || ''
+  );
+
+  btn.disabled = false;
+
+  if (saved) {
+    btn.textContent = 'Plan sent. Check your email.';
+    btn.style.background = 'linear-gradient(135deg,#2AAE80,#1F8A62)';
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = '';
+      goTo('connect');
+    }, 1800);
+  } else {
+    // Still proceed — don't block the user experience on a save failure
+    btn.textContent = original;
+    goTo('connect');
+  }
+}
+
+// ── HOME ────────────────────────────────────────────────────────────────────
+function initHome() {
+  const arch = ARCHETYPES[state.archetype];
+  document.getElementById('homeName').textContent = arch.name;
+  document.getElementById('homeArchBadge').textContent = arch.name;
+
+  // Score ring animation
+  setTimeout(()=>{
+    const score = 634;
+    document.getElementById('scoreNum').textContent = score;
+    document.getElementById('scoreLabel').textContent = 'Strong';
+    const pct = (score-300)/550;
+    const offset = 251 - (251*pct);
+    document.getElementById('scoreRingFill').style.strokeDashoffset = offset;
+  }, 400);
+
+  // Score categories
+  const cats = [
+    {l:'Cash',   v:71, pct:71},
+    {l:'Income', v:68, pct:68},
+    {l:'Debt',   v:58, pct:58},
+    {l:'Build',  v:44, pct:44},
+  ];
+  document.getElementById('scoreCats').innerHTML = cats.map(c=>`
+    <div class="score-cat">
+      <span class="score-cat-label">${c.l}</span>
+      <div class="score-cat-bar-wrap"><div class="score-cat-bar" style="width:${c.pct}%"></div></div>
+      <span class="score-cat-val">${c.v}</span>
+    </div>`).join('');
+
+  // Vitals
+  const vitals = [
+    {e:'❤️',  name:'Flow',         status:'Steady',   dots:[1,1,1,1,0], warn:false},
+    {e:'😮‍💨', name:'Stress Level', status:'Building', dots:[1,1,1,0,0], warn:false},
+    {e:'🪷',  name:'Breathing Room',status:'Low',     dots:[1,1,0,0,0], warn:true},
+    {e:'⚖️',  name:'Debt Weight',  status:'Building', dots:[1,1,1,0,0], warn:false},
+    {e:'🌱',  name:'Build',        status:'Low',      dots:[1,0,0,0,0], warn:true},
+  ];
+  // show 4 in grid
+  document.getElementById('vitalsGrid').innerHTML = vitals.slice(0,4).map(v=>`
+    <div class="vital-card">
+      <span class="vital-emoji">${v.e}</span>
+      <div class="vital-name">${v.name}</div>
+      <div class="vital-status" style="color:${v.warn?'var(--amber)':'var(--teal)'}">${v.status}</div>
+      <div class="vital-dots">
+        ${v.dots.map(d=>`<div class="vital-dot ${d?(v.warn?'warn':'on'):''}"></div>`).join('')}
+      </div>
+    </div>`).join('');
+
+  // Plan card
+  document.getElementById('planCard').innerHTML = `
+    <div class="plan-card-top">
+      <span class="plan-label">Foundation Plan</span>
+      <span class="plan-day">Day 1 · Phase 1</span>
+    </div>
+    <div class="plan-action">${ARCHETYPES[state.archetype].action}</div>
+    <div class="plan-streak">
+      <div class="plan-streak-dots">
+        ${[...Array(7)].map((_,i)=>`<div class="plan-streak-dot ${state.committed&&i===0?'done':''}"></div>`).join('')}
+      </div>
+      <span class="plan-streak-label">${state.committed?'1':'0'} day streak</span>
+    </div>
+    ${!state.committed?'<button class="plan-commit-btn" onclick="goTo(\'commit\')">Commit to today →</button>':''}
+  `;
+
+  renderNavs();
+}
+
+// ── ADVISOR ─────────────────────────────────────────────────────────────────
+const ADVISOR_OPENING = {
+  fog: `I can see you set your Floor at $${()=>state.floorVal} and you're operating close to it right now.\n\nThat takes courage to name. Most people never do.\n\nWhen you're ready — I have one question that usually changes everything. But only when you're ready.`,
+  spark: `You've got energy and income. The gap isn't discipline — it's structure.\n\nHere's what I've seen: the months you feel best about your money aren't the months you spent less. They're the months the important stuff got handled first automatically.\n\nLet's build that system.`,
+  flame: `You're doing everything right. And you're still falling behind — because 0.01% interest doesn't keep up with inflation.\n\nYour discipline is real. Let's make sure it's working as hard as you are.`,
+  current: `You're building. The foundation is stronger than most.\n\nBut in almost every builder's financial picture, there are three gaps that stay invisible until they're expensive. Let's find yours before they cost you.`,
+  wave: `Everyone else gives you advice built for a paycheck. This isn't that.\n\nYour system gets built around your actual income — the floor, the surplus months, the variable reality. Not someone else's situation.`,
+  tide: `The check arrives. And somehow it's gone before the next one.\n\nThat's not a spending problem. That's a system problem. And system problems have system solutions — not willpower ones.`,
+};
+
+const CHIP_QUESTIONS = {
+  fog: ['What is my Floor?','How do I start?','What\'s an emergency fund?'],
+  spark: ['What is the Guilt Free Number?','How does autopay help?','Best first step?'],
+  flame: ['What is a HYSA?','How does compound interest work?','Am I saving enough?'],
+  current: ['What is a beneficiary audit?','Protection gaps?','Am I on track?'],
+  wave: ['What is an income floor?','How to budget variable income?','Buffer account?'],
+  tide: ['Why does my money disappear?','What is lifestyle inflation?','First step?'],
+};
+
+const ADVISOR_REPLIES = {
+  fog: {
+    'What is my Floor?': `Your Floor is $${state.floorVal} — the number you set in the quiz. It's the balance below which your anxiety spikes and avoidance kicks in.\n\nI protect this number in everything I suggest. No action I recommend will push you below it. That's a product promise, not a feature.`,
+    'How do I start?': `One thing. Just one.\n\nLook at your balance today. That's it. Don't move anything. Don't calculate anything. Just look.\n\nThe avoidance pattern breaks the first time you look and survive it. Which you will.`,
+    'What\'s an emergency fund?': `An emergency fund is a dedicated savings account — separate from your main account — that exists for genuine emergencies only.\n\nThe one thing to know: start with $1,000. Not 3 months. $1,000. That number is reachable in weeks, and it changes everything. One car repair stops being a crisis and becomes a minor inconvenience.`,
+  },
+  flame: {
+    'What is a HYSA?': `A High Yield Savings Account. Same FDIC protection as your current savings account. Same instant access. Same safety.\n\nThe difference: instead of 0.01% interest, you earn 4–5%.\n\nOn a $10,000 savings balance, that's $400–$500 per year instead of $1. Your discipline stays the same. Your money works harder.`,
+    'How does compound interest work?': `Money making money on the money it already made.\n\nYou earn interest. That interest earns interest. That interest earns interest.\n\nThe most important variable isn't the amount — it's time. $100 invested at 25 produces more wealth than $10,000 invested at 45. The habit matters more than the number.`,
+    'Am I saving enough?': `Based on your archetype and what you've shared: you're saving consistently — which puts you ahead of most.\n\nThe question isn't the amount yet. It's whether that savings is working. Money sitting at 0.01% is disciplined savings losing ground to inflation every month.\n\nStep one: find out your current rate. We'll go from there.`,
+  },
+};
+
+function initAdvisor() {
+  const arch = state.archetype;
+  const opening = typeof ADVISOR_OPENING[arch]==='function' ? ADVISOR_OPENING[arch]() : ADVISOR_OPENING[arch];
+
+  document.getElementById('advisorMessages').innerHTML = `
+    <div class="msg mune">
+      <div class="msg-bubble">${opening.replace(/\n/g,'<br>')}</div>
+      <span class="msg-time">just now</span>
+    </div>`;
+
+  const chips = CHIP_QUESTIONS[arch]||CHIP_QUESTIONS.fog;
+  document.getElementById('quickChips').innerHTML = chips.map(c=>
+    `<button class="chip" onclick="sendChip('${c}')">${c}</button>`
+  ).join('');
+
+  renderNavs();
+}
+
+function sendChip(q) {
+  document.getElementById('quickChips').style.display='none';
+  addUserMsg(q);
+  showTyping();
+  const arch = state.archetype;
+  const replies = ADVISOR_REPLIES[arch]||{};
+  const reply = replies[q] || `That's a great question. Based on your archetype as ${ARCHETYPES[arch].name}, the most important thing to understand about this is that every financial decision you make happens in the context of your actual situation — your Floor, your vitals, your current phase.\n\nThe short answer: yes, this matters for you specifically. Let me know if you'd like me to go deeper.`;
+  setTimeout(()=>{
+    removeTyping();
+    addMuneMsg(reply);
+  }, 1400);
+}
+
+function sendAdvisorMsg() {
+  const input = document.getElementById('advisorInput');
+  const txt = input.value.trim();
+  if (!txt) return;
+  input.value='';input.style.height='auto';
+  document.getElementById('quickChips').style.display='none';
+  addUserMsg(txt);
+  showTyping();
+  setTimeout(()=>{
+    removeTyping();
+    addMuneMsg(`That's exactly the kind of question that matters.\n\nBased on everything I know about your situation — your archetype, your Floor of $${state.floorVal}, and where you are in the plan — here's the most honest answer I can give you.\n\nThe financial knowledge you're looking for has always existed. It just wasn't given to you in plain language at the right moment. That's what I'm here to change.`);
+  }, 1600);
+}
+
+function addUserMsg(text) {
+  const msgs = document.getElementById('advisorMessages');
+  msgs.innerHTML += `<div class="msg user"><div class="msg-bubble">${text}</div><span class="msg-time">just now</span></div>`;
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function addMuneMsg(text) {
+  const msgs = document.getElementById('advisorMessages');
+  msgs.innerHTML += `<div class="msg mune"><div class="msg-bubble">${text.replace(/\n/g,'<br>')}</div><span class="msg-time">just now</span></div>`;
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('advisorMessages');
+  msgs.innerHTML += `<div class="msg mune" id="typingMsg"><div class="msg-bubble" style="padding:12px 16px;"><div class="typing"><span></span><span></span><span></span></div></div></div>`;
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typingMsg');
+  if(t) t.remove();
+}
+
+// ── FUTURE ──────────────────────────────────────────────────────────────────
+function initFuture() {
+  const arch = state.archetype;
+  const pathMsgs = {
+    fog: {status:'On Track', msg:'Your Floor is protected and your daily check-in habit is building. The avoidance pattern is breaking.'},
+    spark: {status:'On Track', msg:'Your obligations are covered before lifestyle spending. The system is working.'},
+    flame: {status:'Accelerating', msg:'Moving to a HYSA this month will add $400+ in annual interest. Your trajectory is improving.'},
+    current: {status:'On Track', msg:'Your build rate is healthy. One protection gap identified — beneficiary audit pending.'},
+    wave: {status:'Drifting', msg:'Income variance this month has pushed your emergency fund timeline back 6 weeks. One adjustment brings you back.'},
+    tide: {status:'On Track', msg:'$1/day automation is running. You\'ve saved $23 this month without thinking about it.'},
+  };
+  const pm = pathMsgs[arch]||pathMsgs.fog;
+  document.getElementById('pathStatusVal').textContent = pm.status;
+  document.getElementById('pathStatusMsg').textContent = pm.msg;
+  document.getElementById('pathStatusVal').style.color = pm.status==='Accelerating'?'var(--teal)':pm.status==='Drifting'?'var(--amber)':'var(--text-pri)';
+
+  const milestones = [
+    {e:'Emergency fund complete', d:'May 2027', ch:'On target'},
+    {e:'Credit cards paid off',   d:'August 2026', ch:arch==='fog'?'2 months earlier':'On target'},
+    {e:'$50,000 net worth',       d:'April 2028', ch:'On target'},
+    {e:'Student loans paid off',  d:'January 2029', ch:'On target'},
+    {e:'Financial independence',  d:'June 2045', ch:arch==='flame'?'3.4 yrs earlier with HYSA move':'On target'},
+  ];
+  document.getElementById('timelineCard').innerHTML = milestones.map(m=>`
+    <div class="timeline-item">
+      <div class="timeline-dot-col"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+      <div class="timeline-info">
+        <div class="timeline-event">${m.e}</div>
+        <div class="timeline-date">${m.d}</div>
+        <div class="timeline-change">${m.ch}</div>
+      </div>
+    </div>`).join('');
+
+  const simCatItems = ['Income','Debt','Spending','Investing','Life Events'];
+  document.getElementById('simCats').innerHTML = simCatItems.map((c,i)=>`
+    <div class="sim-cat ${c.toLowerCase()===state.selectedSimCat||i===1?' sel':''}"
+      onclick="selectSimCat(this,'${c.toLowerCase()}')">${c}</div>`).join('');
+
+  renderNavs();
+}
+
+function selectSimCat(el, cat) {
+  document.querySelectorAll('.sim-cat').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  state.selectedSimCat = cat;
+}
+
+// ── SIM RESULT ──────────────────────────────────────────────────────────────
+function initSimResult() {
+  const metrics = [
+    {name:'Munē Score',               change:'+14 points',        type:'pos'},
+    {name:'Debt-free date',           change:'2.1 years earlier', type:'pos'},
+    {name:'Financial independence',   change:'3.4 years earlier', type:'pos'},
+    {name:'Breathing Room',           change:'Improves',          type:'pos'},
+    {name:'Stress Level',             change:'Decreases',         type:'pos'},
+    {name:'Interest saved',           change:'$1,840',            type:'pos'},
+    {name:'Emergency fund timeline',  change:'1 month earlier',   type:'pos'},
+    {name:'Net worth (5 yr)',         change:'+$14,200',          type:'pos'},
+    {name:'Flow',                     change:'Improves',          type:'pos'},
+    {name:'Monthly cash freed',       change:'+$0 (same payment)',type:'neu'},
+  ];
+  document.getElementById('simMetrics').innerHTML = metrics.map(m=>`
+    <div class="sim-metric">
+      <span class="sim-metric-name">${m.name}</span>
+      <span class="sim-metric-change ${m.type}">
+        ${m.type==='pos'?'↑ ':''}${m.type==='neg'?'↓ ':''}${m.change}
+      </span>
+    </div>`).join('');
+}
+
+// ── LEARN ───────────────────────────────────────────────────────────────────
+function initLearn() {
+  const arch = state.archetype;
+  const featuredTerms = {
+    fog:     {term:'Emergency Fund', tag:'Your priority', def:'A dedicated savings account for genuine emergencies only. Not a general savings account — a specific account that exists for one purpose.', insight:'Start with $1,000. Not 3 months. $1,000. That number changes everything and is reachable in weeks.'},
+    spark:   {term:'Guilt Free Number', tag:'Built for you', def:'The portion of your income that is truly yours to spend — after obligations, savings, and goals are handled first automatically.', insight:'When the system handles the important stuff first, everything left is guilt-free. That\'s the design — not a budget, a structure.'},
+    flame:   {term:'Compound Interest', tag:'The most important concept', def:'Money making money on the money it already made. Your interest earns interest. That interest earns interest.', insight:'Time is the most important variable. Starting with $100 at 25 produces more wealth than starting with $10,000 at 45. The habit matters more than the amount.'},
+    current: {term:'Beneficiary Audit', tag:'Your blind spot', def:'A review of the beneficiary designations on every financial account — 401k, IRA, life insurance, bank accounts. These transfer outside of a will.', insight:'Most people set beneficiaries once — when they open the account — and never update them. The ex-spouse. The parent who has since passed. This audit finds those gaps.'},
+    wave:    {term:'Income Floor', tag:'The foundation of your system', def:'The minimum monthly income in your most recent lean months. The number your entire financial system must be designed to survive.', insight:'Build around the minimum, not the average. Months above the floor create the Stack — surplus that gets deployed strategically, not spent reactively.'},
+    tide:    {term:'Lifestyle Inflation', tag:'The pattern that explains everything', def:'The tendency for spending to rise in lockstep with income. Every raise, every bonus, every side income — absorbed by a lifestyle that quietly expanded to match it.', insight:'This is structural, not personal. The fix isn\'t spending less — it\'s capturing a percentage of every income increase before lifestyle can claim it.'},
+  };
+  const ft = featuredTerms[arch]||featuredTerms.fog;
+  document.getElementById('learnFeatured').innerHTML = `
+    <div class="learn-feat">
+      <div class="learn-feat-tag">${ft.tag}</div>
+      <div class="learn-feat-term">${ft.term}</div>
+      <div class="learn-feat-def">${ft.def}</div>
+      <div class="learn-feat-insight">The one thing: ${ft.insight}</div>
+    </div>`;
+
+  const terms = [
+    {name:'Credit Score',      preview:'How lenders see you'},
+    {name:'DTI Ratio',         preview:'Debt vs. income'},
+    {name:'HYSA',              preview:'Savings that earns'},
+    {name:'The Floor',         preview:'Your safety anchor'},
+    {name:'Compound Interest', preview:'Money making money'},
+    {name:'Utilization',       preview:'Credit card balance ratio'},
+    {name:'Net Worth',         preview:'Assets minus liabilities'},
+    {name:'401k Match',        preview:'Free money, often missed'},
+  ];
+  document.getElementById('learnGrid').innerHTML = terms.map(t=>`
+    <div class="learn-term">
+      <div class="learn-term-name">${t.name}</div>
+      <div class="learn-term-preview">${t.preview}</div>
+    </div>`).join('');
+
+  renderNavs();
+}
+
+// ── COMMIT ──────────────────────────────────────────────────────────────────
+function handleCommit() {
+  state.committed = true;
+  // confetti
+  for(let i=0;i<12;i++){
+    const c=document.createElement('div');
+    c.className='confetti-piece';
+    c.style.cssText=`left:${30+Math.random()*40}%;top:60%;
+      background:${['var(--teal)','var(--amber)','white','var(--coral)'][Math.floor(Math.random()*4)]};
+      animation-delay:${Math.random()*0.3}s;animation-duration:${0.6+Math.random()*0.4}s;`;
+    document.getElementById('commit').appendChild(c);
+    setTimeout(()=>c.remove(),1200);
+  }
+  document.getElementById('commitInitial').style.display='none';
+  document.getElementById('commitSuccess').classList.add('show');
+}
+
+
+// ── PROTOTYPE NAVIGATION ──────────────────────────────────────────────────────
+const PROTO_SCREENS = [
+  { group:'Onboarding', screens:[
+    { id:'splash',     label:'Splash'   },
+    { id:'quiz',       label:'Quiz'     },
+    { id:'reveal',     label:'Reveal'   },
+    { id:'capture',    label:'Email'    },
+  ]},
+  { group:'Setup', screens:[
+    { id:'connect',    label:'Connect'  },
+    { id:'connecting', label:'Linking'  },
+    { id:'manual',     label:'Manual'   },
+  ]},
+  { group:'App', screens:[
+    { id:'home',       label:'Home'     },
+    { id:'advisor',    label:'Advisor'  },
+    { id:'future',     label:'Future'   },
+    { id:'simresult',  label:'Simulator'},
+    { id:'learn',      label:'Learn'    },
+    { id:'commit',     label:'Plan'     },
+  ]},
+];
+
+function renderProtoNav() {
+  const inner = document.getElementById('protoNavInner');
+  if (!inner) return;
+  let html = '';
+  PROTO_SCREENS.forEach((group, gi) => {
+    if (gi > 0) html += '<div class="pnav-divider"></div>';
+    html += `<span class="pnav-label">${group.group}</span>`;
+    group.screens.forEach(s => {
+      const active = s.id === currentScreen ? ' active' : '';
+      html += `<button class="pnav-btn${active}" onclick="goTo('${s.id}')">
+        <div class="pnav-dot"></div>${s.label}
+      </button>`;
+    });
+  });
+  inner.innerHTML = html;
+  // Scroll active button into view
+  setTimeout(() => {
+    const activeBtn = inner.querySelector('.pnav-btn.active');
+    if (activeBtn) activeBtn.scrollIntoView({inline:'center', behavior:'smooth', block:'nearest'});
+  }, 50);
+}
+
+// Initial proto nav render
+renderProtoNav();
+
+// ── INIT ────────────────────────────────────────────────────────────────────
+renderQuiz();
+initSimResult();
+
+// Keyboard dismiss on advisor input
+document.getElementById('advisorInput').addEventListener('keydown', function(e){
+  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendAdvisorMsg();}
+});
+
+// Auto-dismiss splash after 3.5s
+setTimeout(()=>{
+  if(currentScreen==='splash'){
+    // stay — let user tap
+  }
+}, 3500);
+
+// On desktop — show phone frame nicely
+if(window.innerWidth > 460) {
+  document.body.style.background='#111';
+}
+
+// ── CONNECT FLOW ─────────────────────────────────────────────────────────────
+function startConnecting() {
+  goTo('connecting');
+  state.dataState = 'connecting';
+  const steps = [
+    {label:'Establishing secure connection', delay:0},
+    {label:'Verifying identity', delay:1200},
+    {label:'Reading account balances', delay:2400},
+    {label:'Importing transactions', delay:3600},
+    {label:'Calculating Financial Vitals', delay:5000},
+    {label:'Building your Munē Score', delay:6200},
+  ];
+  function renderSteps(doneCount, activeIdx) {
+    document.getElementById('connectingSteps').innerHTML = steps.map((s,i)=>{
+      const done = i < doneCount;
+      const active = i === activeIdx;
+      const wait = i > activeIdx;
+      return `<div class="cstep">
+        <div class="cstep-icon ${done?'done':active?'active':'wait'}">
+          ${done?'✓':active?'<div class="dot"></div>':''}
+        </div>
+        <span class="cstep-label ${wait?'wait':''}">${s.label}</span>
+      </div>`;
+    }).join('');
+    if (activeIdx < steps.length) {
+      document.getElementById('connectingStep').textContent = steps[activeIdx].label + '…';
+    }
+  }
+  steps.forEach((s,i) => {
+    setTimeout(()=>renderSteps(i, i), s.delay);
+  });
+  setTimeout(()=>{
+    state.dataState = 'connected';
+    goTo('home');
+  }, 7800);
+}
+
+function submitManual() {
+  const bal = parseFloat(document.getElementById('manualBalance').value) || 0;
+  const inc = parseFloat(document.getElementById('manualIncome').value) || 0;
+  const debt = parseFloat(document.getElementById('manualDebt').value) || 0;
+  state.manualBalance = bal;
+  state.manualIncome = inc;
+  state.manualDebt = debt;
+  state.dataState = 'manual';
+  goTo('home');
+}
+
+</script>
+
+<!-- PROTOTYPE NAV — outside phone frame -->
+<div id="protoNav"><div class="pnav-inner" id="protoNavInner"></div></div>
+</body>
+</html>
