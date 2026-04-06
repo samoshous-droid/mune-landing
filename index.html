@@ -12,25 +12,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     :root{
-      --teal:#1B8F82;--teal-dark:#136B61;--teal-light:#E0F5F2;
-      --espresso:#3A2318;--bg:#F4EFE6;--white:#fff;
-      --border:#D8D0C3;--dark:#1E1E1E;
-      --t1:#1A1A1A;--t2:#4A3F38;--t3:#8A7D74;
-      --gold:#C9A96E;--gold-light:#E8D5A3;
+      --teal:#2AAE80;--teal-dark:#1F8A62;--teal-light:#D0EDE0;
+      --espresso:#0A1F13;--bg:#F2EEE6;--white:#FEFCF9;
+      --border:#DDD5C8;--dark:#040D09;
+      --t1:#18130E;--t2:#544B42;--t3:#948578;
+      --gold:#BF9A3F;--gold-light:#F2E8CC;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
-    body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6;}
+    body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6;-moz-osx-font-smoothing:grayscale;}
 
     body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.03'/%3E%3C/svg%3E");opacity:0.4;}
 
-    #spotlight{position:fixed;pointer-events:none;z-index:0;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(27,143,130,0.06) 0%,transparent 65%);transform:translate(-50%,-50%);transition:left 0.8s cubic-bezier(0.23,1,0.32,1),top 0.8s cubic-bezier(0.23,1,0.32,1);left:60%;top:40%;}
+    #spotlight{position:fixed;pointer-events:none;z-index:0;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(42,174,128,0.07) 0%,transparent 65%);transform:translate(-50%,-50%);transition:left 0.8s cubic-bezier(0.23,1,0.32,1),top 0.8s cubic-bezier(0.23,1,0.32,1);left:60%;top:40%;}
 
     nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 52px;display:flex;align-items:center;justify-content:space-between;background:rgba(244,239,230,0.72);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid rgba(255,255,255,0.6);box-shadow:0 1px 0 rgba(201,169,110,0.15),inset 0 1px 0 rgba(255,255,255,0.8);transition:box-shadow 0.3s;}
-    .mark{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:400;letter-spacing:-0.02em;text-decoration:none;}
-    .mark .mun{color:var(--espresso);}
-    .mark .eb{color:var(--teal);}
-    .nav-cta{background:linear-gradient(135deg,#1B8F82 0%,#136B61 50%,#1B8F82 100%);background-size:200% 200%;color:white;border:none;border-radius:10px;padding:10px 22px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:all 0.3s;letter-spacing:0.01em;box-shadow:0 1px 0 rgba(255,255,255,0.2) inset,0 2px 8px rgba(27,143,130,0.3);position:relative;overflow:hidden;}
+    .mark{font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;font-weight:300;letter-spacing:-0.03em;text-decoration:none;display:inline-block;}
+    .mark .mun{
+      background:linear-gradient(135deg,#18130E 0%,#2AAE80 60%,#18130E 100%);
+      background-size:200% 200%;
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      animation:markShimmer 6s ease infinite;
+    }
+    .mark .eb{
+      background:linear-gradient(135deg,#F2E8CC 0%,#BF9A3F 50%,#F5EDD0 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      filter:drop-shadow(0 0 6px rgba(191,154,63,0.5));
+      animation:goldPulse 3s ease infinite;
+    }
+    @keyframes markShimmer{0%{background-position:100% 0%;}50%{background-position:0% 100%;}100%{background-position:100% 0%;}}
+    @keyframes goldPulse{0%,100%{filter:drop-shadow(0 0 6px rgba(191,154,63,0.4));}50%{filter:drop-shadow(0 0 14px rgba(191,154,63,0.8));}}
+    .nav-cta{background:linear-gradient(135deg,#2AAE80 0%,#1F8A62 50%,#2AAE80 100%);background-size:200% 200%;color:white;border:none;border-radius:10px;padding:10px 22px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:all 0.3s;letter-spacing:0.01em;box-shadow:0 1px 0 rgba(255,255,255,0.2) inset,0 2px 8px rgba(42,174,128,0.3);position:relative;overflow:hidden;}
     .nav-cta::after{content:'';position:absolute;top:-50%;left:-60%;width:40%;height:200%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);transform:skewX(-20deg);transition:left 0.5s;}
     .nav-cta:hover{background-position:right center;transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,0.2) inset,0 4px 16px rgba(27,143,130,0.4);}
     .nav-cta:hover::after{left:120%;}
@@ -41,13 +53,13 @@
     .bg-arc-1{border:1px solid rgba(27,143,130,0.08);animation:breathe 8s ease-in-out infinite;}
     .bg-arc-2{border:1px solid rgba(27,143,130,0.06);animation:breathe2 11s ease-in-out infinite;}
     .bg-arc-3{border:1px solid rgba(27,143,130,0.04);animation:breathe3 14s ease-in-out infinite;}
-    .bg-glow{position:fixed;pointer-events:none;z-index:0;border-radius:50%;background:radial-gradient(circle,rgba(27,143,130,0.09) 0%,transparent 70%);animation:glowpulse 9s ease-in-out infinite;}
+    .bg-glow{position:fixed;pointer-events:none;z-index:0;border-radius:50%;background:radial-gradient(circle,rgba(42,174,128,0.08) 0%,transparent 70%);animation:glowpulse 9s ease-in-out infinite;}
     .hero-left{position:relative;z-index:2;padding-right:52px;}
     .hero-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;}
     .eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;opacity:0;animation:up 0.8s ease 0.1s forwards;}
     .e-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:blink 2.5s ease-in-out infinite;}
     .e-text{font-size:11px;font-weight:500;color:var(--t3);letter-spacing:0.12em;text-transform:uppercase;}
-    h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(50px,5.8vw,76px);font-weight:300;line-height:1.06;letter-spacing:-0.028em;color:var(--t1);margin-bottom:20px;opacity:0;animation:up 0.9s ease 0.2s forwards;}
+    h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(50px,5.8vw,80px);font-weight:300;line-height:1.06;letter-spacing:-0.032em;color:var(--t1);margin-bottom:24px;opacity:0;animation:up 0.9s ease 0.2s forwards;}
     h1 em{font-style:italic;color:var(--teal);}
     .hero-sub{font-size:17px;font-weight:300;color:var(--t2);line-height:1.76;margin-bottom:36px;max-width:420px;opacity:0;animation:up 0.9s ease 0.3s forwards;}
     .form-wrap{opacity:0;animation:up 0.9s ease 0.4s forwards;}
@@ -90,7 +102,7 @@
     .sr-what{background:#7B9BAF;border-radius:7px;padding:8px 10px;}
     .sr-cta{background:#7B9BAF;border-radius:7px;padding:8px;text-align:center;font-family:'Outfit',sans-serif;font-size:7.5px;font-weight:600;color:white;margin-top:auto;}
     .s-home{background:#F7F4EF;}
-    .sh-head{background:#2A9D8F;padding:16px 14px 12px;}
+    .sh-head{background:#2AAE80;padding:16px 14px 12px;}
     .sh-greet{font-family:'Cormorant Garamond',Georgia,serif;font-size:15px;font-weight:300;color:white;margin-bottom:2px;}
     .sh-sub{font-size:7px;color:rgba(255,255,255,0.7);font-family:'Outfit',sans-serif;}
     .sh-score{background:rgba(255,255,255,0.14);border-radius:6px;padding:7px 9px;margin-top:9px;display:flex;align-items:center;justify-content:space-between;}
@@ -103,9 +115,9 @@
     .vn{font-family:'Outfit',sans-serif;font-size:7px;color:var(--t2);flex:1;}
     .vd{display:flex;gap:2px;}
     .vdot{width:5px;height:5px;border-radius:50%;background:#E8E2D9;}
-    .vdot.on{background:#2A9D8F;}
+    .vdot.on{background:#2AAE80;}
     .vdot.w{background:#E8965A;}
-    .sh-action{background:#2A9D8F;border-radius:7px;padding:8px 9px;margin-top:1px;}
+    .sh-action{background:#2AAE80;border-radius:7px;padding:8px 9px;margin-top:1px;}
     .sha-lbl{font-family:'Outfit',sans-serif;font-size:6.5px;color:rgba(255,255,255,0.7);}
     .sha-txt{font-family:'Outfit',sans-serif;font-size:7.5px;font-weight:500;color:white;line-height:1.4;margin-top:2px;}
     .s-score{background:#F7F4EF;}
@@ -127,7 +139,7 @@
     .vs-b{font-family:'Cormorant Garamond',Georgia,serif;font-size:12px;color:var(--teal);}
     .vs-mid{font-size:6.5px;color:var(--t3);font-family:'Outfit',sans-serif;}
 
-    .manifesto-s{background:#111111;padding:96px 52px;position:relative;}
+    .manifesto-s{background:#040D09;padding:96px 52px;position:relative;}
     .manifesto-s::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.5),transparent);}
     .manifesto-s::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.3),transparent);}
     .manifesto-wrap{display:grid;grid-template-columns:1fr 1.6fr;gap:72px;align-items:start;max-width:1100px;margin:0 auto;}
@@ -156,16 +168,16 @@
     .oc-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:400;color:var(--t1);margin-bottom:9px;letter-spacing:-0.01em;}
     .oc-body{font-size:13px;font-weight:300;color:var(--t3);line-height:1.72;}
 
-    .dark-s{background:#141414;padding:88px 52px;position:relative;}
+    .dark-s{background:#0A1F13;padding:88px 52px;position:relative;}
     .dark-s::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.4),transparent);}
-    .dark-s .s-label{color:#1DBFAE;}
+    .dark-s .s-label{color:#2AAE80;}
     .dark-s .s-head{color:white;}
     .dark-s .s-body{color:rgba(255,255,255,0.52);}
     .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:48px;border-radius:14px;overflow:hidden;}
     .sc-card{background:rgba(255,255,255,0.06);padding:28px 22px;transition:background 0.2s;}
     .sc-card:hover{background:rgba(255,255,255,0.1);}
     .sc-n{font-family:'Cormorant Garamond',Georgia,serif;font-size:46px;font-weight:300;color:white;line-height:1;margin-bottom:8px;letter-spacing:-0.02em;}
-    .sc-n span{color:#1DBFAE;}
+    .sc-n span{color:#2AAE80;}
     .sc-l{font-size:13px;font-weight:300;color:rgba(255,255,255,0.46);line-height:1.55;}
     .sc-src{font-size:10px;color:rgba(255,255,255,0.2);margin-top:8px;}
 
@@ -201,7 +213,7 @@
     .faq-divider{padding:14px 26px 6px;background:white;}
     .faq-divider-label{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);}
 
-    .cta-s{background:#136B61;padding:96px 52px;text-align:center;position:relative;overflow:hidden;}
+    .cta-s{background:linear-gradient(135deg,#0A1F13 0%,#163524 50%,#0A1F13 100%);padding:96px 52px;text-align:center;position:relative;overflow:hidden;}
     .cta-arc{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,0.07);pointer-events:none;}
     .ci{position:relative;z-index:2;max-width:520px;margin:0 auto;}
     .cta-h{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(38px,5.5vw,62px);font-weight:300;color:white;line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;}
@@ -223,9 +235,13 @@
 
     footer{background:#2A1810;padding:44px 52px 28px;}
     .ft{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:28px;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.1);flex-wrap:wrap;}
-    .fw{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:300;text-decoration:none;}
-    .fw .mun{color:rgba(255,255,255,0.75);}
-    .fw .eb{color:var(--teal);}
+    .fw{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:300;text-decoration:none;letter-spacing:-0.03em;}
+    .fw .mun{color:rgba(255,255,255,0.8);}
+    .fw .eb{
+      background:linear-gradient(135deg,#F2E8CC,#BF9A3F,#F5EDD0);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      filter:drop-shadow(0 0 8px rgba(191,154,63,0.6));
+    }
     .ftag{font-size:13px;font-weight:300;color:rgba(255,255,255,0.32);margin-top:5px;}
     .flinks{display:flex;gap:22px;flex-wrap:wrap;align-items:center;}
     .fl{font-size:13px;color:rgba(255,255,255,0.36);text-decoration:none;transition:color 0.2s;}
@@ -273,6 +289,78 @@
       .email-row,.cta-form{flex-direction:column;}
       .submit-btn,.cta-btn{width:100%;}
     }
+  
+    .quiz-link-btn{
+      display:inline-flex;align-items:center;
+      background:transparent;
+      border:1.5px solid rgba(42,174,128,0.35);
+      border-radius:100px;
+      padding:11px 24px;
+      font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;
+      color:var(--teal);text-decoration:none;
+      letter-spacing:0.2px;
+      transition:all 0.25s;
+      box-shadow:0 0 0 0 rgba(42,174,128,0);
+    }
+    .quiz-link-btn:hover{
+      background:rgba(42,174,128,0.08);
+      border-color:var(--teal);
+      box-shadow:0 0 24px rgba(42,174,128,0.15);
+      transform:translateY(-1px);
+    }
+  
+    /* ── QUIZ TRANSITION OVERLAY ──────────────────────────────────────────────── */
+    #quizTransition{
+      position:fixed;inset:0;z-index:99999;
+      background:#040D09;
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      opacity:0;pointer-events:none;
+      transition:opacity 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+    #quizTransition.active{
+      opacity:1;pointer-events:all;
+    }
+    .qt-wordmark{
+      font-family:'Cormorant Garamond',Georgia,serif;
+      font-size:72px;font-weight:300;letter-spacing:-2px;
+      line-height:1;margin-bottom:16px;
+      opacity:0;transform:translateY(10px);
+      transition:opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
+    }
+    #quizTransition.active .qt-wordmark{opacity:1;transform:translateY(0);}
+    .qt-mun{
+      background:linear-gradient(135deg,#FFFFFF 0%,#D0EDE0 40%,#2AAE80 70%,#FFFFFF 100%);
+      background-size:200% 200%;
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      animation:markShimmer 3s ease infinite;
+    }
+    .qt-e{
+      background:linear-gradient(135deg,#F2E8CC 0%,#BF9A3F 50%,#F5EDD0 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      filter:drop-shadow(0 0 20px rgba(191,154,63,0.8));
+    }
+    .qt-sub{
+      font-family:'Outfit',sans-serif;
+      font-size:13px;font-weight:400;letter-spacing:2px;
+      text-transform:uppercase;color:rgba(255,255,255,0.3);
+      opacity:0;
+      transition:opacity 0.5s ease 0.5s;
+    }
+    #quizTransition.active .qt-sub{opacity:1;}
+    .qt-arcs{
+      position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      width:400px;height:400px;pointer-events:none;
+    }
+    .qt-arc{
+      position:absolute;inset:0;border-radius:50%;
+      border:1px solid rgba(42,174,128,0.12);
+      animation:ap 3s ease infinite;
+    }
+    .qt-arc:nth-child(2){inset:40px;border-color:rgba(42,174,128,0.08);animation-delay:.6s;}
+    .qt-arc:nth-child(3){inset:80px;border-color:rgba(191,154,63,0.06);animation-delay:1.2s;}
+    @keyframes ap{0%,100%{opacity:.3;}50%{opacity:.9;}}
+
   </style>
 </head>
 <body>
@@ -285,7 +373,7 @@
 
 <nav id="nav">
   <a href="#" class="mark"><span class="mun">mun</span><span class="eb">ē</span></a>
-  <a href="#waitlist" class="nav-cta">Join the waitlist</a>
+  <div style="display:flex;align-items:center;gap:10px;"><a href="/quiz" style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:var(--teal);text-decoration:none;padding:10px 16px;border-radius:10px;transition:background 0.2s;" onmouseover="this.style.background='rgba(42,174,128,0.08)'" onmouseout="this.style.background=''">Find my type</a><a href="#waitlist" class="nav-cta">Join waitlist</a></div>
 </nav>
 
 <div class="hero-outer">
@@ -310,6 +398,10 @@
           </div>
         </div>
         <p class="form-note">No spam. No selling your data. <a href="#privacy">Privacy Policy</a>.</p>
+      </div>
+      <div style="margin-top:16px;opacity:0;animation:up 0.9s ease 0.45s forwards;">
+        <a href="/quiz" class="quiz-link-btn">Find my financial type →</a>
+        <span style="font-size:12px;color:var(--t3);margin-left:14px;">No account needed</span>
       </div>
       <div class="trust">
         <span class="ti">iOS & Android</span>
@@ -467,12 +559,12 @@
     <h2 class="s-head r d1" style="margin:0 auto;max-width:480px;">Which one sounds like you?</h2>
     <p class="s-body r d2" style="margin:14px auto 0;">Before munē gives you a single recommendation — it figures out who you actually are with money. Six types. One short quiz. Most people read their result and say "how did it know that."</p>
     <div class="arch-grid r d3">
-      <div class="ac" style="background:#5A8599;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">🌫️</span><div class="ac-n">The Fog</div><div class="ac-q">"I know something's wrong. I just can't bring myself to look."</div></div>
-      <div class="ac" style="background:#D4762E;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">✨</span><div class="ac-n">The Spark</div><div class="ac-q">"I know what I make. I just spend it before my bills see it."</div></div>
-      <div class="ac" style="background:#B85C3A;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">🔥</span><div class="ac-n">The Flame</div><div class="ac-q">"I save everything but I'm still scared I won't have enough."</div></div>
-      <div class="ac" style="background:#1B8F82;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">🌊</span><div class="ac-n">The Current</div><div class="ac-q">"I'm building. I just want to make sure I'm building right."</div></div>
-      <div class="ac" style="background:#3A72A8;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">〰️</span><div class="ac-n">The Wave</div><div class="ac-q">"My income isn't predictable. My system has to be."</div></div>
-      <div class="ac" style="background:#5E4E9E;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">🌙</span><div class="ac-n">The Tide</div><div class="ac-q">"I have a steady check. It just never seems like enough."</div></div>
+      <div class="ac" style="background:#4A6E7E;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">🌫️</span><div class="ac-n">The Fog</div><div class="ac-q">"I know something's wrong. I just can't bring myself to look."</div></div>
+      <div class="ac" style="background:#C87850;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">✨</span><div class="ac-n">The Spark</div><div class="ac-q">"I know what I make. I just spend it before my bills see it."</div></div>
+      <div class="ac" style="background:#B85454;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">🔥</span><div class="ac-n">The Flame</div><div class="ac-q">"I save everything but I'm still scared I won't have enough."</div></div>
+      <div class="ac" style="background:#2AAE80;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">🌊</span><div class="ac-n">The Current</div><div class="ac-q">"I'm building. I just want to make sure I'm building right."</div></div>
+      <div class="ac" style="background:#BF9A3F;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">〰️</span><div class="ac-n">The Wave</div><div class="ac-q">"My income isn't predictable. My system has to be."</div></div>
+      <div class="ac" style="background:#5E7090;"><div class="ac-arc" style="width:90px;height:90px;right:-14px;top:-14px;"></div><span class="ac-e">🌙</span><div class="ac-n">The Tide</div><div class="ac-q">"I have a steady check. It just never seems like enough."</div></div>
     </div>
     <p class="r" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;font-weight:300;font-style:italic;color:var(--t2);text-align:center;margin:28px auto 0;max-width:520px;line-height:1.65;transition-delay:0.4s;">These aren't permanent labels. They're starting points. munē moves you forward — and the person you become by Day 90 isn't the same one who started.</p>
   </div>
@@ -481,7 +573,7 @@
 <section id="quiz-section" style="background:#111111;padding:88px 52px;position:relative;overflow:hidden;">
   <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.4),transparent);"></div>
   <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.3),transparent);"></div>
-  <div style="position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(27,143,130,0.06) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+  <div style="position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(42,174,128,0.06) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
   <div style="max-width:640px;margin:0 auto;position:relative;z-index:2;">
     <div id="quiz-intro" style="text-align:center;">
       <p style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(201,169,110,0.7);margin-bottom:14px;">Find your financial type</p>
@@ -862,6 +954,21 @@
     });
   }
 
+
+  // ── QUIZ TRANSITION ──────────────────────────────────────────────────────────
+  function goToQuiz(e) {
+    if (e) e.preventDefault();
+    var overlay = document.getElementById('quizTransition');
+    overlay.classList.add('active');
+    setTimeout(function() {
+      window.location.href = '/quiz';
+    }, 1100);
+  }
+  // Wire all quiz links to use the transition
+  document.querySelectorAll('a[href="/quiz"]').forEach(function(link) {
+    link.addEventListener('click', goToQuiz);
+  });
+
   // ── SPOTLIGHT ──
   var spot = document.getElementById("spotlight");
   document.addEventListener("mousemove", function(e) {
@@ -892,5 +999,19 @@
 
 })();
 </script>
+
+<!-- QUIZ TRANSITION OVERLAY -->
+<div id="quizTransition">
+  <div class="qt-arcs">
+    <div class="qt-arc"></div>
+    <div class="qt-arc"></div>
+    <div class="qt-arc"></div>
+  </div>
+  <div class="qt-wordmark">
+    <span class="qt-mun">mun</span><span class="qt-e">ē</span>
+  </div>
+  <div class="qt-sub">Finding your type</div>
+</div>
+
 </body>
 </html>
