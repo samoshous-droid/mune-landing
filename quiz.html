@@ -263,11 +263,22 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
 .hero-arc:nth-child(3){inset:64px;border-color:rgba(191,154,63,0.06);animation-delay:1.6s;}
 .intro-hero>*{position:relative;z-index:1;}
 @media(min-width:768px){.intro-hero{display:none;}}
+
+/* ── PAGE ENTRANCE — matches landing page transition ─────────────────────── */
+#pageEntrance{
+  position:fixed;inset:0;z-index:99999;
+  background:#040D09;
+  opacity:1;pointer-events:none;
+  transition:opacity 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+#pageEntrance.gone{opacity:0;}
+
 </style>
 </head>
 <body>
 <div class="app" id="app">
-  <div class="bg-glow"></div>
+  <div id="pageEntrance"></div>
+<div class="bg-glow"></div>
 
   <!-- DESKTOP LEFT PANEL -->
   <div class="left-panel" id="leftPanel">
@@ -422,6 +433,18 @@ async function submitEmail(){
   if(eb)eb.disabled=false;
   renderSuccess(document.getElementById('qi'),false);
 }
+
+
+// ── PAGE ENTRANCE ──────────────────────────────────────────────────────────
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var e = document.getElementById('pageEntrance');
+    if (e) {
+      e.classList.add('gone');
+      setTimeout(function() { e.style.display = 'none'; }, 700);
+    }
+  }, 80);
+});
 
 render();
 window.addEventListener('resize',sync);
