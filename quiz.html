@@ -325,9 +325,26 @@ const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZ
 
 async function save(email,arch,floor,fear){
   try{
-    const r=await fetch(`${SB_URL}/rest/v1/waitlist`,{method:'POST',headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'resolution=merge-duplicates'},body:JSON.stringify({email,archetype:arch,floor_amount:floor,fear_text:fear,source:'quiz',day1_sent:false})});
-    return r.ok||r.status===201;
-  }catch(e){return false;}
+    const payload = {email, archetype:arch, floor_amount:floor, fear_text:fear, source:'quiz', day1_sent:false};
+    console.log('Saving to Supabase:', JSON.stringify(payload));
+    const r = await fetch(SB_URL+'/rest/v1/waitlist', {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer '+SB_KEY,
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify(payload)
+    });
+    const text = await r.text();
+    console.log('Supabase response status:', r.status);
+    console.log('Supabase response body:', text);
+    return r.ok || r.status===201;
+  } catch(e) {
+    console.error('Supabase error:', e);
+    return false;
+  }
 }
 
 const S={step:-1,arch:'fog',floor:200,fear:''};
