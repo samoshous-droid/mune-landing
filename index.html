@@ -570,31 +570,35 @@
   </div>
 </section>
 
-<section id="quiz-section" style="background:#111111;padding:88px 52px;position:relative;overflow:hidden;">
-  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.4),transparent);"></div>
-  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.3),transparent);"></div>
-  <div style="position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(42,174,128,0.06) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
-  <div style="max-width:640px;margin:0 auto;position:relative;z-index:2;">
-    <div id="quiz-intro" style="text-align:center;">
-      <p style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(201,169,110,0.7);margin-bottom:14px;">Find your financial type</p>
-      <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(32px,5vw,52px);font-weight:300;color:white;line-height:1.15;letter-spacing:-0.02em;margin-bottom:16px;">Which one are you?</h2>
-      <p style="font-size:16px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.7;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;">Five honest questions. Two minutes. Most people read their result and say "how did it know that."</p>
-      <button id="start-quiz-btn" style="background:linear-gradient(135deg,#1B8F82,#136B61);color:white;border:none;border-radius:12px;padding:16px 36px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;cursor:pointer;letter-spacing:0.02em;box-shadow:0 1px 0 rgba(255,255,255,0.15) inset,0 4px 20px rgba(27,143,130,0.4);transition:all 0.3s;">Find my type →</button>
-      <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:14px;">No account needed. No email required. Just your result.</p>
+<section id="quiz-section" style="background:#040D09;padding:96px 52px;position:relative;overflow:hidden;">
+  <!-- Subtle arcs in background -->
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(191,154,63,0.4),transparent);"></div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(191,154,63,0.25),transparent);"></div>
+  <div style="position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(42,174,128,0.07) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+  <div style="position:absolute;width:500px;height:500px;border-radius:50%;border:1px solid rgba(42,174,128,0.08);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:breathe 8s ease-in-out infinite;"></div>
+  <div style="position:absolute;width:700px;height:700px;border-radius:50%;border:1px solid rgba(42,174,128,0.05);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:breathe2 11s ease-in-out infinite;"></div>
+
+  <div style="max-width:640px;margin:0 auto;position:relative;z-index:2;text-align:center;">
+    <p class="r" style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(191,154,63,0.7);margin-bottom:16px;">Find your financial type</p>
+    <h2 class="r d1" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(36px,5.5vw,58px);font-weight:300;color:white;line-height:1.12;letter-spacing:-0.025em;margin-bottom:16px;">Which one <em style="font-style:italic;color:#2AAE80;">are you?</em></h2>
+    <p class="r d2" style="font-size:16px;font-weight:300;color:rgba(255,255,255,0.45);line-height:1.75;margin-bottom:48px;max-width:460px;margin-left:auto;margin-right:auto;">Five honest questions. Two minutes. Most people read their result and say "how did it know that."</p>
+
+    <!-- The six archetypes as a subtle preview -->
+    <div class="r d3" style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-bottom:48px;">
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:8px 16px;font-size:12px;color:rgba(255,255,255,0.5);font-family:'Outfit',sans-serif;">🌫️ The Fog</div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:8px 16px;font-size:12px;color:rgba(255,255,255,0.5);font-family:'Outfit',sans-serif;">✨ The Spark</div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:8px 16px;font-size:12px;color:rgba(255,255,255,0.5);font-family:'Outfit',sans-serif;">🔥 The Flame</div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:8px 16px;font-size:12px;color:rgba(255,255,255,0.5);font-family:'Outfit',sans-serif;">🌊 The Current</div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:8px 16px;font-size:12px;color:rgba(255,255,255,0.5);font-family:'Outfit',sans-serif;">〰️ The Wave</div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:8px 16px;font-size:12px;color:rgba(255,255,255,0.5);font-family:'Outfit',sans-serif;">🌙 The Tide</div>
     </div>
-    <div id="quiz-active" style="display:none;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;">
-        <div style="display:flex;gap:8px;" id="quiz-dots"></div>
-        <p style="font-size:12px;color:rgba(255,255,255,0.35);font-family:'Outfit',sans-serif;" id="quiz-counter">1 of 5</p>
-      </div>
-      <div id="quiz-question-wrap" style="transition:opacity 0.3s,transform 0.3s;">
-        <p style="font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,169,110,0.65);margin-bottom:16px;" id="quiz-q-label">Question 1</p>
-        <h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(24px,4vw,36px);font-weight:300;color:white;line-height:1.25;letter-spacing:-0.015em;margin-bottom:10px;" id="quiz-q-text"></h3>
-        <p style="font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:32px;font-weight:300;" id="quiz-q-sub"></p>
-        <div id="quiz-options" style="display:flex;flex-direction:column;gap:10px;"></div>
-      </div>
+
+    <div class="r d4">
+      <a href="/quiz" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#2AAE80,#1F8A62);color:white;border:none;border-radius:100px;padding:18px 44px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;box-shadow:0 12px 40px rgba(42,174,128,0.35),0 0 0 1px rgba(42,174,128,0.15);transition:all 0.3s;letter-spacing:0.02em;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 16px 48px rgba(42,174,128,0.45)'" onmouseout="this.style.transform='';this.style.boxShadow='0 12px 40px rgba(42,174,128,0.35),0 0 0 1px rgba(42,174,128,0.15)'">
+        Find my financial type →
+      </a>
+      <p style="font-size:12px;color:rgba(255,255,255,0.22);margin-top:14px;font-family:'Outfit',sans-serif;">No account needed &nbsp;·&nbsp; Two minutes &nbsp;·&nbsp; Free</p>
     </div>
-    <div id="quiz-reveal" style="display:none;"></div>
   </div>
 </section>
 
@@ -722,251 +726,6 @@
       this.disabled = false;
       this.textContent = "Join waitlist →";
     }
-  });
-
-  // ── QUIZ ──
-  var QUESTIONS = [
-    { q: "When money comes in — what happens first?", sub: "Be honest. There's no wrong answer.", options: [
-      {text:"Relief. I can breathe for a minute.", scores:{fog:3,tide:2}},
-      {text:"Excitement. I'm already thinking about spending it.", scores:{spark:3,wave:1}},
-      {text:"Calm. It's going where it's supposed to go.", scores:{flame:2,current:3}},
-      {text:"It depends — some months feel fine, others like starting over.", scores:{wave:3,spark:1}},
-      {text:"Not much. I have more than I need right now.", scores:{current:2,flame:2}}
-    ]},
-    { q: "How does money actually come into your life?", sub: "Pick the one that fits most.", options: [
-      {text:"Regular paycheck — same amount, same schedule.", scores:{tide:3,fog:1}},
-      {text:"It varies — freelance, gig, self-employed.", scores:{wave:3,spark:1}},
-      {text:"A mix — steady income plus other sources.", scores:{wave:2,tide:1}},
-      {text:"Fixed payments — Social Security, pension, disability.", scores:{tide:2,flame:2}},
-      {text:"I live off what I've built — investments, savings.", scores:{current:3,flame:2}}
-    ]},
-    { q: "What's taking up the most space in your mind financially?", sub: "The thing that comes up when you're quiet.", options: [
-      {text:"Whether I have enough to cover everything this month.", scores:{fog:3,tide:2}},
-      {text:"Where my money goes — it disappears and I don't know why.", scores:{spark:3,tide:2}},
-      {text:"Whether I'm doing enough with what I have.", scores:{flame:3,current:1}},
-      {text:"Managing the complexity — taxes, accounts, income streams.", scores:{wave:3,current:2}},
-      {text:"Making sure what I've built lasts.", scores:{current:3,flame:2}}
-    ]},
-    { q: "When you think about your savings right now —", sub: "Pick the one that feels closest.", options: [
-      {text:"What savings? I'm not there yet.", scores:{fog:3,spark:2}},
-      {text:"I have some but it doesn't feel like enough.", scores:{tide:3,flame:1}},
-      {text:"I save consistently but I'm scared to invest it.", scores:{flame:3}},
-      {text:"I'm actively investing and building.", scores:{current:3,wave:1}},
-      {text:"My income changes so much it's hard to save consistently.", scores:{wave:3}}
-    ]},
-    { q: "Who does this financial plan need to work for?", sub: "Your financial life has to fit your actual life.", options: [
-      {text:"Just me.", scores:{}},
-      {text:"Me and a partner.", scores:{current:1}},
-      {text:"Me and my children.", scores:{flame:1,fog:1}},
-      {text:"Me, a partner, and children.", scores:{flame:1}},
-      {text:"I support family beyond my household.", scores:{tide:1,fog:1}}
-    ]}
-  ];
-
-  var TYPES = {
-    fog: { name:"The Fog", emoji:"🌫️", color:"#5A8599", light:"#EEF3F7",
-      tagline:"I know something's wrong. I just can't bring myself to look.",
-      truth:"You're not broken. You've just been waiting for something safe to start with. munē makes looking feel safe — one number at a time.",
-      plan:[{day:"Day 1",action:"Set your Floor number.",detail:"The one number that makes looking feel safe. We protect it always."},{day:"Day 2",action:"Open one account. Just look.",detail:"No judgment. No action required. Just see the number."},{day:"Day 3",action:"Name your biggest financial worry.",detail:"One sentence. That's your starting point. munē builds from there."}]
-    },
-    spark: { name:"The Spark", emoji:"✨", color:"#D4762E", light:"#FDF4EC",
-      tagline:"I know what I make. I just spend it before my bills see it.",
-      truth:"You don't need restriction. You need a system that makes spending guilt-free. munē builds that around you.",
-      plan:[{day:"Day 1",action:"Calculate your Guilt Free Number.",detail:"The portion of your income that is genuinely, completely yours to spend."},{day:"Day 2",action:"Automate your most urgent bill.",detail:"One obligation handled without thinking. The system starts here."},{day:"Day 3",action:"Open a separate spending account.",detail:"Your Guilt Free Number goes here. Spend it without guilt. That's the point."}]
-    },
-    flame: { name:"The Flame", emoji:"🔥", color:"#B85C3A", light:"#FCF1EE",
-      tagline:"I save everything but I'm still scared I won't have enough.",
-      truth:"Your discipline is real and rare. Nobody ever showed you that growth is just protection with a longer timeline. munē changes that.",
-      plan:[{day:"Day 1",action:"Move your emergency fund to a HYSA.",detail:"Same safety. 4–5% interest instead of 0.01%. Your first act of growth."},{day:"Day 2",action:"Calculate what you're losing to inflation.",detail:"Money sitting still is losing value. munē shows you the exact number."},{day:"Day 3",action:"Open a Roth IRA — even with $0 inside.",detail:"The account existing is the first step. Funding it comes next."}]
-    },
-    current: { name:"The Current", emoji:"🌊", color:"#1B8F82", light:"#E0F5F2",
-      tagline:"I'm building. I just want to make sure I'm building right.",
-      truth:"That instinct is correct. munē audits the whole picture — not to find failure, but to find the one or two things worth closing before they matter.",
-      plan:[{day:"Day 1",action:"Run a full beneficiary audit.",detail:"Every account. Every designation. One wrong name can cost everything."},{day:"Day 2",action:"Check your insurance coverage gaps.",detail:"Most builders are overexposed. munē shows exactly where."},{day:"Day 3",action:"Review your asset allocation.",detail:"Not to change it — to understand it. The Munē Score builds from here."}]
-    },
-    wave: { name:"The Wave", emoji:"〰️", color:"#3A72A8", light:"#EEF4FA",
-      tagline:"My income isn't predictable. My system has to be.",
-      truth:"Variable income isn't a financial problem — it's an architecture problem. munē builds a system designed for how you actually earn.",
-      plan:[{day:"Day 1",action:"Calculate your income floor.",detail:"The minimum you've earned in any month over the last 12. That's your baseline."},{day:"Day 2",action:"Build your income buffer account.",detail:"High months feed it. Low months draw from it. Consistency without a paycheck."},{day:"Day 3",action:"Set your quarterly tax aside — automatically.",detail:"The number that surprises most freelancers. munē calculates it for you."}]
-    },
-    tide: { name:"The Tide", emoji:"🌙", color:"#5E4E9E", light:"#F2F0F9",
-      tagline:"I have a steady check. It just never seems like enough.",
-      truth:"This isn't a willpower problem. It's lifestyle inflation — one of the most invisible forces in personal finance. munē finds exactly where it went.",
-      plan:[{day:"Day 1",action:"Find your lifestyle creep number.",detail:"The difference between what you earn now and what you saved when you earned less. That gap is the story."},{day:"Day 2",action:"Automate $25 to savings before you see it.",detail:"Not a budget. A system. Money you never see, you never spend."},{day:"Day 3",action:"Identify your single highest recurring expense.",detail:"Not to cut it. To decide if it's intentional. That distinction changes everything."}]
-    }
-  };
-
-  var qIndex = 0;
-  var scores = {fog:0,spark:0,flame:0,current:0,wave:0,tide:0};
-
-  document.getElementById("start-quiz-btn").addEventListener("click", function() {
-    document.getElementById("quiz-intro").style.display = "none";
-    document.getElementById("quiz-active").style.display = "block";
-    renderDots();
-    renderQuestion();
-  });
-
-  function renderDots() {
-    var el = document.getElementById("quiz-dots");
-    var html = "";
-    for (var i = 0; i < QUESTIONS.length; i++) {
-      var w = i === qIndex ? "20px" : "8px";
-      var bg = i === qIndex ? "#1B8F82" : i < qIndex ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.15)";
-      html += '<div style="width:' + w + ';height:8px;border-radius:4px;background:' + bg + ';transition:all 0.3s;"></div>';
-    }
-    el.innerHTML = html;
-  }
-
-  function renderQuestion() {
-    var q = QUESTIONS[qIndex];
-    document.getElementById("quiz-q-label").textContent = "Question " + (qIndex + 1);
-    document.getElementById("quiz-q-text").textContent = q.q;
-    document.getElementById("quiz-q-sub").textContent = q.sub;
-    document.getElementById("quiz-counter").textContent = (qIndex + 1) + " of " + QUESTIONS.length;
-    var opts = document.getElementById("quiz-options");
-    var html = "";
-    for (var i = 0; i < q.options.length; i++) {
-      html += '<button data-idx="' + i + '" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px 20px;text-align:left;cursor:pointer;font-family:\'Outfit\',sans-serif;font-size:15px;font-weight:300;color:rgba(255,255,255,0.8);transition:all 0.2s;opacity:0;animation:fadeUp 0.4s ease ' + (i * 0.06) + 's forwards;" onmouseover="this.style.background=\'rgba(27,143,130,0.15)\';this.style.borderColor=\'rgba(27,143,130,0.4)\';this.style.color=\'white\'" onmouseout="this.style.background=\'rgba(255,255,255,0.05)\';this.style.borderColor=\'rgba(255,255,255,0.1)\';this.style.color=\'rgba(255,255,255,0.8)\'">' + q.options[i].text + '</button>';
-    }
-    opts.innerHTML = html;
-    var btns = opts.querySelectorAll("button");
-    btns.forEach(function(btn) {
-      btn.addEventListener("click", function() {
-        selectAnswer(parseInt(this.getAttribute("data-idx")));
-      });
-    });
-  }
-
-  function selectAnswer(optIndex) {
-    var opt = QUESTIONS[qIndex].options[optIndex];
-    var keys = Object.keys(opt.scores);
-    for (var i = 0; i < keys.length; i++) {
-      scores[keys[i]] += opt.scores[keys[i]];
-    }
-    var wrap = document.getElementById("quiz-question-wrap");
-    wrap.style.opacity = "0";
-    wrap.style.transform = "translateY(-12px)";
-    setTimeout(function() {
-      if (qIndex < QUESTIONS.length - 1) {
-        qIndex++;
-        renderDots();
-        renderQuestion();
-        wrap.style.transform = "translateY(12px)";
-        setTimeout(function() { wrap.style.opacity = "1"; wrap.style.transform = "translateY(0)"; }, 50);
-      } else {
-        showReveal();
-      }
-    }, 280);
-  }
-
-  function showReveal() {
-    var entries = Object.entries(scores).sort(function(a,b){ return b[1]-a[1]; });
-    var winner = entries[0][0];
-    var type = TYPES[winner];
-
-    document.getElementById("quiz-active").style.display = "none";
-    var section = document.getElementById("quiz-section");
-    section.style.transition = "background 0.8s ease";
-    section.style.background = type.light;
-
-    var planHTML = "";
-    for (var i = 0; i < type.plan.length; i++) {
-      var p = type.plan[i];
-      var opacity = i === 0 ? 1 : i === 1 ? 0.65 : 0.35;
-      planHTML += '<div style="background:white;border:1px solid rgba(0,0,0,0.07);border-radius:12px;padding:16px 18px 16px 20px;text-align:left;position:relative;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,0.04);">'
-        + '<div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:' + type.color + ';border-radius:3px 0 0 3px;opacity:' + opacity + ';"></div>'
-        + '<p style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:' + type.color + ';margin:0 0 4px;">' + p.day + '</p>'
-        + '<p style="font-size:14px;font-weight:500;color:#1A1A1A;margin:0 0 3px;line-height:1.3;">' + p.action + '</p>'
-        + '<p style="font-size:12px;font-weight:300;color:#8A7D74;margin:0;line-height:1.55;">' + p.detail + '</p>'
-        + '</div>';
-    }
-
-    var revealHTML = '<div style="text-align:center;animation:fadeUp 0.7s ease both;">'
-      + '<p style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:' + type.color + ';margin-bottom:16px;opacity:0.8;">Your financial type</p>'
-      + '<div style="font-size:52px;margin-bottom:12px;">' + type.emoji + '</div>'
-      + '<h2 style="font-family:\'Cormorant Garamond\',Georgia,serif;font-size:clamp(36px,6vw,60px);font-weight:300;color:#1A1A1A;line-height:1.1;letter-spacing:-0.025em;margin-bottom:12px;">' + type.name + '</h2>'
-      + '<p style="font-family:\'Cormorant Garamond\',Georgia,serif;font-size:18px;font-style:italic;color:#4A3F38;margin-bottom:28px;line-height:1.5;max-width:480px;margin-left:auto;margin-right:auto;">&ldquo;' + type.tagline + '&rdquo;</p>'
-      + '<div style="background:white;border:1px solid rgba(0,0,0,0.08);border-radius:16px;padding:24px 28px;max-width:520px;margin:0 auto 28px;text-align:left;box-shadow:0 2px 16px rgba(0,0,0,0.06);position:relative;overflow:hidden;">'
-      + '<div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,' + type.color + ',' + type.color + '66);"></div>'
-      + '<p style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:' + type.color + ';margin-bottom:10px;">The truth</p>'
-      + '<p style="font-size:15px;font-weight:300;color:#4A3F38;line-height:1.78;">' + type.truth + '</p>'
-      + '</div>'
-      + '<div style="max-width:520px;margin:0 auto 32px;">'
-      + '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">'
-      + '<p style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:' + type.color + ';margin:0;">Your Foundation Plan &middot; First 3 days</p>'
-      + '<p style="font-size:11px;color:#B0A89E;margin:0;">Unique to ' + type.name + '</p>'
-      + '</div>'
-      + '<div style="display:flex;flex-direction:column;gap:8px;">' + planHTML + '</div>'
-      + '<div style="margin-top:8px;border:1px dashed rgba(0,0,0,0.1);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.5);">'
-      + '<div style="display:flex;gap:4px;"><div style="width:6px;height:6px;border-radius:50%;background:' + type.color + ';opacity:0.3;"></div><div style="width:6px;height:6px;border-radius:50%;background:' + type.color + ';opacity:0.2;"></div><div style="width:6px;height:6px;border-radius:50%;background:' + type.color + ';opacity:0.1;"></div></div>'
-      + '<p style="font-size:12px;font-weight:300;color:#8A7D74;margin:0;">Days 4 through 90 — built around everything you just shared.</p>'
-      + '</div></div>'
-      + '<div style="max-width:440px;margin:0 auto;" id="quiz-email-wrap">'
-      + '<p style="font-size:16px;color:#1A1A1A;font-weight:500;line-height:1.5;margin-bottom:5px;">Want Days 4 through 90?</p>'
-      + '<p style="font-size:13px;color:#8A7D74;font-weight:300;line-height:1.6;margin-bottom:20px;">Leave your email and we\'ll send your complete Foundation Plan the moment munē launches. No commitment. No spam. Just yours.</p>'
-      + '<div style="display:flex;gap:8px;margin-bottom:10px;" id="quiz-email-row">'
-      + '<input type="email" id="quiz-email-input" placeholder="Your email address" style="flex:1;background:white;border:1.5px solid rgba(0,0,0,0.12);border-radius:11px;padding:14px 18px;font-family:\'Outfit\',sans-serif;font-size:14px;color:#1A1A1A;outline:none;transition:border-color 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.06);" />'
-      + '<button id="quiz-email-btn" style="background:linear-gradient(135deg,' + type.color + ',' + type.color + 'cc);color:white;border:none;border-radius:11px;padding:14px 20px;font-family:\'Outfit\',sans-serif;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all 0.3s;box-shadow:0 4px 16px ' + type.color + '40;">Send my plan →</button>'
-      + '</div>'
-      + '<div id="quiz-email-success" style="display:none;background:white;border:1px solid rgba(0,0,0,0.08);border-radius:11px;padding:14px 18px;text-align:left;">'
-      + '<p style="font-size:14px;font-weight:500;color:#1A1A1A;margin:0 0 3px;">You\'re in. Welcome, ' + type.name + '.</p>'
-      + '<p style="font-size:13px;font-weight:300;color:#8A7D74;margin:0;">Your Foundation Plan will be waiting when munē launches. You\'ll hear first.</p>'
-      + '</div>'
-      + '<p style="margin-top:14px;font-size:13px;color:#8A7D74;">Not ready yet? That\'s fine. <button id="quiz-skip-btn" style="background:none;border:none;font-family:\'Outfit\',sans-serif;font-size:13px;color:' + type.color + ';cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0;">Keep my result without signing up.</button></p>'
-      + '</div>'
-      + '<button id="retake-btn" style="margin-top:24px;background:none;border:none;font-family:\'Outfit\',sans-serif;font-size:12px;color:#B0A89E;cursor:pointer;letter-spacing:0.04em;">&#8617; Take it again</button>'
-      + '</div>';
-
-    var reveal = document.getElementById("quiz-reveal");
-    reveal.innerHTML = revealHTML;
-    reveal.style.display = "block";
-
-    document.getElementById("quiz-email-btn").addEventListener("click", async function() {
-      var email = document.getElementById("quiz-email-input").value.trim();
-      if (!email || !email.includes("@")) {
-        document.getElementById("quiz-email-input").style.borderColor = "#B85C3A";
-        return;
-      }
-      this.disabled = true;
-      this.textContent = "One second...";
-      var ok = await saveToWaitlist(email, "quiz_" + winner);
-      if (ok) {
-        document.getElementById("quiz-email-row").style.display = "none";
-        document.getElementById("quiz-email-success").style.display = "block";
-      } else {
-        this.disabled = false;
-        this.textContent = "Send my plan →";
-        document.getElementById("quiz-email-input").style.borderColor = "#B85C3A";
-      }
-    });
-
-    document.getElementById("quiz-skip-btn").addEventListener("click", function() {
-      document.getElementById("quiz-email-wrap").style.opacity = "0.4";
-    });
-
-    document.getElementById("retake-btn").addEventListener("click", function() {
-      qIndex = 0;
-      scores = {fog:0,spark:0,flame:0,current:0,wave:0,tide:0};
-      reveal.style.display = "none";
-      reveal.innerHTML = "";
-      section.style.background = "#111111";
-      document.getElementById("quiz-intro").style.display = "block";
-    });
-  }
-
-
-  // ── QUIZ TRANSITION ──────────────────────────────────────────────────────────
-  function goToQuiz(e) {
-    if (e) e.preventDefault();
-    var overlay = document.getElementById('quizTransition');
-    overlay.classList.add('active');
-    setTimeout(function() {
-      window.location.href = '/quiz';
-    }, 1100);
-  }
-  // Wire all quiz links to use the transition
-  document.querySelectorAll('a[href="/quiz"]').forEach(function(link) {
-    link.addEventListener('click', goToQuiz);
   });
 
   // ── SPOTLIGHT ──
