@@ -326,21 +326,17 @@ const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZ
 async function save(email,arch,floor,fear){
   try{
     const payload = {email, archetype:arch, floor_amount:floor, fear_text:fear, source:'quiz', day1_sent:false};
-    console.log('Saving to Supabase:', JSON.stringify(payload));
     const r = await fetch(SB_URL+'/rest/v1/waitlist', {
       method:'POST',
       headers:{
         'Content-Type':'application/json',
         'apikey': SB_KEY,
         'Authorization': 'Bearer '+SB_KEY,
-        'Prefer': 'return=representation'
+        'Prefer': 'resolution=merge-duplicates,return=minimal'
       },
       body: JSON.stringify(payload)
     });
-    const text = await r.text();
-    console.log('Supabase response status:', r.status);
-    console.log('Supabase response body:', text);
-    return r.ok || r.status===201;
+    return r.ok || r.status===201 || r.status===200;
   } catch(e) {
     console.error('Supabase error:', e);
     return false;
@@ -361,7 +357,424 @@ const A={
 const QS=[
   {type:'c',n:1,q:'When you think about your finances right now \u2014 what\'s the first feeling that comes up?',opts:[{t:'Honestly? I try not to think about it.',a:'fog'},{t:'I\'m living my life \u2014 money comes and goes.',a:'spark'},{t:'I save but I\'m scared it won\'t be enough.',a:'flame'},{t:'I\'m building \u2014 I just want to make sure I\'m doing it right.',a:'current'},{t:'My income isn\'t consistent \u2014 it\'s complicated.',a:'wave'},{t:'Steady check. Just never seems like enough.',a:'tide'}]},
   {type:'c',n:2,q:'When you get paid \u2014 what typically happens to that money?',opts:[{t:'I pay what I have to and spend what\'s left.',a:'fog'},{t:'It disappears faster than I expect.',a:'spark'},{t:'I put some aside immediately then manage the rest.',a:'flame'},{t:'It goes into the system I\'ve built.',a:'current'},{t:'Depends \u2014 some months great, some rough.',a:'wave'},{t:'I cover bills but there\'s never much left.',a:'tide'}]},
-  {type:'f',n:3,q:'What\'s the financial thing you\'re most worried about right now?',sub:'Type it out. You won\'t be judged for it \u2014 and your plan addresses it directly.'},
+  {type:'c',n:3,q:'When you think about why your finances are where they are — what feels most true?',opts:[
+    {t:'Something set me back and I haven\'t fully recovered.',a:'fog'},
+    {t:'I know what to do. I just don\'t do it.',a:'tide'},
+    {t:'I\'ve tried to fix it before. It never sticks.',a:'fog'},
+    {t:'My income makes it almost impossible to plan.',a:'wave'},
+    {t:'I\'m doing okay — I just want to do better.',a:'current'},
+    {t:'I honestly don\'t know enough to know what\'s wrong.',a:'flame'},
+  ]},
+  {type:'fl',n:4,q:'What\'s the lowest your bank account can go before your stomach drops?',sub:'This becomes your Floor. We protect this number in everything we recommend.'},
+  {type:'c',n:5,q:'Who does this plan need to work for?',opts:[{t:'Just me',a:''},{t:'Me and a partner',a:''},{t:'Me and children',a:''},{t:'Me, a partner, and children',a:'wave'},{t:'Me \u2014 and I support extended family',a:'wave'}]},
+];
+
+function render(){
+  sync();
+  const qi=document.getElementById('qi');
+  const isMobile=window.innerWidth<768;
+  if(S.step===-1&&isMobile){renderIntro(qi);}
+  else if(S.step===-1&&!isMobile){S.step=0;renderQ(QS[0],qi);}
+  else if(S.step<QS.length){renderQ(QS[S.step],qi);}
+  else if(S.step===QS.length){renderReveal(qi);}
+  else if(S.step===QS.length+1){renderEmail(qi);}
+  else{renderSuccess(qi,false);}
+}
+function renderIntro(qi){
+  qi.innerHTML='<div class="intro-hero fu"><div class="hero-arcs"><div class="hero-arc"></div><div class="hero-arc"></div><div class="hero-arc"></div></div><div class="hero-wordmark">mun<span class="hero-wordmark-e">ē</span></div><div class="hero-tagline">The knowledge you were<br>never given.</div><button class="hero-start-btn" onclick="adv()">Find my financial type →</button><div class="hero-note">Five questions · Two minutes · No account needed</div></div>';
+}
+
+function sync(){
+  const total=QS.length+2;
+  const pct=Math.min(100,(S.step/total)*100);
+  const pf=document.getElementById('pf');if(pf)pf.style.width=(S.step<0?0:pct)+'%';
+  const msl=document.getElementById('msl');
+  if(msl){if(S.step<0)msl.textContent='';else if(S.step<QS.length)msl.textContent='Question '+(S.step+1)+' of '+QS.length;else if(S.step===QS.length)msl.textContent='Your result';else msl.textContent='Your plan';}
+  const bb=document.getElementById('bb');if(bb)bb.style.visibility=S.step>0?'visible':'hidden';
+  const dc=document.getElementById('dc');if(dc){if(S.step<QS.length)dc.textContent=(S.step+1)+' of '+QS.length;else dc.textContent='';}
+  const dd=document.getElementById('dd');
+  if(dd)dd.innerHTML=QS.map((_,i)=>{const c=i<S.step?'done':i===S.step?'active':'';return '<div class="dt-dot '+c+'"></div>';}).join('');
+  document.querySelectorAll('.lp-step').forEach(el=>{
+    const s=parseInt(el.dataset.s);
+    el.classList.remove('active','done');
+    if(s<S.step){el.classList.add('done');el.querySelector('.lp-step-n').textContent='✓';}
+    else if(s===S.step)el.classList.add('active');
+    else{const ns=['1','2','3','4','5','✦'];el.querySelector('.lp-step-n').textContent=ns[s];}
+  });
+  const dtn=document.getElementById('dtn');
+  if(dtn)dtn.style.display=window.innerWidth>=768?'flex':'none';
+}
+
+function renderQ(q,qi){
+  if(q.type==='c'){
+    qi.innerHTML='<div class="content fu"><div class="q-num">Question '+q.n+' of '+QS.length+'</div><div class="q-text">'+q.q+'</div><div class="opts">'+q.opts.map((o,i)=>'<button class="opt" onclick="pick(\''+o.a+'\','+i+')">'+o.t+'</button>').join('')+'</div></div>';
+  !DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mune — Find Your Financial Type</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --grove:#040D09;--forest:#0A1F13;--canopy:#163524;
+  --jade:#2AAE80;--jade-dark:#1F8A62;--jade-light:#D0EDE0;
+  --gold:#BF9A3F;--parchment:#F2EEE6;--white:#FEFCF9;
+  --ink:#18130E;--ink-sec:#544B42;--muted:#948578;--border:#DDD5C8;
+  --serif:'Cormorant Garant',Georgia,serif;
+  --sans:'Outfit',sans-serif;
+}
+html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color:var(--white);}
+
+/* MOBILE - full screen immersive */
+.app{min-height:100vh;display:flex;flex-direction:column;background:var(--grove);position:relative;overflow:hidden;}
+.bg-glow{position:fixed;top:25%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(42,174,128,0.07) 0%,transparent 70%);pointer-events:none;z-index:0;}
+.progress{height:2px;background:rgba(255,255,255,0.07);flex-shrink:0;z-index:10;position:relative;}
+.progress-fill{height:100%;background:var(--jade);transition:width 0.4s ease;}
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 0;flex-shrink:0;z-index:10;position:relative;}
+.wordmark{
+  font-family:var(--serif);font-size:28px;font-weight:300;letter-spacing:-0.5px;
+  background:linear-gradient(135deg,#FFFFFF 0%,#C8F0E0 40%,#2AAE80 70%,#FFFFFF 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  filter:drop-shadow(0 0 12px rgba(42,174,128,0.35));
+  position:relative;
+}
+.wordmark span{
+  background:linear-gradient(135deg,#F2E8CC 0%,#BF9A3F 50%,#F5EDD0 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  filter:drop-shadow(0 0 8px rgba(191,154,63,0.6));
+  animation:goldPulse 3s ease infinite;
+}
+@keyframes goldPulse{
+  0%,100%{filter:drop-shadow(0 0 8px rgba(191,154,63,0.5));}
+  50%{filter:drop-shadow(0 0 16px rgba(191,154,63,0.9));}
+}
+.step-label{font-size:11px;font-weight:600;color:rgba(255,255,255,0.3);letter-spacing:1.5px;text-transform:uppercase;}
+.content{flex:1;display:flex;flex-direction:column;padding:32px 24px 32px;overflow-y:auto;position:relative;z-index:5;}
+.content::-webkit-scrollbar{display:none;}
+.q-num{font-size:11px;font-weight:600;color:var(--jade);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+.q-text{font-family:var(--serif);font-size:clamp(22px,5.5vw,30px);font-weight:300;color:var(--white);line-height:1.25;margin-bottom:8px;}
+.q-sub{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.55;margin-bottom:26px;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{padding:15px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:13px;color:rgba(255,255,255,0.8);font-family:var(--sans);font-size:14px;line-height:1.45;cursor:pointer;text-align:left;transition:all 0.18s;position:relative;}
+.opt:hover{background:rgba(42,174,128,0.12);border-color:rgba(42,174,128,0.3);color:var(--white);}
+.opt.sel{background:rgba(42,174,128,0.18);border-color:var(--jade);color:var(--white);}
+.floor-big{font-family:var(--serif);font-size:68px;font-weight:300;color:var(--jade);text-align:center;margin:20px 0;line-height:1;}
+.slider{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:rgba(255,255,255,0.1);border-radius:2px;outline:none;cursor:pointer;accent-color:var(--jade);}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--jade);cursor:pointer;box-shadow:0 0 16px rgba(42,174,128,0.5);}
+.floor-hints{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.25);margin-top:10px;}
+.floor-note{text-align:center;font-size:13px;color:rgba(255,255,255,0.35);line-height:1.5;margin-top:18px;}
+.fear-ta{width:100%;min-height:110px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:13px;padding:14px 16px;color:var(--white);font-family:var(--sans);font-size:14px;resize:none;outline:none;transition:border-color 0.2s;line-height:1.5;}
+.fear-ta:focus{border-color:var(--jade);}
+.fear-ta::placeholder{color:rgba(255,255,255,0.22);}
+.cta{width:100%;padding:16px;background:linear-gradient(135deg,var(--jade),var(--jade-dark));color:var(--white);border:none;border-radius:13px;font-family:var(--sans);font-size:15px;font-weight:500;cursor:pointer;box-shadow:0 8px 28px rgba(42,174,128,0.28);transition:opacity 0.2s,transform 0.15s;margin-top:20px;}
+.cta:active{opacity:0.87;transform:scale(0.99);}
+/* Reveal */
+.reveal-shell{flex:1;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;}
+.r-arcs{position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:440px;height:440px;pointer-events:none;}
+.r-arc{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(42,174,128,0.18);animation:ap 3s ease infinite;}
+.r-arc:nth-child(2){inset:36px;border-color:rgba(42,174,128,0.12);animation-delay:.5s;}
+.r-arc:nth-child(3){inset:72px;border-color:rgba(191,154,63,0.08);animation-delay:1s;}
+@keyframes ap{0%,100%{opacity:.3;}50%{opacity:.8;}}
+.r-card{position:relative;z-index:5;background:rgba(255,255,255,0.04);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.08);border-radius:28px 28px 0 0;padding:34px 26px 50px;animation:su .5s cubic-bezier(.4,0,.2,1) both;}
+@keyframes su{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+.r-label{font-size:11px;font-weight:600;color:var(--jade);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.r-name{font-family:var(--serif);font-size:50px;font-weight:300;line-height:1;margin-bottom:14px;}
+.r-quote{font-family:var(--serif);font-size:17px;font-style:italic;color:rgba(255,255,255,0.6);line-height:1.5;margin-bottom:14px;}
+.r-truth{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.65;margin-bottom:20px;}
+.r-path{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,0.3);margin-bottom:26px;}
+.r-dot{width:5px;height:5px;border-radius:50%;background:var(--jade);flex-shrink:0;}
+/* Email */
+.email-shell{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 24px 40px;}
+.email-title{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--white);line-height:1.2;margin-bottom:8px;}
+.email-title span{color:var(--jade);}
+.email-sub{font-size:14px;color:rgba(255,255,255,0.4);line-height:1.6;margin-bottom:22px;}
+.days{display:flex;flex-direction:column;gap:9px;margin-bottom:24px;}
+.day{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:11px;padding:12px 15px;display:flex;align-items:center;gap:11px;}
+.day-n{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--jade),var(--jade-dark));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--white);flex-shrink:0;}
+.day-t{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.4;}
+.ef{width:100%;padding:14px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:11px;color:var(--white);font-family:var(--sans);font-size:15px;outline:none;margin-bottom:10px;transition:border-color 0.2s;}
+.ef:focus{border-color:var(--jade);}
+.ef::placeholder{color:rgba(255,255,255,0.22);}
+.esub{width:100%;padding:15px;background:linear-gradient(135deg,var(--jade),var(--jade-dark));color:var(--white);border:none;border-radius:11px;font-family:var(--sans);font-size:15px;font-weight:500;cursor:pointer;box-shadow:0 8px 24px rgba(42,174,128,0.25);transition:opacity 0.2s;margin-bottom:8px;}
+.esub:active{opacity:.85;}
+.eskip{width:100%;padding:10px;background:transparent;color:rgba(255,255,255,0.22);border:none;font-family:var(--sans);font-size:13px;cursor:pointer;}
+/* Success */
+.success{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 28px;}
+.s-icon{font-size:56px;margin-bottom:18px;animation:pop .5s ease both;}
+@keyframes pop{0%{transform:scale(0);}70%{transform:scale(1.15);}100%{transform:scale(1);}}
+.s-title{font-family:var(--serif);font-size:30px;font-weight:300;color:var(--white);margin-bottom:10px;line-height:1.2;}
+.s-body{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.65;max-width:280px;}
+@keyframes fu{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.fu{animation:fu .45s ease both;}
+
+/* DESKTOP - two column layout */
+@media(min-width:768px){
+  html,body{background:var(--forest);}
+  .app{flex-direction:row;min-height:100vh;overflow:visible;}
+  .bg-glow{display:none;}
+  /* Left brand panel */
+  .left-panel{
+    width:40%;min-height:100vh;
+    background:linear-gradient(160deg,var(--grove) 0%,var(--forest) 100%);
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding:56px 56px;
+    position:sticky;top:0;height:100vh;
+    border-right:1px solid rgba(255,255,255,0.05);
+    overflow:hidden;
+  }
+  .left-panel::before{
+    content:'';position:absolute;bottom:-100px;right:-100px;
+    width:400px;height:400px;border-radius:50%;
+    background:radial-gradient(circle,rgba(42,174,128,0.06) 0%,transparent 70%);
+    pointer-events:none;
+  }
+  .lp-top{}
+  .lp-wordmark{font-family:var(--serif);font-size:38px;font-weight:300;color:var(--white);letter-spacing:-1px;margin-bottom:56px;}
+  .lp-wordmark span{color:var(--gold);}
+  .lp-headline{font-family:var(--serif);font-size:clamp(34px,3.2vw,48px);font-weight:300;color:var(--white);line-height:1.15;letter-spacing:-0.5px;margin-bottom:18px;}
+  .lp-headline em{color:var(--jade);font-style:normal;}
+  .lp-sub{font-size:14px;color:rgba(255,255,255,0.38);line-height:1.7;max-width:300px;margin-bottom:48px;}
+  .lp-steps{display:flex;flex-direction:column;}
+  .lp-step{display:flex;align-items:flex-start;gap:14px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.05);transition:opacity 0.3s;opacity:.28;}
+  .lp-step:last-child{border-bottom:none;}
+  .lp-step.active{opacity:1;}
+  .lp-step.done{opacity:.55;}
+  .lp-step-n{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:rgba(255,255,255,0.35);flex-shrink:0;margin-top:2px;transition:all 0.3s;}
+  .lp-step.active .lp-step-n{background:var(--jade);border-color:var(--jade);color:var(--white);}
+  .lp-step.done .lp-step-n{background:rgba(42,174,128,0.18);border-color:var(--jade);color:var(--jade);font-size:9px;}
+  .lp-step-title{font-size:13px;font-weight:500;color:rgba(255,255,255,0.65);margin-bottom:2px;}
+  .lp-step-desc{font-size:11px;color:rgba(255,255,255,0.28);line-height:1.4;}
+  .lp-bottom{font-size:11px;color:rgba(255,255,255,0.18);line-height:1.6;}
+  /* Right quiz panel */
+  .right-panel{
+    flex:1;background:var(--parchment);
+    display:flex;align-items:center;justify-content:center;
+    padding:56px 64px;min-height:100vh;
+  }
+  .rp-inner{width:100%;max-width:480px;}
+  /* Desktop top nav */
+  .dt-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;}
+  .dt-back{background:transparent;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;color:var(--muted);display:flex;align-items:center;gap:5px;transition:color 0.15s;padding:0;}
+  .dt-back:hover{color:var(--ink);}
+  .dt-dots{display:flex;gap:5px;}
+  .dt-dot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:all 0.3s;}
+  .dt-dot.active{background:var(--jade);width:18px;border-radius:3px;}
+  .dt-dot.done{background:var(--jade);opacity:.4;}
+  .dt-counter{font-size:12px;font-weight:500;color:var(--muted);}
+  /* Override elements for light desktop */
+  .progress,.top-bar{display:none;}
+  .content{padding:0;background:transparent;overflow:visible;}
+  .q-num{color:var(--jade);}
+  .q-text{color:var(--ink);font-size:clamp(26px,2.8vw,36px);}
+  .q-sub{color:var(--ink-sec);}
+  .opt{background:var(--white);border:1.5px solid var(--border);color:var(--ink-sec);box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+  .opt:hover{background:var(--jade-light);border-color:var(--jade);color:var(--ink);box-shadow:0 4px 16px rgba(42,174,128,0.1);}
+  .opt.sel{background:var(--jade-light);border-color:var(--jade);color:var(--ink);}
+  .floor-big{color:var(--jade);}
+  .slider{background:var(--border);}
+  .floor-hints{color:var(--muted);}
+  .floor-note{color:var(--ink-sec);}
+  .fear-ta{background:var(--white);border:1.5px solid var(--border);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+  .fear-ta:focus{border-color:var(--jade);}
+  .fear-ta::placeholder{color:var(--muted);}
+  .cta{box-shadow:0 6px 20px rgba(42,174,128,0.2);}
+  /* Desktop reveal */
+  .reveal-shell{justify-content:flex-start;flex:none;}
+  .r-arcs{display:none;}
+  .r-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:36px;box-shadow:0 8px 32px rgba(0,0,0,0.06);animation:fu .45s ease both;}
+  .r-label{color:var(--jade);}
+  .r-quote{color:var(--ink-sec);}
+  .r-truth{color:var(--ink-sec);}
+  .r-path{color:var(--muted);}
+  /* Desktop email */
+  .email-shell{justify-content:flex-start;padding:0;flex:none;}
+  .email-title{color:var(--ink);}
+  .email-sub{color:var(--ink-sec);}
+  .day{background:var(--white);border:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+  .day-t{color:var(--ink-sec);}
+  .ef{background:var(--white);border:1.5px solid var(--border);color:var(--ink);}
+  .ef::placeholder{color:var(--muted);}
+  .ef:focus{border-color:var(--jade);}
+  .eskip{color:var(--muted);}
+  /* Desktop success */
+  .s-title{color:var(--ink);}
+  .s-body{color:var(--ink-sec);}
+}
+@media(max-width:767px){
+  .left-panel,.dt-nav{display:none!important;}
+  .right-panel{padding:0;background:transparent;}
+  .rp-inner{max-width:100%;}
+}
+
+/* ── INTRO HERO (mobile) ──────────────────────────────────────────────────── */
+.intro-hero{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:48px 32px;
+  position:relative;
+}
+.hero-wordmark{
+  font-family:var(--serif);
+  font-size:clamp(72px,18vw,100px);
+  font-weight:300;line-height:1;
+  letter-spacing:-3px;
+  background:linear-gradient(160deg,
+    #FFFFFF 0%,
+    #D0EDE0 25%,
+    #2AAE80 50%,
+    #D0EDE0 75%,
+    #FFFFFF 100%);
+  background-size:200% 200%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:shimmer 4s ease infinite;
+  margin-bottom:4px;
+}
+.hero-wordmark-e{
+  background:linear-gradient(135deg,#F2E8CC 0%,#E8C84A 35%,#BF9A3F 60%,#F5EDD0 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:goldPulse 3s ease infinite;
+  filter:drop-shadow(0 0 20px rgba(191,154,63,0.8));
+}
+@keyframes shimmer{
+  0%{background-position:100% 0%;}
+  50%{background-position:0% 100%;}
+  100%{background-position:100% 0%;}
+}
+.hero-tagline{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(16px,4vw,20px);font-weight:300;
+  color:rgba(255,255,255,0.5);
+  letter-spacing:0.5px;margin-bottom:56px;
+  line-height:1.4;
+}
+.hero-start-btn{
+  padding:18px 48px;
+  background:linear-gradient(135deg,var(--jade),var(--jade-dark));
+  color:var(--white);border:none;border-radius:100px;
+  font-family:var(--sans);font-size:15px;font-weight:500;
+  cursor:pointer;letter-spacing:0.5px;
+  box-shadow:0 12px 40px rgba(42,174,128,0.35),0 0 0 1px rgba(42,174,128,0.2);
+  transition:transform 0.2s,box-shadow 0.2s;
+  margin-bottom:14px;
+}
+.hero-start-btn:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(42,174,128,0.45);}
+.hero-start-btn:active{transform:scale(0.98);}
+.hero-note{font-size:12px;color:rgba(255,255,255,0.22);letter-spacing:0.5px;}
+.hero-arcs{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);pointer-events:none;width:320px;height:320px;z-index:0;}
+.hero-arc{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(42,174,128,0.12);animation:ap 4s ease infinite;}
+.hero-arc:nth-child(2){inset:32px;border-color:rgba(42,174,128,0.08);animation-delay:.8s;}
+.hero-arc:nth-child(3){inset:64px;border-color:rgba(191,154,63,0.06);animation-delay:1.6s;}
+.intro-hero>*{position:relative;z-index:1;}
+@media(min-width:768px){.intro-hero{display:none;}}
+
+/* ── PAGE ENTRANCE — matches landing page transition ─────────────────────── */
+#pageEntrance{
+  position:fixed;inset:0;z-index:99999;
+  background:#040D09;
+  opacity:1;pointer-events:none;
+  transition:opacity 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+#pageEntrance.gone{opacity:0;}
+
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <div id="pageEntrance"></div>
+<div class="bg-glow"></div>
+
+  <!-- DESKTOP LEFT PANEL -->
+  <div class="left-panel" id="leftPanel">
+    <div class="lp-top">
+      <div class="lp-wordmark">mun<span>ē</span></div>
+      <div class="lp-headline">Find your<br><em>financial type.</em></div>
+      <div class="lp-sub">Five honest questions. Two minutes. Most people read their result and say "how did it know that."</div>
+      <div class="lp-steps" id="lpSteps">
+        <div class="lp-step active" data-s="0"><div class="lp-step-n">1</div><div><div class="lp-step-title">The feeling</div><div class="lp-step-desc">What money feels like right now</div></div></div>
+        <div class="lp-step" data-s="1"><div class="lp-step-n">2</div><div><div class="lp-step-title">The pattern</div><div class="lp-step-desc">What happens when you get paid</div></div></div>
+        <div class="lp-step" data-s="2"><div class="lp-step-n">3</div><div><div class="lp-step-title">The fear</div><div class="lp-step-desc">What keeps you up at night</div></div></div>
+        <div class="lp-step" data-s="3"><div class="lp-step-n">4</div><div><div class="lp-step-title">The floor</div><div class="lp-step-desc">Your safety number</div></div></div>
+        <div class="lp-step" data-s="4"><div class="lp-step-n">5</div><div><div class="lp-step-title">Your household</div><div class="lp-step-desc">Who the plan works for</div></div></div>
+        <div class="lp-step" data-s="5"><div class="lp-step-n">✦</div><div><div class="lp-step-title">Your result</div><div class="lp-step-desc">Your financial type revealed</div></div></div>
+      </div>
+    </div>
+    <div class="lp-bottom">No account needed. Free to start.<br>getmune.com &nbsp;·&nbsp; 2026 Mune Technologies Inc.</div>
+  </div>
+
+  <!-- RIGHT / MOBILE PANEL -->
+  <div class="right-panel">
+    <div class="rp-inner">
+      <!-- Mobile chrome -->
+      <div class="progress"><div class="progress-fill" id="pf"></div></div>
+      <div class="top-bar">
+        <div class="wordmark">mun<span>ē</span></div>
+        <div class="step-label" id="msl">Question 1 of 5</div>
+      </div>
+      <!-- Desktop nav -->
+      <div class="dt-nav" id="dtn">
+        <button class="dt-back" id="bb" onclick="back()" style="visibility:hidden">← Back</button>
+        <div class="dt-dots" id="dd"></div>
+        <div class="dt-counter" id="dc">1 of 5</div>
+      </div>
+      <!-- Quiz content -->
+      <div id="qi"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SB_URL='https://maolkyrlfojkmiuppcsy.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hb2xreXJsZm9qa21pdXBwY3N5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5MDA3NjAsImV4cCI6MjA5MDQ3Njc2MH0.9vOaUryX45ApTc2AazxrnvUZdxs7DiBS0LyXDqwqxlg';
+
+async function save(email,arch,floor,fear){
+  try{
+    const payload = {email, archetype:arch, floor_amount:floor, fear_text:fear, source:'quiz', day1_sent:false};
+    const r = await fetch(SB_URL+'/rest/v1/waitlist', {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer '+SB_KEY,
+        'Prefer': 'resolution=merge-duplicates,return=minimal'
+      },
+      body: JSON.stringify(payload)
+    });
+    return r.ok || r.status===201 || r.status===200;
+  } catch(e) {
+    console.error('Supabase error:', e);
+    return false;
+  }
+}
+
+const S={step:-1,arch:'fog',floor:200,fear:''};
+
+const A={
+  fog:{name:'The Fog',color:'#7B9A8E',quote:'"I know something\'s wrong. I just can\'t bring myself to look."',truth:'That\'s not a character flaw. That\'s what happens when nobody ever made it safe to look. We will.',path:'The Fog \u2192 The Tide',d1:'Look at your balance. Just once. That\'s it.'},
+  spark:{name:'The Spark',color:'#C87850',quote:'"I know what I make. I just spend it before my bills see it."',truth:'Not irresponsible — unstructured. A system that handles obligations first gives you guilt-free money automatically.',path:'The Spark \u2192 The Tide \u2192 The Wave',d1:'Find the three subscriptions you forgot you had.'},
+  flame:{name:'The Flame',color:'#B85454',quote:'"I save everything but I\'m still scared I won\'t have enough."',truth:'Your discipline is real. And it\'s working against you. Savings at 0.01% loses to inflation every year. We\'re going to fix that.',path:'The Flame \u2192 The Current',d1:'Find out what interest rate your savings account earns.'},
+  current:{name:'The Current',color:'#2AAE80',quote:'"I\'m building. I just want to make sure I\'m building right."',truth:'Further along than most. But there are three gaps in almost every builder\'s foundation that stay invisible until expensive. We\'ll find yours.',path:'The Current \u2192 Legacy Builder',d1:'Pull up your 401k beneficiary designations.'},
+  wave:{name:'The Wave',color:'#BF9A3F',quote:'"My income isn\'t predictable. My system has to be."',truth:'Everyone gives advice built for a paycheck. Your system gets built around your actual income — the floor, not the average.',path:'The Wave \u2192 The Current',d1:'What was your lowest income month in the last 6?'},
+  tide:{name:'The Tide',color:'#5E7090',quote:'"I have a steady check. It just never seems like enough."',truth:'The check is consistent. The lifestyle quietly expanded to match it. That pattern has a name, a cause, and a fix.',path:'The Tide \u2192 The Wave or The Flame',d1:'Automate $1 per day into savings.'},
+};
+
+const QS=[
+  {type:'c',n:1,q:'When you think about your finances right now \u2014 what\'s the first feeling that comes up?',opts:[{t:'Honestly? I try not to think about it.',a:'fog'},{t:'I\'m living my life \u2014 money comes and goes.',a:'spark'},{t:'I save but I\'m scared it won\'t be enough.',a:'flame'},{t:'I\'m building \u2014 I just want to make sure I\'m doing it right.',a:'current'},{t:'My income isn\'t consistent \u2014 it\'s complicated.',a:'wave'},{t:'Steady check. Just never seems like enough.',a:'tide'}]},
+  {type:'c',n:2,q:'When you get paid \u2014 what typically happens to that money?',opts:[{t:'I pay what I have to and spend what\'s left.',a:'fog'},{t:'It disappears faster than I expect.',a:'spark'},{t:'I put some aside immediately then manage the rest.',a:'flame'},{t:'It goes into the system I\'ve built.',a:'current'},{t:'Depends \u2014 some months great, some rough.',a:'wave'},{t:'I cover bills but there\'s never much left.',a:'tide'}]},
+  {type:'c',n:3,q:'When you think about why your finances are where they are — what feels most true?',opts:[
+    {t:'Something set me back and I haven\'t fully recovered.',a:'fog'},
+    {t:'I know what to do. I just don\'t do it.',a:'tide'},
+    {t:'I\'ve tried to fix it before. It never sticks.',a:'fog'},
+    {t:'My income makes it almost impossible to plan.',a:'wave'},
+    {t:'I\'m doing okay — I just want to do better.',a:'current'},
+    {t:'I honestly don\'t know enough to know what\'s wrong.',a:'flame'},
+  ]},
   {type:'fl',n:4,q:'What\'s the lowest your bank account can go before your stomach drops?',sub:'This becomes your Floor. We protect this number in everything we recommend.'},
   {type:'c',n:5,q:'Who does this plan need to work for?',opts:[{t:'Just me',a:''},{t:'Me and a partner',a:''},{t:'Me and children',a:''},{t:'Me, a partner, and children',a:'wave'},{t:'Me \u2014 and I support extended family',a:'wave'}]},
 ];
@@ -438,7 +851,7 @@ function pick(arch,i){
   if(arch)S.arch=arch;
   setTimeout(adv,300);
 }
-function submitFear(){const el=document.getElementById('fta');if(el)S.fear=el.value.trim();adv();}
+function submitFear(){adv();} // legacy — no longer used
 function upFloor(v){S.floor=parseInt(v);const d=document.getElementById('fd');if(d)d.textContent='$'+v;}
 function adv(){S.step++;render();}
 function back(){if(S.step>0){S.step--;render();}}
