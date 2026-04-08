@@ -335,7 +335,7 @@ async function save(email,arch,floor,fear){
   }
 }
 
-const S={step:-1,arch:'fog',floor:200,fear:''};
+const S={step:window.innerWidth>=768?0:-1,arch:'fog',floor:200,fear:''};
 
 const A={
   fog:{name:'The Fog',color:'#7B9A8E',quote:'"I know something\'s wrong. I just can\'t bring myself to look."',truth:'That\'s not a character flaw. That\'s what happens when nobody ever made it safe to look. We will.',path:'The Fog \u2192 The Tide',d1:'Look at your balance. Just once. That\'s it.'},
@@ -365,8 +365,7 @@ function render(){
   sync();
   const qi=document.getElementById('qi');
   const isMobile=window.innerWidth<768;
-  if(S.step===-1&&isMobile){renderIntro(qi);}
-  else if(S.step===-1&&!isMobile){S.step=0;renderQ(QS[0],qi);}
+  if(S.step===-1){renderIntro(qi);}
   else if(S.step<QS.length){renderQ(QS[S.step],qi);}
   else if(S.step===QS.length){renderReveal(qi);}
   else if(S.step===QS.length+1){renderEmail(qi);}
@@ -394,7 +393,7 @@ function sync(){
     else{const ns=['1','2','3','4','5','✦'];el.querySelector('.lp-step-n').textContent=ns[s];}
   });
   const dtn=document.getElementById('dtn');
-  if(dtn)dtn.style.display=window.innerWidth>=768?'flex':'none';
+  if(dtn)dtn.style.display=(window.innerWidth>=768&&S.step>=0)?'flex':'none';
 }
 
 function renderQ(q,qi){
@@ -737,7 +736,7 @@ async function save(email,arch,floor,fear){
   }
 }
 
-const S={step:-1,arch:'fog',floor:200,fear:''};
+const S={step:window.innerWidth>=768?0:-1,arch:'fog',floor:200,fear:''};
 
 const A={
   fog:{name:'The Fog',color:'#7B9A8E',quote:'"I know something\'s wrong. I just can\'t bring myself to look."',truth:'That\'s not a character flaw. That\'s what happens when nobody ever made it safe to look. We will.',path:'The Fog \u2192 The Tide',d1:'Look at your balance. Just once. That\'s it.'},
@@ -767,8 +766,7 @@ function render(){
   sync();
   const qi=document.getElementById('qi');
   const isMobile=window.innerWidth<768;
-  if(S.step===-1&&isMobile){renderIntro(qi);}
-  else if(S.step===-1&&!isMobile){S.step=0;renderQ(QS[0],qi);}
+  if(S.step===-1){renderIntro(qi);}
   else if(S.step<QS.length){renderQ(QS[S.step],qi);}
   else if(S.step===QS.length){renderReveal(qi);}
   else if(S.step===QS.length+1){renderEmail(qi);}
@@ -796,7 +794,7 @@ function sync(){
     else{const ns=['1','2','3','4','5','✦'];el.querySelector('.lp-step-n').textContent=ns[s];}
   });
   const dtn=document.getElementById('dtn');
-  if(dtn)dtn.style.display=window.innerWidth>=768?'flex':'none';
+  if(dtn)dtn.style.display=(window.innerWidth>=768&&S.step>=0)?'flex':'none';
 }
 
 function renderQ(q,qi){
