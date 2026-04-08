@@ -37,7 +37,7 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-clip:text;
   filter:drop-shadow(0 0 8px rgba(191,154,63,0.6));
-  
+  animation:goldPulse 3.5s ease infinite;
 }
 
   50%{filter:drop-shadow(0 0 16px rgba(191,154,63,0.9));}
@@ -65,7 +65,9 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
 /* Reveal */
 .reveal-shell{flex:1;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;}
 .r-arcs{position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:440px;height:440px;pointer-events:none;}
-.r-arc{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(42,174,128,0.10);}
+.r-arc{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(42,174,128,0.12);animation:arcReveal 3.5s ease infinite;}
+.r-arc:nth-child(2){inset:36px;border-color:rgba(42,174,128,0.08);animation-delay:0.7s;}
+.r-arc:nth-child(3){inset:72px;border-color:rgba(191,154,63,0.06);animation-delay:1.4s;}
 .r-arc:nth-child(2){inset:36px;border-color:rgba(42,174,128,0.12);}
 .r-arc:nth-child(3){inset:72px;border-color:rgba(191,154,63,0.08);}
 50%{opacity:.8;}}
@@ -274,7 +276,7 @@ to{opacity:1;transform:translateY(0);}}
   <div class="left-panel" id="leftPanel">
     <div class="lp-top">
       <div class="lp-wordmark">mun<span>ē</span></div>
-      <div class="lp-headline">Find your<br><em>financial type.</em></div>
+      <div class="lp-headline">Find your<br><em>munē type.</em></div>
       <div class="lp-sub">Five honest questions. Two minutes. Most people read their result and say "how did it know that."</div>
       <div class="lp-steps" id="lpSteps">
         <div class="lp-step active" data-s="0"><div class="lp-step-n">1</div><div><div class="lp-step-title">The feeling</div><div class="lp-step-desc">What money feels like right now</div></div></div>
@@ -282,7 +284,7 @@ to{opacity:1;transform:translateY(0);}}
         <div class="lp-step" data-s="2"><div class="lp-step-n">3</div><div><div class="lp-step-title">The fear</div><div class="lp-step-desc">What keeps you up at night</div></div></div>
         <div class="lp-step" data-s="3"><div class="lp-step-n">4</div><div><div class="lp-step-title">The floor</div><div class="lp-step-desc">Your safety number</div></div></div>
         <div class="lp-step" data-s="4"><div class="lp-step-n">5</div><div><div class="lp-step-title">Your household</div><div class="lp-step-desc">Who the plan works for</div></div></div>
-        <div class="lp-step" data-s="5"><div class="lp-step-n">✦</div><div><div class="lp-step-title">Your result</div><div class="lp-step-desc">Your financial type revealed</div></div></div>
+        <div class="lp-step" data-s="5"><div class="lp-step-n">✦</div><div><div class="lp-step-title">Your result</div><div class="lp-step-desc">Your munē type revealed</div></div></div>
       </div>
     </div>
     <div class="lp-bottom">No account needed. Free to start.<br>getmune.com &nbsp;·&nbsp; 2026 Mune Technologies Inc.</div>
@@ -313,9 +315,9 @@ to{opacity:1;transform:translateY(0);}}
 const SB_URL='https://maolkyrlfojkmiuppcsy.supabase.co';
 const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hb2xreXJsZm9qa21pdXBwY3N5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5MDA3NjAsImV4cCI6MjA5MDQ3Njc2MH0.9vOaUryX45ApTc2AazxrnvUZdxs7DiBS0LyXDqwqxlg';
 
-async function save(email,arch,floor,fear){
+async function save(email,arch,floor){
   try{
-    const payload = {email, archetype:arch, floor_amount:floor, fear_text:fear, source:'quiz', day1_sent:false};
+    const payload = {email, archetype:arch, floor_amount:floor, source:'quiz', day1_sent:false};
     const r = await fetch(SB_URL+'/rest/v1/waitlist', {
       method:'POST',
       headers:{
@@ -371,7 +373,7 @@ function render(){
   else{renderSuccess(qi,false);}
 }
 function renderIntro(qi){
-  qi.innerHTML='<div class="intro-hero fu"><div class="hero-wordmark">mun<span class="hero-wordmark-e">ē</span></div><div class="hero-tagline">The knowledge you were<br>never given.</div><button class="hero-start-btn" onclick="adv()">Find my financial type →</button><div class="hero-note">Five questions · Two minutes · No account needed</div></div>';
+  qi.innerHTML='<div class="intro-hero fu"><div class="hero-wordmark">mun<span class="hero-wordmark-e">ē</span></div><div class="hero-tagline">The knowledge you were<br>never given.</div><button class="hero-start-btn" onclick="adv()">Find my munē type →</button><div class="hero-note">Five questions · Two minutes · No account needed</div></div>';
 }
 
 function sync(){
@@ -407,9 +409,9 @@ function renderReveal(qi){
   const a=A[S.arch];
   const isD=window.innerWidth>=768;
   if(isD){
-    qi.innerHTML='<div class="reveal-shell"><div class="r-card"><div class="r-label">Your Financial Type</div><div class="r-name" style="color:'+a.color+'">'+a.name+'</div><div class="r-quote">'+a.quote+'</div><div class="r-truth">'+a.truth+'</div><div class="r-path"><div class="r-dot"></div><span>'+a.path+'</span></div><button class="cta" onclick="adv()">See your first 3 days \u2192</button></div></div>';
+    qi.innerHTML='<div class="reveal-shell"><div class="r-arcs"><div class="r-arc"></div><div class="r-arc"></div><div class="r-arc"></div></div><div class="r-card"><div class="r-label">Your Financial Type</div><div class="r-name" style="color:'+a.color+'">'+a.name+'</div><div class="r-quote">'+a.quote+'</div><div class="r-truth">'+a.truth+'</div><div class="r-path"><div class="r-dot"></div><span>'+a.path+'</span></div><button class="cta" onclick="adv()">See your first 3 days \u2192</button></div></div>';
   }else{
-    qi.innerHTML='<div class="reveal-shell"><div class="r-card"><div class="r-label">Your Financial Type</div><div class="r-name" style="color:'+a.color+'">'+a.name+'</div><div class="r-quote">'+a.quote+'</div><div class="r-truth">'+a.truth+'</div><div class="r-path"><div class="r-dot"></div><span>'+a.path+'</span></div><button class="cta" onclick="adv()">See your first 3 days \u2192</button></div></div>';
+    qi.innerHTML='<div class="reveal-shell"><div class="r-arcs"><div class="r-arc"></div><div class="r-arc"></div><div class="r-arc"></div></div><div class="r-card"><div class="r-label">Your Financial Type</div><div class="r-name" style="color:'+a.color+'">'+a.name+'</div><div class="r-quote">'+a.quote+'</div><div class="r-truth">'+a.truth+'</div><div class="r-path"><div class="r-dot"></div><span>'+a.path+'</span></div><button class="cta" onclick="adv()">See your first 3 days \u2192</button></div></div>';
   }
 }
 
@@ -437,7 +439,7 @@ async function submitEmail(){
   const v=document.getElementById('ei')?.value?.trim();
   if(!v||!v.includes('@')){const f=document.getElementById('ei');if(f){f.style.borderColor='#B85454';setTimeout(()=>f.style.borderColor='',1200);}return;}
   const eb=document.getElementById('eb');if(eb){eb.textContent='Sending...';eb.disabled=true;}
-  await save(v,S.arch,S.floor,S.fear);
+  await save(v,S.arch,S.floor);
   if(eb)eb.disabled=false;
   renderSuccess(document.getElementById('qi'),false);
 }
