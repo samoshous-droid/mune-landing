@@ -269,9 +269,8 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
   position:fixed;inset:0;z-index:99999;
   background:#040D09;
   opacity:1;pointer-events:none;
-  transition:opacity 0.7s cubic-bezier(0.4,0,0.2,1);
+  transition:opacity 0.5s ease;
 }
-#pageEntrance.gone{opacity:0;}
 
 </style>
 </head>
@@ -679,9 +678,8 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
   position:fixed;inset:0;z-index:99999;
   background:#040D09;
   opacity:1;pointer-events:none;
-  transition:opacity 0.7s cubic-bezier(0.4,0,0.2,1);
+  transition:opacity 0.5s ease;
 }
-#pageEntrance.gone{opacity:0;}
 
 </style>
 </head>
@@ -866,15 +864,22 @@ async function submitEmail(){
 
 
 // ── PAGE ENTRANCE ──────────────────────────────────────────────────────────
-window.addEventListener('load', function() {
-  setTimeout(function() {
-    var e = document.getElementById('pageEntrance');
-    if (e) {
-      e.classList.add('gone');
-      setTimeout(function() { e.style.display = 'none'; }, 700);
-    }
-  }, 80);
+function clearEntrance() {
+  var e = document.getElementById('pageEntrance');
+  if (e) {
+    e.style.transition = 'opacity 0.5s ease';
+    e.style.opacity = '0';
+    setTimeout(function() { e.style.display = 'none'; }, 520);
+  }
+}
+// Clear immediately on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(clearEntrance, 60);
 });
+// Also clear on load as backup
+window.addEventListener('load', clearEntrance);
+// Nuclear fallback — clear after 1 second no matter what
+setTimeout(clearEntrance, 1000);
 
 render();
 window.addEventListener('resize',sync);
