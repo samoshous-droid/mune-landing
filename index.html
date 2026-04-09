@@ -47,8 +47,8 @@
     .nav-cta:hover{background-position:right center;transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,0.2) inset,0 4px 16px rgba(27,143,130,0.4);}
     .nav-cta:hover::after{left:120%;}
 
-    .hero-outer{max-width:1200px;margin:0 auto;}
-    .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:110px 52px 64px;gap:0;position:relative;}
+    .hero-outer{max-width:1200px;margin:0 auto;overflow:hidden;}
+    .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:110px 52px 64px;gap:0;position:relative;overflow:hidden;}
     .bg-arc{position:fixed;border-radius:50%;pointer-events:none;z-index:0;transform-origin:center center;}
     .bg-arc-1{border:1px solid rgba(42,174,128,0.07);}
     .bg-arc-2{border:1px solid rgba(42,174,128,0.05);}
@@ -272,7 +272,9 @@
       .hero-left{padding-right:0;}
       .hero-sub{margin-left:auto;margin-right:auto;}
       .trust{justify-content:center;}
-      .hero-right{display:none;}
+      .hero-right{display:none !important;}
+      .phones{display:none !important;}
+      .phone{display:none !important;}
       .manifesto-s{padding:72px 28px;}
       .manifesto-wrap{grid-template-columns:1fr;gap:40px;}
       .manifesto-left{position:static;}
