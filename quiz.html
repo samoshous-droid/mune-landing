@@ -335,6 +335,20 @@ async function save(email,arch,floor){
   }
 }
 
+const LOOPS_KEY='f1bb0b187ef46a68a674e8afb28516ce';
+const ARCH_TO_MUNE={fog:'The Fog',spark:'The Spark',flame:'The Flame',current:'The Current',wave:'The Wave',tide:'The Tide'};
+
+async function saveToLoops(email,arch,floor){
+  try{
+    const r=await fetch('https://app.loops.so/api/v1/contacts/update',{
+      method:'PUT',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+LOOPS_KEY},
+      body:JSON.stringify({email:email,muneType:ARCH_TO_MUNE[arch]||arch,floorAmount:floor,source:'quiz',subscribed:true})
+    });
+    return r.ok;
+  }catch(e){console.error('Loops error:',e);return false;}
+}
+
 const S={step:-1,arch:'fog',floor:200,fear:''};
 
 const A={
@@ -439,7 +453,7 @@ async function submitEmail(){
   const v=document.getElementById('ei')?.value?.trim();
   if(!v||!v.includes('@')){const f=document.getElementById('ei');if(f){f.style.borderColor='#B85454';setTimeout(()=>f.style.borderColor='',1200);}return;}
   const eb=document.getElementById('eb');if(eb){eb.textContent='Sending...';eb.disabled=true;}
-  await save(v,S.arch,S.floor);
+  await Promise.all([save(v,S.arch,S.floor), saveToLoops(v,S.arch,S.floor)]);
   if(eb)eb.disabled=false;
   renderSuccess(document.getElementById('qi'),false);
 }
