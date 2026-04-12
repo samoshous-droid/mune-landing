@@ -314,12 +314,12 @@ to{opacity:1;transform:translateY(0);}}
 <script>
 const SB_URL='https://maolkyrlfojkmiuppcsy.supabase.co';
 
-async function save(email,arch,floor){
+async function save(email,arch,floor,firstName){
   try{
     const r = await fetch(SB_URL+'/functions/v1/waitlist-signup', {
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({email, archetype:arch, floor_amount:floor, source:'quiz'})
+      body: JSON.stringify({email, archetype:arch, floor_amount:floor, source:'quiz', first_name:firstName||''})
     });
     const data = await r.json();
     return data.success === true;
@@ -413,12 +413,14 @@ function renderReveal(qi){
 
 function renderEmail(qi){
   const a=A[S.arch];
-  qi.innerHTML='<div class="email-shell"><div class="email-title">Your plan is<br><span>waiting for you.</span></div><div class="email-sub">Get your first 3 days \u2014 no card, no account needed.</div><div class="days"><div class="day"><div class="day-n">1</div><div class="day-t">'+a.d1+'</div></div><div class="day"><div class="day-n">2</div><div class="day-t">Check in. One sentence about what happened.</div></div><div class="day"><div class="day-n">3</div><div class="day-t">The next piece of your Foundation Plan unlocks.</div></div></div><input class="ef" type="email" placeholder="Your email address" id="ei"><button class="esub" id="eb" onclick="submitEmail()">Send my plan \u2192</button><button class="eskip" onclick="renderSuccess(document.getElementById(\'qi\'),true)">I\'ll explore first</button></div>';
+  qi.innerHTML='<div class="email-shell"><div class="email-title">Your plan is<br><span>waiting for you.</span></div><div class="email-sub">Get your first 3 days \u2014 no card, no account needed.</div><div class="days"><div class="day"><div class="day-n">1</div><div class="day-t">'+a.d1+'</div></div><div class="day"><div class="day-n">2</div><div class="day-t">Check in. One sentence about what happened.</div></div><div class="day"><div class="day-n">3</div><div class="day-t">The next piece of your Foundation Plan unlocks.</div></div></div><input class="ef" type="text" placeholder="Your first name" id="fn" autocomplete="given-name"><input class="ef" type="email" placeholder="Your email address" id="ei" autocomplete="email"><button class="esub" id="eb" onclick="submitEmail()">Send my plan \u2192</button><button class="eskip" onclick="renderSuccess(document.getElementById(\'qi\'),true)">I\'ll explore first</button></div>';
 }
 
 function renderSuccess(qi,skipped){
   const a=A[S.arch];
-  qi.innerHTML='<div class="success"><div class="s-icon">\u2713</div><div class="s-title">'+(skipped?'You\'re all set.':'Plan sent.')+'</div><div class="s-body">'+(skipped?'Your type is '+a.name+'. Come back anytime.':'Check your email for Day 1. The cycle stops here.')+'</div></div>';
+  const nm=document.getElementById('fn')?.value?.trim();
+  const greeting=nm?nm:'friend';
+  qi.innerHTML='<div class="success"><div class="s-icon">\u2713</div><div class="s-title">'+(skipped?'You\'re all set.':'Plan sent, '+greeting+'.')+'</div><div class="s-body">'+(skipped?'Your type is '+a.name+'. Come back anytime.':'Check your email for Day 1. The cycle stops here.')+'</div></div>';
 }
 
 function pick(arch,i){
@@ -432,10 +434,12 @@ function upFloor(v){S.floor=parseInt(v);const d=document.getElementById('fd');if
 function adv(){S.step++;render();}
 function back(){if(S.step>0){S.step--;render();}}
 async function submitEmail(){
+  const nm=document.getElementById('fn')?.value?.trim();
   const v=document.getElementById('ei')?.value?.trim();
+  if(!nm){const f=document.getElementById('fn');if(f){f.style.borderColor='#B85454';setTimeout(()=>f.style.borderColor='',1200);}return;}
   if(!v||!v.includes('@')){const f=document.getElementById('ei');if(f){f.style.borderColor='#B85454';setTimeout(()=>f.style.borderColor='',1200);}return;}
   const eb=document.getElementById('eb');if(eb){eb.textContent='Sending...';eb.disabled=true;}
-  await Promise.all([save(v,S.arch,S.floor)]);
+  await Promise.all([save(v,S.arch,S.floor,nm)]);
   if(eb)eb.disabled=false;
   renderSuccess(document.getElementById('qi'),false);
 }
