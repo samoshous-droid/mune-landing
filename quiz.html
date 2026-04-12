@@ -313,41 +313,23 @@ to{opacity:1;transform:translateY(0);}}
 
 <script>
 const SB_URL='https://maolkyrlfojkmiuppcsy.supabase.co';
-const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hb2xreXJsZm9qa21pdXBwY3N5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5MDA3NjAsImV4cCI6MjA5MDQ3Njc2MH0.9vOaUryX45ApTc2AazxrnvUZdxs7DiBS0LyXDqwqxlg';
 
 async function save(email,arch,floor){
   try{
-    const payload = {email, archetype:arch, floor_amount:floor, source:'quiz', day1_sent:false};
-    const r = await fetch(SB_URL+'/rest/v1/waitlist', {
+    const r = await fetch(SB_URL+'/functions/v1/waitlist-signup', {
       method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'apikey': SB_KEY,
-        'Authorization': 'Bearer '+SB_KEY,
-        'Prefer': 'resolution=merge-duplicates,return=minimal'
-      },
-      body: JSON.stringify(payload)
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({email, archetype:arch, floor_amount:floor, source:'quiz'})
     });
-    return r.ok || r.status===201 || r.status===200;
+    const data = await r.json();
+    return data.success === true;
   } catch(e) {
-    console.error('Supabase error:', e);
+    console.error('Save error:', e);
     return false;
   }
 }
 
-const LOOPS_KEY='f1bb0b187ef46a68a674e8afb28516ce';
 const ARCH_TO_MUNE={fog:'The Fog',spark:'The Spark',flame:'The Flame',current:'The Current',wave:'The Wave',tide:'The Tide'};
-
-async function saveToLoops(email,arch,floor){
-  try{
-    const r=await fetch('https://app.loops.so/api/v1/contacts/update',{
-      method:'PUT',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+LOOPS_KEY},
-      body:JSON.stringify({email:email,muneType:ARCH_TO_MUNE[arch]||arch,floorAmount:floor,source:'quiz',subscribed:true})
-    });
-    return r.ok;
-  }catch(e){console.error('Loops error:',e);return false;}
-}
 
 const S={step:-1,arch:'fog',floor:200,fear:''};
 
@@ -453,7 +435,7 @@ async function submitEmail(){
   const v=document.getElementById('ei')?.value?.trim();
   if(!v||!v.includes('@')){const f=document.getElementById('ei');if(f){f.style.borderColor='#B85454';setTimeout(()=>f.style.borderColor='',1200);}return;}
   const eb=document.getElementById('eb');if(eb){eb.textContent='Sending...';eb.disabled=true;}
-  await Promise.all([save(v,S.arch,S.floor), saveToLoops(v,S.arch,S.floor)]);
+  await Promise.all([save(v,S.arch,S.floor)]);
   if(eb)eb.disabled=false;
   renderSuccess(document.getElementById('qi'),false);
 }
