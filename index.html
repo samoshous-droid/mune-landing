@@ -377,7 +377,7 @@
       </div>
     </div>
 
-    <div class="hero-right">
+    <div class="hero-right" id="hero-right-section">
       <div class="phones">
         <div class="phone phone-l">
           <div class="ps s-home">
@@ -416,7 +416,7 @@
               </div>
               <div class="sr-truth">
                 <div class="sr-lbl">The Truth</div>
-                <div class="sr-txt">The avoidance isn't the problem — it's the protection. munē is going to make looking feel safe, one number at a time.</div>
+                <div class="sr-txt">The avoidance isn't the protection. munē is going to make looking feel safe, one number at a time.</div>
               </div>
               <div class="sr-what">
                 <div class="sr-lbl" style="color:rgba(255,255,255,0.62);">What This Means For You</div>
@@ -457,6 +457,13 @@
     </div>
   </div>
 </div>
+<script>
+// Hide hero-right immediately on mobile before paint
+if(window.innerWidth <= 920){
+  var hr = document.getElementById('hero-right-section');
+  if(hr) hr.style.display = 'none';
+}
+</script>
 
 <section class="manifesto-s">
   <div class="section-inner">
