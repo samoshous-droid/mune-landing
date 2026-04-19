@@ -21,7 +21,8 @@ html{scroll-behavior:smooth;}
 body{font-family:var(--sans);background:var(--parchment);color:var(--ink);line-height:1.6;}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;background:rgba(242,238,230,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;background:rgba(4,13,9,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);}
+.wordmark{color:var(--white)!important;}
 .wordmark{font-family:var(--serif);font-size:24px;font-weight:300;color:var(--ink);text-decoration:none;letter-spacing:-0.5px;}
 .wordmark span{color:var(--jade);}
 .nav-cta{padding:10px 22px;background:var(--jade);color:var(--white);border:none;border-radius:100px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:background 0.2s;}
@@ -39,7 +40,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 32px;display:fl
 .hero-price-main{font-family:var(--serif);font-size:28px;font-weight:300;color:var(--white);}
 .hero-price-label{font-size:12px;color:rgba(255,255,255,0.35);}
 .hero-badge{background:var(--gold);color:var(--grove);font-size:10px;font-weight:700;padding:4px 10px;border-radius:100px;letter-spacing:1px;text-transform:uppercase;}
-.hero-btn{display:inline-block;padding:18px 48px;background:linear-gradient(135deg,var(--jade),var(--jade-dark));color:var(--white);text-decoration:none;border-radius:100px;font-family:var(--sans);font-size:15px;font-weight:500;letter-spacing:0.3px;box-shadow:0 12px 40px rgba(42,174,128,0.3);transition:transform 0.2s,box-shadow 0.2s;margin-bottom:14px;display:block;max-width:280px;margin:0 auto 14px;}
+.hero-btn{display:inline-block;padding:18px 48px;background:linear-gradient(135deg,var(--jade),var(--jade-dark));color:var(--white);text-decoration:none;border-radius:100px;font-family:var(--sans);font-size:15px;font-weight:500;letter-spacing:0.3px;box-shadow:0 12px 40px rgba(42,174,128,0.3);transition:transform 0.2s,box-shadow 0.2s;max-width:320px;margin:0 auto;position:relative;z-index:1;}
 .hero-btn:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(42,174,128,0.4);}
 .hero-note{font-size:12px;color:rgba(255,255,255,0.22);letter-spacing:0.3px;}
 
@@ -160,9 +161,10 @@ footer{background:var(--grove);padding:48px 24px;border-top:1px solid rgba(255,2
     <span class="hero-price-label">one-time · instant download</span>
     <span class="hero-badge">Launch price</span>
   </div>
-  <br>
-  <a href="https://munehunter.gumroad.com/l/getmune" class="hero-btn">Get the Transformation Workbook</a>
-  <p class="hero-note">Instant PDF download &nbsp;·&nbsp; 30-day guarantee &nbsp;·&nbsp; No subscription</p>
+  <div style="margin-top:32px;">
+    <a href="https://munehunter.gumroad.com/l/getmune" class="hero-btn" style="position:relative;z-index:1;">Get the Transformation Workbook</a>
+    <p class="hero-note" style="margin-top:12px;">Instant PDF download &nbsp;·&nbsp; 30-day guarantee &nbsp;·&nbsp; No subscription</p>
+  </div>
 </section>
 
 <!-- STATS -->
