@@ -77,6 +77,7 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
 .r-email-prompt{font-family:var(--serif);font-size:18px;font-weight:300;color:var(--white);margin-bottom:4px;}
 .r-email-sub{font-size:13px;color:rgba(255,255,255,0.35);margin-bottom:16px;line-height:1.5;}
 .r-ef{margin-bottom:8px;}
+.r-success-note{font-size:12px;color:rgba(255,255,255,0.35);text-align:center;margin-top:12px;line-height:1.5;}
 .success{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 28px;}
 .s-icon{font-size:56px;margin-bottom:18px;}
 .s-title{font-family:var(--serif);font-size:30px;font-weight:300;color:var(--white);margin-bottom:10px;line-height:1.2;}
@@ -132,6 +133,7 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
   .cta-secondary:hover{background:var(--jade-light);border-color:var(--jade);color:var(--ink);}
   .r-email-prompt{color:var(--ink);}
   .r-email-sub{color:var(--ink-sec);}
+  .r-success-note{color:var(--muted);}
   .situation-note strong{color:var(--jade-dark);}
   .cta{box-shadow:0 6px 20px rgba(42,174,128,0.2);}
   .reveal-shell{justify-content:flex-start;flex:none;}
@@ -363,12 +365,34 @@ function renderReveal(qi){
   const overlayUrl=OVERLAY_URLS[S.situation]||null;
 
   let sNote='';
-  if(S.situation==='single_parent')sNote='<div class="situation-note"><strong>Single parent note:</strong> We also prepared a guide written specifically for carrying this alone. Download it below.</div>';
-  else if(S.situation==='entrepreneur')sNote='<div class="situation-note"><strong>Builder note:</strong> We also prepared a guide for the W-2 + side income two-track system. Download it below.</div>';
+  if(S.situation==='single_parent')sNote='<div class="situation-note"><strong>Single parent note:</strong> Your plan includes specific guidance for carrying this alone. A second guide is included with your download.</div>';
+  else if(S.situation==='entrepreneur')sNote='<div class="situation-note"><strong>Builder note:</strong> Your plan includes the two-track system for W-2 + side income. A second guide is included with your download.</div>';
 
-  const overlayBtn=overlayUrl?'<a href="'+overlayUrl+'" target="_blank" class="cta-secondary">Download your situation guide</a>':'';
-
-  qi.innerHTML='<div class="reveal-shell"><div class="r-arcs"><div class="r-arc"></div><div class="r-arc"></div><div class="r-arc"></div></div><div class="r-card"><div class="r-label">Your Financial Type</div><div class="r-name" style="color:'+a.color+'">'+a.name+'</div><div class="r-quote">'+a.quote+'</div><div class="r-truth">'+a.truth+'</div><div class="r-path"><div class="r-dot"></div><span>'+a.path+'</span></div>'+sNote+'<a href="'+guideUrl+'" target="_blank" class="cta" style="display:block;text-align:center;text-decoration:none;">Download your free guide</a>'+overlayBtn+'<div class="r-divider"></div><div class="r-email-prompt">Get your 30-day plan by email</div><div class="r-email-sub">Optional — stay connected as the app builds toward launch.</div><input class="ef r-ef" type="text" placeholder="Your first name" id="rfn" autocomplete="given-name"><input class="ef r-ef" type="email" placeholder="Your email address" id="rei" autocomplete="email"><button class="esub" id="reb" onclick="submitRevealEmail()">Stay connected</button><button class="eskip" onclick="renderSuccess(document.getElementById('qi'),true)">No thanks</button></div></div>';
+  qi.innerHTML=`<div class="reveal-shell">
+    <div class="r-arcs"><div class="r-arc"></div><div class="r-arc"></div><div class="r-arc"></div></div>
+    <div class="r-card">
+      <div class="r-label">Your Financial Type</div>
+      <div class="r-name" style="color:${a.color}">${a.name}</div>
+      <div class="r-quote">${a.quote}</div>
+      <div class="r-truth">${a.truth}</div>
+      <div class="r-path"><div class="r-dot"></div><span>${a.path}</span></div>
+      ${sNote}
+      <div class="r-divider"></div>
+      <div class="r-email-prompt">Your free guide is ready.</div>
+      <div class="r-email-sub">Enter your name and email to unlock your personalized ${a.name} guide — free, instant download.</div>
+      <div id="r-form">
+        <input class="ef r-ef" type="text" placeholder="Your first name" id="rfn" autocomplete="given-name">
+        <input class="ef r-ef" type="email" placeholder="Your email address" id="rei" autocomplete="email">
+        <button class="esub" id="reb" onclick="submitRevealEmail()">Unlock my free guide →</button>
+        <div class="privacy-note">No spam. No selling your data. Just your guide.</div>
+      </div>
+      <div id="r-download" style="display:none;">
+        <a href="${guideUrl}" target="_blank" class="cta" style="display:block;text-align:center;text-decoration:none;margin-bottom:10px;">Download your ${a.name} guide →</a>
+        ${overlayUrl ? `<a href="${overlayUrl}" target="_blank" class="cta-secondary">Download your situation guide →</a>` : ''}
+        <div class="r-success-note">Check your inbox too — your 30-day plan is on its way.</div>
+      </div>
+    </div>
+  </div>`;
 }
 
 function renderEmail(qi){
@@ -408,24 +432,19 @@ async function submitRevealEmail(){
   const email=document.getElementById('rei')?.value?.trim();
   if(!nm){const f=document.getElementById('rfn');if(f){f.style.borderColor='#B85454';setTimeout(()=>f.style.borderColor='',1200);}return;}
   if(!email||!email.includes('@')){const f=document.getElementById('rei');if(f){f.style.borderColor='#B85454';setTimeout(()=>f.style.borderColor='',1200);}return;}
-  const eb=document.getElementById('reb');if(eb){eb.textContent='Saving...';eb.disabled=true;}
+  const eb=document.getElementById('reb');if(eb){eb.textContent='Unlocking...';eb.disabled=true;}
   await Promise.all([
     saveToSupabase(email,S.arch,S.floor,nm,S.incomeType,S.situation),
     triggerResend(email,nm,S.arch,S.situation)
   ]);
-  if(eb)eb.disabled=false;
-  // Show confirmation inline — don't leave the result screen
+  // Hide form, show download buttons
+  const form=document.getElementById('r-form');if(form)form.style.display='none';
+  const dl=document.getElementById('r-download');if(dl)dl.style.display='block';
+  // Update prompt
   const prompt=document.querySelector('.r-email-prompt');
-  if(prompt){
-    prompt.textContent='You are connected.';
-    prompt.style.color='var(--jade)';
-  }
+  if(prompt){prompt.textContent='Your guide is unlocked, '+nm+'.';prompt.style.color='var(--jade)';}
   const sub=document.querySelector('.r-email-sub');
-  if(sub)sub.textContent='Check your inbox. The cycle stops here.';
-  if(eb)eb.style.display='none';
-  document.getElementById('rfn').style.display='none';
-  document.getElementById('rei').style.display='none';
-  document.querySelector('.eskip').style.display='none';
+  if(sub)sub.textContent='Download it now. Your 30-day plan is also on its way to your inbox.';
 }
 function adv(){S.step++;render();}
 function back(){if(S.step>0){S.step--;render();}}
@@ -446,7 +465,10 @@ async function submitEmail(){
   renderSuccess(document.getElementById('qi'),false);
 }
 
-document.addEventListener('DOMContentLoaded',function(){render();});
+document.addEventListener('DOMContentLoaded',function(){
+  // Small timeout ensures all elements are in DOM before render
+  setTimeout(function(){render();},50);
+});
 window.addEventListener('resize',sync);
 </script>
 </body>
