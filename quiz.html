@@ -17,26 +17,12 @@
   --sans:'Outfit',sans-serif;
 }
 html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color:var(--white);}
-
 .app{min-height:100vh;display:flex;flex-direction:column;background:var(--grove);position:relative;overflow:hidden;}
-
 .progress{height:2px;background:rgba(255,255,255,0.07);flex-shrink:0;z-index:10;position:relative;}
 .progress-fill{height:100%;background:var(--jade);transition:width 0.4s ease;}
 .top-bar{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 0;flex-shrink:0;z-index:10;position:relative;}
-.wordmark{
-  font-family:var(--serif);font-size:28px;font-weight:300;letter-spacing:-0.5px;
-  background:linear-gradient(135deg,#FFFFFF 0%,#C8F0E0 40%,#2AAE80 70%,#FFFFFF 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-  filter:drop-shadow(0 0 12px rgba(42,174,128,0.35));
-}
-.wordmark span{
-  background:linear-gradient(135deg,#F2E8CC 0%,#BF9A3F 50%,#F5EDD0 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-  filter:drop-shadow(0 0 8px rgba(191,154,63,0.6));
-  animation:goldPulse 3.5s ease infinite;
-}
+.wordmark{font-family:var(--serif);font-size:28px;font-weight:300;letter-spacing:-0.5px;background:linear-gradient(135deg,#FFFFFF 0%,#C8F0E0 40%,#2AAE80 70%,#FFFFFF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 12px rgba(42,174,128,0.35));}
+.wordmark span{background:linear-gradient(135deg,#F2E8CC 0%,#BF9A3F 50%,#F5EDD0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 8px rgba(191,154,63,0.6));animation:goldPulse 3.5s ease infinite;}
 @keyframes goldPulse{0%,100%{filter:drop-shadow(0 0 8px rgba(191,154,63,0.6));}50%{filter:drop-shadow(0 0 16px rgba(191,154,63,0.9));}}
 .step-label{font-size:11px;font-weight:600;color:rgba(255,255,255,0.3);letter-spacing:1.5px;text-transform:uppercase;}
 .content{flex:1;display:flex;flex-direction:column;padding:32px 24px 32px;overflow-y:auto;position:relative;z-index:5;}
@@ -55,8 +41,6 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
 .floor-note{text-align:center;font-size:13px;color:rgba(255,255,255,0.35);line-height:1.5;margin-top:18px;}
 .cta{width:100%;padding:16px;background:linear-gradient(135deg,var(--jade),var(--jade-dark));color:var(--white);border:none;border-radius:13px;font-family:var(--sans);font-size:15px;font-weight:500;cursor:pointer;box-shadow:0 8px 28px rgba(42,174,128,0.28);margin-top:20px;}
 .cta:active{opacity:0.87;}
-
-/* Reveal */
 .reveal-shell{flex:1;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;}
 .r-arcs{position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:440px;height:440px;pointer-events:none;}
 .r-arc{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(42,174,128,0.12);animation:arcReveal 3.5s ease infinite;}
@@ -70,8 +54,8 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
 .r-truth{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.65;margin-bottom:20px;}
 .r-path{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,0.3);margin-bottom:26px;}
 .r-dot{width:5px;height:5px;border-radius:50%;background:var(--jade);flex-shrink:0;}
-
-/* Email */
+.situation-note{margin-top:16px;padding:12px 15px;background:rgba(42,174,128,0.08);border:1px solid rgba(42,174,128,0.2);border-radius:10px;font-size:13px;color:rgba(255,255,255,0.5);line-height:1.5;}
+.situation-note strong{color:var(--jade);font-weight:500;}
 .email-shell{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 24px 40px;}
 .email-title{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--white);line-height:1.2;margin-bottom:8px;}
 .email-title span{color:var(--jade);}
@@ -86,39 +70,26 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
 .esub{width:100%;padding:15px;background:linear-gradient(135deg,var(--jade),var(--jade-dark));color:var(--white);border:none;border-radius:11px;font-family:var(--sans);font-size:15px;font-weight:500;cursor:pointer;box-shadow:0 8px 24px rgba(42,174,128,0.25);margin-bottom:8px;}
 .esub:active{opacity:.85;}
 .eskip{width:100%;padding:10px;background:transparent;color:rgba(255,255,255,0.22);border:none;font-family:var(--sans);font-size:13px;cursor:pointer;}
-
-/* Success */
+.privacy-note{font-size:11px;color:rgba(255,255,255,0.18);text-align:center;line-height:1.5;margin-top:4px;}
 .success{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 28px;}
 .s-icon{font-size:56px;margin-bottom:18px;}
 .s-title{font-family:var(--serif);font-size:30px;font-weight:300;color:var(--white);margin-bottom:10px;line-height:1.2;}
 .s-body{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.65;max-width:280px;}
+.s-next{margin-top:28px;padding:14px 32px;background:rgba(42,174,128,0.15);border:1px solid rgba(42,174,128,0.3);border-radius:11px;color:var(--jade);font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;display:inline-block;}
 
 /* DESKTOP */
 @media(min-width:768px){
   html,body{background:var(--forest);}
   .app{flex-direction:row;min-height:100vh;overflow:visible;}
-  .left-panel{
-    width:40%;min-height:100vh;
-    background:linear-gradient(160deg,var(--grove) 0%,var(--forest) 100%);
-    display:flex;flex-direction:column;justify-content:space-between;
-    padding:56px 56px;
-    position:sticky;top:0;height:100vh;
-    border-right:1px solid rgba(255,255,255,0.05);
-    overflow:hidden;
-  }
-  .left-panel::before{
-    content:'';position:absolute;bottom:-100px;right:-100px;
-    width:400px;height:400px;border-radius:50%;
-    background:radial-gradient(circle,rgba(42,174,128,0.06) 0%,transparent 70%);
-    pointer-events:none;
-  }
+  .left-panel{width:40%;min-height:100vh;background:linear-gradient(160deg,var(--grove) 0%,var(--forest) 100%);display:flex;flex-direction:column;justify-content:space-between;padding:56px 56px;position:sticky;top:0;height:100vh;border-right:1px solid rgba(255,255,255,0.05);overflow:hidden;}
+  .left-panel::before{content:'';position:absolute;bottom:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(42,174,128,0.06) 0%,transparent 70%);pointer-events:none;}
   .lp-wordmark{font-family:var(--serif);font-size:38px;font-weight:300;color:var(--white);letter-spacing:-1px;margin-bottom:56px;}
   .lp-wordmark span{color:var(--gold);}
   .lp-headline{font-family:var(--serif);font-size:clamp(34px,3.2vw,48px);font-weight:300;color:var(--white);line-height:1.15;letter-spacing:-0.5px;margin-bottom:18px;}
   .lp-headline em{color:var(--jade);font-style:normal;}
   .lp-sub{font-size:14px;color:rgba(255,255,255,0.38);line-height:1.7;max-width:300px;margin-bottom:48px;}
   .lp-steps{display:flex;flex-direction:column;}
-  .lp-step{display:flex;align-items:flex-start;gap:14px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.05);opacity:.28;}
+  .lp-step{display:flex;align-items:flex-start;gap:14px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.05);opacity:.28;}
   .lp-step:last-child{border-bottom:none;}
   .lp-step.active{opacity:1;}
   .lp-step.done{opacity:.55;}
@@ -128,11 +99,7 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
   .lp-step-title{font-size:13px;font-weight:500;color:rgba(255,255,255,0.65);margin-bottom:2px;}
   .lp-step-desc{font-size:11px;color:rgba(255,255,255,0.28);line-height:1.4;}
   .lp-bottom{font-size:11px;color:rgba(255,255,255,0.18);line-height:1.6;}
-  .right-panel{
-    flex:1;background:var(--parchment);
-    display:flex;align-items:center;justify-content:center;
-    padding:56px 64px;min-height:100vh;
-  }
+  .right-panel{flex:1;background:var(--parchment);display:flex;align-items:center;justify-content:center;padding:56px 64px;min-height:100vh;}
   .rp-inner{width:100%;max-width:480px;}
   .dt-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;}
   .dt-back{background:transparent;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;color:var(--muted);display:flex;align-items:center;gap:5px;transition:color 0.15s;padding:0;}
@@ -154,9 +121,8 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
   .slider{background:var(--border);}
   .floor-hints{color:var(--muted);}
   .floor-note{color:var(--ink-sec);}
-  .fear-ta{background:var(--white);border:1.5px solid var(--border);color:var(--ink);}
-  .fear-ta:focus{border-color:var(--jade);}
-  .fear-ta::placeholder{color:var(--muted);}
+  .situation-note{background:rgba(42,174,128,0.06);border-color:rgba(42,174,128,0.2);color:var(--ink-sec);}
+  .situation-note strong{color:var(--jade-dark);}
   .cta{box-shadow:0 6px 20px rgba(42,174,128,0.2);}
   .reveal-shell{justify-content:flex-start;flex:none;}
   .r-arcs{display:none;}
@@ -174,76 +140,30 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
   .ef::placeholder{color:var(--muted);}
   .ef:focus{border-color:var(--jade);}
   .eskip{color:var(--muted);}
+  .privacy-note{color:var(--muted);}
   .s-title{color:var(--ink);}
   .s-body{color:var(--ink-sec);}
 }
-@media(max-width:767px){
-  .left-panel,.dt-nav{display:none!important;}
-  .right-panel{padding:0;background:transparent;}
-  .rp-inner{max-width:100%;}
-}
-
-/* INTRO HERO */
-.intro-hero{
-  flex:1;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  text-align:center;padding:48px 32px;
-  position:relative;
-}
-.hero-wordmark{
-  font-family:var(--serif);
-  font-size:clamp(72px,18vw,100px);
-  font-weight:300;line-height:1;
-  letter-spacing:-3px;
-  background:linear-gradient(160deg,#FFFFFF 0%,#D0EDE0 25%,#2AAE80 50%,#D0EDE0 75%,#FFFFFF 100%);
-  background-size:200% 200%;
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-  margin-bottom:4px;
-}
-.hero-wordmark-e{
-  background:linear-gradient(135deg,#F2E8CC 0%,#E8C84A 35%,#BF9A3F 60%,#F5EDD0 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-  filter:drop-shadow(0 0 20px rgba(191,154,63,0.8));
-}
-.hero-tagline{
-  font-family:var(--serif);font-style:italic;
-  font-size:clamp(16px,4vw,20px);font-weight:300;
-  color:rgba(255,255,255,0.5);
-  letter-spacing:0.5px;margin-bottom:56px;
-  line-height:1.4;
-}
-.hero-start-btn{
-  padding:18px 48px;
-  background:linear-gradient(135deg,var(--jade),var(--jade-dark));
-  color:var(--white);border:none;border-radius:100px;
-  font-family:var(--sans);font-size:15px;font-weight:500;
-  cursor:pointer;letter-spacing:0.5px;
-  box-shadow:0 12px 40px rgba(42,174,128,0.35),0 0 0 1px rgba(42,174,128,0.2);
-  transition:transform 0.2s,box-shadow 0.2s;
-  margin-bottom:14px;
-}
+@media(max-width:767px){.left-panel,.dt-nav{display:none!important;}.right-panel{padding:0;background:transparent;}.rp-inner{max-width:100%;}}
+.intro-hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 32px;position:relative;}
+.hero-wordmark{font-family:var(--serif);font-size:clamp(72px,18vw,100px);font-weight:300;line-height:1;letter-spacing:-3px;background:linear-gradient(160deg,#FFFFFF 0%,#D0EDE0 25%,#2AAE80 50%,#D0EDE0 75%,#FFFFFF 100%);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
+.hero-wordmark-e{background:linear-gradient(135deg,#F2E8CC 0%,#E8C84A 35%,#BF9A3F 60%,#F5EDD0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 20px rgba(191,154,63,0.8));}
+.hero-tagline{font-family:var(--serif);font-style:italic;font-size:clamp(16px,4vw,20px);font-weight:300;color:rgba(255,255,255,0.5);letter-spacing:0.5px;margin-bottom:56px;line-height:1.4;}
+.hero-start-btn{padding:18px 48px;background:linear-gradient(135deg,var(--jade),var(--jade-dark));color:var(--white);border:none;border-radius:100px;font-family:var(--sans);font-size:15px;font-weight:500;cursor:pointer;letter-spacing:0.5px;box-shadow:0 12px 40px rgba(42,174,128,0.35),0 0 0 1px rgba(42,174,128,0.2);transition:transform 0.2s,box-shadow 0.2s;margin-bottom:14px;}
 .hero-start-btn:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(42,174,128,0.45);}
 .hero-start-btn:active{transform:scale(0.98);}
 .hero-note{font-size:12px;color:rgba(255,255,255,0.22);letter-spacing:0.5px;}
-.hero-arcs{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);pointer-events:none;width:320px;height:320px;z-index:0;}
-.hero-arc{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(42,174,128,0.10);}
-.hero-arc:nth-child(2){inset:32px;border-color:rgba(42,174,128,0.08);}
-.hero-arc:nth-child(3){inset:64px;border-color:rgba(191,154,63,0.06);}
 .intro-hero>*{position:relative;z-index:1;}
 @media(min-width:768px){.intro-hero{display:none;}}
 </style>
 </head>
 <body>
 <div class="app" id="app">
-
-  <!-- DESKTOP LEFT PANEL -->
   <div class="left-panel" id="leftPanel">
     <div class="lp-top">
-      <div class="lp-wordmark">mun<span>ē</span></div>
+      <div class="lp-wordmark">mun<span>e</span></div>
       <div class="lp-headline">Two minutes.<br><em>Your whole picture.</em></div>
-      <div class="lp-sub">Six honest questions. Most people read their result and say "how did it know that."</div>
+      <div class="lp-sub">Seven honest questions. Most people read their result and say "how did it know that."</div>
       <div class="lp-steps" id="lpSteps">
         <div class="lp-step active" data-s="0"><div class="lp-step-n">1</div><div><div class="lp-step-title">The feeling</div><div class="lp-step-desc">Where you are right now</div></div></div>
         <div class="lp-step" data-s="1"><div class="lp-step-n">2</div><div><div class="lp-step-title">How money comes in</div><div class="lp-step-desc">Paycheck, gig, or somewhere in between</div></div></div>
@@ -251,104 +171,43 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
         <div class="lp-step" data-s="3"><div class="lp-step-n">4</div><div><div class="lp-step-title">The honest part</div><div class="lp-step-desc">What feels most true about where you are</div></div></div>
         <div class="lp-step" data-s="4"><div class="lp-step-n">5</div><div><div class="lp-step-title">Your floor</div><div class="lp-step-desc">The number that makes looking feel safe</div></div></div>
         <div class="lp-step" data-s="5"><div class="lp-step-n">6</div><div><div class="lp-step-title">Your household</div><div class="lp-step-desc">Who the plan works for</div></div></div>
-        <div class="lp-step" data-s="6"><div class="lp-step-n">✦</div><div><div class="lp-step-title">Your result</div><div class="lp-step-desc">Your munē type revealed</div></div></div>
+        <div class="lp-step" data-s="6"><div class="lp-step-n">7</div><div><div class="lp-step-title">Your reality</div><div class="lp-step-desc">The context that shapes your plan</div></div></div>
+        <div class="lp-step" data-s="7"><div class="lp-step-n">*</div><div><div class="lp-step-title">Your result</div><div class="lp-step-desc">Your mune type revealed</div></div></div>
       </div>
     </div>
-    <div class="lp-bottom">No account needed. Free to start.<br>getmune.com &nbsp;·&nbsp; 2026 Mune Technologies Inc.</div>
+    <div class="lp-bottom">No account needed. Free to start.<br>getmune.com - 2026 Mune Technologies Inc.</div>
   </div>
-
-  <!-- RIGHT / MOBILE PANEL -->
   <div class="right-panel">
     <div class="rp-inner">
       <div class="progress"><div class="progress-fill" id="pf"></div></div>
       <div class="top-bar">
-        <div class="wordmark">mun<span>ē</span></div>
-        <div class="step-label" id="msl">Question 1 of 6</div>
+        <div class="wordmark">mun<span>e</span></div>
+        <div class="step-label" id="msl">Question 1 of 7</div>
       </div>
       <div class="dt-nav" id="dtn">
-        <button class="dt-back" id="bb" onclick="back()" style="visibility:hidden">← Back</button>
+        <button class="dt-back" id="bb" onclick="back()" style="visibility:hidden">Back</button>
         <div class="dt-dots" id="dd"></div>
-        <div class="dt-counter" id="dc">1 of 6</div>
+        <div class="dt-counter" id="dc">1 of 7</div>
       </div>
       <div id="qi"></div>
     </div>
   </div>
 </div>
-
 <script>
 const SB_URL='https://maolkyrlfojkmiuppcsy.supabase.co';
-
-async function save(email,arch,floor,firstName,incomeType){
-  try{
-    const r=await fetch(SB_URL+'/functions/v1/waitlist-signup',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email,archetype:arch,floor_amount:floor,source:'quiz',first_name:firstName||'',income_type:incomeType||''})
-    });
-    const data=await r.json();
-    return data.success===true;
-  }catch(e){
-    console.error('Save error:',e);
-    return false;
-  }
-}
+const RESEND_EDGE=SB_URL+'/functions/v1/send-archetype-email';
 
 const A={
-  fog:{
-    name:'The Fog',
-    color:'#7B9A8E',
-    quote:'"I know something\'s wrong. I just can\'t bring myself to look."',
-    truth:'That\'s not a character flaw. That\'s what happens when nobody ever made it safe to look. We will.',
-    path:'The Fog \u2192 The Tide',
-    d1:'Look at your balance. Just once. That\'s it.'
-  },
-  spark:{
-    name:'The Spark',
-    color:'#C87850',
-    quote:'"I know what I make. I just spend it before my bills see it."',
-    truth:'Not irresponsible. Unstructured. A system that handles obligations first gives you guilt-free money left over — automatically.',
-    path:'The Spark \u2192 The Tide \u2192 The Wave',
-    d1:'Find the three subscriptions you forgot you had.'
-  },
-  flame:{
-    name:'The Flame',
-    color:'#B85454',
-    quote:'"I save everything but I\'m still scared I won\'t have enough."',
-    truth:'Your discipline is real. And right now it\'s working against you. Savings sitting at 0.01% loses to inflation every single year. We\'re going to fix that.',
-    path:'The Flame \u2192 The Current',
-    d1:'Find out what interest rate your savings account is actually earning.'
-  },
-  current:{
-    name:'The Current',
-    color:'#2AAE80',
-    quote:'"I\'m building. I just want to make sure I\'m building right."',
-    truth:'Further along than most. But there are gaps in almost every builder\'s foundation that stay invisible until they\'re expensive. We\'ll find yours.',
-    path:'The Current \u2192 Legacy Builder',
-    d1:'Pull up your 401k beneficiary designations. Make sure they\'re right.'
-  },
-  wave:{
-    name:'The Wave',
-    color:'#BF9A3F',
-    quote:'"My income isn\'t predictable. My system has to be."',
-    truth:'Everyone gives advice built for a paycheck. Yours gets built around your actual income — the floor, not the average.',
-    path:'The Wave \u2192 The Current',
-    d1:'What was your lowest income month in the last six? That\'s your planning number.'
-  },
-  tide:{
-    name:'The Tide',
-    color:'#5E7090',
-    quote:'"I have a steady check. It just never seems like enough."',
-    truth:'The check is consistent. Life quietly expanded to match it — and then some. That pattern has a name, a cause, and a fix.',
-    path:'The Tide \u2192 The Wave or The Flame',
-    d1:'Set up an automatic transfer of $1 a day into a separate savings account.'
-  },
+  fog:{name:'The Fog',color:'#7B9A8E',quote:'"I know something\'s wrong. I just can\'t bring myself to look."',truth:'That\'s not a character flaw. That\'s what happens when nobody ever made it safe to look. We will.',path:'The Fog > The Tide',d1:'Look at your balance. Just once. That\'s it.'},
+  spark:{name:'The Spark',color:'#C87850',quote:'"I know what I make. I just spend it before my bills see it."',truth:'Not irresponsible. Unstructured. A system that handles obligations first gives you guilt-free money left over — automatically.',path:'The Spark > The Tide > The Wave',d1:'Find the three subscriptions you forgot you had.'},
+  flame:{name:'The Flame',color:'#B85454',quote:'"I save everything but I\'m still scared I won\'t have enough."',truth:'Your discipline is real. And right now it\'s working against you. Savings sitting at 0.01% loses to inflation every single year. We\'re going to fix that.',path:'The Flame > The Current',d1:'Find out what interest rate your savings account is actually earning.'},
+  current:{name:'The Current',color:'#2AAE80',quote:'"I\'m building. I just want to make sure I\'m building right."',truth:'Further along than most. But there are gaps in almost every builder\'s foundation that stay invisible until they\'re expensive. We\'ll find yours.',path:'The Current > Legacy Builder',d1:'Pull up your 401k beneficiary designations. Make sure they\'re right.'},
+  wave:{name:'The Wave',color:'#BF9A3F',quote:'"My income isn\'t predictable. My system has to be."',truth:'Everyone gives advice built for a paycheck. Yours gets built around your actual income — the floor, not the average.',path:'The Wave > The Current',d1:'What was your lowest income month in the last six? That\'s your planning number.'},
+  tide:{name:'The Tide',color:'#5E7090',quote:'"I have a steady check. It just never seems like enough."',truth:'The check is consistent. Life quietly expanded to match it — and then some. That pattern has a name, a cause, and a fix.',path:'The Tide > The Wave or The Flame',d1:'Set up an automatic transfer of $1 a day into a separate savings account.'},
 };
 
-// Income type signal — used to refine archetype and for email personalization
-// wave_boost: if true, nudges toward Wave archetype for variable income users
 const QS=[
-  // Q1 — The feeling
-  {type:'c',n:1,q:'When you think about your finances right now \u2014 what comes up first?',opts:[
+  {type:'c',n:1,q:'When you think about your finances right now — what comes up first?',opts:[
     {t:'Honestly? I try not to think about it.',a:'fog'},
     {t:'I\'m living my life. Money comes in, money goes out.',a:'spark'},
     {t:'I save, but I\'m scared it\'s not going to be enough.',a:'flame'},
@@ -356,16 +215,14 @@ const QS=[
     {t:'My income is all over the place. It\'s complicated.',a:'wave'},
     {t:'Steady paycheck. Still never seems like enough.',a:'tide'},
   ]},
-  // Q2 — Income type (NEW)
   {type:'c',n:2,q:'How does your money come in?',sub:'This shapes your whole plan. No wrong answer here.',opts:[
-    {t:'Regular paycheck \u2014 same amount, same day every time.',a:'',incomeTag:'w2'},
-    {t:'Regular paycheck plus something on the side.',a:'',incomeTag:'w2_side'},
-    {t:'Freelance, contract, or gig work \u2014 it varies month to month.',a:'wave',incomeTag:'freelance'},
-    {t:'I run my own business.',a:'wave',incomeTag:'business'},
-    {t:'Multiple sources. It\'s a mix.',a:'wave',incomeTag:'mixed'},
+    {t:'Regular paycheck — same amount, same day every time.',a:'',it:'w2'},
+    {t:'Regular paycheck plus something on the side.',a:'',it:'w2_side'},
+    {t:'Freelance, contract, or gig work — it varies month to month.',a:'wave',it:'freelance'},
+    {t:'I run my own business.',a:'wave',it:'business'},
+    {t:'Multiple sources. It\'s a mix.',a:'wave',it:'mixed'},
   ]},
-  // Q3 — The pattern
-  {type:'c',n:3,q:'When money comes in \u2014 what actually happens to it?',opts:[
+  {type:'c',n:3,q:'When money comes in — what actually happens to it?',opts:[
     {t:'I pay what I have to. Whatever\'s left, I spend.',a:'fog'},
     {t:'It disappears faster than I expect. Every time.',a:'spark'},
     {t:'I set some aside right away, then figure out the rest.',a:'flame'},
@@ -373,8 +230,7 @@ const QS=[
     {t:'Good months I stack. Slow months I survive.',a:'wave'},
     {t:'Bills get paid. Not much left after that.',a:'tide'},
   ]},
-  // Q4 — The honest part
-  {type:'c',n:4,q:'When you think about why your finances are where they are \u2014 what feels most true?',opts:[
+  {type:'c',n:4,q:'When you think about why your finances are where they are — what feels most true?',opts:[
     {t:'Something set me back and I haven\'t fully recovered.',a:'fog'},
     {t:'I know what I should do. I just don\'t do it.',a:'tide'},
     {t:'I\'ve tried to fix it before. It never sticks.',a:'fog'},
@@ -382,33 +238,64 @@ const QS=[
     {t:'I\'m doing okay. I just want to do better.',a:'current'},
     {t:'I honestly don\'t know enough to know what\'s wrong.',a:'flame'},
   ]},
-  // Q5 — The floor
   {type:'fl',n:5,q:'What\'s the lowest your balance can go before your stomach drops?',sub:'This is your Floor. It\'s the number that makes checking feel safe. We protect it in everything we recommend.'},
-  // Q6 — Household
   {type:'c',n:6,q:'Who does this plan need to work for?',opts:[
     {t:'Just me.',a:''},
     {t:'Me and a partner.',a:''},
     {t:'Me and my kids.',a:''},
     {t:'Me, a partner, and kids.',a:'wave'},
-    {t:'Me \u2014 and I help support family too.',a:'wave'},
+    {t:'Me — and I help support family too.',a:'wave'},
+  ]},
+  {type:'c',n:7,q:'One more — which of these best describes your situation?',
+   sub:'This helps us send you the right guide for your specific reality.',opts:[
+    {t:'Just me — I\'m building this for myself.',a:'',sit:'just_me'},
+    {t:'Me and a partner — we\'re figuring this out together.',a:'',sit:'partner'},
+    {t:'Single parent — I carry this alone.',a:'',sit:'single_parent'},
+    {t:'Full-time job and building something on the side.',a:'',sit:'entrepreneur'},
+    {t:'Extended family depends on my income.',a:'',sit:'extended'},
   ]},
 ];
 
-const S={step:-1,arch:'fog',floor:200,incomeType:''};
+const S={step:-1,arch:'fog',floor:200,incomeType:'',situation:'just_me'};
+
+async function saveToSupabase(email,arch,floor,firstName,incomeType,situation){
+  try{
+    // Try edge function first, fall back to direct REST
+    const r=await fetch(SB_URL+'/functions/v1/waitlist-signup',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,archetype:arch,floor_amount:floor,source:'quiz',first_name:firstName||'',income_type:incomeType||'',situation:situation||'just_me'})
+    });
+    const data=await r.json();
+    return data.success===true;
+  }catch(e){console.error('Save error:',e);return false;}
+}
+
+async function triggerResend(email,firstName,arch,situation){
+  try{
+    const r=await fetch(RESEND_EDGE,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,first_name:firstName||'',archetype:arch,situation:situation||'just_me'})
+    });
+    const data=await r.json();
+    return data.success===true;
+  }catch(e){console.error('Resend error:',e);return false;}
+}
 
 function render(){
   if(S.step===-1&&window.innerWidth>=768){S.step=0;}
   sync();
   const qi=document.getElementById('qi');
-  if(S.step===-1){renderIntro(qi);}
-  else if(S.step<QS.length){renderQ(QS[S.step],qi);}
-  else if(S.step===QS.length){renderReveal(qi);}
-  else if(S.step===QS.length+1){renderEmail(qi);}
-  else{renderSuccess(qi,false);}
+  if(S.step===-1)renderIntro(qi);
+  else if(S.step<QS.length)renderQ(QS[S.step],qi);
+  else if(S.step===QS.length)renderReveal(qi);
+  else if(S.step===QS.length+1)renderEmail(qi);
+  else renderSuccess(qi,false);
 }
 
 function renderIntro(qi){
-  qi.innerHTML='<div class="intro-hero"><div class="hero-wordmark">mun<span class="hero-wordmark-e">ē</span></div><div class="hero-tagline">The knowledge you were<br>never given.</div><button class="hero-start-btn" onclick="adv()">Find my munē type \u2192</button><div class="hero-note">Six questions \u00b7 Two minutes \u00b7 No account needed</div></div>';
+  qi.innerHTML='<div class="intro-hero"><div class="hero-wordmark">mun<span class="hero-wordmark-e">e</span></div><div class="hero-tagline">The knowledge you were<br>never given.</div><button class="hero-start-btn" onclick="adv()">Find my mune type</button><div class="hero-note">Seven questions - Two minutes - No account needed</div></div>';
 }
 
 function sync(){
@@ -429,9 +316,9 @@ function sync(){
   document.querySelectorAll('.lp-step').forEach(el=>{
     const s=parseInt(el.dataset.s);
     el.classList.remove('active','done');
-    if(s<S.step){el.classList.add('done');el.querySelector('.lp-step-n').textContent='\u2713';}
+    if(s<S.step){el.classList.add('done');el.querySelector('.lp-step-n').textContent='v';}
     else if(s===S.step)el.classList.add('active');
-    else{const ns=['1','2','3','4','5','6','\u2736'];el.querySelector('.lp-step-n').textContent=ns[s]||'';}
+    else{const ns=['1','2','3','4','5','6','7','*'];el.querySelector('.lp-step-n').textContent=ns[s]||'';}
   });
   const dtn=document.getElementById('dtn');
   if(dtn)dtn.style.display=(window.innerWidth>=768&&S.step>=0)?'flex':'none';
@@ -440,61 +327,69 @@ function sync(){
 function renderQ(q,qi){
   if(q.type==='c'){
     const sub=q.sub?'<div class="q-sub">'+q.sub+'</div>':'';
-    qi.innerHTML='<div class="content"><div class="q-num">Question '+q.n+' of '+QS.length+'</div><div class="q-text">'+q.q+'</div>'+sub+'<div class="opts">'+q.opts.map((o,i)=>'<button class="opt" onclick="pick(\''+o.a+'\','+i+','+(o.incomeTag?'\''+o.incomeTag+'\'':'null')+')">'+o.t+'</button>').join('')+'</div></div>';
+    qi.innerHTML='<div class="content"><div class="q-num">Question '+q.n+' of '+QS.length+'</div><div class="q-text">'+q.q+'</div>'+sub+'<div class="opts">'+
+      q.opts.map((o,i)=>'<button class="opt" onclick="pick(\''+escape(o.a||'')+'\','+i+',\''+escape(o.it||'')+'\',\''+escape(o.sit||'')+'\')">'+o.t+'</button>').join('')+
+    '</div></div>';
   }else if(q.type==='fl'){
-    qi.innerHTML='<div class="content"><div class="q-num">Question '+q.n+' of '+QS.length+'</div><div class="q-text">'+q.q+'</div><div class="q-sub">'+q.sub+'</div><div class="floor-big" id="fd">$'+S.floor+'</div><input type="range" class="slider" min="0" max="2000" step="50" value="'+S.floor+'" oninput="upFloor(this.value)"><div class="floor-hints"><span>$0</span><span>$500</span><span>$1,000</span><span>$2,000</span></div><div class="floor-note">We protect this number in everything we recommend.</div><button class="cta" onclick="adv()">Set my Floor \u2192</button></div>';
+    qi.innerHTML='<div class="content"><div class="q-num">Question '+q.n+' of '+QS.length+'</div><div class="q-text">'+q.q+'</div><div class="q-sub">'+q.sub+'</div><div class="floor-big" id="fd">$'+S.floor+'</div><input type="range" class="slider" min="0" max="2000" step="50" value="'+S.floor+'" oninput="upFloor(this.value)"><div class="floor-hints"><span>$0</span><span>$500</span><span>$1,000</span><span>$2,000</span></div><div class="floor-note">We protect this number in everything we recommend.</div><button class="cta" onclick="adv()">Set my Floor</button></div>';
   }
 }
 
 function renderReveal(qi){
   const a=A[S.arch];
-  qi.innerHTML='<div class="reveal-shell"><div class="r-arcs"><div class="r-arc"></div><div class="r-arc"></div><div class="r-arc"></div></div><div class="r-card"><div class="r-label">Your Financial Type</div><div class="r-name" style="color:'+a.color+'">'+a.name+'</div><div class="r-quote">'+a.quote+'</div><div class="r-truth">'+a.truth+'</div><div class="r-path"><div class="r-dot"></div><span>'+a.path+'</span></div><button class="cta" onclick="adv()">See your first 3 days \u2192</button></div></div>';
+  let sNote='';
+  if(S.situation==='single_parent')sNote='<div class="situation-note"><strong>Single parent note:</strong> Your plan includes specific guidance for carrying this alone — including your Floor, emergency fund priority, and benefits you may be leaving behind.</div>';
+  else if(S.situation==='entrepreneur')sNote='<div class="situation-note"><strong>Builder note:</strong> Your plan includes the two-track system for W-2 + side income — keeping them completely separate from day one.</div>';
+  qi.innerHTML='<div class="reveal-shell"><div class="r-arcs"><div class="r-arc"></div><div class="r-arc"></div><div class="r-arc"></div></div><div class="r-card"><div class="r-label">Your Financial Type</div><div class="r-name" style="color:'+a.color+'">'+a.name+'</div><div class="r-quote">'+a.quote+'</div><div class="r-truth">'+a.truth+'</div><div class="r-path"><div class="r-dot"></div><span>'+a.path+'</span></div>'+sNote+'<button class="cta" onclick="adv()">Get your free guide</button></div></div>';
 }
 
 function renderEmail(qi){
   const a=A[S.arch];
-  qi.innerHTML='<div class="email-shell"><div class="email-title">Your plan is<br><span>ready for you.</span></div><div class="email-sub">Get your first 3 days. No card, no account needed.</div><div class="days"><div class="day"><div class="day-n">1</div><div class="day-t">'+a.d1+'</div></div><div class="day"><div class="day-n">2</div><div class="day-t">Check in. One sentence about what happened.</div></div><div class="day"><div class="day-n">3</div><div class="day-t">The next piece of your Foundation Plan unlocks.</div></div></div><input class="ef" type="text" placeholder="Your first name" id="fn" autocomplete="given-name"><input class="ef" type="email" placeholder="Your email address" id="ei" autocomplete="email"><button class="esub" id="eb" onclick="submitEmail()">Send my plan \u2192</button><button class="eskip" onclick="renderSuccess(document.getElementById(\'qi\'),true)">I\'ll explore first</button></div>';
+  const archLabel=a.name.replace('The ','');
+  qi.innerHTML='<div class="email-shell"><div class="email-title">Your <span>'+archLabel+' guide</span><br>is ready.</div><div class="email-sub">Enter your email and we\'ll send your personalized free guide right now. No card, no account needed.</div><div class="days"><div class="day"><div class="day-n">1</div><div class="day-t">'+a.d1+'</div></div><div class="day"><div class="day-n">2</div><div class="day-t">Check in. One sentence about what happened.</div></div><div class="day"><div class="day-n">3</div><div class="day-t">The next piece of your Foundation Plan unlocks.</div></div></div><input class="ef" type="text" placeholder="Your first name" id="fn" autocomplete="given-name"><input class="ef" type="email" placeholder="Your email address" id="ei" autocomplete="email"><button class="esub" id="eb" onclick="submitEmail()">Send my guide</button><button class="eskip" onclick="skipEmail()">I\'ll explore first</button><div class="privacy-note">No spam. No selling your data. One email with your guide.</div></div>';
 }
 
 function renderSuccess(qi,skipped){
   const a=A[S.arch];
   const nm=document.getElementById('fn')?.value?.trim();
   const greeting=nm?nm:'friend';
-  qi.innerHTML='<div class="success"><div class="s-icon">\u2713</div><div class="s-title">'+(skipped?'You\'re all set.':'Plan sent, '+greeting+'.')+'</div><div class="s-body">'+(skipped?'Your type is '+a.name+'. Come back any time.':'Check your email for Day 1. The cycle stops here.')+'</div></div>';
+  qi.innerHTML='<div class="success"><div class="s-icon">v</div><div class="s-title">'+(skipped?'You\'re all set.':'On its way, '+greeting+'.')+'</div><div class="s-body">'+(skipped?'Your type is '+a.name+'. Come back any time.':'Check your inbox. Your '+a.name+' guide is there. The cycle stops here.')+'</div>'+(!skipped?'<a class="s-next" href="https://getmune.com">Back to getmune.com</a>':'')+'</div>';
 }
 
-// Archetype scoring — last meaningful answer wins, with wave boost for variable income
-function pick(arch, i, incomeTag){
+function pick(arch,i,incomeTag,situation){
+  // unescape values
+  arch=unescape(arch);incomeTag=unescape(incomeTag);situation=unescape(situation);
   document.querySelectorAll('.opt').forEach(b=>b.classList.remove('sel'));
   document.querySelectorAll('.opt')[i].classList.add('sel');
+  if(situation)S.situation=situation;
   if(incomeTag){
     S.incomeType=incomeTag;
-    // Variable income users get a wave nudge regardless of Q1 answer
-    if(['freelance','business','mixed'].includes(incomeTag)){
-      S.arch='wave';
-    }
-  } else if(arch){
-    // Only override wave if user strongly signals otherwise
-    if(S.arch==='wave'&&['freelance','business','mixed'].includes(S.incomeType)){
-      // Keep wave if income type confirmed variable
-    } else {
-      S.arch=arch;
-    }
+    if(['freelance','business','mixed'].includes(incomeTag))S.arch='wave';
+  }else if(arch){
+    if(S.arch==='wave'&&['freelance','business','mixed'].includes(S.incomeType)){}
+    else S.arch=arch;
   }
+  // Entrepreneur nudge — side hustle + tide = wave
+  if(situation==='entrepreneur'&&S.arch==='tide')S.arch='wave';
   setTimeout(adv,300);
 }
 
 function upFloor(v){S.floor=parseInt(v);const d=document.getElementById('fd');if(d)d.textContent='$'+v;}
 function adv(){S.step++;render();}
 function back(){if(S.step>0){S.step--;render();}}
+function skipEmail(){renderSuccess(document.getElementById('qi'),true);}
 
 async function submitEmail(){
   const nm=document.getElementById('fn')?.value?.trim();
-  const v=document.getElementById('ei')?.value?.trim();
+  const email=document.getElementById('ei')?.value?.trim();
   if(!nm){const f=document.getElementById('fn');if(f){f.style.borderColor='#B85454';setTimeout(()=>f.style.borderColor='',1200);}return;}
-  if(!v||!v.includes('@')){const f=document.getElementById('ei');if(f){f.style.borderColor='#B85454';setTimeout(()=>f.style.borderColor='',1200);}return;}
+  if(!email||!email.includes('@')){const f=document.getElementById('ei');if(f){f.style.borderColor='#B85454';setTimeout(()=>f.style.borderColor='',1200);}return;}
   const eb=document.getElementById('eb');if(eb){eb.textContent='Sending...';eb.disabled=true;}
-  await save(v,S.arch,S.floor,nm,S.incomeType);
+  // Save + trigger email in parallel
+  await Promise.all([
+    saveToSupabase(email,S.arch,S.floor,nm,S.incomeType,S.situation),
+    triggerResend(email,nm,S.arch,S.situation)
+  ]);
   if(eb)eb.disabled=false;
   renderSuccess(document.getElementById('qi'),false);
 }
