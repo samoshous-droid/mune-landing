@@ -333,7 +333,7 @@ function sync(){
     else if(S.step===QS.length)msl.textContent='Your result';
     else msl.textContent='Your plan';
   }
-  const bb=document.getElementById('bb');if(bb)bb.style.visibility=S.step>0?'visible':'hidden';
+  const bb=document.getElementById('bb');if(bb)bb.style.visibility=(S.step>0&&S.step<QS.length)?'visible':'hidden';
   const dc=document.getElementById('dc');if(dc){if(S.step<QS.length)dc.textContent=(S.step+1)+' of '+QS.length;else dc.textContent='';}
   const dd=document.getElementById('dd');
   if(dd)dd.innerHTML=QS.map((_,i)=>{const c=i<S.step?'done':i===S.step?'active':'';return '<div class="dt-dot '+c+'"></div>';}).join('');
@@ -447,7 +447,10 @@ async function submitRevealEmail(){
   if(sub)sub.textContent='Download it now. Your 30-day plan is also on its way to your inbox.';
 }
 function adv(){S.step++;render();}
-function back(){if(S.step>0){S.step--;render();}}
+function back(){
+  // Don't allow back from reveal screen or beyond
+  if(S.step>0&&S.step<QS.length){S.step--;render();}
+}
 function skipEmail(){renderSuccess(document.getElementById('qi'),true);}
 
 async function submitEmail(){
