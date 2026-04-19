@@ -11,6 +11,16 @@
       "permanent": false
     },
     {
+      "source": "/privacy",
+      "destination": "/privacy.html",
+      "permanent": false
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms.html",
+      "permanent": false
+    },
+    {
       "source": "/fog-guide",
       "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_fog.pdf",
       "permanent": false
