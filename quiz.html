@@ -71,6 +71,12 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
 .esub:active{opacity:.85;}
 .eskip{width:100%;padding:10px;background:transparent;color:rgba(255,255,255,0.22);border:none;font-family:var(--sans);font-size:13px;cursor:pointer;}
 .privacy-note{font-size:11px;color:rgba(255,255,255,0.18);text-align:center;line-height:1.5;margin-top:4px;}
+.cta-secondary{display:block;text-align:center;text-decoration:none;width:100%;padding:13px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:13px;color:rgba(255,255,255,0.7);font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;margin-top:10px;}
+.cta-secondary:hover{background:rgba(42,174,128,0.12);border-color:rgba(42,174,128,0.3);color:var(--white);}
+.r-divider{height:1px;background:rgba(255,255,255,0.08);margin:24px 0;}
+.r-email-prompt{font-family:var(--serif);font-size:18px;font-weight:300;color:var(--white);margin-bottom:4px;}
+.r-email-sub{font-size:13px;color:rgba(255,255,255,0.35);margin-bottom:16px;line-height:1.5;}
+.r-ef{margin-bottom:8px;}
 .success{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 28px;}
 .s-icon{font-size:56px;margin-bottom:18px;}
 .s-title{font-family:var(--serif);font-size:30px;font-weight:300;color:var(--white);margin-bottom:10px;line-height:1.2;}
@@ -122,6 +128,10 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
   .floor-hints{color:var(--muted);}
   .floor-note{color:var(--ink-sec);}
   .situation-note{background:rgba(42,174,128,0.06);border-color:rgba(42,174,128,0.2);color:var(--ink-sec);}
+  .cta-secondary{background:var(--white);border:1.5px solid var(--border);color:var(--ink-sec);}
+  .cta-secondary:hover{background:var(--jade-light);border-color:var(--jade);color:var(--ink);}
+  .r-email-prompt{color:var(--ink);}
+  .r-email-sub{color:var(--ink-sec);}
   .situation-note strong{color:var(--jade-dark);}
   .cta{box-shadow:0 6px 20px rgba(42,174,128,0.2);}
   .reveal-shell{justify-content:flex-start;flex:none;}
@@ -206,6 +216,18 @@ const A={
   tide:{name:'The Tide',color:'#5E7090',quote:'"I have a steady check. It just never seems like enough."',truth:'The check is consistent. Life quietly expanded to match it — and then some. That pattern has a name, a cause, and a fix.',path:'The Tide > The Wave or The Flame',d1:'Set up an automatic transfer of $1 a day into a separate savings account.'},
 };
 
+const GUIDE_URLS={
+  fog:'https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_fog.pdf',
+  spark:'https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_spark.pdf',
+  flame:'https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_flame.pdf',
+  current:'https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_current.pdf',
+  wave:'https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_wave.pdf',
+  tide:'https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_tide.pdf',
+};
+const OVERLAY_URLS={
+  single_parent:'https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_overlay_single_parent.pdf',
+  entrepreneur:'https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_overlay_entrepreneur.pdf',
+};
 const QS=[
   {type:'c',n:1,q:'When you think about your finances right now — what comes up first?',opts:[
     {t:'Honestly? I try not to think about it.',a:'fog'},
@@ -337,10 +359,16 @@ function renderQ(q,qi){
 
 function renderReveal(qi){
   const a=A[S.arch];
+  const guideUrl=GUIDE_URLS[S.arch]||GUIDE_URLS.fog;
+  const overlayUrl=OVERLAY_URLS[S.situation]||null;
+
   let sNote='';
-  if(S.situation==='single_parent')sNote='<div class="situation-note"><strong>Single parent note:</strong> Your plan includes specific guidance for carrying this alone — including your Floor, emergency fund priority, and benefits you may be leaving behind.</div>';
-  else if(S.situation==='entrepreneur')sNote='<div class="situation-note"><strong>Builder note:</strong> Your plan includes the two-track system for W-2 + side income — keeping them completely separate from day one.</div>';
-  qi.innerHTML='<div class="reveal-shell"><div class="r-arcs"><div class="r-arc"></div><div class="r-arc"></div><div class="r-arc"></div></div><div class="r-card"><div class="r-label">Your Financial Type</div><div class="r-name" style="color:'+a.color+'">'+a.name+'</div><div class="r-quote">'+a.quote+'</div><div class="r-truth">'+a.truth+'</div><div class="r-path"><div class="r-dot"></div><span>'+a.path+'</span></div>'+sNote+'<button class="cta" onclick="adv()">Get your free guide</button></div></div>';
+  if(S.situation==='single_parent')sNote='<div class="situation-note"><strong>Single parent note:</strong> We also prepared a guide written specifically for carrying this alone. Download it below.</div>';
+  else if(S.situation==='entrepreneur')sNote='<div class="situation-note"><strong>Builder note:</strong> We also prepared a guide for the W-2 + side income two-track system. Download it below.</div>';
+
+  const overlayBtn=overlayUrl?'<a href="'+overlayUrl+'" target="_blank" class="cta-secondary">Download your situation guide</a>':'';
+
+  qi.innerHTML='<div class="reveal-shell"><div class="r-arcs"><div class="r-arc"></div><div class="r-arc"></div><div class="r-arc"></div></div><div class="r-card"><div class="r-label">Your Financial Type</div><div class="r-name" style="color:'+a.color+'">'+a.name+'</div><div class="r-quote">'+a.quote+'</div><div class="r-truth">'+a.truth+'</div><div class="r-path"><div class="r-dot"></div><span>'+a.path+'</span></div>'+sNote+'<a href="'+guideUrl+'" target="_blank" class="cta" style="display:block;text-align:center;text-decoration:none;">Download your free guide</a>'+overlayBtn+'<div class="r-divider"></div><div class="r-email-prompt">Get your 30-day plan by email</div><div class="r-email-sub">Optional — stay connected as the app builds toward launch.</div><input class="ef r-ef" type="text" placeholder="Your first name" id="rfn" autocomplete="given-name"><input class="ef r-ef" type="email" placeholder="Your email address" id="rei" autocomplete="email"><button class="esub" id="reb" onclick="submitRevealEmail()">Stay connected</button><button class="eskip" onclick="renderSuccess(document.getElementById('qi'),true)">No thanks</button></div></div>';
 }
 
 function renderEmail(qi){
@@ -375,6 +403,30 @@ function pick(arch,i,incomeTag,situation){
 }
 
 function upFloor(v){S.floor=parseInt(v);const d=document.getElementById('fd');if(d)d.textContent='$'+v;}
+async function submitRevealEmail(){
+  const nm=document.getElementById('rfn')?.value?.trim();
+  const email=document.getElementById('rei')?.value?.trim();
+  if(!nm){const f=document.getElementById('rfn');if(f){f.style.borderColor='#B85454';setTimeout(()=>f.style.borderColor='',1200);}return;}
+  if(!email||!email.includes('@')){const f=document.getElementById('rei');if(f){f.style.borderColor='#B85454';setTimeout(()=>f.style.borderColor='',1200);}return;}
+  const eb=document.getElementById('reb');if(eb){eb.textContent='Saving...';eb.disabled=true;}
+  await Promise.all([
+    saveToSupabase(email,S.arch,S.floor,nm,S.incomeType,S.situation),
+    triggerResend(email,nm,S.arch,S.situation)
+  ]);
+  if(eb)eb.disabled=false;
+  // Show confirmation inline — don't leave the result screen
+  const prompt=document.querySelector('.r-email-prompt');
+  if(prompt){
+    prompt.textContent='You are connected.';
+    prompt.style.color='var(--jade)';
+  }
+  const sub=document.querySelector('.r-email-sub');
+  if(sub)sub.textContent='Check your inbox. The cycle stops here.';
+  if(eb)eb.style.display='none';
+  document.getElementById('rfn').style.display='none';
+  document.getElementById('rei').style.display='none';
+  document.querySelector('.eskip').style.display='none';
+}
 function adv(){S.step++;render();}
 function back(){if(S.step>0){S.step--;render();}}
 function skipEmail(){renderSuccess(document.getElementById('qi'),true);}
