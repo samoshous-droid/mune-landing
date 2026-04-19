@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+  "source": "/guide",
+  "destination": "/guide.html",
+  "permanent": false
+    },
+    {
       "source": "/fog-guide",
       "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_fog.pdf",
       "permanent": false
