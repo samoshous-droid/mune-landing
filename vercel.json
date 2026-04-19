@@ -1,7 +1,49 @@
 {
-  "cleanUrls": true,
-  "routes": [
-    { "src": "/quiz", "dest": "/quiz.html" },
-    { "src": "/", "dest": "/index.html" }
+  "redirects": [
+    {
+      "source": "/fog-guide",
+      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_fog.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/spark-guide",
+      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_spark.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/flame-guide",
+      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_flame.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/current-guide",
+      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_current.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/wave-guide",
+      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_wave.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/tide-guide",
+      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_tide.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/single-parent-guide",
+      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_overlay_single_parent.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/entrepreneur-guide",
+      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_overlay_entrepreneur.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/workbook",
+      "destination": "https://munehunter.gumroad.com/l/getmune",
+      "permanent": false
+    }
   ]
 }
