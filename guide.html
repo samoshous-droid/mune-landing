@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Your mune Type — The Complete Guide</title>
+<meta name="description" content="All six mune Types. All six 30-day plans. The financial knowledge you were never given. Finally made for you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --grove:#040D09;--forest:#0A1F13;
+  --jade:#2AAE80;--jade-dark:#1F8A62;--jade-light:#D0EDE0;
+  --gold:#BF9A3F;--parchment:#F2EEE6;--white:#FEFCF9;
+  --ink:#18130E;--ink-sec:#544B42;--muted:#948578;--border:#DDD5C8;
+  --serif:'Cormorant Garant',Georgia,serif;
+  --sans:'Outfit',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--parchment);color:var(--ink);line-height:1.6;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;background:rgba(242,238,230,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.wordmark{font-family:var(--serif);font-size:24px;font-weight:300;color:var(--ink);text-decoration:none;letter-spacing:-0.5px;}
+.wordmark span{color:var(--jade);}
+.nav-cta{padding:10px 22px;background:var(--jade);color:var(--white);border:none;border-radius:100px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:background 0.2s;}
+.nav-cta:hover{background:var(--jade-dark);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden;background:var(--grove);}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(42,174,128,0.08) 0%,transparent 65%);}
+.hero-eyebrow{font-size:11px;font-weight:600;color:var(--jade);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:20px;}
+.hero-title{font-family:var(--serif);font-size:clamp(42px,8vw,88px);font-weight:300;color:var(--white);line-height:1.05;letter-spacing:-1px;margin-bottom:20px;max-width:900px;}
+.hero-title em{color:var(--jade);font-style:normal;}
+.hero-sub{font-size:clamp(15px,2vw,18px);color:rgba(255,255,255,0.45);line-height:1.7;max-width:520px;margin:0 auto 48px;}
+.hero-price{display:inline-flex;align-items:center;gap:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:10px 24px;margin-bottom:32px;}
+.hero-price-strike{font-size:14px;color:rgba(255,255,255,0.25);text-decoration:line-through;}
+.hero-price-main{font-family:var(--serif);font-size:28px;font-weight:300;color:var(--white);}
+.hero-price-label{font-size:12px;color:rgba(255,255,255,0.35);}
+.hero-badge{background:var(--gold);color:var(--grove);font-size:10px;font-weight:700;padding:4px 10px;border-radius:100px;letter-spacing:1px;text-transform:uppercase;}
+.hero-btn{display:inline-block;padding:18px 48px;background:linear-gradient(135deg,var(--jade),var(--jade-dark));color:var(--white);text-decoration:none;border-radius:100px;font-family:var(--sans);font-size:15px;font-weight:500;letter-spacing:0.3px;box-shadow:0 12px 40px rgba(42,174,128,0.3);transition:transform 0.2s,box-shadow 0.2s;margin-bottom:14px;display:block;max-width:280px;margin:0 auto 14px;}
+.hero-btn:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(42,174,128,0.4);}
+.hero-note{font-size:12px;color:rgba(255,255,255,0.22);letter-spacing:0.3px;}
+
+/* WHAT'S INSIDE */
+.section{padding:96px 24px;max-width:1100px;margin:0 auto;}
+.section-eyebrow{font-size:11px;font-weight:600;color:var(--jade);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px;text-align:center;}
+.section-title{font-family:var(--serif);font-size:clamp(32px,5vw,56px);font-weight:300;color:var(--ink);line-height:1.1;text-align:center;margin-bottom:16px;letter-spacing:-0.5px;}
+.section-title em{color:var(--jade);font-style:normal;}
+.section-sub{font-size:16px;color:var(--muted);line-height:1.7;text-align:center;max-width:520px;margin:0 auto 64px;}
+
+/* STATS */
+.stats{background:var(--grove);padding:72px 24px;}
+.stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:40px;text-align:center;}
+.stat-num{font-family:var(--serif);font-size:52px;font-weight:300;color:var(--jade);line-height:1;margin-bottom:8px;}
+.stat-label{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.5;}
+
+/* WHAT'S IN IT */
+.inside-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:0;}
+.inside-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:28px;transition:box-shadow 0.2s;}
+.inside-card:hover{box-shadow:0 8px 32px rgba(0,0,0,0.06);}
+.inside-num{font-family:var(--serif);font-size:42px;font-weight:300;color:var(--jade);line-height:1;margin-bottom:12px;}
+.inside-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.inside-body{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* ARCHETYPES */
+.arch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;}
+.arch-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:24px 26px;display:flex;gap:16px;align-items:flex-start;}
+.arch-icon{font-size:28px;flex-shrink:0;width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:var(--parchment);border-radius:12px;}
+.arch-name{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--ink);margin-bottom:4px;}
+.arch-quote{font-size:13px;color:var(--muted);line-height:1.5;font-style:italic;}
+
+/* PREVIEW */
+.preview{background:var(--grove);padding:96px 24px;}
+.preview-inner{max-width:900px;margin:0 auto;}
+.preview-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:40px;margin-top:48px;}
+.preview-label{font-size:10px;font-weight:600;color:var(--jade);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.preview-arch{font-family:var(--serif);font-size:36px;font-weight:300;color:#7B9A8E;margin-bottom:12px;}
+.preview-quote{font-family:var(--serif);font-size:16px;font-style:italic;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:20px;padding-left:16px;border-left:2px solid rgba(42,174,128,0.4);}
+.preview-body{font-size:14px;color:rgba(255,255,255,0.4);line-height:1.8;}
+.preview-receipt{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:20px;margin-top:24px;}
+.receipt-title{font-size:10px;font-weight:600;color:var(--jade);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+.receipt-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;}
+.receipt-row:last-child{border-bottom:none;}
+.receipt-before{color:rgba(255,255,255,0.3);}
+.receipt-after{color:var(--jade);font-weight:500;}
+
+/* TESTIMONIAL */
+.testimonial{padding:80px 24px;background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.testimonial-inner{max-width:640px;margin:0 auto;text-align:center;}
+.testimonial-quote{font-family:var(--serif);font-size:clamp(20px,3vw,28px);font-weight:300;color:var(--ink);line-height:1.5;margin-bottom:16px;font-style:italic;}
+.testimonial-source{font-size:12px;color:var(--muted);letter-spacing:0.5px;}
+
+/* PURCHASE */
+.purchase{padding:96px 24px;background:var(--parchment);}
+.purchase-inner{max-width:560px;margin:0 auto;}
+.purchase-card{background:var(--white);border:1.5px solid var(--border);border-radius:24px;padding:48px 40px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.06);}
+.purchase-eyebrow{font-size:10px;font-weight:600;color:var(--jade);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+.purchase-title{font-family:var(--serif);font-size:36px;font-weight:300;color:var(--ink);margin-bottom:8px;line-height:1.2;}
+.purchase-sub{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:32px;}
+.purchase-price-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px;}
+.purchase-strike{font-size:18px;color:var(--muted);text-decoration:line-through;}
+.purchase-price{font-family:var(--serif);font-size:56px;font-weight:300;color:var(--ink);line-height:1;}
+.purchase-period{font-size:13px;color:var(--muted);margin-bottom:28px;}
+.purchase-includes{text-align:left;margin-bottom:32px;}
+.purchase-include{display:flex;align-items:flex-start;gap:10px;padding:8px 0;font-size:14px;color:var(--ink-sec);border-bottom:1px solid var(--border);}
+.purchase-include:last-child{border-bottom:none;}
+.include-check{width:18px;height:18px;background:var(--jade);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.include-check::after{content:'';width:5px;height:8px;border:2px solid white;border-top:none;border-left:none;transform:rotate(45deg);margin-top:-2px;}
+.purchase-btn{display:block;width:100%;padding:18px;background:linear-gradient(135deg,var(--jade),var(--jade-dark));color:var(--white);text-decoration:none;border-radius:14px;font-family:var(--sans);font-size:16px;font-weight:500;box-shadow:0 8px 28px rgba(42,174,128,0.25);transition:transform 0.2s,box-shadow 0.2s;margin-bottom:12px;}
+.purchase-btn:hover{transform:translateY(-1px);box-shadow:0 12px 36px rgba(42,174,128,0.35);}
+.purchase-guarantee{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* FREE PREVIEW */
+.free-preview{padding:64px 24px;background:var(--grove);text-align:center;}
+.free-preview-inner{max-width:520px;margin:0 auto;}
+.fp-title{font-family:var(--serif);font-size:clamp(26px,4vw,36px);font-weight:300;color:var(--white);margin-bottom:10px;line-height:1.2;}
+.fp-sub{font-size:14px;color:rgba(255,255,255,0.4);line-height:1.7;margin-bottom:28px;}
+.fp-btn{display:inline-block;padding:15px 36px;background:transparent;border:1px solid rgba(42,174,128,0.4);color:var(--jade);text-decoration:none;border-radius:100px;font-family:var(--sans);font-size:14px;font-weight:500;transition:all 0.2s;}
+.fp-btn:hover{background:rgba(42,174,128,0.1);border-color:var(--jade);}
+
+/* FOOTER */
+footer{background:var(--grove);padding:48px 24px;border-top:1px solid rgba(255,255,255,0.05);}
+.footer-inner{max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;}
+.footer-wordmark{font-family:var(--serif);font-size:28px;font-weight:300;color:var(--white);}
+.footer-wordmark span{color:var(--jade);}
+.footer-tagline{font-size:13px;color:rgba(255,255,255,0.3);}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;}
+.footer-links a{font-size:12px;color:rgba(255,255,255,0.25);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:rgba(255,255,255,0.5);}
+.footer-copy{font-size:11px;color:rgba(255,255,255,0.15);}
+
+@media(max-width:640px){
+  nav{padding:14px 20px;}
+  .hero{padding:100px 20px 64px;}
+  .section{padding:64px 20px;}
+  .purchase-card{padding:32px 24px;}
+  .purchase-price{font-size:44px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://getmune.com" class="wordmark">mun<span>e</span></a>
+  <a href="https://munehunter.gumroad.com/l/getmune" class="nav-cta">Get the guide — $29</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">The mune Transformation Workbook</p>
+  <h1 class="hero-title">Find Your <em>mune Type.</em><br>Transform Your Finances.</h1>
+  <p class="hero-sub">All six mune Types. All six 30-day plans. The financial knowledge you were never given — finally made for you.</p>
+
+  <div class="hero-price">
+    <span class="hero-price-strike">$49</span>
+    <span class="hero-price-main">$29</span>
+    <span class="hero-price-label">one-time · instant download</span>
+    <span class="hero-badge">Launch price</span>
+  </div>
+  <br>
+  <a href="https://munehunter.gumroad.com/l/getmune" class="hero-btn">Get the Transformation Workbook</a>
+  <p class="hero-note">Instant PDF download &nbsp;·&nbsp; 30-day guarantee &nbsp;·&nbsp; No subscription</p>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-num">63%</div>
+      <div class="stat-label">of Americans can't cover a $400 emergency<br><span style="color:rgba(255,255,255,0.2);font-size:11px;">Federal Reserve, 2023</span></div>
+    </div>
+    <div>
+      <div class="stat-num">72%</div>
+      <div class="stat-label">say money is their #1 source of anxiety<br><span style="color:rgba(255,255,255,0.2);font-size:11px;">APA, 2023</span></div>
+    </div>
+    <div>
+      <div class="stat-num">57M</div>
+      <div class="stat-label">Americans underserved by traditional finance<br><span style="color:rgba(255,255,255,0.2);font-size:11px;">FDIC, 2022</span></div>
+    </div>
+    <div>
+      <div class="stat-num">$0</div>
+      <div class="stat-label">financial education most people ever received<br><span style="color:rgba(255,255,255,0.2);font-size:11px;">The real gap</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT'S INSIDE -->
+<section class="section">
+  <p class="section-eyebrow">What's inside</p>
+  <h2 class="section-title">Not a list of tips.<br><em>A complete system.</em></h2>
+  <p class="section-sub">Most financial guides give you generic advice. This one starts by figuring out who you actually are with money — then builds everything around that.</p>
+
+  <div class="inside-grid">
+    <div class="inside-card">
+      <div class="inside-num">6</div>
+      <div class="inside-title">Financial archetypes</div>
+      <div class="inside-body">The Fog, The Spark, The Flame, The Current, The Wave, The Tide. One of them is you. Everything builds from there.</div>
+    </div>
+    <div class="inside-card">
+      <div class="inside-num">6</div>
+      <div class="inside-title">Complete 30-day plans</div>
+      <div class="inside-body">One action per day. Built specifically for your archetype. Small enough to do. Real enough to matter.</div>
+    </div>
+    <div class="inside-card">
+      <div class="inside-num">107+</div>
+      <div class="inside-title">Financial terms explained</div>
+      <div class="inside-body">Plain language. No jargon. The way a trusted older sibling would explain them — not the way a bank would.</div>
+    </div>
+    <div class="inside-card">
+      <div class="inside-num">6</div>
+      <div class="inside-title">Real stories</div>
+      <div class="inside-body">Marcus. Destiny. Patricia. Devon. Simone. Jerome. Real people with your pattern — and what changed for them.</div>
+    </div>
+    <div class="inside-card">
+      <div class="inside-num">6</div>
+      <div class="inside-title">The Receipt</div>
+      <div class="inside-body">Day 1 versus Day 90. Real numbers. Not promises — proof of what 90 days actually looks like for each archetype.</div>
+    </div>
+    <div class="inside-card">
+      <div class="inside-num">1</div>
+      <div class="inside-title">Quiz to find your type</div>
+      <div class="inside-body">Five questions. Two minutes. Most people read their result and say "how did it know that."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHETYPES -->
+<section style="padding:0 24px 96px;max-width:1100px;margin:0 auto;">
+  <p class="section-eyebrow" style="text-align:center;">The six mune Types</p>
+  <h2 class="section-title" style="text-align:center;margin-bottom:16px;">Which one <em>sounds like you?</em></h2>
+  <p class="section-sub" style="text-align:center;margin-bottom:48px;">Before the guide gives you a single recommendation — it figures out who you actually are with money.</p>
+
+  <div class="arch-grid">
+    <div class="arch-card">
+      <div class="arch-icon">🌫️</div>
+      <div>
+        <div class="arch-name">The Fog</div>
+        <div class="arch-quote">"I know something's wrong. I just can't bring myself to look."</div>
+      </div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-icon">✨</div>
+      <div>
+        <div class="arch-name">The Spark</div>
+        <div class="arch-quote">"I know what I make. I just spend it before my bills see it."</div>
+      </div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-icon">🔥</div>
+      <div>
+        <div class="arch-name">The Flame</div>
+        <div class="arch-quote">"I save everything but I'm still scared I won't have enough."</div>
+      </div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-icon">🌊</div>
+      <div>
+        <div class="arch-name">The Current</div>
+        <div class="arch-quote">"I'm building. I just want to make sure I'm building right."</div>
+      </div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-icon">〰️</div>
+      <div>
+        <div class="arch-name">The Wave</div>
+        <div class="arch-quote">"My income isn't predictable. My system has to be."</div>
+      </div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-icon">🌙</div>
+      <div>
+        <div class="arch-name">The Tide</div>
+        <div class="arch-quote">"I have a steady check. It just never seems like enough."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE PREVIEW -->
+<div class="preview">
+  <div class="preview-inner">
+    <p class="section-eyebrow" style="text-align:center;margin-bottom:12px;">A look inside</p>
+    <h2 style="font-family:var(--serif);font-size:clamp(28px,4vw,44px);font-weight:300;color:var(--white);text-align:center;line-height:1.2;letter-spacing:-0.5px;">Every archetype gets a complete picture.<br><span style="color:var(--jade);">Here's The Fog.</span></h2>
+
+    <div class="preview-card">
+      <div class="preview-label">The Fog · Real story</div>
+      <div class="preview-arch">Marcus, 34</div>
+      <div class="preview-quote">"Every time his phone buzzes with a bank notification he flips it face down without reading it. His mail sits in a pile on the kitchen counter. Not because he is lazy. Because opening it feels like bracing for impact."</div>
+      <div class="preview-body">The guide names the pattern, traces it to its root, and gives Marcus — and you — the exact system that makes looking safe. Not by fixing the finances first. By fixing the feeling first.</div>
+
+      <div class="preview-receipt">
+        <div class="receipt-title">The Receipt · Marcus — Day 1 vs Day 90</div>
+        <div class="receipt-row">
+          <span class="receipt-before">Balance: unknown — has not checked</span>
+          <span class="receipt-after">Checked every morning</span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-before">Late fees: $87 this year</span>
+          <span class="receipt-after">$0 in 60 days</span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-before">Emergency fund: $0</span>
+          <span class="receipt-after">$225 and growing</span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-before">Financial anxiety: daily</span>
+          <span class="receipt-after">Occasional</span>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.25);font-style:italic;margin-top:12px;">This is what 90 days looks like. Not perfect. Not done. Just different.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIAL -->
+<div class="testimonial">
+  <div class="testimonial-inner">
+    <div class="testimonial-quote">"I came to the workshop thinking I just needed a budget. I left understanding why I never stuck to one. That was the first time anyone had explained money in a way that actually fit my life."</div>
+    <div class="testimonial-source">— Workshop participant, EAARA Financial Wellness Series</div>
+  </div>
+</div>
+
+<!-- PURCHASE -->
+<section class="purchase">
+  <div class="purchase-inner">
+    <div class="purchase-card">
+      <p class="purchase-eyebrow">The mune Transformation Workbook</p>
+      <h2 class="purchase-title">Find Your<br>mune Type</h2>
+      <p class="purchase-sub">The complete guide to understanding your money personality and transforming your relationship with money.</p>
+
+      <div class="purchase-price-row">
+        <span class="purchase-strike">$49</span>
+        <span class="purchase-price">$29</span>
+      </div>
+      <p class="purchase-period">One-time · Instant PDF download · Launch price</p>
+
+      <div class="purchase-includes">
+        <div class="purchase-include"><div class="include-check"></div><span>All six mune Types — full chapters with real stories, core wounds, and 30-day plans</span></div>
+        <div class="purchase-include"><div class="include-check"></div><span>Quiz to identify your primary and secondary type</span></div>
+        <div class="purchase-include"><div class="include-check"></div><span>107+ financial terms in plain language</span></div>
+        <div class="purchase-include"><div class="include-check"></div><span>The Receipt — Day 1 vs Day 90 for every archetype</span></div>
+        <div class="purchase-include"><div class="include-check"></div><span>Tax strategy, estate planning, and work benefits for each type</span></div>
+        <div class="purchase-include"><div class="include-check"></div><span>Letters to your future self and past self — one per archetype</span></div>
+      </div>
+
+      <a href="https://munehunter.gumroad.com/l/getmune" class="purchase-btn">Get instant access — $29</a>
+      <p class="purchase-guarantee">30-day money-back guarantee &nbsp;·&nbsp; No subscription &nbsp;·&nbsp; Yours forever</p>
+    </div>
+  </div>
+</section>
+
+<!-- FREE PREVIEW -->
+<div class="free-preview">
+  <div class="free-preview-inner">
+    <h3 class="fp-title">Not sure yet?<br>Start with The Fog — free.</h3>
+    <p class="fp-sub">Download the Fog chapter free. No email required. If it resonates — the full guide is waiting.</p>
+    <a href="https://getmune.com/fog-guide" class="fp-btn">Download the free preview</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-wordmark">mun<span>e</span></div>
+    <div class="footer-tagline">The knowledge you were never given. Finally made for you.</div>
+    <div class="footer-links">
+      <a href="https://getmune.com">Home</a>
+      <a href="https://getmune.com/quiz">Take the quiz</a>
+      <a href="https://munehunter.gumroad.com/l/getmune">Get the guide</a>
+    </div>
+    <div class="footer-copy">© 2026 Mune Technologies Inc. · mune provides financial education only. Nothing here constitutes financial, investment, legal, or tax advice.</div>
+  </div>
+</footer>
+
+</body>
+</html>
