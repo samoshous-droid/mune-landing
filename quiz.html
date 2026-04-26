@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>mune — Find Your Financial Type</title>
+<title>munē — Find Your Financial Type</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -173,7 +173,7 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
 <div class="app" id="app">
   <div class="left-panel" id="leftPanel">
     <div class="lp-top">
-      <div class="lp-wordmark">mun<span>e</span></div>
+      <div class="lp-wordmark">mun<span>ē</span></div>
       <div class="lp-headline">Two minutes.<br><em>Your whole picture.</em></div>
       <div class="lp-sub">Seven honest questions. Most people read their result and say "how did it know that."</div>
       <div class="lp-steps" id="lpSteps">
@@ -184,16 +184,16 @@ html,body{min-height:100vh;font-family:var(--sans);background:var(--grove);color
         <div class="lp-step" data-s="4"><div class="lp-step-n">5</div><div><div class="lp-step-title">Your floor</div><div class="lp-step-desc">The number that makes looking feel safe</div></div></div>
         <div class="lp-step" data-s="5"><div class="lp-step-n">6</div><div><div class="lp-step-title">Your household</div><div class="lp-step-desc">Who the plan works for</div></div></div>
         <div class="lp-step" data-s="6"><div class="lp-step-n">7</div><div><div class="lp-step-title">Your reality</div><div class="lp-step-desc">The context that shapes your plan</div></div></div>
-        <div class="lp-step" data-s="7"><div class="lp-step-n">*</div><div><div class="lp-step-title">Your result</div><div class="lp-step-desc">Your mune type revealed</div></div></div>
+        <div class="lp-step" data-s="7"><div class="lp-step-n">✦</div><div><div class="lp-step-title">Your result</div><div class="lp-step-desc">Your munē type revealed</div></div></div>
       </div>
     </div>
-    <div class="lp-bottom">No account needed. Free to start.<br>getmune.com - 2026 Mune Technologies Inc.</div>
+    <div class="lp-bottom">No account needed. Free to start.<br>getmune.com · 2026 Mune Technologies Inc.</div>
   </div>
   <div class="right-panel">
     <div class="rp-inner">
       <div class="progress"><div class="progress-fill" id="pf"></div></div>
       <div class="top-bar">
-        <div class="wordmark">mun<span>e</span></div>
+        <div class="wordmark">mun<span>ē</span></div>
         <div class="step-label" id="msl">Question 1 of 7</div>
       </div>
       <div class="dt-nav" id="dtn">
@@ -319,7 +319,7 @@ function render(){
 }
 
 function renderIntro(qi){
-  qi.innerHTML='<div class="intro-hero"><div class="hero-wordmark">mun<span class="hero-wordmark-e">e</span></div><div class="hero-tagline">The knowledge you were<br>never given.</div><button class="hero-start-btn" onclick="adv()">Find my mune type</button><div class="hero-note">Seven questions - Two minutes - No account needed</div></div>';
+  qi.innerHTML='<div class="intro-hero"><div class="hero-wordmark">mun<span class="hero-wordmark-e">ē</span></div><div class="hero-tagline">The knowledge you were<br>never given.</div><button class="hero-start-btn" onclick="adv()">Find my munē type</button><div class="hero-note">Seven questions · Two minutes · No account needed</div></div>';
 }
 
 function sync(){
@@ -340,9 +340,9 @@ function sync(){
   document.querySelectorAll('.lp-step').forEach(el=>{
     const s=parseInt(el.dataset.s);
     el.classList.remove('active','done');
-    if(s<S.step){el.classList.add('done');el.querySelector('.lp-step-n').textContent='v';}
+    if(s<S.step){el.classList.add('done');el.querySelector('.lp-step-n').textContent='✓';}
     else if(s===S.step)el.classList.add('active');
-    else{const ns=['1','2','3','4','5','6','7','*'];el.querySelector('.lp-step-n').textContent=ns[s]||'';}
+    else{const ns=['1','2','3','4','5','6','7','✦'];el.querySelector('.lp-step-n').textContent=ns[s]||'';}
   });
   const dtn=document.getElementById('dtn');
   if(dtn)dtn.style.display=(window.innerWidth>=768&&S.step>=0)?'flex':'none';
@@ -405,7 +405,7 @@ function renderSuccess(qi,skipped){
   const a=A[S.arch];
   const nm=document.getElementById('fn')?.value?.trim();
   const greeting=nm?nm:'friend';
-  qi.innerHTML='<div class="success"><div class="s-icon">v</div><div class="s-title">'+(skipped?'You\'re all set.':'On its way, '+greeting+'.')+'</div><div class="s-body">'+(skipped?'Your type is '+a.name+'. Come back any time.':'Check your inbox. Your '+a.name+' guide is there. The cycle stops here.')+'</div>'+(!skipped?'<a class="s-next" href="https://getmune.com">Back to getmune.com</a>':'')+'</div>';
+  qi.innerHTML='<div class="success"><div class="s-icon">✓</div><div class="s-title">'+(skipped?'You\'re all set.':'On its way, '+greeting+'.')+'</div><div class="s-body">'+(skipped?'Your type is '+a.name+'. Come back any time.':'Check your inbox. Your '+a.name+' guide is there. The cycle stops here.')+'</div>'+(!skipped?'<a class="s-next" href="https://getmune.com">Back to getmune.com</a>':'')+'</div>';
 }
 
 function pick(arch,i,incomeTag,situation){
