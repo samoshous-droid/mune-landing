@@ -3,12 +3,29 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>munē — The knowledge you were never given.</title>
-  <meta name="description" content="munē is the first financial platform built around who you actually are with money. Not a tracker. Not a budget. A complete system — personalized to you."/>
-  <meta property="og:title" content="munē — The knowledge you were never given."/>
-  <meta property="og:description" content="Financial struggle is a human problem — not a math one. munē is the first platform built around that truth. Before a single number, it understands who you are."/>
+  <title>munē. The knowledge you were never given.</title>
+  <meta name="description" content="You make money. So why does it still feel like it disappears? munē shows you exactly why and builds the system to fix it. Find your financial type in 2 minutes."/>
+  <meta property="og:title" content="munē. You make money. So why does it still feel like it disappears?"/>
+  <meta property="og:description" content="munē diagnoses the real reason your money disappears and builds the system to fix it. Find your financial type in 2 minutes."/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://getmune.com"/>
+  <script>
+    (function() {
+      try {
+        var key = Object.keys(localStorage).find(function(k) {
+          return k.startsWith('sb-') && k.endsWith('-auth-token')
+        })
+        if(key) {
+          var session = JSON.parse(localStorage.getItem(key))
+          var token = session?.access_token
+          var expires = session?.expires_at
+          if(token && expires && (expires * 1000) > Date.now()) {
+            window.location.href = 'https://mune-app.vercel.app/home'
+          }
+        }
+      } catch(e) {}
+    })()
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
@@ -59,14 +76,13 @@
     .hero { min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 24px 100px;position:relative;overflow:hidden; }
     .hero-bg { position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 55% at 50% 0%,rgba(42,157,143,0.11) 0%,transparent 60%),radial-gradient(ellipse 40% 35% at 85% 85%,rgba(196,166,110,0.05) 0%,transparent 50%); }
     .hero-arc { position:absolute;border-radius:50%;border:1px solid rgba(42,157,143,0.06);pointer-events:none; }
-    .hero-label { font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:32px;opacity:0;animation:fadeUp 0.8s ease 0.1s forwards;display:flex;align-items:center;gap:10px; }
-    .hero-label::before,.hero-label::after { content:'';width:24px;height:1px;background:linear-gradient(to right,transparent,var(--gold)); }
-    .hero-label::after { transform:scaleX(-1); }
-    .hero-h1 { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(54px,8.5vw,112px);font-weight:300;line-height:1.0;letter-spacing:-0.032em;color:rgba(255,255,255,0.95);margin-bottom:28px;max-width:920px;opacity:0;animation:fadeUp 0.9s ease 0.2s forwards; }
+    .hero-eyebrow { font-size:12px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:rgba(196,166,110,0.7);margin-bottom:28px;opacity:0;animation:fadeUp 0.8s ease 0.1s forwards; }
+    .hero-h1 { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(52px,8vw,108px);font-weight:300;line-height:1.0;letter-spacing:-0.032em;color:rgba(255,255,255,0.95);margin-bottom:10px;max-width:960px;opacity:0;animation:fadeUp 0.9s ease 0.2s forwards; }
     .hero-h1 em { font-style:italic;background:linear-gradient(135deg,#2A9D8F,#3DBFAD,#2A9D8F);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
-    .hero-sub { font-size:clamp(15px,1.8vw,18px);font-weight:300;color:rgba(255,255,255,0.46);line-height:1.85;max-width:460px;margin:0 auto 52px;opacity:0;animation:fadeUp 0.9s ease 0.35s forwards; }
-    .hero-cta { display:flex;flex-direction:column;align-items:center;gap:14px;opacity:0;animation:fadeUp 0.9s ease 0.5s forwards; }
-    .btn-primary { display:inline-flex;align-items:center;gap:10px;background:linear-gradient(170deg,#30B09F,#2A9D8F,#1E8070);color:#fff;text-decoration:none;font-family:'Outfit',sans-serif;font-size:15px;font-weight:500;border:1px solid rgba(30,122,110,0.4);border-radius:100px;padding:18px 46px;letter-spacing:0.02em;box-shadow:0 1px 0 rgba(255,255,255,0.18) inset,0 8px 32px rgba(42,157,143,0.38);transition:all 0.2s ease; }
+    .hero-h2 { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,4vw,52px);font-weight:300;line-height:1.1;letter-spacing:-0.02em;color:rgba(255,255,255,0.38);margin-bottom:40px;opacity:0;animation:fadeUp 0.9s ease 0.3s forwards; }
+    .hero-sub { font-size:clamp(15px,1.8vw,18px);font-weight:300;color:rgba(255,255,255,0.42);line-height:1.85;max-width:440px;margin:0 auto 52px;opacity:0;animation:fadeUp 0.9s ease 0.4s forwards; }
+    .hero-cta { display:flex;flex-direction:column;align-items:center;gap:14px;opacity:0;animation:fadeUp 0.9s ease 0.55s forwards; }
+    .btn-primary { display:inline-flex;align-items:center;gap:10px;background:linear-gradient(170deg,#30B09F,#2A9D8F,#1E8070);color:#fff;text-decoration:none;font-family:'Outfit',sans-serif;font-size:16px;font-weight:500;border:1px solid rgba(30,122,110,0.4);border-radius:100px;padding:20px 52px;letter-spacing:0.02em;box-shadow:0 1px 0 rgba(255,255,255,0.18) inset,0 8px 32px rgba(42,157,143,0.38);transition:all 0.2s ease; }
     .btn-primary:hover { transform:translateY(-2px);box-shadow:0 1px 0 rgba(255,255,255,0.18) inset,0 16px 48px rgba(42,157,143,0.52); }
     .btn-primary .arr { transition:transform 0.2s ease; }
     .btn-primary:hover .arr { transform:translateX(4px); }
@@ -74,70 +90,77 @@
     .hero-scroll { position:absolute;bottom:40px;left:50%;transform:translateX(-50%);opacity:0;animation:fadeUp 1s ease 1.1s forwards; }
     .scroll-line { width:1px;height:52px;background:linear-gradient(to bottom,rgba(42,157,143,0.55),transparent);animation:scrollPulse 2.2s ease infinite;margin:0 auto; }
 
-    /* MANIFESTO */
-    .manifesto { background:var(--cream);padding:128px 52px; }
-    .manifesto-inner { max-width:780px;margin:0 auto;text-align:center; }
-    .s-label { font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:52px;display:block; }
-    .m-line { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(22px,3.2vw,34px);font-weight:300;line-height:1.45;letter-spacing:-0.01em;color:var(--tp);padding:30px 0;border-bottom:1px solid var(--border);opacity:0;transform:translateY(16px);transition:opacity 0.7s ease,transform 0.7s ease; }
-    .m-line:first-of-type { border-top:1px solid var(--border); }
-    .m-line em { font-style:italic;color:var(--teal); }
-    .m-line.on { opacity:1;transform:translateY(0); }
-    .m-pull { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(17px,2.2vw,22px);font-weight:300;font-style:italic;color:var(--muted);margin-top:52px;line-height:1.75;opacity:0;transition:opacity 0.8s ease 0.3s; }
-    .m-pull.on { opacity:1; }
-
-    /* TRUTH */
-    .truth { background:var(--forest);padding:128px 52px;border-top:1px solid rgba(196,166,110,0.1);border-bottom:1px solid rgba(196,166,110,0.1); }
-    .truth-wrap { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:88px;align-items:start; }
-    .truth-left { position:sticky;top:120px; }
-    .truth-hl { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(30px,3.2vw,42px);font-weight:300;line-height:1.25;color:rgba(255,255,255,0.88);letter-spacing:-0.02em;margin-top:14px; }
-    .truth-right { display:flex;flex-direction:column; }
-    .t-stat { padding:36px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:flex-start;gap:32px;opacity:0;transform:translateX(18px);transition:opacity 0.6s ease,transform 0.6s ease; }
-    .t-stat:first-child { border-top:1px solid rgba(255,255,255,0.05); }
-    .t-stat.on { opacity:1;transform:translateX(0); }
-    .t-n { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(44px,5vw,68px);font-weight:300;color:var(--teal);line-height:1;min-width:130px;letter-spacing:-0.03em; }
-    .t-n sub { font-size:0.45em;color:rgba(255,255,255,0.35);vertical-align:super;font-style:normal; }
-    .t-text { padding-top:10px; }
-    .t-text p { font-size:15px;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.75; }
-    .t-text small { font-size:11px;color:rgba(255,255,255,0.18);display:block;margin-top:6px;letter-spacing:0.04em; }
+    /* RECOGNITION — pain section */
+    .recognition { background:var(--cream);padding:112px 52px; }
+    .recognition-inner { max-width:780px;margin:0 auto;text-align:center; }
+    .rec-label { font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:44px;display:block; }
+    .rec-line { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(20px,3vw,32px);font-weight:300;line-height:1.5;letter-spacing:-0.01em;color:var(--tp);padding:26px 0;border-bottom:1px solid var(--border);opacity:0;transform:translateY(16px);transition:opacity 0.7s ease,transform 0.7s ease; }
+    .rec-line:first-of-type { border-top:1px solid var(--border); }
+    .rec-line em { font-style:italic;color:var(--teal); }
+    .rec-line.on { opacity:1;transform:translateY(0); }
+    .rec-close { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(18px,2.2vw,24px);font-weight:300;font-style:italic;color:var(--muted);margin-top:44px;line-height:1.75;opacity:0;transition:opacity 0.8s ease 0.3s; }
+    .rec-close.on { opacity:1; }
+    .rec-cta { margin-top:48px;opacity:0;transform:translateY(16px);transition:opacity 0.7s ease 0.4s,transform 0.7s ease 0.4s; }
+    .rec-cta.on { opacity:1;transform:translateY(0); }
+    .btn-dark { display:inline-flex;align-items:center;gap:10px;background:var(--tp);color:var(--cream);text-decoration:none;font-family:'Outfit',sans-serif;font-size:15px;font-weight:500;border-radius:100px;padding:18px 44px;letter-spacing:0.02em;transition:all 0.2s ease; }
+    .btn-dark:hover { transform:translateY(-2px);background:#2A1F1A; }
+    .btn-dark .arr { transition:transform 0.2s ease; }
+    .btn-dark:hover .arr { transform:translateX(4px); }
 
     /* ARCHETYPES */
-    .archetypes { background:var(--cream);padding:128px 52px; }
-    .arch-hd { text-align:center;margin-bottom:64px; }
-    .s-hl { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,4.5vw,54px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:var(--tp); }
+    .archetypes { background:var(--forest);padding:112px 52px;border-top:1px solid rgba(196,166,110,0.1); }
+    .arch-hd { text-align:center;margin-bottom:56px; }
+    .s-label { font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:block; }
+    .s-hl { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,4.5vw,54px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:rgba(255,255,255,0.9); }
     .s-hl em { font-style:italic;color:var(--teal); }
-    .s-sub { font-size:16px;font-weight:300;color:var(--ts);line-height:1.8;max-width:500px;margin:16px auto 0; }
+    .s-sub { font-size:16px;font-weight:300;color:rgba(255,255,255,0.38);line-height:1.8;max-width:460px;margin:16px auto 0; }
     .arch-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:44px; }
     .a-card { border-radius:20px;padding:32px 28px;position:relative;overflow:hidden;cursor:pointer;transition:transform 0.25s ease,box-shadow 0.25s ease; }
     .a-card::before { content:'';position:absolute;inset:0;background:linear-gradient(145deg,rgba(255,255,255,0.09),transparent);pointer-events:none; }
     .a-card::after { content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,0.28),transparent); }
-    .a-card:hover { transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.25); }
+    .a-card:hover { transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.3); }
     .a-icon { font-size:26px;margin-bottom:16px;display:block; }
     .a-name { font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:400;color:#fff;margin-bottom:8px; }
     .a-truth { font-size:13px;font-weight:300;color:rgba(255,255,255,0.68);line-height:1.6;font-style:italic; }
     .arch-cta { text-align:center; }
-    .btn-outline { display:inline-flex;align-items:center;gap:8px;color:var(--teal);text-decoration:none;font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;border:1.5px solid rgba(42,157,143,0.32);border-radius:100px;padding:14px 34px;letter-spacing:0.02em;transition:all 0.2s ease; }
+    .arch-prompt { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(18px,2.2vw,24px);font-weight:300;font-style:italic;color:rgba(255,255,255,0.42);margin-bottom:28px;line-height:1.6; }
+    .btn-outline { display:inline-flex;align-items:center;gap:8px;color:var(--teal);text-decoration:none;font-family:'Outfit',sans-serif;font-size:15px;font-weight:500;border:1.5px solid rgba(42,157,143,0.32);border-radius:100px;padding:16px 38px;letter-spacing:0.02em;transition:all 0.2s ease; }
     .btn-outline:hover { background:rgba(42,157,143,0.07);border-color:var(--teal);transform:translateY(-1px); }
-    .arch-note { font-size:12px;color:var(--muted);font-weight:300;margin-top:12px;display:block; }
+    .arch-note { font-size:12px;color:rgba(255,255,255,0.2);font-weight:300;margin-top:12px;display:block; }
 
-    /* HOW IT WORKS */
-    .how { background:var(--forest);padding:128px 52px;border-top:1px solid rgba(196,166,110,0.1); }
-    .how-wrap { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start; }
-    .how-left { position:sticky;top:120px; }
-    .how-quote { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(24px,3vw,36px);font-weight:300;line-height:1.5;color:rgba(255,255,255,0.88);letter-spacing:-0.01em;margin-bottom:28px; }
-    .how-quote em { font-style:italic;color:var(--teal); }
-    .how-body { font-size:15px;font-weight:300;color:rgba(255,255,255,0.38);line-height:1.9; }
-    .how-right { display:flex;flex-direction:column;gap:20px; }
-    .stage { background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:26px 28px;opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease; }
-    .stage.on { opacity:1;transform:translateY(0); }
-    .stage:hover { background:rgba(255,255,255,0.05);border-color:rgba(42,157,143,0.18); }
-    .stage-num { font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block; }
-    .stage-bar { width:28px;height:2px;border-radius:1px;background:var(--teal);margin-bottom:14px; }
-    .stage-name { font-family:'Cormorant Garamond',Georgia,serif;font-size:23px;font-weight:300;color:rgba(255,255,255,0.9);margin-bottom:8px;letter-spacing:-0.01em; }
-    .stage-desc { font-size:13px;font-weight:300;color:rgba(255,255,255,0.38);line-height:1.75; }
+    /* DIFFERENCE — replaces manifesto + stats */
+    .difference { background:var(--cream);padding:112px 52px; }
+    .diff-inner { max-width:900px;margin:0 auto; }
+    .diff-hd { margin-bottom:64px; }
+    .diff-grid { display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start; }
+    .diff-col-label { font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:28px;display:block; }
+    .diff-col-label.before { color:var(--muted); }
+    .diff-col-label.after { color:var(--teal); }
+    .diff-item { padding:18px 0;border-bottom:1px solid var(--border);font-size:16px;font-weight:300;line-height:1.6; }
+    .diff-item.before { color:var(--ts); }
+    .diff-item.after { color:var(--tp);font-family:'Cormorant Garamond',Georgia,serif;font-size:18px; }
+    .diff-item.after em { font-style:italic;color:var(--teal); }
+    .diff-item:last-child { border-bottom:none; }
+    .diff-pull { margin-top:64px;padding:32px 40px;background:rgba(42,157,143,0.06);border:1px solid rgba(42,157,143,0.14);border-radius:16px;text-align:center; }
+    .diff-pull p { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(20px,2.5vw,28px);font-weight:300;font-style:italic;color:var(--teal);line-height:1.65; }
+
+    /* HOW IT WORKS — condensed */
+    .how { background:var(--forest);padding:112px 52px;border-top:1px solid rgba(196,166,110,0.1); }
+    .how-inner { max-width:900px;margin:0 auto; }
+    .how-hd { text-align:center;margin-bottom:64px; }
+    .how-hl { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(32px,4vw,48px);font-weight:300;line-height:1.15;letter-spacing:-0.02em;color:rgba(255,255,255,0.9); }
+    .how-hl em { font-style:italic;color:var(--teal); }
+    .how-steps { display:grid;grid-template-columns:repeat(3,1fr);gap:28px; }
+    .step { background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:32px 28px;opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease; }
+    .step.on { opacity:1;transform:translateY(0); }
+    .step-n { font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block; }
+    .step-bar { width:28px;height:2px;border-radius:1px;background:var(--teal);margin-bottom:16px; }
+    .step-name { font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:300;color:rgba(255,255,255,0.9);margin-bottom:10px;letter-spacing:-0.01em; }
+    .step-desc { font-size:13px;font-weight:300;color:rgba(255,255,255,0.38);line-height:1.75; }
 
     /* RECEIPT */
-    .receipt-s { background:var(--cream);padding:128px 52px; }
-    .receipt-wrap { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center; }
+    .receipt-s { background:var(--cream);padding:112px 52px; }
+    .receipt-wrap { max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center; }
     .receipt-card { background:var(--forest);border-radius:24px;padding:40px;border:1px solid rgba(196,166,110,0.12);position:relative;overflow:hidden; }
     .receipt-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent); }
     .r-label { font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:block; }
@@ -147,30 +170,12 @@
     .r-dot { width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:6px; }
     .r-text { font-size:13px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.6; }
     .r-text strong { color:rgba(255,255,255,0.82);font-weight:400;display:block; }
-    .receipt-hl { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(30px,3.8vw,46px);font-weight:300;line-height:1.15;letter-spacing:-0.02em;color:var(--tp);margin-bottom:22px; }
+    .receipt-content {}
+    .receipt-hl { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,3.5vw,44px);font-weight:300;line-height:1.15;letter-spacing:-0.02em;color:var(--tp);margin-bottom:20px; }
     .receipt-hl em { font-style:italic;color:var(--teal); }
     .receipt-body { font-size:16px;font-weight:300;color:var(--ts);line-height:1.85;margin-bottom:28px; }
-    .receipt-pull { background:rgba(42,157,143,0.06);border:1px solid rgba(42,157,143,0.14);border-radius:12px;padding:20px 24px; }
+    .receipt-pull { background:rgba(42,157,143,0.06);border:1px solid rgba(42,157,143,0.14);border-radius:12px;padding:20px 24px;margin-bottom:32px; }
     .receipt-pull p { font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:300;font-style:italic;color:var(--teal);line-height:1.65; }
-
-    /* PRICING */
-    .pricing { background:var(--forest);padding:128px 52px;border-top:1px solid rgba(196,166,110,0.1); }
-    .pricing-inner { max-width:520px;margin:0 auto;text-align:center; }
-    .pricing-hl { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(36px,4.5vw,52px);font-weight:300;line-height:1.15;letter-spacing:-0.025em;color:rgba(255,255,255,0.9);margin-bottom:14px; }
-    .pricing-sub { font-size:16px;font-weight:300;color:rgba(255,255,255,0.38);line-height:1.8;margin-bottom:48px; }
-    .p-card { background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:40px;margin-bottom:14px;position:relative;overflow:hidden; }
-    .p-card::before { content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(42,157,143,0.4),transparent); }
-    .p-amount { font-family:'Cormorant Garamond',Georgia,serif;font-size:68px;font-weight:300;color:rgba(255,255,255,0.9);line-height:1;letter-spacing:-0.03em;margin-bottom:4px; }
-    .p-amount sup { font-size:28px;color:rgba(255,255,255,0.38);font-weight:300;vertical-align:super; }
-    .p-period { font-size:13px;font-weight:300;color:rgba(255,255,255,0.28);margin-bottom:32px;letter-spacing:0.04em; }
-    .p-features { display:flex;flex-direction:column;gap:10px;margin-bottom:32px;text-align:left; }
-    .p-feat { display:flex;align-items:center;gap:12px;font-size:14px;font-weight:300;color:rgba(255,255,255,0.55); }
-    .p-feat svg { flex-shrink:0; }
-    .p-note { font-size:12px;font-weight:300;color:rgba(255,255,255,0.18);margin-top:16px;line-height:1.7; }
-    .annual { background:rgba(196,166,110,0.05);border:1px solid rgba(196,166,110,0.14);border-radius:14px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;text-decoration:none;transition:all 0.2s ease; }
-    .annual:hover { background:rgba(196,166,110,0.09); }
-    .annual p { font-size:14px;font-weight:400;color:rgba(255,255,255,0.65);text-align:left; }
-    .annual small { font-size:12px;font-weight:300;color:var(--gold);display:block;margin-top:2px; }
 
     /* CLOSE */
     .close-s { background:#0A1A16;padding:160px 52px;text-align:center;position:relative;overflow:hidden;border-top:1px solid rgba(196,166,110,0.08); }
@@ -196,29 +201,30 @@
 
     /* ANIMATIONS */
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
-    @keyframes goldPulse { 0%,100%{filter:drop-shadow(0 0 6px rgba(196,166,110,0.38));}50%{filter:drop-shadow(0 0 18px rgba(196,166,110,0.72));} }
-    @keyframes scrollPulse { 0%,100%{opacity:0.6;}50%{opacity:0.15;} }
+    @keyframes goldPulse { 0%,100%{filter:drop-shadow(0 0 8px rgba(196,166,110,0.45));}50%{filter:drop-shadow(0 0 16px rgba(196,166,110,0.7));} }
+    @keyframes scrollPulse { 0%,100%{opacity:0.4;transform:scaleY(1);}50%{opacity:0.7;transform:scaleY(1.08);} }
+
+    /* SCROLL REVEAL */
     .r { opacity:0;transform:translateY(18px);transition:opacity 0.7s ease,transform 0.7s ease; }
     .r.on { opacity:1;transform:translateY(0); }
-    .d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.3s;}.d4{transition-delay:0.4s;}
+    .d1 { transition-delay:0.1s; }
+    .d2 { transition-delay:0.2s; }
+    .d3 { transition-delay:0.3s; }
+    .d4 { transition-delay:0.4s; }
 
-    /* MOBILE */
-    @media(max-width:900px){
-      nav{padding:16px 20px;}
-      .hero{padding:110px 20px 80px;}
-      .manifesto,.truth,.archetypes,.how,.receipt-s,.pricing,.close-s{padding:80px 20px;}
-      .truth-wrap{grid-template-columns:1fr;gap:40px;}
-      .truth-left{position:static;}
-      .arch-grid{grid-template-columns:1fr 1fr;}
-      .how-wrap{grid-template-columns:1fr;gap:40px;}
-      .how-left{position:static;}
-      .receipt-wrap{grid-template-columns:1fr;gap:48px;}
-      footer{padding:40px 20px 24px;}
-      .ft-inner{flex-direction:column;}
-      .cursor,.cursor-ring{display:none;}
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      nav { padding:18px 24px; }
+      .hero { padding:120px 24px 80px; }
+      .recognition,.archetypes,.difference,.how,.receipt-s,.close-s { padding:80px 24px; }
+      .arch-grid { grid-template-columns:1fr 1fr; }
+      .diff-grid { grid-template-columns:1fr; }
+      .how-steps { grid-template-columns:1fr; }
+      .receipt-wrap { grid-template-columns:1fr; }
+      footer { padding:40px 24px 28px; }
     }
-    @media(max-width:520px){
-      .arch-grid{grid-template-columns:1fr;}
+    @media(max-width:480px){
+      .arch-grid { grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -230,34 +236,28 @@
 <!-- NAV -->
 <nav id="nav">
   <a href="/" class="wordmark"><span class="mun">mun</span><span class="eb">ē</span></a>
-  <div style="display:flex;align-items:center;gap:12px;">
-  <a href="https://mune-app.vercel.app/signin" style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:300;color:rgba(255,255,255,0.45);text-decoration:none;padding:8px 16px;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.75)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Sign in</a>
-  <a href="https://mune-app.vercel.app/quiz" class="nav-btn">Begin my journey →</a>
-</div>
+  <a href="https://mune-app.vercel.app/quiz" class="nav-btn">Find my type →</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-arc" style="width:560px;height:560px;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
-  <div class="hero-arc" style="width:880px;height:880px;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
-  <div class="hero-arc" style="width:1200px;height:1200px;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+  <div class="hero-arc" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+  <div class="hero-arc" style="width:900px;height:900px;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
 
-  <p class="hero-label">The knowledge you were never given</p>
+  <p class="hero-eyebrow">The knowledge you were never given</p>
 
-  <h1 class="hero-h1">
-    This isn't about<br/><em>money.</em>
-  </h1>
+  <h1 class="hero-h1">You make money.<br/><em>So why does it still feel like it disappears?</em></h1>
 
-  <p class="hero-sub">
-    It never was. Financial struggle is a human problem — not a math one. munē is the first platform built around that truth. Before a single number, it understands who you are.
-  </p>
+  <p class="hero-h2">munē tells you exactly why.</p>
+
+  <p class="hero-sub">In 2 minutes, find your financial type — and see the system that finally makes sense of your money.</p>
 
   <div class="hero-cta">
     <a href="https://mune-app.vercel.app/quiz" class="btn-primary">
       Find my munē type <span class="arr">→</span>
     </a>
-    <p class="hero-note">Free to start &nbsp;·&nbsp; No credit card &nbsp;·&nbsp; Works on any device</p>
+    <p class="hero-note">2 minutes · No account needed · Free to start</p>
   </div>
 
   <div class="hero-scroll">
@@ -265,147 +265,136 @@
   </div>
 </section>
 
-<!-- MANIFESTO -->
-<section class="manifesto">
-  <div class="manifesto-inner">
-    <span class="s-label r">A new category</span>
-    <p class="m-line r d1">Every other tool starts with <em>your money.</em></p>
-    <p class="m-line r d2">munē starts with <em>you.</em></p>
-    <p class="m-line r d3">The knowledge you were never given. <em>Finally made for you.</em></p>
-    <p class="m-pull r d4">"The reason people struggle financially is not that they lack willpower or intelligence. It is that nobody ever sat down with them — genuinely, in plain language — and explained how any of this actually works."</p>
-  </div>
-</section>
+<!-- RECOGNITION — pain section -->
+<section class="recognition">
+  <div class="recognition-inner">
+    <span class="rec-label">Sound familiar?</span>
 
-<!-- TRUTH -->
-<section class="truth">
-  <div class="truth-wrap">
-    <div class="truth-left r">
-      <span class="s-label" style="color:var(--gold);">The gap nobody closes</span>
-      <h2 class="truth-hl">The knowledge that transforms financial lives has always existed.<br/><br/>It just wasn't available to everyone.</h2>
-    </div>
-    <div class="truth-right">
-      <div class="t-stat r">
-        <div class="t-n">63<sub>%</sub></div>
-        <div class="t-text">
-          <p>of Americans cannot cover a $400 emergency. Not because they don't care — because nobody ever gave them the system.</p>
-          <small>Federal Reserve, 2023</small>
-        </div>
-      </div>
-      <div class="t-stat r d1">
-        <div class="t-n">72<sub>%</sub></div>
-        <div class="t-text">
-          <p>say money is their number one source of anxiety. The emotion is the real problem. munē treats it as such.</p>
-          <small>APA, 2023</small>
-        </div>
-      </div>
-      <div class="t-stat r d2">
-        <div class="t-n">57<sub>M</sub></div>
-        <div class="t-text">
-          <p>Americans underserved by traditional financial services. The tools that exist weren't built for them. munē was.</p>
-          <small>FDIC, 2022</small>
-        </div>
-      </div>
-      <div class="t-stat r d3">
-        <div class="t-n">52<sub>%</sub></div>
-        <div class="t-text">
-          <p>average financial literacy score across US adults. The gap is documented, structural, and closeable. munē closes it.</p>
-          <small>FINRA, 2022</small>
-        </div>
-      </div>
+    <p class="rec-line r">You have saved before. <em>Then something came up.</em></p>
+    <p class="rec-line r">You have reset before. <em>Then the month got away from you.</em></p>
+    <p class="rec-line r">You have said this time will be different. <em>Then it was not.</em></p>
+    <p class="rec-line r">You make good money. <em>And still feel like you are behind.</em></p>
+
+    <p class="rec-close r">That is not a willpower problem. That is a system problem.<br/>And a system can be fixed.</p>
+
+    <div class="rec-cta r">
+      <a href="https://mune-app.vercel.app/quiz" class="btn-dark">
+        Find out what's actually happening <span class="arr">→</span>
+      </a>
     </div>
   </div>
 </section>
 
 <!-- ARCHETYPES -->
 <section class="archetypes">
-  <div class="section-inner" style="max-width:1100px;margin:0 auto;">
-    <div class="arch-hd">
-      <span class="s-label r">Your munē type</span>
-      <h2 class="s-hl r d1">Which one<br/><em>sounds like you?</em></h2>
-      <p class="s-sub r d2">Before munē shows you a single number — it figures out who you actually are with money. Six types. One short quiz. Most people read their result and say "how did it know that."</p>
+  <div class="arch-hd r">
+    <span class="s-label">Six financial types. One is yours.</span>
+    <h2 class="s-hl">You already know<br/><em>which one you are.</em></h2>
+    <p class="s-sub">Most people do. Take 2 minutes and see it confirmed — along with exactly what it means for your money.</p>
+  </div>
+
+  <div class="arch-grid">
+    <div class="a-card r" style="background:linear-gradient(145deg,#3A4258,#2C3347);">
+      <span class="a-icon">🌫</span>
+      <p class="a-name">The Fog</p>
+      <p class="a-truth">"I know something's wrong. I just can't bring myself to look."</p>
+    </div>
+    <div class="a-card r d1" style="background:linear-gradient(145deg,#6B4020,#502F18);">
+      <span class="a-icon">⚡</span>
+      <p class="a-name">The Spark</p>
+      <p class="a-truth">"I know what I make. I just spend it before my bills see it."</p>
+    </div>
+    <div class="a-card r d2" style="background:linear-gradient(145deg,#5C2A1E,#451E15);">
+      <span class="a-icon">🔥</span>
+      <p class="a-name">The Flame</p>
+      <p class="a-truth">"I save everything but I'm still scared I won't have enough."</p>
+    </div>
+    <div class="a-card r d1" style="background:linear-gradient(145deg,#1A4A44,#123530);">
+      <span class="a-icon">🌊</span>
+      <p class="a-name">The Current</p>
+      <p class="a-truth">"I'm building. I just want to make sure I'm building right."</p>
+    </div>
+    <div class="a-card r d2" style="background:linear-gradient(145deg,#1A4040,#122E2E);">
+      <span class="a-icon">〰️</span>
+      <p class="a-name">The Wave</p>
+      <p class="a-truth">"My income isn't predictable. My system has to be."</p>
+    </div>
+    <div class="a-card r d3" style="background:linear-gradient(145deg,#1A3848,#102835);">
+      <span class="a-icon">🌙</span>
+      <p class="a-name">The Tide</p>
+      <p class="a-truth">"I have a steady check. It just never seems like enough."</p>
+    </div>
+  </div>
+
+  <div class="arch-cta r">
+    <p class="arch-prompt">Most people already know. Take the 2 minutes and see for real.</p>
+    <a href="https://mune-app.vercel.app/quiz" class="btn-primary">
+      Find my type <span class="arr">→</span>
+    </a>
+    <span class="arch-note">2 minutes · No account needed</span>
+  </div>
+</section>
+
+<!-- DIFFERENCE -->
+<section class="difference">
+  <div class="diff-inner">
+    <div class="diff-hd r">
+      <span class="s-label" style="color:var(--teal);">What makes munē different</span>
+      <h2 class="s-hl" style="color:var(--tp);font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,4.5vw,52px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;">
+        Every other tool starts<br/>with your money.<br/><em style="color:var(--teal);">munē starts with you.</em>
+      </h2>
     </div>
 
-    <div class="arch-grid">
-      <div class="a-card r" style="background:linear-gradient(145deg,#4A5E75,#3A4E62);">
-        <span class="a-icon">🌫️</span>
-        <p class="a-name">The Fog</p>
-        <p class="a-truth">"I know something's wrong. I just can't bring myself to look."</p>
+    <div class="diff-grid">
+      <div>
+        <span class="diff-col-label before">Every other tool</span>
+        <p class="diff-item before">Shows you what you spent</p>
+        <p class="diff-item before">Assumes a steady paycheck</p>
+        <p class="diff-item before">Gives the same advice to everyone</p>
+        <p class="diff-item before">Tracks the symptom</p>
+        <p class="diff-item before">Tells you to spend less</p>
       </div>
-      <div class="a-card r d1" style="background:linear-gradient(145deg,#B87333,#9A6028);">
-        <span class="a-icon">✨</span>
-        <p class="a-name">The Spark</p>
-        <p class="a-truth">"I know what I make. I just spend it before my bills see it."</p>
-      </div>
-      <div class="a-card r d2" style="background:linear-gradient(145deg,#A04830,#883C24);">
-        <span class="a-icon">🔥</span>
-        <p class="a-name">The Flame</p>
-        <p class="a-truth">"I save everything but I'm still scared I won't have enough."</p>
-      </div>
-      <div class="a-card r d1" style="background:linear-gradient(145deg,#2A9D8F,#1E8070);">
-        <span class="a-icon">🌊</span>
-        <p class="a-name">The Current</p>
-        <p class="a-truth">"I'm building. I just want to make sure I'm building right."</p>
-      </div>
-      <div class="a-card r d2" style="background:linear-gradient(145deg,#2A8080,#1E6868);">
-        <span class="a-icon">〰️</span>
-        <p class="a-name">The Wave</p>
-        <p class="a-truth">"My income isn't predictable. My system has to be."</p>
-      </div>
-      <div class="a-card r d3" style="background:linear-gradient(145deg,#2A5F78,#1E4D62);">
-        <span class="a-icon">🌙</span>
-        <p class="a-name">The Tide</p>
-        <p class="a-truth">"I have a steady check. It just never seems like enough."</p>
+      <div>
+        <span class="diff-col-label after">munē</span>
+        <p class="diff-item after"><em>Diagnoses why</em> it keeps happening</p>
+        <p class="diff-item after">Built for how you <em>actually</em> earn</p>
+        <p class="diff-item after">Personalized to your financial type</p>
+        <p class="diff-item after">Fixes the <em>system</em></p>
+        <p class="diff-item after">Gives you the <em>structure</em> to stop reacting</p>
       </div>
     </div>
 
-    <div class="arch-cta r">
-      <a href="https://mune-app.vercel.app/quiz" class="btn-outline">
-        Find my munē type <span>→</span>
-      </a>
-      <span class="arch-note">Seven questions · Two minutes · No account needed</span>
+    <div class="diff-pull r">
+      <p>"You are not bad with money. Your system just was not built for how you actually use it."</p>
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
 <section class="how">
-  <div class="how-wrap">
-    <div class="how-left r">
-      <span class="s-label" style="color:var(--gold);">How it works</span>
-      <p class="how-quote">
-        Like a trainer.<br/>
-        Like an older sibling<br/>who figured it out and<br/>
-        <em>came back to show you.</em>
-      </p>
-      <p class="how-body">
-        munē doesn't hand you a plan and disappear. It's there at every stage — adjusting when life changes, teaching one concept at a time, celebrating the small wins because those are the real wins.<br/><br/>
-        The goal isn't that you need munē forever. The goal is that by the time you're done, the knowledge is yours. The decisions are yours. The habit is yours.
-      </p>
+  <div class="how-inner">
+    <div class="how-hd r">
+      <h2 class="how-hl">Three steps.<br/><em>One complete system.</em></h2>
     </div>
-    <div class="how-right">
-      <div class="stage r">
-        <span class="stage-num">Stage 1</span>
-        <div class="stage-bar"></div>
-        <p class="stage-name">Make looking feel possible.</p>
-        <p class="stage-desc">You set your Floor — the number that makes engagement feel safe instead of terrifying. One action every day. Small enough to do. Real enough to matter. The habit starts here.</p>
+
+    <div class="how-steps">
+      <div class="step r">
+        <span class="step-n">Step 01</span>
+        <div class="step-bar"></div>
+        <p class="step-name">Find your type</p>
+        <p class="step-desc">Five questions. Two minutes. munē identifies your financial archetype — the psychological pattern behind how you make decisions with money. Everything is built around who you actually are.</p>
       </div>
-      <div class="stage r d1">
-        <span class="stage-num">Stage 2</span>
-        <div class="stage-bar" style="background:var(--gold);"></div>
-        <p class="stage-name">Build the architecture.</p>
-        <p class="stage-desc">The Blueprint gives every dollar a job before you can spend it. The Munē Moment reads your real numbers and rebuilds the plan around them. The system learns. The plan adapts.</p>
+      <div class="step r d1">
+        <span class="step-n">Step 02</span>
+        <div class="step-bar"></div>
+        <p class="step-name">See your moment</p>
+        <p class="step-desc">Drop a bank statement. munē extracts the pattern — not the transactions — and diagnoses exactly why your money feels the way it does. Income, obligations, behavioral flags, and the one system move that changes it.</p>
       </div>
-      <div class="stage r d2">
-        <span class="stage-num">Stage 3</span>
-        <div class="stage-bar" style="background:#C4A66E;"></div>
-        <p class="stage-name">Start building.</p>
-        <p class="stage-desc">Emergency fund funded. Obligations automated. The Score moves. The Receipt shows exactly how far you've come. The person you are at the end of this stage is not who started it.</p>
-      </div>
-      <div class="stage r d3">
-        <span class="stage-num">Ongoing</span>
-        <div class="stage-bar" style="background:rgba(255,255,255,0.15);"></div>
-        <p class="stage-name">The journey evolves.</p>
-        <p class="stage-desc">The Fog becomes The Tide. The Tide becomes The Wave. Each chapter brings a new plan, new milestones, new knowledge. The journey never ends — it deepens. So do you.</p>
+      <div class="step r d2">
+        <span class="step-n">Step 03</span>
+        <div class="step-bar"></div>
+        <p class="step-name">Build your system</p>
+        <p class="step-desc">Your Blueprint assigns every dollar a job before you can spend it wrong. Your Floor protects you. Ask munē answers the financial question nobody ever sat down with you to explain. The system starts holding what you used to carry alone.</p>
       </div>
     </div>
   </div>
@@ -414,78 +403,53 @@
 <!-- THE RECEIPT -->
 <section class="receipt-s">
   <div class="receipt-wrap">
-    <div class="receipt-left r">
-      <div class="receipt-card">
-        <span class="r-label">The Receipt</span>
-        <div class="r-entry">
-          <span class="r-day">Day 1</span>
-          <div class="r-dot"></div>
-          <div class="r-text"><strong>Floor set. $400.</strong>The number that makes looking feel possible. Protected. Always.</div>
+    <div class="receipt-card r">
+      <span class="r-label">The Receipt · Day 30</span>
+      <div class="r-entry">
+        <span class="r-day">Day 1</span>
+        <div class="r-dot"></div>
+        <div class="r-text">
+          <strong>Floor set. $847.</strong>
+          That number makes looking feel safe for the first time.
         </div>
-        <div class="r-entry">
-          <span class="r-day">Day 7</span>
-          <div class="r-dot"></div>
-          <div class="r-text"><strong>First Munē Moment.</strong>Real numbers. Real patterns. Blueprint activated with actual data.</div>
+      </div>
+      <div class="r-entry">
+        <span class="r-day">Day 7</span>
+        <div class="r-dot"></div>
+        <div class="r-text">
+          <strong>First statement analyzed.</strong>
+          Obligation lock. 68% spoken for before a single decision.
         </div>
-        <div class="r-entry">
-          <span class="r-day">Day 14</span>
-          <div class="r-dot"></div>
-          <div class="r-text"><strong>First obligation automated.</strong>One bill — off your plate. The system is holding.</div>
+      </div>
+      <div class="r-entry">
+        <span class="r-day">Day 14</span>
+        <div class="r-dot"></div>
+        <div class="r-text">
+          <strong>Blueprint live.</strong>
+          Every dollar has a job. Guilt Free Number: $1,240/month.
         </div>
-        <div class="r-entry">
-          <span class="r-day">Day 30</span>
-          <div class="r-dot" style="background:var(--gold);"></div>
-          <div class="r-text"><strong>Emergency fund: $347.</strong>Didn't exist a month ago. Now it does. Something real changed.</div>
-        </div>
-        <div class="r-entry">
-          <span class="r-day">Day 90</span>
-          <div class="r-dot" style="background:var(--gold);width:8px;height:8px;"></div>
-          <div class="r-text"><strong>The First Ground — complete.</strong>You are not the same person who started. The next chapter begins.</div>
+      </div>
+      <div class="r-entry">
+        <span class="r-day">Day 30</span>
+        <div class="r-dot" style="background:var(--gold);"></div>
+        <div class="r-text">
+          <strong>First month closed.</strong>
+          Protected $400 before it disappeared. Emergency fund started.
         </div>
       </div>
     </div>
-    <div class="receipt-right r d2">
-      <span class="s-label">The Receipt</span>
-      <h2 class="receipt-hl">Proof that something<br/><em>real changed.</em></h2>
-      <p class="receipt-body">Every action you complete is logged here permanently. This is the record of your transformation — one day at a time. At Day 30 you'll see exactly how far you've come. At Day 90 the Receipt is undeniable proof.<br/><br/>That proof is yours forever. Whether you use munē or not. Because munē is built to be outgrown. That's the whole point.</p>
+
+    <div class="receipt-content r d1">
+      <span class="s-label" style="color:var(--teal);">munē proves it worked</span>
+      <h2 class="receipt-hl">This is what it looks like<br/><em>when it finally works.</em></h2>
+      <p class="receipt-body">Every action you take in munē creates a permanent record. Not a streak. Not a score. A timestamped proof that something real changed. Specific, dated, and yours.</p>
       <div class="receipt-pull">
-        <p>"The person you become by Day 90 is not the same one who started. The knowledge is yours now. That's what this was always about."</p>
+        <p>"The Receipt is what you show yourself when you forget how far you have come."</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="pricing">
-  <div class="pricing-inner">
-    <h2 class="pricing-hl r">Simple.<br/>Honest.<br/>Worth it.</h2>
-    <p class="pricing-sub r d1">Seven days free. No credit card. After that — $9.99/month. Cancel in three taps. Always.</p>
-
-    <div class="p-card r d2">
-      <div class="p-amount"><sup>$</sup>9.99</div>
-      <p class="p-period">per month · after 7-day free trial</p>
-      <div class="p-features">
-        <div class="p-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2A9D8F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Full Foundation Plan — all stages, your archetype</div>
-        <div class="p-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2A9D8F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Munē Moment — unlimited statement analysis</div>
-        <div class="p-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2A9D8F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Ask munē — unlimited conversations</div>
-        <div class="p-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2A9D8F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Blueprint — living income allocation system</div>
-        <div class="p-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2A9D8F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Munē Score — six-category financial health score</div>
-        <div class="p-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2A9D8F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>The Receipt — permanent record of your transformation</div>
-      </div>
-      <a href="https://mune-app.vercel.app/quiz" class="btn-primary" style="width:100%;justify-content:center;font-size:15px;">
-        Start free — 7 days on us <span class="arr">→</span>
+      <a href="https://mune-app.vercel.app/quiz" class="btn-dark">
+        Start building your receipt <span class="arr">→</span>
       </a>
     </div>
-
-    <a href="https://mune-app.vercel.app/quiz" class="annual r d3">
-      <div>
-        <p>Annual plan — $79.99/year</p>
-        <small>2 months free · Best for the full journey</small>
-      </div>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(196,166,110,0.45)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-    </a>
-
-    <p class="p-note r d4">Cancel anytime · 3 taps · No price increases without notice · Your data is yours. We never sell it.</p>
   </div>
 </section>
 
@@ -501,10 +465,10 @@
     <p class="close-sub r d2">For the people who have been doing everything right and still feel behind. For the people who never had anyone sit down with them and explain how any of this actually works. For everyone who deserved this knowledge from the beginning.</p>
     <div class="r d3">
       <a href="https://mune-app.vercel.app/quiz" class="btn-primary" style="font-size:16px;padding:20px 56px;">
-        Begin <span class="arr">→</span>
+        Find my munē type <span class="arr">→</span>
       </a>
     </div>
-    <p class="close-note r d4">Free to start · No credit card · Works on any device</p>
+    <p class="close-note r d4">Free to start · No credit card · 2 minutes</p>
   </div>
 </section>
 
@@ -557,8 +521,8 @@
   // SCROLL REVEAL
   var io=new IntersectionObserver(function(entries){
     entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
-  },{threshold:0.1,rootMargin:'0px 0px -28px 0px'});
-  document.querySelectorAll('.r,.m-line,.m-pull,.t-stat,.stage').forEach(function(el){ io.observe(el); });
+  },{threshold:0.08,rootMargin:'0px 0px -24px 0px'});
+  document.querySelectorAll('.r,.rec-line,.rec-close,.rec-cta,.step').forEach(function(el){ io.observe(el); });
 
 })();
 </script>
