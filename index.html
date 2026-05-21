@@ -1,530 +1,663 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>munē. The knowledge you were never given.</title>
-  <meta name="description" content="You make money. So why does it still feel like it disappears? munē shows you exactly why and builds the system to fix it. Find your financial type in 2 minutes."/>
-  <meta property="og:title" content="munē. You make money. So why does it still feel like it disappears?"/>
-  <meta property="og:description" content="munē diagnoses the real reason your money disappears and builds the system to fix it. Find your financial type in 2 minutes."/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://getmune.com"/>
-  <script>
-    (function() {
-      try {
-        var key = Object.keys(localStorage).find(function(k) {
-          return k.startsWith('sb-') && k.endsWith('-auth-token')
-        })
-        if(key) {
-          var session = JSON.parse(localStorage.getItem(key))
-          var token = session?.access_token
-          var expires = session?.expires_at
-          if(token && expires && (expires * 1000) > Date.now()) {
-            window.location.href = 'https://mune-app.vercel.app/home'
-          }
-        }
-      } catch(e) {}
-    })()
-  </script>
+  <title>munē — The knowledge you were never given.</title>
+  <meta name="description" content="munē finds your financial pattern, gives you one rule to follow, and shows you proof that you changed. The only financial platform built around who you actually are."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --teal:   #2A9D8F;
-      --teal-d: #1E8070;
-      --gold:   #C4A66E;
-      --forest: #0C1E1A;
-      --cream:  #F7F4EF;
-      --tp:     #1C1714;
-      --ts:     #5A5248;
-      --muted:  #9B9087;
-      --border: #E8E2D9;
-    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:      #2A9D8F;
+      --teal-lt:   #30B09F;
+      --teal-dk:   #1E7A6E;
+      --gold:      #C4A66E;
+      --gold-br:   #E8C97A;
+      --green-bg:  #061510;
+      --green-mid: #0A2218;
+      --green-card:#0E2D20;
+      --cream:     #F7F4EF;
+      --white:     rgba(255,255,255,0.92);
+      --white-mid: rgba(255,255,255,0.55);
+      --white-low: rgba(255,255,255,0.28);
+      --white-dim: rgba(255,255,255,0.10);
+      --F-display: 'Cormorant Garamond', Georgia, serif;
+      --F-body:    'Outfit', sans-serif;
+    }
+
     html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Outfit', sans-serif;
-      background: var(--forest);
-      color: var(--cream);
+      background: var(--green-bg);
+      color: var(--white);
+      font-family: var(--F-body);
+      font-weight: 300;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      line-height: 1.6;
     }
-    body::after {
+
+    /* ── Animations ── */
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
+    @keyframes pulse    { 0%,100% { opacity:0.5; } 50% { opacity:1; } }
+    @keyframes goldGlow { 0%,100% { filter:drop-shadow(0 0 8px rgba(196,166,110,0.4)); } 50% { filter:drop-shadow(0 0 24px rgba(196,166,110,0.8)); } }
+    @keyframes drift    { 0%,100% { transform:translateY(0) rotate(0deg); } 50% { transform:translateY(-12px) rotate(1deg); } }
+    @keyframes arcPulse { 0%,100% { opacity:0.15; } 50% { opacity:0.4; } }
+
+    .fu0 { animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.1s both; }
+    .fu1 { animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.25s both; }
+    .fu2 { animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.4s both; }
+    .fu3 { animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.55s both; }
+    .fu4 { animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.7s both; }
+    .fu5 { animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.85s both; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 40px;
+      background: linear-gradient(to bottom, rgba(6,21,16,0.95), transparent);
+      backdrop-filter: blur(8px);
+    }
+
+    .wordmark {
+      font-family: var(--F-display);
+      font-size: 26px;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+    .wordmark .mun { color: #FFFFFF; }
+    .wordmark .macron { color: var(--gold-br); animation: goldGlow 3.5s ease infinite; display: inline-block; }
+
+    .nav-cta {
+      background: linear-gradient(170deg, var(--teal-lt), var(--teal));
+      color: #fff;
+      border: none;
+      border-radius: 100px;
+      padding: 11px 24px;
+      font-family: var(--F-body);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(42,157,143,0.35);
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(42,157,143,0.5); }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(42,157,143,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(42,157,143,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 60%, rgba(196,166,110,0.04) 0%, transparent 40%);
+    }
+
+    .arc-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(42,157,143,0.12);
+      animation: arcPulse 4s ease infinite;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--F-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 20px;
+      opacity: 0.85;
+    }
+
+    .hero-h1 {
+      font-family: var(--F-display);
+      font-size: clamp(42px, 7vw, 88px);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 16px;
+      max-width: 900px;
+    }
+
+    .hero-h1 em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .hero-sub {
+      font-family: var(--F-body);
+      font-size: clamp(15px, 2vw, 18px);
+      font-weight: 300;
+      color: var(--white-mid);
+      line-height: 1.75;
+      max-width: 560px;
+      margin: 0 auto 48px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(170deg, var(--teal-lt) 0%, var(--teal) 45%, var(--teal-dk) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 100px;
+      padding: 20px 44px;
+      font-family: var(--F-body);
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 32px rgba(42,157,143,0.42);
+      transition: all 0.2s;
+      margin-bottom: 14px;
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 14px 40px rgba(42,157,143,0.55); }
+
+    .hero-fine {
+      font-size: 12px;
+      color: var(--white-low);
+      font-weight: 300;
+    }
+
+    /* ── What munē is ── */
+    .what-section {
+      padding: 100px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--F-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 20px;
+      opacity: 0.75;
+    }
+
+    .what-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 60px;
+    }
+
+    .what-card {
+      background: var(--green-card);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .what-card:hover { border-color: rgba(42,157,143,0.3); }
+    .what-card::before {
       content: '';
-      position: fixed; inset: 0;
-      pointer-events: none; z-index: 9999; opacity: 0.022;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, transparent, var(--teal), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .what-card:hover::before { opacity: 1; }
+
+    .card-number {
+      font-family: var(--F-display);
+      font-size: 48px;
+      font-weight: 300;
+      color: rgba(42,157,143,0.2);
+      line-height: 1;
+      margin-bottom: 16px;
     }
 
-    /* CURSOR */
-    .cursor { width:8px;height:8px;background:var(--teal);border-radius:50%;position:fixed;pointer-events:none;z-index:10000;transition:transform 0.15s ease;mix-blend-mode:screen; }
-    .cursor-ring { width:32px;height:32px;border:1px solid rgba(42,157,143,0.35);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transition:all 0.08s ease; }
-
-    /* NAV */
-    nav { position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 52px;display:flex;align-items:center;justify-content:space-between;transition:background 0.4s,border-color 0.4s; }
-    nav.scrolled { background:rgba(12,30,26,0.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(196,166,110,0.1); }
-    .wordmark { font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;font-weight:300;letter-spacing:-0.02em;text-decoration:none;display:inline-block; }
-    .wordmark .mun { color:rgba(255,255,255,0.9); }
-    .wordmark .eb { color:var(--gold);filter:drop-shadow(0 0 8px rgba(196,166,110,0.45));animation:goldPulse 4s ease infinite;display:inline-block; }
-    .nav-btn { font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#fff;text-decoration:none;background:linear-gradient(170deg,#30B09F,#2A9D8F,#1E8070);border:1px solid rgba(30,122,110,0.4);border-radius:100px;padding:10px 24px;box-shadow:0 1px 0 rgba(255,255,255,0.15) inset,0 4px 20px rgba(42,157,143,0.28);transition:all 0.2s ease;letter-spacing:0.02em; }
-    .nav-btn:hover { transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,0.15) inset,0 8px 28px rgba(42,157,143,0.42); }
-
-    /* HERO */
-    .hero { min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 24px 100px;position:relative;overflow:hidden; }
-    .hero-bg { position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 55% at 50% 0%,rgba(42,157,143,0.11) 0%,transparent 60%),radial-gradient(ellipse 40% 35% at 85% 85%,rgba(196,166,110,0.05) 0%,transparent 50%); }
-    .hero-arc { position:absolute;border-radius:50%;border:1px solid rgba(42,157,143,0.06);pointer-events:none; }
-    .hero-eyebrow { font-size:12px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:rgba(196,166,110,0.7);margin-bottom:28px;opacity:0;animation:fadeUp 0.8s ease 0.1s forwards; }
-    .hero-h1 { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(52px,8vw,108px);font-weight:300;line-height:1.0;letter-spacing:-0.032em;color:rgba(255,255,255,0.95);margin-bottom:10px;max-width:960px;opacity:0;animation:fadeUp 0.9s ease 0.2s forwards; }
-    .hero-h1 em { font-style:italic;background:linear-gradient(135deg,#2A9D8F,#3DBFAD,#2A9D8F);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
-    .hero-h2 { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,4vw,52px);font-weight:300;line-height:1.1;letter-spacing:-0.02em;color:rgba(255,255,255,0.38);margin-bottom:40px;opacity:0;animation:fadeUp 0.9s ease 0.3s forwards; }
-    .hero-sub { font-size:clamp(15px,1.8vw,18px);font-weight:300;color:rgba(255,255,255,0.42);line-height:1.85;max-width:440px;margin:0 auto 52px;opacity:0;animation:fadeUp 0.9s ease 0.4s forwards; }
-    .hero-cta { display:flex;flex-direction:column;align-items:center;gap:14px;opacity:0;animation:fadeUp 0.9s ease 0.55s forwards; }
-    .btn-primary { display:inline-flex;align-items:center;gap:10px;background:linear-gradient(170deg,#30B09F,#2A9D8F,#1E8070);color:#fff;text-decoration:none;font-family:'Outfit',sans-serif;font-size:16px;font-weight:500;border:1px solid rgba(30,122,110,0.4);border-radius:100px;padding:20px 52px;letter-spacing:0.02em;box-shadow:0 1px 0 rgba(255,255,255,0.18) inset,0 8px 32px rgba(42,157,143,0.38);transition:all 0.2s ease; }
-    .btn-primary:hover { transform:translateY(-2px);box-shadow:0 1px 0 rgba(255,255,255,0.18) inset,0 16px 48px rgba(42,157,143,0.52); }
-    .btn-primary .arr { transition:transform 0.2s ease; }
-    .btn-primary:hover .arr { transform:translateX(4px); }
-    .hero-note { font-size:12px;font-weight:300;color:rgba(255,255,255,0.2);letter-spacing:0.06em; }
-    .hero-scroll { position:absolute;bottom:40px;left:50%;transform:translateX(-50%);opacity:0;animation:fadeUp 1s ease 1.1s forwards; }
-    .scroll-line { width:1px;height:52px;background:linear-gradient(to bottom,rgba(42,157,143,0.55),transparent);animation:scrollPulse 2.2s ease infinite;margin:0 auto; }
-
-    /* RECOGNITION — pain section */
-    .recognition { background:var(--cream);padding:112px 52px; }
-    .recognition-inner { max-width:780px;margin:0 auto;text-align:center; }
-    .rec-label { font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:44px;display:block; }
-    .rec-line { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(20px,3vw,32px);font-weight:300;line-height:1.5;letter-spacing:-0.01em;color:var(--tp);padding:26px 0;border-bottom:1px solid var(--border);opacity:0;transform:translateY(16px);transition:opacity 0.7s ease,transform 0.7s ease; }
-    .rec-line:first-of-type { border-top:1px solid var(--border); }
-    .rec-line em { font-style:italic;color:var(--teal); }
-    .rec-line.on { opacity:1;transform:translateY(0); }
-    .rec-close { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(18px,2.2vw,24px);font-weight:300;font-style:italic;color:var(--muted);margin-top:44px;line-height:1.75;opacity:0;transition:opacity 0.8s ease 0.3s; }
-    .rec-close.on { opacity:1; }
-    .rec-cta { margin-top:48px;opacity:0;transform:translateY(16px);transition:opacity 0.7s ease 0.4s,transform 0.7s ease 0.4s; }
-    .rec-cta.on { opacity:1;transform:translateY(0); }
-    .btn-dark { display:inline-flex;align-items:center;gap:10px;background:var(--tp);color:var(--cream);text-decoration:none;font-family:'Outfit',sans-serif;font-size:15px;font-weight:500;border-radius:100px;padding:18px 44px;letter-spacing:0.02em;transition:all 0.2s ease; }
-    .btn-dark:hover { transform:translateY(-2px);background:#2A1F1A; }
-    .btn-dark .arr { transition:transform 0.2s ease; }
-    .btn-dark:hover .arr { transform:translateX(4px); }
-
-    /* ARCHETYPES */
-    .archetypes { background:var(--forest);padding:112px 52px;border-top:1px solid rgba(196,166,110,0.1); }
-    .arch-hd { text-align:center;margin-bottom:56px; }
-    .s-label { font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:block; }
-    .s-hl { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,4.5vw,54px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:rgba(255,255,255,0.9); }
-    .s-hl em { font-style:italic;color:var(--teal); }
-    .s-sub { font-size:16px;font-weight:300;color:rgba(255,255,255,0.38);line-height:1.8;max-width:460px;margin:16px auto 0; }
-    .arch-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:44px; }
-    .a-card { border-radius:20px;padding:32px 28px;position:relative;overflow:hidden;cursor:pointer;transition:transform 0.25s ease,box-shadow 0.25s ease; }
-    .a-card::before { content:'';position:absolute;inset:0;background:linear-gradient(145deg,rgba(255,255,255,0.09),transparent);pointer-events:none; }
-    .a-card::after { content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,0.28),transparent); }
-    .a-card:hover { transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.3); }
-    .a-icon { font-size:26px;margin-bottom:16px;display:block; }
-    .a-name { font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:400;color:#fff;margin-bottom:8px; }
-    .a-truth { font-size:13px;font-weight:300;color:rgba(255,255,255,0.68);line-height:1.6;font-style:italic; }
-    .arch-cta { text-align:center; }
-    .arch-prompt { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(18px,2.2vw,24px);font-weight:300;font-style:italic;color:rgba(255,255,255,0.42);margin-bottom:28px;line-height:1.6; }
-    .btn-outline { display:inline-flex;align-items:center;gap:8px;color:var(--teal);text-decoration:none;font-family:'Outfit',sans-serif;font-size:15px;font-weight:500;border:1.5px solid rgba(42,157,143,0.32);border-radius:100px;padding:16px 38px;letter-spacing:0.02em;transition:all 0.2s ease; }
-    .btn-outline:hover { background:rgba(42,157,143,0.07);border-color:var(--teal);transform:translateY(-1px); }
-    .arch-note { font-size:12px;color:rgba(255,255,255,0.2);font-weight:300;margin-top:12px;display:block; }
-
-    /* DIFFERENCE — replaces manifesto + stats */
-    .difference { background:var(--cream);padding:112px 52px; }
-    .diff-inner { max-width:900px;margin:0 auto; }
-    .diff-hd { margin-bottom:64px; }
-    .diff-grid { display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start; }
-    .diff-col-label { font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:28px;display:block; }
-    .diff-col-label.before { color:var(--muted); }
-    .diff-col-label.after { color:var(--teal); }
-    .diff-item { padding:18px 0;border-bottom:1px solid var(--border);font-size:16px;font-weight:300;line-height:1.6; }
-    .diff-item.before { color:var(--ts); }
-    .diff-item.after { color:var(--tp);font-family:'Cormorant Garamond',Georgia,serif;font-size:18px; }
-    .diff-item.after em { font-style:italic;color:var(--teal); }
-    .diff-item:last-child { border-bottom:none; }
-    .diff-pull { margin-top:64px;padding:32px 40px;background:rgba(42,157,143,0.06);border:1px solid rgba(42,157,143,0.14);border-radius:16px;text-align:center; }
-    .diff-pull p { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(20px,2.5vw,28px);font-weight:300;font-style:italic;color:var(--teal);line-height:1.65; }
-
-    /* HOW IT WORKS — condensed */
-    .how { background:var(--forest);padding:112px 52px;border-top:1px solid rgba(196,166,110,0.1); }
-    .how-inner { max-width:900px;margin:0 auto; }
-    .how-hd { text-align:center;margin-bottom:64px; }
-    .how-hl { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(32px,4vw,48px);font-weight:300;line-height:1.15;letter-spacing:-0.02em;color:rgba(255,255,255,0.9); }
-    .how-hl em { font-style:italic;color:var(--teal); }
-    .how-steps { display:grid;grid-template-columns:repeat(3,1fr);gap:28px; }
-    .step { background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:32px 28px;opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease; }
-    .step.on { opacity:1;transform:translateY(0); }
-    .step-n { font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block; }
-    .step-bar { width:28px;height:2px;border-radius:1px;background:var(--teal);margin-bottom:16px; }
-    .step-name { font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:300;color:rgba(255,255,255,0.9);margin-bottom:10px;letter-spacing:-0.01em; }
-    .step-desc { font-size:13px;font-weight:300;color:rgba(255,255,255,0.38);line-height:1.75; }
-
-    /* RECEIPT */
-    .receipt-s { background:var(--cream);padding:112px 52px; }
-    .receipt-wrap { max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center; }
-    .receipt-card { background:var(--forest);border-radius:24px;padding:40px;border:1px solid rgba(196,166,110,0.12);position:relative;overflow:hidden; }
-    .receipt-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent); }
-    .r-label { font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:block; }
-    .r-entry { display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.05); }
-    .r-entry:last-child { border-bottom:none; }
-    .r-day { font-size:11px;font-weight:300;color:rgba(255,255,255,0.22);min-width:40px;padding-top:3px;letter-spacing:0.04em;flex-shrink:0; }
-    .r-dot { width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:6px; }
-    .r-text { font-size:13px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.6; }
-    .r-text strong { color:rgba(255,255,255,0.82);font-weight:400;display:block; }
-    .receipt-content {}
-    .receipt-hl { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,3.5vw,44px);font-weight:300;line-height:1.15;letter-spacing:-0.02em;color:var(--tp);margin-bottom:20px; }
-    .receipt-hl em { font-style:italic;color:var(--teal); }
-    .receipt-body { font-size:16px;font-weight:300;color:var(--ts);line-height:1.85;margin-bottom:28px; }
-    .receipt-pull { background:rgba(42,157,143,0.06);border:1px solid rgba(42,157,143,0.14);border-radius:12px;padding:20px 24px;margin-bottom:32px; }
-    .receipt-pull p { font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:300;font-style:italic;color:var(--teal);line-height:1.65; }
-
-    /* CLOSE */
-    .close-s { background:#0A1A16;padding:160px 52px;text-align:center;position:relative;overflow:hidden;border-top:1px solid rgba(196,166,110,0.08); }
-    .close-bg { position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(42,157,143,0.07) 0%,transparent 65%); }
-    .close-arc { position:absolute;border-radius:50%;border:1px solid rgba(42,157,143,0.05);pointer-events:none; }
-    .close-inner { position:relative;z-index:2;max-width:660px;margin:0 auto; }
-    .close-label { font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:36px;display:block; }
-    .close-hl { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(48px,7vw,88px);font-weight:300;line-height:1.0;letter-spacing:-0.03em;color:rgba(255,255,255,0.92);margin-bottom:28px; }
-    .close-hl em { font-style:italic;color:var(--teal); }
-    .close-sub { font-size:16px;font-weight:300;color:rgba(255,255,255,0.32);line-height:1.9;margin-bottom:56px;max-width:480px;margin-left:auto;margin-right:auto; }
-    .close-note { font-size:12px;font-weight:300;color:rgba(255,255,255,0.16);margin-top:20px;letter-spacing:0.06em; }
-
-    /* FOOTER */
-    footer { background:#070E0C;padding:48px 52px 32px;border-top:1px solid rgba(255,255,255,0.04); }
-    .ft-inner { max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.05);flex-wrap:wrap;gap:20px; }
-    .ft-tag { font-size:13px;font-weight:300;color:rgba(255,255,255,0.22);margin-top:6px; }
-    .ft-links { display:flex;gap:22px;align-items:center;flex-wrap:wrap; }
-    .ft-link { font-size:13px;font-weight:300;color:rgba(255,255,255,0.28);text-decoration:none;transition:color 0.2s ease; }
-    .ft-link:hover { color:rgba(255,255,255,0.62); }
-    .ft-bottom { max-width:1100px;margin:22px auto 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px; }
-    .ft-copy { font-size:11px;color:rgba(255,255,255,0.16); }
-    .ft-disc { font-size:11px;color:rgba(255,255,255,0.12);max-width:480px;line-height:1.65; }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
-    @keyframes goldPulse { 0%,100%{filter:drop-shadow(0 0 8px rgba(196,166,110,0.45));}50%{filter:drop-shadow(0 0 16px rgba(196,166,110,0.7));} }
-    @keyframes scrollPulse { 0%,100%{opacity:0.4;transform:scaleY(1);}50%{opacity:0.7;transform:scaleY(1.08);} }
-
-    /* SCROLL REVEAL */
-    .r { opacity:0;transform:translateY(18px);transition:opacity 0.7s ease,transform 0.7s ease; }
-    .r.on { opacity:1;transform:translateY(0); }
-    .d1 { transition-delay:0.1s; }
-    .d2 { transition-delay:0.2s; }
-    .d3 { transition-delay:0.3s; }
-    .d4 { transition-delay:0.4s; }
-
-    /* RESPONSIVE */
-    @media(max-width:768px){
-      nav { padding:18px 24px; }
-      .hero { padding:120px 24px 80px; }
-      .recognition,.archetypes,.difference,.how,.receipt-s,.close-s { padding:80px 24px; }
-      .arch-grid { grid-template-columns:1fr 1fr; }
-      .diff-grid { grid-template-columns:1fr; }
-      .how-steps { grid-template-columns:1fr; }
-      .receipt-wrap { grid-template-columns:1fr; }
-      footer { padding:40px 24px 28px; }
+    .card-title {
+      font-family: var(--F-display);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 10px;
+      line-height: 1.2;
     }
-    @media(max-width:480px){
-      .arch-grid { grid-template-columns:1fr; }
+
+    .card-body {
+      font-family: var(--F-body);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--white-mid);
+      line-height: 1.75;
+    }
+
+    /* ── Archetypes strip ── */
+    .archetypes-section {
+      padding: 100px 24px;
+      text-align: center;
+      background: linear-gradient(to bottom, transparent, var(--green-mid), transparent);
+    }
+
+    .arch-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 48px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .arch-pill {
+      border-radius: 100px;
+      padding: 10px 20px;
+      font-family: var(--F-body);
+      font-size: 13px;
+      font-weight: 400;
+      border: 1px solid;
+      transition: all 0.2s;
+      cursor: default;
+    }
+
+    /* ── Receipt / proof section ── */
+    .proof-section {
+      padding: 100px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .receipt-card {
+      background: var(--green-card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 40px;
+      margin-top: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .receipt-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .receipt-line1 {
+      font-family: var(--F-display);
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white-mid);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .receipt-line2 {
+      font-family: var(--F-display);
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .receipt-days {
+      font-family: var(--F-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--white-low);
+    }
+
+    .receipt-wordmark {
+      position: absolute;
+      bottom: 20px; right: 24px;
+      font-family: var(--F-display);
+      font-size: 14px;
+      color: var(--white-low);
+    }
+
+    /* ── Final CTA ── */
+    .final-section {
+      padding: 120px 24px 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .final-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse at 50% 50%, rgba(42,157,143,0.1) 0%, transparent 65%);
+    }
+
+    .final-h2 {
+      font-family: var(--F-display);
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .final-h2 em { font-style: italic; color: var(--teal); }
+
+    .final-sub {
+      font-family: var(--F-body);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--white-mid);
+      line-height: 1.75;
+      max-width: 460px;
+      margin: 0 auto 48px;
+      position: relative;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 32px 40px;
+      border-top: 1px solid var(--white-dim);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-fine {
+      font-size: 11px;
+      color: var(--white-low);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .what-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr !important; }
+      .final-section { padding: 80px 24px 60px; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+      .free-paid-grid { grid-template-columns: 1fr !important; }
     }
   </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+  <!-- Nav -->
+  <nav>
+    <a href="/" class="wordmark"><span class="mun">mun</span><span class="macron">ē</span></a>
+    <a href="/quiz" class="nav-cta">Find my munē type →</a>
+  </nav>
 
-<!-- NAV -->
-<nav id="nav">
-  <a href="/" class="wordmark"><span class="mun">mun</span><span class="eb">ē</span></a>
-  <a href="https://mune-app.vercel.app/quiz" class="nav-btn">Find my type →</a>
-</nav>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <!-- Arc rings -->
+    <div class="arc-ring" style="width:600px;height:600px;top:-200px;left:50%;transform:translateX(-50%);animation-delay:0s;"></div>
+    <div class="arc-ring" style="width:900px;height:900px;top:-350px;left:50%;transform:translateX(-50%);animation-delay:1s;"></div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-arc" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
-  <div class="hero-arc" style="width:900px;height:900px;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+    <p class="hero-eyebrow fu0" style="color:var(--gold-br);">The knowledge you were never given</p>
 
-  <p class="hero-eyebrow">The knowledge you were never given</p>
+    <h1 class="hero-h1 fu1">
+      Most financial tools<br/>
+      show you what happened.<br/>
+      <em>They don't tell you<br/>why it keeps happening.</em><br/>
+      <span style="color:#FFFFFF;font-style:normal;"><span style="color:#FFFFFF;">mun</span><span style="color:var(--gold-br);animation:goldGlow 3.5s ease infinite;display:inline-block;">ē</span> does — and shows you how to stop it.</span>
+    </h1>
 
-  <h1 class="hero-h1">You make money.<br/><em>So why does it still feel like it disappears?</em></h1>
+    <p class="hero-sub fu2">
+      There is a pattern behind your money.<br/>
+      You just have not seen it yet.
+    </p>
 
-  <p class="hero-h2">munē tells you exactly why.</p>
-
-  <p class="hero-sub">In 2 minutes, find your financial type — and see the system that finally makes sense of your money.</p>
-
-  <div class="hero-cta">
-    <a href="https://mune-app.vercel.app/quiz" class="btn-primary">
-      Find my munē type <span class="arr">→</span>
-    </a>
-    <p class="hero-note">2 minutes · No account needed · Free to start</p>
-  </div>
-
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-  </div>
-</section>
-
-<!-- RECOGNITION — pain section -->
-<section class="recognition">
-  <div class="recognition-inner">
-    <span class="rec-label">Sound familiar?</span>
-
-    <p class="rec-line r">You have saved before. <em>Then something came up.</em></p>
-    <p class="rec-line r">You have reset before. <em>Then the month got away from you.</em></p>
-    <p class="rec-line r">You have said this time will be different. <em>Then it was not.</em></p>
-    <p class="rec-line r">You make good money. <em>And still feel like you are behind.</em></p>
-
-    <p class="rec-close r">That is not a willpower problem. That is a system problem.<br/>And a system can be fixed.</p>
-
-    <div class="rec-cta r">
-      <a href="https://mune-app.vercel.app/quiz" class="btn-dark">
-        Find out what's actually happening <span class="arr">→</span>
-      </a>
+    <div class="fu3">
+      <a href="/quiz" class="hero-cta">Find my munē type →</a>
+      <p class="hero-fine">2 minutes · No account needed · Free to start</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ARCHETYPES -->
-<section class="archetypes">
-  <div class="arch-hd r">
-    <span class="s-label">Six financial types. One is yours.</span>
-    <h2 class="s-hl">You already know<br/><em>which one you are.</em></h2>
-    <p class="s-sub">Most people do. Take 2 minutes and see it confirmed — along with exactly what it means for your money.</p>
-  </div>
+  <!-- What munē is -->
+  <section class="what-section">
+    <p class="section-label reveal">What munē actually does</p>
+    <h2 class="reveal reveal-d1" style="font-family:var(--F-display);font-size:clamp(32px,5vw,56px);font-weight:300;line-height:1.1;max-width:700px;">
+      Three things nobody else does.<br/>
+      <span style="font-style:italic;color:var(--teal);">In that order.</span>
+    </h2>
 
-  <div class="arch-grid">
-    <div class="a-card r" style="background:linear-gradient(145deg,#3A4258,#2C3347);">
-      <span class="a-icon">🌫</span>
-      <p class="a-name">The Fog</p>
-      <p class="a-truth">"I know something's wrong. I just can't bring myself to look."</p>
+    <div class="what-grid">
+      <div class="what-card reveal reveal-d1">
+        <div class="card-number">01</div>
+        <div class="card-title">Shows you what's actually driving it</div>
+        <p class="card-body">
+          Six financial archetypes. You have one. It is not a personality label — it is the specific behavioral pattern running your money right now. The Fog. The Spark. The Flame. The Current. The Wave. The Tide.
+        </p>
+      </div>
+      <div class="what-card reveal reveal-d2">
+        <div class="card-number">02</div>
+        <div class="card-title">Gives you one move to follow</div>
+        <p class="card-body">
+          Not a budget. Not a twelve-step plan. One behavioral move — specific to your pattern and your real numbers — that you follow once a day. That is the entire system.
+        </p>
+      </div>
+      <div class="what-card reveal reveal-d3">
+        <div class="card-number">03</div>
+        <div class="card-title">Shows you the proof</div>
+        <p class="card-body">
+          The Receipt. A permanent, timestamped record of what changed. Not how much you saved — what actually shifted in how you relate to money. The only financial platform that proves it worked.
+        </p>
+      </div>
     </div>
-    <div class="a-card r d1" style="background:linear-gradient(145deg,#6B4020,#502F18);">
-      <span class="a-icon">⚡</span>
-      <p class="a-name">The Spark</p>
-      <p class="a-truth">"I know what I make. I just spend it before my bills see it."</p>
-    </div>
-    <div class="a-card r d2" style="background:linear-gradient(145deg,#5C2A1E,#451E15);">
-      <span class="a-icon">🔥</span>
-      <p class="a-name">The Flame</p>
-      <p class="a-truth">"I save everything but I'm still scared I won't have enough."</p>
-    </div>
-    <div class="a-card r d1" style="background:linear-gradient(145deg,#1A4A44,#123530);">
-      <span class="a-icon">🌊</span>
-      <p class="a-name">The Current</p>
-      <p class="a-truth">"I'm building. I just want to make sure I'm building right."</p>
-    </div>
-    <div class="a-card r d2" style="background:linear-gradient(145deg,#1A4040,#122E2E);">
-      <span class="a-icon">〰️</span>
-      <p class="a-name">The Wave</p>
-      <p class="a-truth">"My income isn't predictable. My system has to be."</p>
-    </div>
-    <div class="a-card r d3" style="background:linear-gradient(145deg,#1A3848,#102835);">
-      <span class="a-icon">🌙</span>
-      <p class="a-name">The Tide</p>
-      <p class="a-truth">"I have a steady check. It just never seems like enough."</p>
-    </div>
-  </div>
+  </section>
 
-  <div class="arch-cta r">
-    <p class="arch-prompt">Most people already know. Take the 2 minutes and see for real.</p>
-    <a href="https://mune-app.vercel.app/quiz" class="btn-primary">
-      Find my type <span class="arr">→</span>
-    </a>
-    <span class="arch-note">2 minutes · No account needed</span>
-  </div>
-</section>
+  <!-- Archetypes -->
+  <section class="archetypes-section">
+    <p class="section-label reveal">The six financial archetypes</p>
+    <h2 class="reveal reveal-d1" style="font-family:var(--F-display);font-size:clamp(28px,4vw,48px);font-weight:300;line-height:1.15;max-width:600px;margin:0 auto;">
+      One of these is you.<br/>
+      <span style="font-style:italic;color:var(--white-mid);">You will know which one immediately.</span>
+    </h2>
+    <p class="reveal reveal-d2" style="font-family:var(--F-body);font-size:15px;color:var(--white-mid);font-weight:300;margin:20px auto 0;max-width:480px;line-height:1.7;">
+      You already recognize yourself in one of these.
+    </p>
 
-<!-- DIFFERENCE -->
-<section class="difference">
-  <div class="diff-inner">
-    <div class="diff-hd r">
-      <span class="s-label" style="color:var(--teal);">What makes munē different</span>
-      <h2 class="s-hl" style="color:var(--tp);font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,4.5vw,52px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;">
-        Every other tool starts<br/>with your money.<br/><em style="color:var(--teal);">munē starts with you.</em>
-      </h2>
+    <div class="arch-grid">
+      <div class="arch-pill reveal" style="color:#5A6278;border-color:#5A627840;background:rgba(90,98,120,0.08);">"I know something's wrong. I just can't look." — <strong>The Fog</strong></div>
+      <div class="arch-pill reveal reveal-d1" style="color:#B87333;border-color:#B8733340;background:rgba(184,115,51,0.08);">"I spend it before my bills see it." — <strong>The Spark</strong></div>
+      <div class="arch-pill reveal reveal-d2" style="color:#A04830;border-color:#A0483040;background:rgba(160,72,48,0.08);">"I save everything and I'm still scared." — <strong>The Flame</strong></div>
+      <div class="arch-pill reveal reveal-d1" style="color:#2A9D8F;border-color:#2A9D8F40;background:rgba(42,157,143,0.08);">"I'm building. I want to make sure it's right." — <strong>The Current</strong></div>
+      <div class="arch-pill reveal reveal-d2" style="color:#2A8080;border-color:#2A808040;background:rgba(42,128,128,0.08);">"My income isn't consistent. My system has to be." — <strong>The Wave</strong></div>
+      <div class="arch-pill reveal reveal-d3" style="color:#2A5F78;border-color:#2A5F7840;background:rgba(42,95,120,0.08);">"Steady check. Never seems like enough." — <strong>The Tide</strong></div>
     </div>
 
-    <div class="diff-grid">
+    <div class="reveal reveal-d2" style="margin-top:40px;">
+      <a href="/quiz" class="hero-cta" style="font-size:15px;padding:16px 36px;">Find yours — 2 minutes →</a>
+    </div>
+  </section>
+
+  <!-- The Receipt / Proof -->
+  <section class="proof-section">
+    <p class="section-label reveal">The Receipt</p>
+    <h2 class="reveal reveal-d1" style="font-family:var(--F-display);font-size:clamp(28px,4vw,48px);font-weight:300;line-height:1.15;max-width:600px;margin:0 auto;">
+      The only financial platform<br/>
+      <em style="color:var(--teal);">that proves it worked.</em>
+    </h2>
+    <p class="reveal reveal-d2" style="font-family:var(--F-body);font-size:14px;color:var(--white-mid);line-height:1.8;max-width:480px;margin:16px auto 0;">
+      Every action you take in munē writes a permanent, timestamped entry. When enough of them stack — the system surfaces your arc. Where you started. What you did. What changed.
+    </p>
+
+    <p class="reveal reveal-d2" style="font-family:var(--F-display);font-size:20px;font-weight:300;font-style:italic;color:var(--white-mid);margin:32px auto 0;max-width:480px;">This is what happens when the system holds.</p>
+    <div class="receipt-card reveal reveal-d3">
+      <p class="receipt-line1">"I was afraid I'd never feel safe with money."</p>
+      <p class="receipt-line2">Now I have room.</p>
+      <p class="receipt-days">14 days of following one rule.</p>
+      <div class="receipt-wordmark">mun<span style="color:var(--gold);">ē</span></div>
+    </div>
+  </section>
+
+
+  <!-- Features -->
+  <section style="padding:100px 24px;max-width:1100px;margin:0 auto;">
+    <p class="section-label reveal" style="text-align:center;">How the system works</p>
+    <h2 class="reveal reveal-d1" style="font-family:var(--F-display);font-size:clamp(28px,4vw,48px);font-weight:300;line-height:1.15;max-width:600px;margin:0 auto 16px;text-align:center;">
+      Everything you need.<br/>
+      <span style="font-style:italic;color:var(--teal);">Nothing you don't.</span>
+    </h2>
+    <p class="reveal reveal-d2" style="font-family:var(--F-body);font-size:14px;color:var(--white-mid);text-align:center;max-width:460px;margin:0 auto 60px;line-height:1.75;">
+      This is not a set of features. It is one system — shown in different moments of your financial life.
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;" class="features-grid reveal">
+
+      <div class="what-card reveal reveal-d1">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(42,157,143,0.15);border:1px solid rgba(42,157,143,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2A9D8F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="card-title" style="font-size:18px;">Daily Edge</div>
+        <p class="card-body">One behavioral instruction every day — drawn from your archetype, your pattern, and your Blueprint. Not a notification. A decision point.</p>
+      </div>
+
+      <div class="what-card reveal reveal-d2">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(42,157,143,0.15);border:1px solid rgba(42,157,143,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2A9D8F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="card-title" style="font-size:18px;">The Blueprint</div>
+        <p class="card-body">Your income allocation system. Every dollar gets a job before you can touch it. Built around your real numbers — not a generic percentage template.</p>
+      </div>
+
+      <div class="what-card reveal reveal-d3">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(42,157,143,0.15);border:1px solid rgba(42,157,143,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2A9D8F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="card-title" style="font-size:18px;">Ask munē</div>
+        <p class="card-body">A financial guide that already knows you — your archetype, your pattern, your numbers. Plain language explanations of how money actually works, specific to your situation. Not advice. Understanding.</p>
+      </div>
+
+      <div class="what-card reveal reveal-d1">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(196,166,110,0.12);border:1px solid rgba(196,166,110,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4A66E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="card-title" style="font-size:18px;">The Munē Moment</div>
+        <p class="card-body">Upload a bank statement. munē reads it, names the pattern running your money, and connects it to your archetype. This is where the system stops being general and starts being yours.</p>
+      </div>
+
+      <div class="what-card reveal reveal-d2">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(196,166,110,0.12);border:1px solid rgba(196,166,110,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4A66E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div class="card-title" style="font-size:18px;">The Vision</div>
+        <p class="card-body">Set a financial destination. munē tells you honestly whether you are ready to move toward it — and what needs to be in place first. No false timelines.</p>
+      </div>
+
+      <div class="what-card reveal reveal-d3">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(196,166,110,0.12);border:1px solid rgba(196,166,110,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4A66E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+        </div>
+        <div class="card-title" style="font-size:18px;">The Receipt</div>
+        <p class="card-body">A permanent, timestamped record of what changed. Not your balance — your behavior. The only proof that something actually shifted. Shareable when you are ready.</p>
+      </div>
+
+    </div>
+
+    <!-- Free vs Paid -->
+    <div class="reveal reveal-d2" class="free-paid-grid" style="margin-top:48px;background:var(--green-card);border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:32px;">
       <div>
-        <span class="diff-col-label before">Every other tool</span>
-        <p class="diff-item before">Shows you what you spent</p>
-        <p class="diff-item before">Assumes a steady paycheck</p>
-        <p class="diff-item before">Gives the same advice to everyone</p>
-        <p class="diff-item before">Tracks the symptom</p>
-        <p class="diff-item before">Tells you to spend less</p>
-      </div>
-      <div>
-        <span class="diff-col-label after">munē</span>
-        <p class="diff-item after"><em>Diagnoses why</em> it keeps happening</p>
-        <p class="diff-item after">Built for how you <em>actually</em> earn</p>
-        <p class="diff-item after">Personalized to your financial type</p>
-        <p class="diff-item after">Fixes the <em>system</em></p>
-        <p class="diff-item after">Gives you the <em>structure</em> to stop reacting</p>
-      </div>
-    </div>
-
-    <div class="diff-pull r">
-      <p>"You are not bad with money. Your system just was not built for how you actually use it."</p>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="how">
-  <div class="how-inner">
-    <div class="how-hd r">
-      <h2 class="how-hl">Three steps.<br/><em>One complete system.</em></h2>
-    </div>
-
-    <div class="how-steps">
-      <div class="step r">
-        <span class="step-n">Step 01</span>
-        <div class="step-bar"></div>
-        <p class="step-name">Find your type</p>
-        <p class="step-desc">Five questions. Two minutes. munē identifies your financial archetype — the psychological pattern behind how you make decisions with money. Everything is built around who you actually are.</p>
-      </div>
-      <div class="step r d1">
-        <span class="step-n">Step 02</span>
-        <div class="step-bar"></div>
-        <p class="step-name">See your moment</p>
-        <p class="step-desc">Drop a bank statement. munē extracts the pattern — not the transactions — and diagnoses exactly why your money feels the way it does. Income, obligations, behavioral flags, and the one system move that changes it.</p>
-      </div>
-      <div class="step r d2">
-        <span class="step-n">Step 03</span>
-        <div class="step-bar"></div>
-        <p class="step-name">Build your system</p>
-        <p class="step-desc">Your Blueprint assigns every dollar a job before you can spend it wrong. Your Floor protects you. Ask munē answers the financial question nobody ever sat down with you to explain. The system starts holding what you used to carry alone.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- THE RECEIPT -->
-<section class="receipt-s">
-  <div class="receipt-wrap">
-    <div class="receipt-card r">
-      <span class="r-label">The Receipt · Day 30</span>
-      <div class="r-entry">
-        <span class="r-day">Day 1</span>
-        <div class="r-dot"></div>
-        <div class="r-text">
-          <strong>Floor set. $847.</strong>
-          That number makes looking feel safe for the first time.
+        <p style="font-family:var(--F-body);font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--white-low);margin-bottom:16px;">Free</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <p style="font-family:var(--F-body);font-size:13px;color:var(--white-mid);font-weight:300;display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--teal);margin-top:2px;">✓</span> Archetype quiz + reveal</p>
+          <p style="font-family:var(--F-body);font-size:13px;color:var(--white-mid);font-weight:300;display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--teal);margin-top:2px;">✓</span> Daily Edge — one move per day</p>
+          <p style="font-family:var(--F-body);font-size:13px;color:var(--white-mid);font-weight:300;display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--teal);margin-top:2px;">✓</span> Blueprint structure</p>
+          <p style="font-family:var(--F-body);font-size:13px;color:var(--white-mid);font-weight:300;display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--teal);margin-top:2px;">✓</span> Ask munē — 3 messages per day</p>
         </div>
       </div>
-      <div class="r-entry">
-        <span class="r-day">Day 7</span>
-        <div class="r-dot"></div>
-        <div class="r-text">
-          <strong>First statement analyzed.</strong>
-          Obligation lock. 68% spoken for before a single decision.
-        </div>
-      </div>
-      <div class="r-entry">
-        <span class="r-day">Day 14</span>
-        <div class="r-dot"></div>
-        <div class="r-text">
-          <strong>Blueprint live.</strong>
-          Every dollar has a job. Guilt Free Number: $1,240/month.
-        </div>
-      </div>
-      <div class="r-entry">
-        <span class="r-day">Day 30</span>
-        <div class="r-dot" style="background:var(--gold);"></div>
-        <div class="r-text">
-          <strong>First month closed.</strong>
-          Protected $400 before it disappeared. Emergency fund started.
+      <div style="border-left:1px solid rgba(255,255,255,0.07);padding-left:32px;">
+        <p style="font-family:var(--F-display);font-size:15px;font-weight:300;font-style:italic;color:var(--white-mid);margin-bottom:8px;">This is where the system becomes yours.</p><p style="font-family:var(--F-body);font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">munē Personal — $9.99/mo</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <p style="font-family:var(--F-body);font-size:13px;color:var(--white-mid);font-weight:300;display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--gold);margin-top:2px;">✓</span> Munē Moment — your actual pattern named from your real statement</p>
+          <p style="font-family:var(--F-body);font-size:13px;color:var(--white-mid);font-weight:300;display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--gold);margin-top:2px;">✓</span> Blueprint built from your real numbers — not assumptions</p>
+          <p style="font-family:var(--F-body);font-size:13px;color:var(--white-mid);font-weight:300;display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--gold);margin-top:2px;">✓</span> Ask munē — unlimited, with full context of your pattern</p>
+          <p style="font-family:var(--F-body);font-size:13px;color:var(--white-mid);font-weight:300;display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--gold);margin-top:2px;">✓</span> Daily Edge drawn from your actual data — not archetype defaults</p>
+          <p style="font-family:var(--F-body);font-size:13px;color:var(--white-mid);font-weight:300;display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--gold);margin-top:2px;">✓</span> The Receipt arc — your transformation in your own words</p>
+          <p style="font-family:var(--F-body);font-size:13px;color:var(--white-mid);font-weight:300;display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--gold);margin-top:2px;">✓</span> Vision with readiness engine — honest timeline, no false promises</p>
+          <p style="font-family:var(--F-body);font-size:13px;color:var(--white-mid);font-weight:300;display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--gold);margin-top:2px;">✓</span> Cancel anytime · 3 taps · No price increases without notice</p>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="receipt-content r d1">
-      <span class="s-label" style="color:var(--teal);">munē proves it worked</span>
-      <h2 class="receipt-hl">This is what it looks like<br/><em>when it finally works.</em></h2>
-      <p class="receipt-body">Every action you take in munē creates a permanent record. Not a streak. Not a score. A timestamped proof that something real changed. Specific, dated, and yours.</p>
-      <div class="receipt-pull">
-        <p>"The Receipt is what you show yourself when you forget how far you have come."</p>
-      </div>
-      <a href="https://mune-app.vercel.app/quiz" class="btn-dark">
-        Start building your receipt <span class="arr">→</span>
-      </a>
+  <!-- Final CTA -->
+  <section class="final-section">
+    <div class="final-bg"></div>
+    <h2 class="final-h2 reveal">
+      The knowledge<br/>
+      <em style="color:var(--gold-br);">you were never given.</em>
+    </h2>
+    <p class="final-sub reveal reveal-d1">
+      Two minutes. Five questions. The most honest look at your relationship with money you have ever taken.
+    </p>
+    <p class="reveal reveal-d2" style="font-family:var(--F-body);font-size:13px;color:var(--teal);font-weight:400;letter-spacing:0.06em;margin:0 auto 32px;opacity:0.85;">
+      This is how we find your actual pattern.
+    </p>
+    <div class="reveal reveal-d3">
+      <a href="/quiz" class="hero-cta">Find my munē type →</a>
+      <p class="hero-fine" style="margin-top:12px;">Free to start · No credit card needed · Takes 2 minutes</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CLOSE -->
-<section class="close-s">
-  <div class="close-bg"></div>
-  <div class="close-arc" style="width:480px;height:480px;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
-  <div class="close-arc" style="width:780px;height:780px;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+  <!-- Footer -->
+  <footer>
+    <a href="/" class="wordmark" style="font-size:20px;"><span class="mun">mun</span><span class="macron">ē</span></a>
+    <p class="footer-fine">
+      © 2026 Mune Technologies Inc. · <a href="https://getmune.com" style="color:var(--teal);text-decoration:none;">getmune.com</a><br/>
+      The knowledge you were never given. Finally made for you.
+    </p>
+  </footer>
 
-  <div class="close-inner">
-    <span class="close-label r">Finally made for you</span>
-    <h2 class="close-hl r d1">The cycle<br/><em>stops here.</em></h2>
-    <p class="close-sub r d2">For the people who have been doing everything right and still feel behind. For the people who never had anyone sit down with them and explain how any of this actually works. For everyone who deserved this knowledge from the beginning.</p>
-    <div class="r d3">
-      <a href="https://mune-app.vercel.app/quiz" class="btn-primary" style="font-size:16px;padding:20px 56px;">
-        Find my munē type <span class="arr">→</span>
-      </a>
-    </div>
-    <p class="close-note r d4">Free to start · No credit card · 2 minutes</p>
-  </div>
-</section>
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting) {
+          e.target.classList.add('visible')
+          observer.unobserve(e.target)
+        }
+      })
+    }, { threshold: 0.15 })
 
-<!-- FOOTER -->
-<footer>
-  <div class="ft-inner">
-    <div>
-      <a href="/" class="wordmark"><span class="mun">mun</span><span class="eb">ē</span></a>
-      <p class="ft-tag">The knowledge you were never given. Finally made for you.</p>
-    </div>
-    <div class="ft-links">
-      <a href="https://mune-app.vercel.app/quiz" class="ft-link">Find my munē type</a>
-      <a href="https://munehunter.gumroad.com/l/getmune" class="ft-link">Transformation Workbook</a>
-      <a href="/privacy" class="ft-link">Privacy</a>
-      <a href="/terms" class="ft-link">Terms</a>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <p class="ft-copy">© 2026 Mune Technologies Inc. · getmune.com</p>
-    <p class="ft-disc">munē provides financial education and behavioral guidance — not licensed financial advice. Consult a qualified professional for decisions specific to your situation.</p>
-  </div>
-</footer>
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+  </script>
 
-<script>
-(function(){
-
-  // CURSOR
-  var cursor = document.getElementById('cursor');
-  var ring   = document.getElementById('cursorRing');
-  var mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',function(e){
-    mx=e.clientX; my=e.clientY;
-    cursor.style.left=mx-4+'px';
-    cursor.style.top=my-4+'px';
-  });
-  (function loop(){
-    rx+=(mx-rx-16)*0.12; ry+=(my-ry-16)*0.12;
-    ring.style.left=rx+'px'; ring.style.top=ry+'px';
-    requestAnimationFrame(loop);
-  })();
-  document.querySelectorAll('a,button').forEach(function(el){
-    el.addEventListener('mouseenter',function(){ cursor.style.transform='scale(2.5)'; ring.style.transform='scale(1.4)'; ring.style.borderColor='rgba(42,157,143,0.65)'; });
-    el.addEventListener('mouseleave',function(){ cursor.style.transform='scale(1)'; ring.style.transform='scale(1)'; ring.style.borderColor='rgba(42,157,143,0.35)'; });
-  });
-
-  // NAV
-  var nav=document.getElementById('nav');
-  window.addEventListener('scroll',function(){ nav.classList.toggle('scrolled',window.scrollY>60); });
-
-  // SCROLL REVEAL
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
-  },{threshold:0.08,rootMargin:'0px 0px -24px 0px'});
-  document.querySelectorAll('.r,.rec-line,.rec-close,.rec-cta,.step').forEach(function(el){ io.observe(el); });
-
-})();
-</script>
 </body>
 </html>
