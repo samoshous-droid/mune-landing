@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Commitments — munē</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --jade:#2A9D8F;--gold:#C4A66E;--parchment:#F7F4EF;--white:#FEFCF9;
+  --ink:#2C2C2C;--ink-sec:#5A5248;--muted:#9B9087;--border:#E8E2D9;
+  --grove:#040D09;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Outfit',sans-serif;
+}
+body{font-family:var(--sans);background:var(--parchment);color:var(--ink);line-height:1.7;}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:100;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;background:rgba(247,244,239,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.wordmark{font-family:var(--serif);font-size:22px;font-weight:300;color:var(--ink);text-decoration:none;letter-spacing:-0.3px;}
+.wordmark span{color:var(--jade);}
+.nav-back{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-back:hover{color:var(--ink);}
+
+/* Hero */
+.hero{padding:80px 24px 64px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(42,157,143,0.08) 0%,transparent 65%);pointer-events:none;}
+.hero-label{font-size:11px;font-weight:600;color:var(--jade);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:16px;}
+.hero h1{font-family:var(--serif);font-size:clamp(40px,7vw,72px);font-weight:300;color:var(--ink);line-height:1.0;letter-spacing:-1px;margin-bottom:20px;}
+.hero h1 em{font-style:italic;color:var(--jade);}
+.hero-sub{font-size:17px;color:var(--ink-sec);font-weight:300;line-height:1.8;max-width:580px;margin:0 auto 0;}
+
+/* Commitments grid */
+.commitments{max-width:880px;margin:0 auto;padding:64px 24px 96px;display:flex;flex-direction:column;gap:0;}
+
+.commitment{display:grid;grid-template-columns:48px 1fr;gap:24px;padding:36px 0;border-bottom:1px solid var(--border);align-items:start;}
+.commitment:last-child{border-bottom:none;}
+
+.commitment-number{font-family:var(--serif);font-size:13px;font-weight:300;color:var(--muted);padding-top:6px;font-style:italic;}
+
+.commitment-body{}
+.commitment-tag{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--jade);margin-bottom:8px;}
+.commitment-title{font-family:var(--serif);font-size:clamp(24px,4vw,34px);font-weight:300;color:var(--ink);line-height:1.1;margin-bottom:14px;letter-spacing:-0.3px;}
+.commitment-title em{font-style:italic;}
+.commitment-body p{font-size:15px;color:var(--ink-sec);line-height:1.85;margin-bottom:10px;}
+.commitment-body p:last-child{margin-bottom:0;}
+.commitment-proof{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:12px;color:var(--muted);font-weight:300;}
+.commitment-proof svg{flex-shrink:0;}
+
+/* The Carry feature section */
+.carry-block{background:var(--grove);border-radius:20px;padding:40px;margin:16px 0 0;position:relative;overflow:hidden;}
+.carry-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(42,157,143,0.15) 0%,transparent 55%);pointer-events:none;}
+.carry-label{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--jade);margin-bottom:12px;}
+.carry-title{font-family:var(--serif);font-size:clamp(22px,4vw,32px);font-weight:300;color:rgba(255,255,255,0.92);line-height:1.2;margin-bottom:14px;font-style:italic;}
+.carry-body{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.85;margin-bottom:20px;}
+.carry-line{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--gold);font-style:italic;line-height:1.5;border-top:1px solid rgba(255,255,255,0.08);padding-top:18px;}
+
+/* Closing */
+.closing{max-width:640px;margin:0 auto;padding:0 24px 96px;text-align:center;}
+.closing-title{font-family:var(--serif);font-size:clamp(28px,5vw,44px);font-weight:300;color:var(--ink);line-height:1.1;margin-bottom:16px;font-style:italic;}
+.closing-body{font-size:15px;color:var(--ink-sec);line-height:1.85;margin-bottom:28px;}
+.closing-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.closing-link{font-size:13px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:1px;transition:color 0.2s,border-color 0.2s;}
+.closing-link:hover{color:var(--jade);border-color:var(--jade);}
+
+/* Footer */
+footer{background:var(--grove);padding:40px 24px;text-align:center;}
+.footer-wordmark{font-family:var(--serif);font-size:22px;font-weight:300;color:var(--white);margin-bottom:8px;}
+.footer-wordmark span{color:var(--jade);}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.25);}
+
+@media(max-width:600px){
+  nav{padding:14px 20px;}
+  .commitment{grid-template-columns:32px 1fr;gap:14px;}
+  .carry-block{padding:28px 22px;}
+  .closing-links{flex-direction:column;align-items:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://getmune.com" class="wordmark">mun<span>ē</span></a>
+  <a href="https://getmune.com" class="nav-back">← Back to getmune.com</a>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <p class="hero-label">What we stand for</p>
+  <h1>These are<br><em>our commitments</em><br>to you.</h1>
+  <p class="hero-sub">Not terms. Not disclaimers. Things we are actually going to do — and things we will never do — because this platform only works if you trust it completely.</p>
+</div>
+
+<!-- Commitments -->
+<div class="commitments">
+
+  <!-- 1. The Carry -->
+  <div class="commitment">
+    <div class="commitment-number">01</div>
+    <div class="commitment-body">
+      <div class="commitment-tag">Access</div>
+      <h2 class="commitment-title">If cost is a barrier,<br><em>cost is not the barrier.</em></h2>
+      <p>munē maintains a free access program called The Carry. For every ten people who pay for munē, one person gets in free — someone for whom the cost was a real obstacle.</p>
+      <p>This is not a trial. It is full access. No label. No lesser version. The same platform, the same Advisor, the same system. The only difference is that munē covers the cost.</p>
+      <p>The Carry is funded by munē — not by advertising, not by selling data, and not by charging paying subscribers more. It is simply what we do.</p>
+      <div class="carry-block">
+        <div class="carry-label">How The Carry works</div>
+        <div class="carry-title">Someone held the door open for you.<br>When you're ready — hold it for the next person.</div>
+        <div class="carry-body">Free access stays active as long as the recipient checks in once a week. When their financial health reaches a stable place, they are invited — not required — to subscribe. If they can't yet, The Carry continues.</div>
+        <div class="carry-line">"The cycle stops here."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Plain Language -->
+  <div class="commitment">
+    <div class="commitment-number">02</div>
+    <div class="commitment-body">
+      <div class="commitment-tag">Communication</div>
+      <h2 class="commitment-title">We will never hide<br><em>behind jargon.</em></h2>
+      <p>Every word in munē is written for someone who was never given the financial education they deserved — not for someone who already has it.</p>
+      <p>If a financial term appears in munē without a plain-language explanation, we failed. This is a design principle and a commitment. We will never use complexity to sound authoritative. We will use clarity to actually be useful.</p>
+      <p>The knowledge gap is the problem. Not you.</p>
+      <div class="commitment-proof">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        107+ plain-language financial terms built into the platform
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. No Dark Patterns -->
+  <div class="commitment">
+    <div class="commitment-number">03</div>
+    <div class="commitment-body">
+      <div class="commitment-tag">Integrity</div>
+      <h2 class="commitment-title">Cancellation will always<br><em>be three taps.</em></h2>
+      <p>No confusing flows. No guilt-trip screens. No "are you sure you want to lose all your progress?" No pre-checked boxes. No hidden fees that appear at checkout.</p>
+      <p>If you want to leave, you leave. In three taps. We earn your continued subscription the same way we earned it the first time — by being worth it.</p>
+      <p>The cancel button is proof we trust our product. We do.</p>
+    </div>
+  </div>
+
+  <!-- 4. Algorithm integrity -->
+  <div class="commitment">
+    <div class="commitment-number">04</div>
+    <div class="commitment-body">
+      <div class="commitment-tag">Recommendations</div>
+      <h2 class="commitment-title">We recommend what is best<br><em>for you. Always.</em></h2>
+      <p>munē may earn referral fees when you choose to act on a product recommendation — opening a high-yield savings account, connecting with a fee-only advisor, or similar actions. These fees are earned based on your choice, not your data.</p>
+      <p>The recommendation algorithm is not influenced by what pays us more. The same product would be recommended whether or not a referral relationship exists. When a referral relationship exists, we will tell you.</p>
+      <p>We will never accept payment to promote a product we would not otherwise recommend. The integrity of the recommendation is the product.</p>
+    </div>
+  </div>
+
+  <!-- 5. The Outcome Report -->
+  <div class="commitment">
+    <div class="commitment-number">05</div>
+    <div class="commitment-body">
+      <div class="commitment-tag">Accountability</div>
+      <h2 class="commitment-title">We will publish whether<br><em>munē actually worked.</em></h2>
+      <p>Every year, munē will publish an Annual Outcome Report — real, anonymized data showing whether people who used munē actually improved their financial health. Not engagement metrics. Not app ratings. Outcomes.</p>
+      <p>If the product is working, the report will show it. If it is not, the report will say that too. We are building this platform to prove something — and we will prove it publicly, with data, to anyone who wants to see it.</p>
+      <p>The first Annual Outcome Report is targeted for Year 2. That is the milestone we hold ourselves to.</p>
+      <div class="commitment-proof">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        "We are the only financial platform that proves it worked."
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. The Receipt -->
+  <div class="commitment">
+    <div class="commitment-number">06</div>
+    <div class="commitment-body">
+      <div class="commitment-tag">Your Progress</div>
+      <h2 class="commitment-title">Your proof of progress<br><em>belongs to you.</em></h2>
+      <p>The Receipt is munē's permanent, timestamped record of your financial behavior — every Blueprint you locked, every milestone you hit, every day you followed the system. It is yours.</p>
+      <p>We will never delete your Receipt without your explicit request. We will never use it against you. And if you leave munē, you can take it with you — a full export of your history is available within 30 days of request.</p>
+      <p>The work you did happened. The record stays.</p>
+    </div>
+  </div>
+
+  <!-- 7. The Advisor boundary -->
+  <div class="commitment">
+    <div class="commitment-number">07</div>
+    <div class="commitment-body">
+      <div class="commitment-tag">Honesty</div>
+      <h2 class="commitment-title">The Advisor will always<br><em>tell you when to go further.</em></h2>
+      <p>The Munē Advisor is an AI-powered educational guide — not a licensed financial planner, not an investment advisor, not a therapist. It knows the difference, and it will always tell you when your question has crossed into territory that requires a real licensed professional.</p>
+      <p>When that moment comes, the Advisor does not just stop. It explains why you need a professional, what kind, and helps you find one. munē is designed to take you as far as education can go — and then hand you to the right person to go further.</p>
+      <p>We will never let the AI pretend to be something it is not.</p>
+    </div>
+  </div>
+
+  <!-- 8. Data -->
+  <div class="commitment">
+    <div class="commitment-number">08</div>
+    <div class="commitment-body">
+      <div class="commitment-tag">Data</div>
+      <h2 class="commitment-title">Your financial data<br><em>is never for sale.</em></h2>
+      <p>We will never sell your individual financial data. Not to banks. Not to lenders. Not to insurers. Not to data brokers. Not when we are small. Not if we grow. Not if we are acquired.</p>
+      <p>Your bank statement is deleted the moment we finish reading it. What stays is only what helps munē help you — income totals, spending patterns, behavioral signals. Never individual transactions. Never account numbers. Never institution names.</p>
+      <p>Any data used for research or product improvement is fully anonymized. No individual is ever identifiable.</p>
+      <div class="commitment-proof">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Full details in our <a href="/privacy" style="color:var(--jade);">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. Price transparency -->
+  <div class="commitment">
+    <div class="commitment-number">09</div>
+    <div class="commitment-body">
+      <div class="commitment-tag">Pricing</div>
+      <h2 class="commitment-title">You will never be surprised<br><em>by a higher charge.</em></h2>
+      <p>If munē's subscription price ever changes, you will receive 30 days notice before the new price takes effect. No surprises at renewal. No price buried in an update email.</p>
+      <p>Existing subscribers will always have the option to cancel before a price change applies. We will make that easy — not buried, not a dark pattern, not a guilt trip.</p>
+    </div>
+  </div>
+
+  <!-- 10. The mission -->
+  <div class="commitment">
+    <div class="commitment-number">10</div>
+    <div class="commitment-body">
+      <div class="commitment-tag">The Mission</div>
+      <h2 class="commitment-title">Financial safety.<br><em>Not financial freedom.</em></h2>
+      <p>Financial freedom implies escaping bondage. Financial safety is what you build when you have come far and want to protect it — or when you have never felt safe with money and are finally ready to change that.</p>
+      <p>munē is built around safety. Every feature, every word, every recommendation is tested against one question: does this make the user more financially safe? If the answer is no, it does not ship.</p>
+      <p>This is the mission. It does not change when we raise money. It does not change if we grow. It does not change if someone offers to buy us. The mission is the product.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Closing -->
+<div class="closing">
+  <h2 class="closing-title">These commitments are public<br>because they should be held.</h2>
+  <p class="closing-body">If munē ever breaks one of these commitments, you should know. Share this page. Hold us to it. The accountability is the point.</p>
+  <div class="closing-links">
+    <a href="/privacy" class="closing-link">Privacy Policy</a>
+    <a href="/terms" class="closing-link">Terms of Service</a>
+    <a href="mailto:sam@getmune.com" class="closing-link">Contact us</a>
+    <a href="https://getmune.com" class="closing-link">Back to munē</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-wordmark">mun<span>ē</span></div>
+  <div class="footer-copy">© 2026 Mune Technologies Inc. · The knowledge you were never given.</div>
+</footer>
+
+</body>
+</html>
