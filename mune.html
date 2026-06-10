@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>munē — Financial Identity Technology by Mune Technologies Inc.</title>
+  <meta name="description" content="munē identifies the behavioral pattern behind your money, gives you one rule to follow, and creates a permanent record proving what changed. Six archetypes. One system. Built around who you actually are."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --black:#080808;--off:#0F0F0F;--card:#151515;--border:#202020;--border2:#2A2A2A;
+      --tp:#EFEFEF;--ts:rgba(239,239,239,.52);--tt:rgba(239,239,239,.24);
+      --teal:#2A9D8F;--tl:#33B09F;--gold:#C4A66E;--gb:#E8C97A;
+      --Fd:'Cormorant Garamond',Georgia,serif;--Fb:'Outfit',sans-serif;
+    }
+    html{scroll-behavior:smooth;}
+    body{background:var(--black);color:var(--tp);font-family:var(--Fb);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes glow{0%,100%{opacity:.6}50%{opacity:1}}
+    @keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.9;transform:scale(1.2)}}
+    .fu0{animation:fadeUp .9s cubic-bezier(.22,1,.36,1) .05s both}
+    .fu1{animation:fadeUp .9s cubic-bezier(.22,1,.36,1) .2s both}
+    .fu2{animation:fadeUp .9s cubic-bezier(.22,1,.36,1) .35s both}
+    .fu3{animation:fadeUp .9s cubic-bezier(.22,1,.36,1) .5s both}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:300;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(8,8,8,.97);backdrop-filter:blur(28px);border-bottom:1px solid var(--border);transition:box-shadow .3s;}
+    nav.scrolled{box-shadow:0 2px 32px rgba(0,0,0,.6);}
+    .wm{font-family:var(--Fd);font-size:22px;font-weight:400;color:var(--tp);text-decoration:none;letter-spacing:-.01em;display:flex;align-items:center;gap:11px;}
+    .wm-e{color:var(--gb);animation:glow 4s ease infinite;}
+    .wm-sep{width:1px;height:14px;background:var(--border2);flex-shrink:0;}
+    .wm-co{font-family:var(--Fb);font-size:10px;font-weight:400;color:var(--tt);letter-spacing:.06em;text-transform:uppercase;}
+    .nav-mid{display:flex;align-items:center;gap:2px;position:absolute;left:50%;transform:translateX(-50%);}
+    .nl{font-family:var(--Fb);font-size:13px;font-weight:400;color:var(--ts);text-decoration:none;padding:6px 13px;border-radius:7px;transition:all .15s;white-space:nowrap;}
+    .nl:hover{color:var(--tp);background:rgba(255,255,255,.06);}
+    .nl.act{color:var(--tp);}
+    .nav-r{display:flex;align-items:center;gap:10px;}
+    .nb-g{font-family:var(--Fb);font-size:13px;font-weight:400;color:var(--ts);background:none;border:1px solid var(--border2);border-radius:8px;padding:7px 15px;cursor:pointer;text-decoration:none;transition:all .15s;}
+    .nb-g:hover{color:var(--tp);border-color:rgba(255,255,255,.22);}
+    .nb-p{font-family:var(--Fb);font-size:13px;font-weight:500;color:#fff;background:var(--teal);border:none;border-radius:8px;padding:8px 18px;cursor:pointer;text-decoration:none;transition:all .15s;}
+    .nb-p:hover{background:var(--tl);}
+    .dd{position:relative;}
+    .dd-btn{font-family:var(--Fb);font-size:13px;font-weight:400;color:var(--ts);background:none;border:none;padding:6px 13px;border-radius:7px;cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .15s;}
+    .dd-btn:hover{color:var(--tp);background:rgba(255,255,255,.06);}
+    .dd-btn svg{transition:transform .2s;}
+    .dd:hover .dd-btn svg{transform:rotate(180deg);}
+    .dd-menu{position:absolute;top:calc(100% + 10px);right:0;background:#161616;border:1px solid var(--border2);border-radius:14px;padding:8px;min-width:210px;opacity:0;pointer-events:none;transform:translateY(-6px);transition:all .18s;box-shadow:0 24px 64px rgba(0,0,0,.65);}
+    .dd:hover .dd-menu{opacity:1;pointer-events:all;transform:translateY(0);}
+    .dd-item{display:block;padding:9px 14px;font-family:var(--Fb);font-size:13px;font-weight:400;color:var(--ts);text-decoration:none;border-radius:8px;transition:all .12s;}
+    .dd-item:hover{background:rgba(255,255,255,.07);color:var(--tp);}
+    .dd-lbl{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--tt);padding:8px 14px 4px;}
+    .dd-div{height:1px;background:var(--border);margin:5px 0;}
+
+    .ph{padding:130px 48px 72px;max-width:1280px;margin:0 auto;border-bottom:1px solid var(--border);}
+    .ph-lbl{font-family:var(--Fb);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:22px;display:flex;align-items:center;gap:9px;opacity:.85;}
+    .ph-lbl-line{width:22px;height:1px;background:var(--teal);}
+    .ph-name{font-family:var(--Fd);font-size:clamp(64px,8vw,110px);font-weight:400;line-height:.92;letter-spacing:-.025em;margin-bottom:16px;}
+    .ph-mun{color:var(--tp);}
+    .ph-e{color:var(--gb);animation:glow 4s ease infinite;}
+    .ph-tag{font-family:var(--Fd);font-size:clamp(18px,2.5vw,26px);font-weight:300;font-style:italic;color:var(--ts);margin-bottom:20px;line-height:1.3;}
+    .ph-sub{font-family:var(--Fb);font-size:clamp(15px,1.7vw,17px);font-weight:300;color:var(--ts);line-height:1.82;max-width:540px;margin-bottom:36px;}
+    .ph-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(42,157,143,.1);border:1px solid rgba(42,157,143,.22);border-radius:100px;padding:5px 14px;font-family:var(--Fb);font-size:11px;font-weight:500;color:var(--teal);margin-bottom:28px;}
+    .ph-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s ease infinite;}
+    .ph-btns{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+    .btn-p{font-family:var(--Fb);font-size:15px;font-weight:500;color:#fff;background:var(--teal);border:none;border-radius:10px;padding:16px 30px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;box-shadow:0 1px 0 rgba(255,255,255,.14) inset,0 8px 28px rgba(42,157,143,.38);}
+    .btn-p:hover{background:var(--tl);transform:translateY(-1px);}
+    .btn-g{font-family:var(--Fb);font-size:14px;font-weight:400;color:var(--ts);background:none;border:1px solid var(--border2);border-radius:10px;padding:13px 22px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;}
+    .btn-g:hover{color:var(--tp);border-color:rgba(255,255,255,.26);}
+
+    .sec{max-width:1280px;margin:0 auto;padding:80px 48px;}
+    .sl{font-family:var(--Fb);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--tt);margin-bottom:14px;}
+    .sh{font-family:var(--Fd);font-size:clamp(32px,4vw,52px);font-weight:400;line-height:1.06;letter-spacing:-.015em;color:var(--tp);}
+    .div{height:1px;background:var(--border);}
+
+    .three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-top:52px;}
+    .tc{background:var(--off);padding:40px 32px;}
+    .tc-n{font-family:var(--Fd);font-size:52px;font-weight:400;color:rgba(42,157,143,.18);line-height:1;margin-bottom:20px;}
+    .tc-t{font-family:var(--Fd);font-size:24px;font-weight:400;color:var(--tp);margin-bottom:10px;line-height:1.15;}
+    .tc-b{font-family:var(--Fb);font-size:14px;font-weight:300;color:var(--ts);line-height:1.8;}
+
+    .arch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-top:52px;}
+    .ac{background:var(--off);padding:32px 28px;transition:background .2s;}
+    .ac:hover{background:var(--card);}
+    .ac-name{font-family:var(--Fd);font-size:28px;font-weight:400;color:var(--tp);margin-bottom:8px;line-height:1;}
+    .ac-quote{font-family:var(--Fd);font-size:15px;font-weight:300;font-style:italic;color:var(--ts);line-height:1.5;margin-bottom:14px;}
+    .ac-path{font-family:var(--Fb);font-size:11px;font-weight:400;color:var(--teal);letter-spacing:.06em;}
+
+    .fp{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-top:52px;}
+    .fc{background:var(--off);padding:40px 36px;}
+    .fc-lbl{font-family:var(--Fb);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--tt);margin-bottom:18px;}
+    .fc-price{font-family:var(--Fd);font-size:44px;font-weight:400;color:var(--tp);line-height:1;margin-bottom:5px;}
+    .fc-sub{font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);margin-bottom:28px;}
+    .fr{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;}
+    .fck{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+    .fck-t{background:rgba(42,157,143,.15);border:1px solid rgba(42,157,143,.3);}
+    .fck-g{background:rgba(196,166,110,.12);border:1px solid rgba(196,166,110,.25);}
+    .fl{font-family:var(--Fb);font-size:13px;font-weight:400;color:var(--tp);margin-bottom:2px;}
+    .fs{font-family:var(--Fb);font-size:12px;font-weight:300;color:var(--tt);}
+
+    .rc{background:var(--off);border:1px solid var(--border);border-radius:20px;padding:52px 48px;margin-top:52px;position:relative;overflow:hidden;text-align:center;}
+    .rc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+    .rl1{font-family:var(--Fd);font-size:clamp(20px,3vw,30px);font-weight:300;font-style:italic;color:var(--ts);line-height:1.5;margin-bottom:16px;}
+    .rl2{font-family:var(--Fd);font-size:clamp(28px,4.5vw,52px);font-weight:400;color:var(--tp);line-height:1.1;margin-bottom:18px;}
+    .rm{font-family:var(--Fb);font-size:12px;font-weight:300;color:var(--tt);letter-spacing:.08em;}
+    .rwm{position:absolute;bottom:20px;right:24px;font-family:var(--Fd);font-size:14px;color:var(--tt);}
+
+    footer{background:#050505;border-top:1px solid var(--border);padding:64px 48px 36px;}
+    .ft{max-width:1280px;margin:0 auto;}
+    .ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;padding-bottom:44px;border-bottom:1px solid var(--border);}
+    .ft-brand{font-family:var(--Fd);font-size:21px;font-weight:400;color:var(--tp);text-decoration:none;}
+    .ft-brand-e{color:var(--gb);}
+    .ft-tag{font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);line-height:1.75;margin-top:11px;max-width:270px;}
+    .ft-cl{font-family:var(--Fb);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tt);margin-bottom:18px;}
+    .ft-lk{display:block;font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);text-decoration:none;margin-bottom:12px;transition:color .15s;}
+    .ft-lk:hover{color:var(--tp);}
+    .ft-bot{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;margin-top:26px;}
+    .ft-copy{font-family:var(--Fb);font-size:11px;color:rgba(255,255,255,.16);line-height:1.7;}
+    .ft-legal{font-family:var(--Fb);font-size:11px;color:rgba(255,255,255,.13);max-width:520px;line-height:1.7;}
+
+    .r{opacity:0;transform:translateY(20px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1);}
+    .r.v{opacity:1;transform:translateY(0);}
+    .d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}
+
+    @media(max-width:960px){
+      nav{padding:0 20px;}
+      .nav-mid{display:none;}
+      .wm-sep,.wm-co{display:none;}
+      .ph,.sec{padding-left:24px;padding-right:24px;}
+      .three{grid-template-columns:1fr;}
+      .arch-grid{grid-template-columns:1fr 1fr;}
+      .fp{grid-template-columns:1fr;}
+      .ft-top{grid-template-columns:1fr 1fr;gap:36px;}
+      .ft-bot{flex-direction:column;}
+      .ph-btns{flex-direction:column;align-items:flex-start;}
+    }
+    @media(max-width:540px){
+      .arch-grid{grid-template-columns:1fr;}
+      .ft-top{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="wm">mun<span class="wm-e">ē</span><span class="wm-sep"></span><span class="wm-co">Mune Technologies Inc.</span></a>
+  <div class="nav-mid">
+    <a href="/mune"      class="nl act">munē</a>
+    <a href="/solutions" class="nl">Solutions</a>
+    <a href="/platform"  class="nl">Platform</a>
+    <a href="/company"   class="nl">Company</a>
+    <a href="/investors" class="nl">Investors</a>
+    <div class="dd">
+      <button class="dd-btn">More<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="dd-menu">
+        <div class="dd-lbl">Legal</div>
+        <a href="/privacy"     class="dd-item">Privacy Policy</a>
+        <a href="/terms"       class="dd-item">Terms of Service</a>
+        <a href="/commitments" class="dd-item">Our Commitments</a>
+        <div class="dd-div"></div>
+        <div class="dd-lbl">Contact</div>
+        <a href="mailto:sam@getmune.com" class="dd-item">sam@getmune.com</a>
+      </div>
+    </div>
+  </div>
+  <div class="nav-r">
+    <a href="https://app.getmune.com/signin" class="nb-g">Sign in</a>
+    <a href="https://app.getmune.com/quiz"   class="nb-p">Open munē →</a>
+  </div>
+</nav>
+
+<div class="ph">
+  <div class="ph-badge fu0"><span class="ph-badge-dot"></span>Live now · app.getmune.com</div>
+  <p class="ph-lbl fu0"><span class="ph-lbl-line"></span>Financial identity technology · Consumer product</p>
+  <div class="ph-name fu1"><span class="ph-mun">mun</span><span class="ph-e">ē</span></div>
+  <p class="ph-tag fu2">The knowledge you were never given.</p>
+  <p class="ph-sub fu2">munē identifies the behavioral pattern behind your money, gives you one rule to follow, and creates a permanent record proving what changed. Not a tracker. Not a budget. A system built around who you actually are.</p>
+  <div class="ph-btns fu3">
+    <a href="https://app.getmune.com/quiz" class="btn-p">Find my munē type — free →</a>
+    <a href="https://app.getmune.com/signin" class="btn-g">Sign in</a>
+  </div>
+  <p style="font-family:var(--Fb);font-size:12px;color:var(--tt);margin-top:14px;" class="fu3">Free tier always free · Personal at $9.99/mo or $79.99/yr</p>
+</div>
+
+<section class="sec">
+  <p class="sl r">How it works</p>
+  <h2 class="sh r d1" style="max-width:600px;">Three things nobody else does.<br/><em style="font-style:italic;color:var(--ts);">In that order.</em></h2>
+  <div class="three">
+    <div class="tc r d1"><div class="tc-n">01</div><div class="tc-t">Find your pattern</div><p class="tc-b">Six financial archetypes. Five questions. Two minutes. The specific behavioral driver running your money — named in plain language. Not a personality type. The actual pattern.</p></div>
+    <div class="tc r d2"><div class="tc-n">02</div><div class="tc-t">Follow one rule</div><p class="tc-b">Not a budget. One behavioral instruction per day — drawn from your archetype, your real statement data, and your Blueprint. One thing. Every day. That is the entire system.</p></div>
+    <div class="tc r d3"><div class="tc-n">03</div><div class="tc-t">See the proof</div><p class="tc-b">The Receipt. Permanent. Timestamped. Every decision recorded. When enough stack — the system names your arc. Where you started. What you did. What changed. Shareable when you are ready.</p></div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<section class="sec">
+  <p class="sl r">The six archetypes</p>
+  <h2 class="sh r d1" style="max-width:580px;">One of these is you.<br/><em style="font-style:italic;color:var(--ts);">You will know which one immediately.</em></h2>
+  <div class="arch-grid">
+    <div class="ac r d1"><div class="ac-name">The Fog</div><div class="ac-quote">"I know something's wrong. I just can't bring myself to look."</div><div class="ac-path">Path → The Tide</div></div>
+    <div class="ac r d2"><div class="ac-name">The Spark</div><div class="ac-quote">"I know what I make. I just spend it before my bills see it."</div><div class="ac-path">Path → The Tide → The Wave</div></div>
+    <div class="ac r d3"><div class="ac-name">The Flame</div><div class="ac-quote">"I save everything but I'm still scared I won't have enough."</div><div class="ac-path">Path → The Current</div></div>
+    <div class="ac r d1"><div class="ac-name">The Current</div><div class="ac-quote">"I'm building. I just want to make sure I'm building right."</div><div class="ac-path">Path → Legacy Builder</div></div>
+    <div class="ac r d2"><div class="ac-name">The Wave</div><div class="ac-quote">"My income isn't predictable. My system has to be."</div><div class="ac-path">Path → The Current</div></div>
+    <div class="ac r d3"><div class="ac-name">The Tide</div><div class="ac-quote">"I have a steady check. It just never seems like enough."</div><div class="ac-path">Path → The Wave or The Flame</div></div>
+  </div>
+  <div style="margin-top:36px;text-align:center;" class="r d2">
+    <a href="https://app.getmune.com/quiz" class="btn-p">Find yours — 2 minutes →</a>
+    <p style="font-family:var(--Fb);font-size:12px;color:var(--tt);margin-top:10px;">Free · No account needed</p>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<section class="sec">
+  <p class="sl r">Free vs Personal</p>
+  <h2 class="sh r d1" style="max-width:560px;">Start free.<br/><em style="font-style:italic;color:var(--ts);">Go deeper when you're ready.</em></h2>
+  <div class="fp">
+    <div class="fc r d1">
+      <div class="fc-lbl">Free — always</div>
+      <div class="fc-price">$0</div>
+      <div class="fc-sub">No credit card. No expiry.</div>
+      <div class="fr"><div class="fck fck-t"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2A9D8F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="fl">Archetype quiz + reveal</div><div class="fs">Five questions. Your pattern named.</div></div></div>
+      <div class="fr"><div class="fck fck-t"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2A9D8F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="fl">Daily Edge — one move per day</div><div class="fs">Archetype-based behavioral instruction.</div></div></div>
+      <div class="fr"><div class="fck fck-t"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2A9D8F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="fl">Blueprint structure</div><div class="fs">Income allocation framework.</div></div></div>
+      <div class="fr"><div class="fck fck-t"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2A9D8F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="fl">Ask munē — 3 messages per day</div><div class="fs">Financial guidance in plain language.</div></div></div>
+      <div style="margin-top:28px;"><a href="https://app.getmune.com/quiz" class="btn-p" style="width:100%;justify-content:center;">Start free →</a></div>
+    </div>
+    <div class="fc r d2" style="border-left:1px solid var(--border);position:relative;">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);"></div>
+      <div class="fc-lbl" style="color:var(--gold);">munē Personal</div>
+      <div class="fc-price">$9.99<span style="font-family:var(--Fb);font-size:16px;color:var(--tt);font-weight:300;">/mo</span></div>
+      <div class="fc-sub">$79.99/year — 2 months free</div>
+      <div class="fr"><div class="fck fck-g"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#C4A66E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="fl">Munē Moment — statement analysis</div><div class="fs">Upload a statement. Your pattern named from real data.</div></div></div>
+      <div class="fr"><div class="fck fck-g"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#C4A66E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="fl">Blueprint from real numbers</div><div class="fs">Not assumptions. Your actual income allocation.</div></div></div>
+      <div class="fr"><div class="fck fck-g"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#C4A66E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="fl">Ask munē — unlimited</div><div class="fs">Full context of your pattern and numbers.</div></div></div>
+      <div class="fr"><div class="fck fck-g"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#C4A66E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="fl">The Receipt arc</div><div class="fs">Your transformation in your own words. Permanent.</div></div></div>
+      <div class="fr"><div class="fck fck-g"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#C4A66E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="fl">Vision with readiness engine</div><div class="fs">Honest timeline. No false promises.</div></div></div>
+      <div class="fr"><div class="fck fck-g"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#C4A66E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="fl">Cancel anytime · 3 taps</div><div class="fs">No questions. No dark patterns. Ever.</div></div></div>
+      <div style="margin-top:28px;">
+        <a href="https://app.getmune.com/quiz" class="btn-p" style="width:100%;justify-content:center;background:linear-gradient(145deg,#C4A66E,#B8953E);box-shadow:0 8px 28px rgba(196,166,110,.25);">Start munē Personal →</a>
+        <p style="font-family:var(--Fb);font-size:12px;color:var(--tt);margin-top:10px;text-align:center;">7-day trial · No charge until you decide</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<section class="sec">
+  <p class="sl r" style="text-align:center;">The Receipt</p>
+  <h2 class="sh r d1" style="max-width:560px;text-align:center;margin:0 auto 10px;">Not promises.<br/><em style="font-style:italic;color:var(--ts);">Receipts.</em></h2>
+  <p style="font-family:var(--Fb);font-size:15px;font-weight:300;color:var(--ts);line-height:1.8;max-width:480px;margin:0 auto;" class="r d2">Every action in munē writes a permanent timestamped entry. When enough stack — the system names your arc. Shareable when you are ready. This is what the system looks like when it holds.</p>
+  <div class="rc r d3">
+    <p class="rl1">"I was afraid I'd never feel safe with money."</p>
+    <p class="rl2">Now I have room.</p>
+    <p class="rm">14 days · One rule · The Fog → The Tide</p>
+    <div class="rwm">mun<span style="color:var(--gold);">ē</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div class="ft-top">
+      <div>
+        <a href="/" class="ft-brand">mun<span class="ft-brand-e">ē</span></a>
+        <p class="ft-tag">A product of Mune Technologies Inc.<br/>Financial identity technology.<br/>The knowledge you were never given.</p>
+      </div>
+      <div>
+        <p class="ft-cl">Product</p>
+        <a href="/mune"                          class="ft-lk">munē</a>
+        <a href="https://app.getmune.com/quiz"   class="ft-lk">Take the quiz</a>
+        <a href="https://app.getmune.com"        class="ft-lk">Open app</a>
+        <a href="https://app.getmune.com/signin" class="ft-lk">Sign in</a>
+      </div>
+      <div>
+        <p class="ft-cl">Company</p>
+        <a href="/company"   class="ft-lk">About</a>
+        <a href="/platform"  class="ft-lk">Platform</a>
+        <a href="/solutions" class="ft-lk">Solutions</a>
+        <a href="/investors" class="ft-lk">Investors</a>
+        <a href="mailto:sam@getmune.com" class="ft-lk">Contact</a>
+      </div>
+      <div>
+        <p class="ft-cl">Legal</p>
+        <a href="/privacy"     class="ft-lk">Privacy Policy</a>
+        <a href="/terms"       class="ft-lk">Terms of Service</a>
+        <a href="/commitments" class="ft-lk">Our Commitments</a>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p class="ft-copy">© 2026 Mune Technologies Inc. · Delaware C-Corp · EIN on file · getmune.com</p>
+      <p class="ft-legal">munē provides financial education and information only. Nothing on this platform constitutes financial, investment, legal, or tax advice. Mune Technologies Inc. is not a registered investment advisor, broker-dealer, or financial institution.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('v'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.r').forEach(el => obs.observe(el));
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 30);
+  }, { passive: true });
+</script>
+</body>
+</html>

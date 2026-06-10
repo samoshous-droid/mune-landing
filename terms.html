@@ -1,141 +1,146 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terms of Service — mune</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;1,300&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --jade:#2AAE80;--parchment:#F2EEE6;--white:#FEFCF9;
-  --ink:#18130E;--ink-sec:#544B42;--muted:#948578;--border:#DDD5C8;
-  --grove:#040D09;
-  --serif:'Cormorant Garant',Georgia,serif;
-  --sans:'Outfit',sans-serif;
-}
-body{font-family:var(--sans);background:var(--parchment);color:var(--ink);line-height:1.7;}
-nav{position:sticky;top:0;z-index:100;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;background:rgba(242,238,230,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-.wordmark{font-family:var(--serif);font-size:22px;font-weight:300;color:var(--ink);text-decoration:none;}
-.wordmark span{color:var(--jade);}
-.nav-back{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
-.nav-back:hover{color:var(--ink);}
-.container{max-width:720px;margin:0 auto;padding:64px 24px 96px;}
-.doc-label{font-size:11px;font-weight:600;color:var(--jade);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
-h1{font-family:var(--serif);font-size:clamp(32px,5vw,52px);font-weight:300;color:var(--ink);line-height:1.1;margin-bottom:8px;letter-spacing:-0.5px;}
-.effective{font-size:13px;color:var(--muted);margin-bottom:48px;}
-h2{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);margin:40px 0 12px;padding-top:8px;border-top:1px solid var(--border);}
-h2:first-of-type{border-top:none;margin-top:0;}
-p{font-size:15px;color:var(--ink-sec);line-height:1.8;margin-bottom:14px;}
-ul{margin:0 0 14px 20px;}
-li{font-size:15px;color:var(--ink-sec);line-height:1.8;margin-bottom:6px;}
-a{color:var(--jade);text-decoration:none;}
-a:hover{text-decoration:underline;}
-.highlight{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin:24px 0;}
-.highlight p{margin-bottom:0;}
-footer{background:var(--grove);padding:40px 24px;text-align:center;}
-.footer-wordmark{font-family:var(--serif);font-size:22px;font-weight:300;color:var(--white);margin-bottom:8px;}
-.footer-wordmark span{color:var(--jade);}
-.footer-copy{font-size:12px;color:rgba(255,255,255,0.25);}
-</style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terms of Service — Mune Technologies Inc.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--black:#080808;--off:#0F0F0F;--border:#202020;--border2:#2A2A2A;--tp:#EFEFEF;--ts:rgba(239,239,239,.55);--tt:rgba(239,239,239,.26);--teal:#2A9D8F;--tl:#33B09F;--gold:#C4A66E;--gb:#E8C97A;--Fd:'Cormorant Garamond',Georgia,serif;--Fb:'Outfit',sans-serif;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--black);color:var(--tp);font-family:var(--Fb);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+    @keyframes glow{0%,100%{opacity:.6}50%{opacity:1}}
+    nav{position:fixed;top:0;left:0;right:0;z-index:300;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(8,8,8,.97);backdrop-filter:blur(28px);border-bottom:1px solid var(--border);}
+    .wm{font-family:var(--Fd);font-size:22px;font-weight:400;color:var(--tp);text-decoration:none;letter-spacing:-.01em;display:flex;align-items:center;gap:11px;}
+    .wm-e{color:var(--gb);animation:glow 4s ease infinite;}
+    .wm-sep{width:1px;height:14px;background:var(--border2);flex-shrink:0;}
+    .wm-co{font-family:var(--Fb);font-size:10px;font-weight:400;color:var(--tt);letter-spacing:.06em;text-transform:uppercase;}
+    .nav-r{display:flex;align-items:center;gap:10px;}
+    .nb-g{font-family:var(--Fb);font-size:13px;font-weight:400;color:var(--ts);background:none;border:1px solid var(--border2);border-radius:8px;padding:7px 15px;cursor:pointer;text-decoration:none;transition:all .15s;}
+    .nb-g:hover{color:var(--tp);}
+    .nb-p{font-family:var(--Fb);font-size:13px;font-weight:500;color:#fff;background:var(--teal);border:none;border-radius:8px;padding:8px 18px;cursor:pointer;text-decoration:none;transition:all .15s;}
+    .nb-p:hover{background:var(--tl);}
+    .legal-wrap{max-width:760px;margin:0 auto;padding:120px 48px 100px;}
+    .legal-label{font-family:var(--Fb);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;opacity:.85;}
+    .legal-h1{font-family:var(--Fd);font-size:clamp(36px,5vw,64px);font-weight:400;line-height:1.0;letter-spacing:-.02em;color:var(--tp);margin-bottom:12px;}
+    .legal-date{font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);margin-bottom:48px;}
+    .legal-intro{font-family:var(--Fb);font-size:16px;font-weight:300;color:var(--ts);line-height:1.85;margin-bottom:48px;padding:24px 28px;background:var(--off);border:1px solid var(--border);border-radius:14px;border-left:3px solid var(--teal);}
+    .legal-h2{font-family:var(--Fd);font-size:26px;font-weight:400;color:var(--tp);margin-bottom:14px;line-height:1.1;padding-top:44px;border-top:1px solid var(--border);margin-top:44px;}
+    .legal-p{font-family:var(--Fb);font-size:15px;font-weight:300;color:var(--ts);line-height:1.85;margin-bottom:16px;}
+    .legal-ul{list-style:none;margin-bottom:16px;}
+    .legal-ul li{font-family:var(--Fb);font-size:15px;font-weight:300;color:var(--ts);line-height:1.85;margin-bottom:8px;padding-left:18px;position:relative;}
+    .legal-ul li::before{content:'·';position:absolute;left:0;color:var(--teal);}
+    .legal-highlight{background:rgba(42,157,143,.06);border:1px solid rgba(42,157,143,.15);border-radius:10px;padding:18px 22px;margin:20px 0;font-family:var(--Fb);font-size:14px;font-weight:300;color:var(--ts);line-height:1.8;}
+    .legal-contact{background:var(--off);border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-top:48px;text-align:center;}
+    .legal-contact p{font-family:var(--Fb);font-size:14px;font-weight:300;color:var(--ts);line-height:1.75;margin-bottom:12px;}
+    .legal-contact a{color:var(--teal);text-decoration:none;}
+    footer{background:#050505;border-top:1px solid var(--border);padding:40px 48px 28px;}
+    .ft{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+    .ft-brand{font-family:var(--Fd);font-size:18px;font-weight:400;color:var(--tp);text-decoration:none;}
+    .ft-brand-e{color:var(--gb);}
+    .ft-copy{font-family:var(--Fb);font-size:11px;color:rgba(255,255,255,.18);line-height:1.7;}
+    .ft-links{display:flex;gap:20px;}
+    .ft-lk{font-family:var(--Fb);font-size:12px;font-weight:300;color:rgba(255,255,255,.28);text-decoration:none;transition:color .15s;}
+    .ft-lk:hover{color:var(--tp);}
+    @media(max-width:760px){nav{padding:0 20px;}.wm-sep,.wm-co{display:none;}.legal-wrap{padding:100px 24px 80px;}footer{padding:32px 24px 24px;}.ft{flex-direction:column;align-items:flex-start;gap:12px;}}
+  </style>
 </head>
 <body>
-
 <nav>
-  <a href="https://getmune.com" class="wordmark">mun<span>e</span></a>
-  <a href="https://getmune.com" class="nav-back">← Back to getmune.com</a>
+  <a href="/" class="wm">mun<span class="wm-e">ē</span><span class="wm-sep"></span><span class="wm-co">Mune Technologies Inc.</span></a>
+  <div class="nav-r">
+    <a href="https://app.getmune.com/signin" class="nb-g">Sign in</a>
+    <a href="https://app.getmune.com/quiz"   class="nb-p">Open munē →</a>
+  </div>
 </nav>
 
-<div class="container">
-  <p class="doc-label">Legal</p>
-  <h1>Terms of Service</h1>
-  <p class="effective">Effective date: April 19, 2026 &nbsp;·&nbsp; Mune Technologies Inc.</p>
+<div class="legal-wrap">
+  <p class="legal-label">Mune Technologies Inc.</p>
+  <h1 class="legal-h1">Terms of Service</h1>
+  <p class="legal-date">Last updated: June 2026 · Effective immediately</p>
 
-  <div class="highlight">
-    <p>The short version: mune provides financial education, not financial advice. Use the platform honestly. Don't misuse it. Pay for what you purchase. We'll do right by you.</p>
+  <div class="legal-intro">
+    These terms govern your use of munē and all products and services offered by Mune Technologies Inc. They are written to be read — not buried. The short version: use munē honestly, do not misuse the platform, and we will do the same for you. If something is unclear, email us.
   </div>
 
-  <h2>Agreement</h2>
-  <p>By accessing getmune.com, completing the mune quiz, joining the waitlist, or purchasing any mune product, you agree to these Terms of Service. If you do not agree, please do not use mune.</p>
-  <p>These terms are between you and Mune Technologies Inc., a Delaware C-Corp ("mune," "we," "us," "our").</p>
+  <h2 class="legal-h2">Who these terms apply to</h2>
+  <p class="legal-p">These Terms of Service apply to all users of munē (app.getmune.com) and the Mune Technologies website (getmune.com), including free tier users, Personal subscribers, and users accessing munē through an employer benefit arrangement.</p>
 
-  <h2>What mune is</h2>
-  <p>mune is a financial education platform. We provide tools, content, and guidance to help you understand your relationship with money and build healthier financial habits.</p>
-  <p><strong>mune is not a financial advisor, investment advisor, broker-dealer, or licensed financial planner.</strong> Nothing on getmune.com or in any mune product constitutes financial, investment, legal, or tax advice. All content is for educational and informational purposes only.</p>
-  <p>Always consult a qualified financial professional before making financial decisions specific to your situation.</p>
-
-  <h2>The mune quiz and waitlist</h2>
-  <p>The mune quiz is free to use. By completing the quiz and providing your email address, you:</p>
-  <ul>
-    <li>Consent to receive your personalized mune Type guide and onboarding email sequence</li>
-    <li>Join the mune waitlist for early app access</li>
-    <li>Agree to our <a href="/privacy">Privacy Policy</a></li>
-  </ul>
-  <p>You may unsubscribe from emails at any time using the link in any email we send.</p>
-
-  <h2>Purchased products</h2>
-  <p>The mune Transformation Workbook and other digital products are sold through Gumroad. By purchasing:</p>
-  <ul>
-    <li>You receive a personal use license for the purchased product</li>
-    <li>You may not reproduce, distribute, resell, or share the product without written permission from Mune Technologies Inc.</li>
-    <li>You may not use mune proprietary content — including the mune Type framework, archetypes, Financial Vitals system, or mune Score methodology — in commercial workshops, courses, or products without a written license agreement</li>
-    <li>Digital products are delivered immediately upon payment and are subject to our refund policy below</li>
+  <h2 class="legal-h2">What munē is and is not</h2>
+  <div class="legal-highlight">munē is a financial education and behavioral wellness platform. It is not a licensed financial advisor, investment advisor, broker-dealer, bank, or financial institution. Nothing in munē constitutes financial, investment, legal, or tax advice. The Munē Advisor is an AI-powered educational guide — not a licensed professional. For decisions specific to your situation, consult a qualified licensed professional.</div>
+  <p class="legal-p">munē provides three types of guidance:</p>
+  <ul class="legal-ul">
+    <li><strong>Financial education:</strong> Plain-language explanations of financial concepts. No restrictions.</li>
+    <li><strong>Personalized education:</strong> Guidance that references your actual data — framed as education, not advice.</li>
+    <li><strong>Licensed advice boundary:</strong> When a question requires a licensed professional, munē says so clearly and helps you find one. We never cross that line.</li>
   </ul>
 
-  <h2>Refund policy</h2>
-  <p>We offer a 30-day money-back guarantee on the Transformation Workbook. If you are not satisfied for any reason, email <a href="mailto:sam@getmune.com">sam@getmune.com</a> within 30 days of purchase and we will issue a full refund. No questions asked.</p>
-  <p>Refunds are processed through Gumroad and may take 5-10 business days to appear.</p>
+  <h2 class="legal-h2">Your account</h2>
+  <p class="legal-p">You are responsible for maintaining the security of your account. munē uses magic links and one-time passwords — we do not store passwords. You agree to provide accurate information and to notify us immediately if you believe your account has been compromised.</p>
+  <p class="legal-p">You must be 18 or older to create a consumer account. munē Jr. accounts for children ages 5–17 must be created and managed by a parent or legal guardian.</p>
 
-  <h2>Founding member access</h2>
-  <p>The first 100 waitlist members who secure founding member pricing ($49 lifetime access) are guaranteed full access to the mune app at that price upon launch. This is a binding commitment. If mune fails to launch, founding members will receive a full refund.</p>
-  <p>Founding member pricing is non-transferable and applies to one individual account.</p>
-
-  <h2>Intellectual property</h2>
-  <p>All mune content, products, and proprietary systems are owned by Mune Technologies Inc. and protected by applicable intellectual property law. This includes:</p>
-  <ul>
-    <li>The mune Type System and all six mune Types</li>
-    <li>The Financial Vitals framework</li>
-    <li>The mune Score methodology</li>
-    <li>The Floor number concept and Guilt Free Number concept</li>
-    <li>The Income Smoothing Account system</li>
-    <li>All associated content, copy, and design</li>
+  <h2 class="legal-h2">Subscriptions and billing</h2>
+  <ul class="legal-ul">
+    <li><strong>Free tier:</strong> Always free. No credit card required. No expiry.</li>
+    <li><strong>Personal — Monthly:</strong> $9.99 per month. Billed monthly. Cancel anytime.</li>
+    <li><strong>Personal — Annual:</strong> $79.99 per year. Billed annually. Cancel anytime for a prorated refund of the unused portion.</li>
+    <li><strong>Trial extensions:</strong> One 7-day trial extension per account, available once.</li>
   </ul>
-  <p>You may share getmune.com links. You may not reproduce or distribute mune content without written permission.</p>
+  <p class="legal-p">We process payments through Stripe. Your payment information is handled by Stripe and is never stored by Mune Technologies Inc. directly.</p>
+  <p class="legal-p">We will never increase prices without giving you at least 30 days notice. If we increase prices, you will be given the option to cancel before the new price takes effect.</p>
 
-  <h2>Acceptable use</h2>
-  <p>You agree not to:</p>
-  <ul>
-    <li>Use mune for any unlawful purpose</li>
-    <li>Attempt to reverse engineer, scrape, or copy any part of the platform</li>
-    <li>Impersonate mune or Mune Technologies Inc.</li>
-    <li>Provide false information when completing the quiz or joining the waitlist</li>
-    <li>Use mune in any way that could damage, disable, or impair the platform</li>
+  <h2 class="legal-h2">Cancellation</h2>
+  <p class="legal-p">You can cancel your subscription at any time in three taps from your Profile screen. No questions asked. No cancellation fees. No dark patterns. Your access continues until the end of your current billing period. Your data remains available to export during that time.</p>
+
+  <h2 class="legal-h2">The Carry</h2>
+  <p class="legal-p">The Carry is munē's access program for users for whom cost is a genuine barrier. It provides full Personal access at no charge. The Carry is funded by paying subscribers — one Carry access for every ten Personal subscribers. Carry access is not a right and is granted at Mune Technologies' discretion. Carry users agree to at least one check-in per week and to exit the program when their financial situation stabilizes.</p>
+
+  <h2 class="legal-h2">Employer benefit arrangements</h2>
+  <p class="legal-p">If you access munē through an employer benefit arrangement, your individual data is never shared with your employer. Employers receive only anonymized, aggregate reports about their workforce's financial wellness progress. Your personal financial data, archetype, and Receipt remain private to you.</p>
+
+  <h2 class="legal-h2">Acceptable use</h2>
+  <p class="legal-p">You agree not to:</p>
+  <ul class="legal-ul">
+    <li>Use munē for any unlawful purpose or in violation of any applicable law.</li>
+    <li>Attempt to gain unauthorized access to any part of the platform or any other user's data.</li>
+    <li>Upload bank statements or financial documents that belong to someone else without their explicit consent.</li>
+    <li>Use munē to provide financial advice to third parties in a commercial capacity.</li>
+    <li>Attempt to reverse engineer, scrape, or systematically extract data from the platform.</li>
   </ul>
 
-  <h2>Disclaimer of warranties</h2>
-  <p>mune is provided "as is" and "as available" without warranties of any kind, express or implied. We do not warrant that the platform will be uninterrupted, error-free, or free of harmful components. We do not warrant any specific financial outcome from using mune products or following mune guidance.</p>
+  <h2 class="legal-h2">Intellectual property</h2>
+  <p class="legal-p">The munē platform, the Financial Archetype Framework, the Munē Score system, the Financial Vitals system, and all associated content are the intellectual property of Mune Technologies Inc. Three provisional patents are pending at USPTO.</p>
+  <p class="legal-p">Your personal data — your Receipt entries, your Blueprint, your arc — belongs to you. You can export it and take it with you at any time.</p>
 
-  <h2>Limitation of liability</h2>
-  <p>To the maximum extent permitted by law, Mune Technologies Inc. shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of mune, including but not limited to financial losses resulting from decisions made based on mune content.</p>
-  <p>Our total liability to you for any claim arising from these terms or your use of mune shall not exceed the amount you paid to mune in the 12 months preceding the claim.</p>
+  <h2 class="legal-h2">Limitation of liability</h2>
+  <p class="legal-p">Mune Technologies Inc. provides munē as a financial education tool. We are not liable for financial decisions you make based on information provided by the platform. To the maximum extent permitted by law, our liability is limited to the amount you paid us in the 12 months preceding any claim.</p>
 
-  <h2>Governing law</h2>
-  <p>These terms are governed by the laws of the State of Delaware, without regard to conflict of law principles. Any disputes shall be resolved in the courts of Delaware.</p>
+  <h2 class="legal-h2">Changes to these terms</h2>
+  <p class="legal-p">We will notify you by email at least 30 days before making material changes to these terms. If you do not agree with the changes, you may cancel your account before the changes take effect.</p>
 
-  <h2>Changes to these terms</h2>
-  <p>We may update these terms as mune grows. When we make material changes, we will update the effective date and notify waitlist members by email. Continued use of mune after changes constitutes acceptance of the updated terms.</p>
+  <h2 class="legal-h2">Governing law</h2>
+  <p class="legal-p">These terms are governed by the laws of the State of Delaware. Any disputes will be resolved in the courts of Delaware, except where prohibited by applicable law.</p>
 
-  <h2>Contact</h2>
-  <p>Mune Technologies Inc.<br>
-  <a href="mailto:sam@getmune.com">sam@getmune.com</a><br>
-  getmune.com</p>
+  <div class="legal-contact">
+    <p>Questions about these terms?</p>
+    <p><a href="mailto:sam@getmune.com">sam@getmune.com</a> · We respond within 48 hours.</p>
+  </div>
 </div>
 
 <footer>
-  <div class="footer-wordmark">mun<span>e</span></div>
-  <div class="footer-copy">© 2026 Mune Technologies Inc. · The knowledge you were never given.</div>
+  <div class="ft">
+    <a href="/" class="ft-brand">mun<span class="ft-brand-e">ē</span></a>
+    <div class="ft-links">
+      <a href="/privacy"     class="ft-lk">Privacy</a>
+      <a href="/terms"       class="ft-lk">Terms</a>
+      <a href="/commitments" class="ft-lk">Commitments</a>
+      <a href="/company"     class="ft-lk">Company</a>
+    </div>
+    <p class="ft-copy">© 2026 Mune Technologies Inc. · All rights reserved.</p>
+  </div>
 </footer>
-
 </body>
 </html>
