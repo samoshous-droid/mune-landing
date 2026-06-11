@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Company — Mune Technologies</title>
+  <meta name="description" content="Mune Technologies is building financial identity technology for the communities traditional finance forgot."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--bg:#060606;--tp:#F2F0EC;--ts:rgba(242,240,236,.48);--tt:rgba(242,240,236,.2);--teal:#2A9D8F;--tl:#38B5A5;--gold:#C4A66E;--gb:#E8C97A;--border:rgba(242,240,236,.08);--Fd:'Cormorant Garamond',Georgia,serif;--Fb:'Outfit',sans-serif;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--tp);font-family:var(--Fb);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;}
+    #cursor{position:fixed;width:8px;height:8px;background:var(--teal);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:screen;}
+    #cursor.expand{width:40px;height:40px;background:rgba(42,157,143,.15);border:1px solid var(--teal);}
+    @keyframes glow{0%,100%{opacity:.6}50%{opacity:1}}
+    nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:60px;}
+    .wm{font-family:var(--Fd);font-size:22px;font-weight:400;color:var(--tp);text-decoration:none;letter-spacing:-.01em;}
+    .wm-e{color:var(--gb);animation:glow 4s ease infinite;}
+    .nav-links{display:flex;align-items:center;}
+    .nl{font-family:var(--Fb);font-size:12px;font-weight:400;color:var(--tt);text-decoration:none;padding:8px 16px;letter-spacing:.06em;transition:color .25s;text-transform:uppercase;}
+    .nl:hover,.nl.act{color:var(--tp);}
+    .nav-cta{font-family:var(--Fb);font-size:12px;font-weight:500;color:var(--bg);background:var(--tp);border:none;border-radius:100px;padding:9px 22px;cursor:pointer;text-decoration:none;transition:all .2s;letter-spacing:.04em;}
+    .nav-cta:hover{background:var(--teal);color:#fff;}
+
+    /* HERO */
+    .ph{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:140px 52px 80px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+    .ph-bg{position:absolute;top:50%;right:-40px;transform:translateY(-50%);font-family:var(--Fd);font-size:clamp(200px,30vw,420px);font-weight:400;font-style:italic;color:rgba(242,240,236,.018);pointer-events:none;user-select:none;letter-spacing:-.03em;line-height:1;}
+    .ph-label{font-family:var(--Fb);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--tt);margin-bottom:20px;}
+    .ph-h1{font-family:var(--Fd);font-size:clamp(52px,7.5vw,108px);font-weight:400;line-height:.95;letter-spacing:-.025em;color:var(--tp);margin-bottom:28px;max-width:800px;}
+    .ph-h1 em{font-style:italic;color:var(--ts);}
+    .ph-bottom{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;}
+    .ph-sub{font-family:var(--Fb);font-size:16px;font-weight:300;color:var(--ts);line-height:1.82;max-width:440px;}
+    .ph-fact{font-family:var(--Fd);font-size:clamp(52px,7vw,88px);font-weight:400;color:var(--teal);line-height:1;margin-bottom:6px;}
+    .ph-fact-lbl{font-family:var(--Fb);font-size:12px;font-weight:300;color:var(--tt);letter-spacing:.06em;}
+
+    /* SECTIONS */
+    .sec{padding:100px 52px;border-bottom:1px solid var(--border);}
+    .sec-label{font-family:var(--Fb);font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--tt);margin-bottom:14px;}
+    .sec-h{font-family:var(--Fd);font-size:clamp(36px,5vw,64px);font-weight:400;line-height:1.0;letter-spacing:-.02em;color:var(--tp);}
+    .sec-h em{font-style:italic;color:var(--ts);}
+
+    /* STORY */
+    .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:56px;}
+    .pull{font-family:var(--Fd);font-size:clamp(26px,3.5vw,42px);font-weight:400;font-style:italic;line-height:1.25;letter-spacing:-.01em;color:var(--tp);margin-bottom:32px;}
+    .story-p{font-family:var(--Fb);font-size:15px;font-weight:300;color:var(--ts);line-height:1.85;margin-bottom:20px;}
+    .btn-link{font-family:var(--Fb);font-size:14px;font-weight:400;color:var(--teal);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:opacity .15s;}
+    .btn-link:hover{opacity:.7;}
+
+    /* STATS */
+    .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:52px;}
+    .stat{background:var(--bg);padding:36px 28px;}
+    .stat-n{font-family:var(--Fd);font-size:44px;font-weight:400;color:var(--teal);line-height:1;margin-bottom:8px;}
+    .stat-l{font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);line-height:1.5;}
+
+    /* BELIEFS */
+    .beliefs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);margin-top:52px;}
+    .bel{background:var(--bg);padding:36px 30px;}
+    .bel-n{font-family:var(--Fd);font-size:13px;color:var(--tt);margin-bottom:16px;}
+    .bel-t{font-family:var(--Fd);font-size:21px;font-weight:400;color:var(--tp);margin-bottom:10px;line-height:1.15;letter-spacing:-.01em;}
+    .bel-b{font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--ts);line-height:1.8;}
+    .bel-teal{background:rgba(42,157,143,.04);border-left:1px solid var(--teal);}
+    .bel-teal .bel-n,.bel-teal .bel-t{color:var(--teal);}
+
+    /* TIMELINE */
+    .timeline{display:flex;flex-direction:column;gap:1px;background:var(--border);margin-top:52px;}
+    .te{background:var(--bg);display:grid;grid-template-columns:160px 1fr;gap:40px;padding:32px 40px;transition:background .2s;}
+    .te:hover{background:rgba(42,157,143,.03);}
+    .te-date{font-family:var(--Fb);font-size:12px;font-weight:500;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;padding-top:4px;}
+    .te-title{font-family:var(--Fd);font-size:22px;font-weight:400;color:var(--tp);margin-bottom:7px;line-height:1.1;}
+    .te-body{font-family:var(--Fb);font-size:14px;font-weight:300;color:var(--ts);line-height:1.75;}
+
+    /* CONTACT */
+    .contact-card{background:rgba(42,157,143,.04);border:1px solid rgba(42,157,143,.12);padding:60px;text-align:center;margin-top:52px;position:relative;}
+    .contact-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--teal),transparent);}
+    .contact-h{font-family:var(--Fd);font-size:clamp(32px,4.5vw,56px);font-weight:400;font-style:italic;color:var(--tp);margin-bottom:14px;line-height:1.1;}
+    .contact-s{font-family:var(--Fb);font-size:15px;font-weight:300;color:var(--ts);line-height:1.8;max-width:440px;margin:0 auto 32px;}
+    .btn-p{font-family:var(--Fb);font-size:14px;font-weight:500;color:#fff;background:var(--teal);border:none;border-radius:100px;padding:14px 30px;cursor:pointer;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-p:hover{background:var(--tl);}
+
+    footer{background:var(--bg);border-top:1px solid var(--border);padding:52px;}
+    .ft{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid var(--border);}
+    .ft-brand{font-family:var(--Fd);font-size:22px;font-weight:400;color:var(--tp);text-decoration:none;}
+    .ft-brand-e{color:var(--gb);}
+    .ft-tag{font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);line-height:1.75;margin-top:12px;max-width:240px;}
+    .ft-cl{font-family:var(--Fb);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tt);margin-bottom:18px;opacity:.6;}
+    .ft-lk{display:block;font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);text-decoration:none;margin-bottom:11px;transition:color .15s;}
+    .ft-lk:hover{color:var(--tp);}
+    .ft-bot{max-width:1400px;margin:28px auto 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+    .ft-copy{font-family:var(--Fb);font-size:11px;color:rgba(242,240,236,.15);line-height:1.7;}
+    .ft-ll{font-family:var(--Fb);font-size:11px;font-weight:300;color:rgba(242,240,236,.2);text-decoration:none;margin-left:20px;transition:color .15s;}
+    .ft-ll:hover{color:var(--tp);}
+
+    .fu{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);}
+    .fu.in{opacity:1;transform:translateY(0);}
+    .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+    @media(max-width:1024px){
+      nav,.ph,.sec,footer{padding-left:28px;padding-right:28px;}
+      .ph-bottom,.story-grid{grid-template-columns:1fr;}
+      .stats-row{grid-template-columns:1fr 1fr;}
+      .beliefs{grid-template-columns:1fr;}
+      .te{grid-template-columns:1fr;}
+      .ft{grid-template-columns:1fr 1fr;gap:36px;}
+      .contact-card{padding:40px 28px;}
+      body{cursor:auto;}#cursor{display:none;}
+    }
+    @media(max-width:640px){.stats-row{grid-template-columns:1fr;}.ft{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div id="cursor"></div>
+<nav>
+  <a href="/" class="wm">mun<span class="wm-e">ē</span></a>
+  <div class="nav-links">
+    <a href="/mune"      class="nl">munē</a>
+    <a href="/solutions" class="nl">Solutions</a>
+    <a href="/platform"  class="nl">Platform</a>
+    <a href="/company"   class="nl act">Company</a>
+    <a href="/investors" class="nl">Investors</a>
+  </div>
+  <a href="https://app.getmune.com/quiz" class="nav-cta">Open munē</a>
+</nav>
+
+<div class="ph">
+  <div class="ph-bg">origin</div>
+  <p class="ph-label fu">Mune Technologies</p>
+  <h1 class="ph-h1 fu d1">Who we are.<br/><em>Why we exist.</em></h1>
+  <div class="ph-bottom fu d2">
+    <p class="ph-sub">A company building financial identity technology for the communities traditional finance has always overlooked. The problem was never the people. The knowledge gap was. We close it.</p>
+    <div>
+      <div class="ph-fact">57M</div>
+      <p class="ph-fact-lbl">Americans underserved by traditional financial services</p>
+    </div>
+  </div>
+</div>
+
+<section class="sec">
+  <p class="sec-label fu">The founding story</p>
+  <div class="story-grid">
+    <div class="fu d1">
+      <p class="pull">"The problem was never the people. The knowledge gap was. We close it."</p>
+      <a href="https://app.getmune.com/quiz" class="btn-p">Experience munē →</a>
+    </div>
+    <div class="fu d2">
+      <p class="story-p">Communities with generational wealth pass down financial knowledge the same way they pass down assets — through dinner table conversations, role models, and access to professional guidance. Everyone else was left to figure it out alone.</p>
+      <p class="story-p">Mune Technologies was founded by someone who grew up experiencing this gap firsthand — and spent years delivering financial literacy workshops through EAARA to the communities this category is built for. Those workshops gave people knowledge. What they didn't have was a system to implement it.</p>
+      <p class="story-p">munē closes that loop. The workshops became the product. The community became the founding users. The problem became the mission. The mission became the company.</p>
+      <p class="story-p" style="color:var(--teal);font-weight:400;">Financial identity technology is the category we are building. We are the only ones standing in it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <p class="sec-label fu">The market we serve</p>
+  <h2 class="sec-h fu d1" style="max-width:600px;">The gap is documented.<br/><em>And measurable.</em></h2>
+  <div class="stats-row fu d2">
+    <div class="stat"><div class="stat-n">57M</div><div class="stat-l">Americans underserved by traditional financial services</div></div>
+    <div class="stat"><div class="stat-n">72%</div><div class="stat-l">say money is their #1 source of anxiety</div></div>
+    <div class="stat"><div class="stat-n">63%</div><div class="stat-l">cannot cover a $400 emergency</div></div>
+    <div class="stat"><div class="stat-n">$45B</div><div class="stat-l">total addressable market in financial wellness</div></div>
+  </div>
+</section>
+
+<section class="sec">
+  <p class="sec-label fu">What we believe</p>
+  <h2 class="sec-h fu d1" style="max-width:560px;">Five principles.<br/><em>Every product built on them.</em></h2>
+  <div class="beliefs fu d2">
+    <div class="bel"><div class="bel-n">01</div><div class="bel-t">Financial safety — not financial freedom.</div><p class="bel-b">Freedom implies escaping bondage. Safety is what you build when you have never had it, or when you have come far and want to protect it. Every word in every product reflects this.</p></div>
+    <div class="bel"><div class="bel-n">02</div><div class="bel-t">The problem was never the people.</div><p class="bel-b">The financial knowledge gap is structural, not personal. The system was not designed for everyone. We build the system that was always missing.</p></div>
+    <div class="bel"><div class="bel-n">03</div><div class="bel-t">Identity before instruction.</div><p class="bel-b">Before you can change what someone does with money, you have to understand who they are with money. Identity first. Every time.</p></div>
+    <div class="bel"><div class="bel-n">04</div><div class="bel-t">Transformation requires proof.</div><p class="bel-b">Every platform makes promises. We show receipts. Permanent. Timestamped. The only proof that something actually shifted — not a balance, a behavior.</p></div>
+    <div class="bel"><div class="bel-n">05</div><div class="bel-t">Build honestly. Always.</div><p class="bel-b">We never present aspirational status as current status. The trust we earn through honesty is the only moat that cannot be bought or manufactured.</p></div>
+    <div class="bel bel-teal"><div class="bel-n">—</div><div class="bel-t">The cycle stops here.</div><p class="bel-b">The next generation starts further ahead because their parents had access to what Mune Technologies provides. That is the only goal that matters.</p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <p class="sec-label fu">How we got here</p>
+  <h2 class="sec-h fu d1" style="max-width:560px;">Built before the product.<br/><em>In every way that matters.</em></h2>
+  <div class="timeline fu d2">
+    <div class="te"><div class="te-date">Before</div><div><p class="te-title">Years of workshop delivery through EAARA</p><p class="te-body">Financial literacy workshops delivered in person to working-class communities. The content that became munē was tested on real people with real financial struggles before a single line of code was written.</p></div></div>
+    <div class="te"><div class="te-date">2025</div><div><p class="te-title">Thirty framework documents. Complete IP foundation.</p><p class="te-body">Six archetypes. Five financial vitals. The Munē Score. The behavioral architecture. The voice guide. The complete product definition was built before the first line of app code.</p></div></div>
+    <div class="te"><div class="te-date">2026 · Q1</div><div><p class="te-title">Mune Technologies incorporated. munē built and deployed.</p><p class="te-body">App built and deployed at app.getmune.com. Supabase database live. Claude API wired for munē Advisor. Stripe integrated. Real product. Real users.</p></div></div>
+    <div class="te"><div class="te-date">Now</div><div><p class="te-title">Soft launch. EAARA founding users. First receipts.</p><p class="te-body">The founding community — built through years of in-person workshop delivery — becomes the first users. The loop between workshop and product is now closed.</p></div></div>
+    <div class="te"><div class="te-date">Next</div><div><p class="te-title">1,000 paying subscribers. Employer channel. Seed round.</p><p class="te-body">At 1,000 subscribers — product-market fit is demonstrated, retention data exists, and every subsequent conversation is credible.</p></div></div>
+  </div>
+</section>
+
+<section class="sec" style="border-bottom:none;">
+  <p class="sec-label fu">Get in touch</p>
+  <div class="contact-card fu d1">
+    <p class="contact-h">Let's talk.</p>
+    <p class="contact-s">Employer inquiries, investor relations, partnership opportunities, workshop bookings, press. We respond directly.</p>
+    <a href="mailto:sam@getmune.com" class="btn-p">sam@getmune.com →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div><a href="/" class="ft-brand">mun<span class="ft-brand-e">ē</span></a><p class="ft-tag">Financial identity technology by Mune Technologies. The knowledge you were never given.</p></div>
+    <div><p class="ft-cl">Product</p><a href="/mune" class="ft-lk">munē</a><a href="https://app.getmune.com/quiz" class="ft-lk">Take the quiz</a><a href="https://app.getmune.com" class="ft-lk">Open app</a><a href="https://app.getmune.com/signin" class="ft-lk">Sign in</a></div>
+    <div><p class="ft-cl">Company</p><a href="/company" class="ft-lk">About</a><a href="/platform" class="ft-lk">Platform</a><a href="/solutions" class="ft-lk">Solutions</a><a href="/investors" class="ft-lk">Investors</a></div>
+    <div><p class="ft-cl">Legal</p><a href="/privacy" class="ft-lk">Privacy</a><a href="/terms" class="ft-lk">Terms</a><a href="/commitments" class="ft-lk">Commitments</a></div>
+    <div><p class="ft-cl">Contact</p><a href="mailto:sam@getmune.com" class="ft-lk">sam@getmune.com</a></div>
+  </div>
+  <div class="ft-bot">
+    <p class="ft-copy">© 2026 Mune Technologies Inc. · getmune.com</p>
+    <div><a href="/privacy" class="ft-ll">Privacy</a><a href="/terms" class="ft-ll">Terms</a><a href="/commitments" class="ft-ll">Commitments</a></div>
+    <p class="ft-copy">munē is financial education — not financial advice.</p>
+  </div>
+</footer>
+
+<script>
+  const cursor=document.getElementById('cursor');let mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  function a(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;cursor.style.left=cx+'px';cursor.style.top=cy+'px';requestAnimationFrame(a);}a();
+  document.querySelectorAll('a,button,.bel,.te').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('expand'));el.addEventListener('mouseleave',()=>cursor.classList.remove('expand'));});
+  const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target);}});},{threshold:.1});
+  document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
