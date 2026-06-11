@@ -1,74 +1,12 @@
 {
-  "redirects": [
-    {
-      "source": "/guide",
-      "destination": "/guide.html",
-      "permanent": false
-    },
-    {
-      "source": "/quiz",
-      "destination": "/quiz.html",
-      "permanent": false
-    },
-    {
-      "source": "/privacy",
-      "destination": "/privacy.html",
-      "permanent": false
-    },
-    {
-      "source": "/terms",
-      "destination": "/terms.html",
-      "permanent": false
-    },
-    {
-      "source": "/commitments",
-      "destination": "/commitments.html",
-      "permanent": false
-    },
-    {
-      "source": "/fog-guide",
-      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_fog.pdf",
-      "permanent": false
-    },
-    {
-      "source": "/spark-guide",
-      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_spark.pdf",
-      "permanent": false
-    },
-    {
-      "source": "/flame-guide",
-      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_flame.pdf",
-      "permanent": false
-    },
-    {
-      "source": "/current-guide",
-      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_current.pdf",
-      "permanent": false
-    },
-    {
-      "source": "/wave-guide",
-      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_wave.pdf",
-      "permanent": false
-    },
-    {
-      "source": "/tide-guide",
-      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_preview_tide.pdf",
-      "permanent": false
-    },
-    {
-      "source": "/single-parent-guide",
-      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_overlay_single_parent.pdf",
-      "permanent": false
-    },
-    {
-      "source": "/entrepreneur-guide",
-      "destination": "https://maolkyrlfojkmiuppcsy.supabase.co/storage/v1/object/public/guides/mune_overlay_entrepreneur.pdf",
-      "permanent": false
-    },
-    {
-      "source": "/workbook",
-      "destination": "https://munehunter.gumroad.com/l/getmune",
-      "permanent": false
-    }
+  "rewrites": [
+    { "source": "/mune",        "destination": "/mune.html"        },
+    { "source": "/company",     "destination": "/company.html"     },
+    { "source": "/solutions",   "destination": "/solutions.html"   },
+    { "source": "/platform",    "destination": "/platform.html"    },
+    { "source": "/investors",   "destination": "/investors.html"   },
+    { "source": "/privacy",     "destination": "/privacy.html"     },
+    { "source": "/terms",       "destination": "/terms.html"       },
+    { "source": "/commitments", "destination": "/commitments.html" }
   ]
 }
