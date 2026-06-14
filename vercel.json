@@ -2,7 +2,6 @@
   "rewrites": [
     { "source": "/mune",        "destination": "/mune.html"        },
     { "source": "/company",     "destination": "/company.html"     },
-    { "source": "/solutions",   "destination": "/solutions.html"   },
     { "source": "/platform",    "destination": "/platform.html"    },
     { "source": "/investors",   "destination": "/investors.html"   },
     { "source": "/privacy",     "destination": "/privacy.html"     },
