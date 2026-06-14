@@ -10,14 +10,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    :root{--bg:#060606;--tp:#F2F0EC;--ts:rgba(242,240,236,.48);--tt:rgba(242,240,236,.2);--teal:#2A9D8F;--tl:#38B5A5;--gold:#C4A66E;--gb:#E8C97A;--border:rgba(242,240,236,.08);--Fd:'Cormorant Garamond',Georgia,serif;--Fb:'Outfit',sans-serif;}
+    :root{--bg:#103D29;--tp:#F2F0EC;--ts:rgba(242,240,236,.72);--tt:rgba(242,240,236,.42);--teal:#2A9D8F;--tl:#38B5A5;--gold:#C4A66E;--gb:#E8C97A;--border:rgba(242,240,236,.08);--Fd:'Cormorant Garamond',Georgia,serif;--Fb:'Outfit',sans-serif;}
     html{scroll-behavior:smooth;}
     body{background:var(--bg);color:var(--tp);font-family:var(--Fb);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;}
     #cursor{position:fixed;width:8px;height:8px;background:var(--teal);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:screen;}
     #cursor.expand{width:40px;height:40px;background:rgba(42,157,143,.15);border:1px solid var(--teal);}
     @keyframes glow{0%,100%{opacity:.6}50%{opacity:1}}
     nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:60px;}
-    .wm{font-family:var(--Fd);font-size:22px;font-weight:400;color:var(--tp);text-decoration:none;letter-spacing:-.01em;}
+    .wm{font-family:var(--Fb);font-size:14px;font-weight:500;color:var(--tp);text-decoration:none;letter-spacing:.02em;}
     .wm-e{color:var(--gb);animation:glow 4s ease infinite;}
     .nav-links{display:flex;align-items:center;}
     .nl{font-family:var(--Fb);font-size:12px;font-weight:400;color:var(--tt);text-decoration:none;padding:8px 16px;letter-spacing:.06em;transition:color .25s;text-transform:uppercase;}
@@ -82,15 +82,15 @@
 
     footer{background:var(--bg);border-top:1px solid var(--border);padding:52px;}
     .ft{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid var(--border);}
-    .ft-brand{font-family:var(--Fd);font-size:22px;font-weight:400;color:var(--tp);text-decoration:none;}
+    .ft-brand{font-family:var(--Fb);font-size:15px;font-weight:500;color:var(--tp);text-decoration:none;letter-spacing:.02em;}
     .ft-brand-e{color:var(--gb);}
     .ft-tag{font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);line-height:1.75;margin-top:12px;max-width:240px;}
     .ft-cl{font-family:var(--Fb);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tt);margin-bottom:18px;opacity:.6;}
     .ft-lk{display:block;font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);text-decoration:none;margin-bottom:11px;transition:color .15s;}
     .ft-lk:hover{color:var(--tp);}
     .ft-bot{max-width:1400px;margin:28px auto 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-    .ft-copy{font-family:var(--Fb);font-size:11px;color:rgba(242,240,236,.15);line-height:1.7;}
-    .ft-ll{font-family:var(--Fb);font-size:11px;font-weight:300;color:rgba(242,240,236,.2);text-decoration:none;margin-left:20px;transition:color .15s;}
+    .ft-copy{font-family:var(--Fb);font-size:11px;color:rgba(242,240,236,.35);line-height:1.7;}
+    .ft-ll{font-family:var(--Fb);font-size:11px;font-weight:300;color:rgba(242,240,236,.42);text-decoration:none;margin-left:20px;transition:color .15s;}
     .ft-ll:hover{color:var(--tp);}
 
     .fu{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);}
@@ -112,13 +112,13 @@
 <body>
 <div id="cursor"></div>
 <nav>
-  <a href="/" class="wm">mun<span class="wm-e">ē</span></a>
+  <a href="/" class="wm">Mune Technologies</a>
   <div class="nav-links">
-    <a href="/mune"      class="nl">munē</a>
-    <a href="/solutions" class="nl">Solutions</a>
-    <a href="/platform"  class="nl">Platform</a>
-    <a href="/company"   class="nl">Company</a>
-    <a href="/investors" class="nl act">Investors</a>
+    <a href="/mune"        class="nl">munē</a>
+    <a href="/platform"    class="nl">Platform</a>
+    <a href="/company"     class="nl">Company</a>
+    <a href="/commitments" class="nl">Commitments</a>
+    <a href="/investors"   class="nl act">Investors</a>
   </div>
   <a href="https://app.getmune.com/quiz" class="nav-cta">Open munē</a>
 </nav>
@@ -128,60 +128,61 @@
   <p class="ph-label fu">Investor Relations · Mune Technologies</p>
   <h1 class="ph-h1 fu d1">We don't pitch until<br/><em>the data earns it.</em></h1>
   <div class="ph-bottom fu d2">
-    <p class="ph-sub">We do not pitch formally until 30-day retention data exists from real users. This page is for those tracking this space who want to understand what we are building and why it matters.</p>
+    <p class="ph-sub">Mune Technologies is a financial behavior company. munē is our first product. We do not pitch formally until 30-day retention data exists from real users. This page is for those tracking this space who want to understand what we are building and why it matters.</p>
   </div>
 </div>
 
 <div class="milestone fu">
   <div class="ms-label">The milestone that changes everything</div>
   <div class="ms-num">1,000</div>
-  <p class="ms-body">At 1,000 paying subscribers — product-market fit is demonstrated, retention data exists to project LTV, and every subsequent conversation is credible. Seed investors have evidence. Grant committees have proof of impact. The employer channel has a case study. The path to 10,000 is clear and fundable.</p>
+  <p class="ms-body">At 1,000 paying subscribers — product-market fit is demonstrated and retention data exists to project LTV. Seed investors have evidence. Grant committees have proof of impact. From there, the path to 10,000 — where the employer channel and other future initiatives unlock — is clear.</p>
 </div>
 
 <section class="sec">
   <p class="sec-label fu">Unit economics</p>
-  <h2 class="sec-h fu d1" style="max-width:600px;">The numbers<br/><em>as they stand today.</em></h2>
-  <div class="metrics fu d2">
+  <h2 class="sec-h fu d1" style="max-width:640px;">Targets and hypotheses.<br/><em>Not yet validated.</em></h2>
+  <p style="font-family:var(--Fb);font-size:14px;font-weight:300;color:var(--ts);line-height:1.8;max-width:600px;margin-top:16px;" class="fu d1">We are a single-product company today. The figures below are our model's targets — built from industry benchmarks and our own assumptions — not measured outcomes. We will publish real numbers once munē has real users to measure.</p>
+  <div class="metrics fu d2" style="margin-top:36px;">
     <div class="met"><div class="met-n">$350K</div><div class="met-l">Friends-and-family seed round · active</div></div>
-    <div class="met"><div class="met-n">$45B</div><div class="met-l">Total addressable market · $8.2B serviceable</div></div>
-    <div class="met"><div class="met-n">12:1</div><div class="met-l">LTV to CAC ratio · projected Year 1 · $220 LTV · $18 CAC</div></div>
-    <div class="met"><div class="met-n">72%</div><div class="met-l">Gross margin · after all infrastructure costs · 79% at Year 3</div></div>
-    <div class="met"><div class="met-n">Mo. 16</div><div class="met-l">Projected break-even · base case · accelerated with employer + grants</div></div>
-    <div class="met"><div class="met-n">$1M</div><div class="met-l">ARR projected Month 30 · 8,350–15,000 subscribers</div></div>
+    <div class="met"><div class="met-n">$45B</div><div class="met-l">Total addressable market · $8.2B serviceable (estimate)</div></div>
+    <div class="met"><div class="met-n">12:1</div><div class="met-l">LTV:CAC target · hypothesis · $220 LTV / $18 CAC modeled</div></div>
+    <div class="met"><div class="met-n">72%</div><div class="met-l">Gross margin target · modeled after infrastructure costs</div></div>
+    <div class="met"><div class="met-n">Mo. 16</div><div class="met-l">Break-even target · base case model · not a forecast</div></div>
+    <div class="met"><div class="met-n">$1M</div><div class="met-l">ARR milestone · long-range target, Month 30</div></div>
   </div>
 </section>
 
 <section class="sec">
   <p class="sec-label fu">Revenue model</p>
-  <h2 class="sec-h fu d1" style="max-width:560px;">Four streams.<br/><em>All recurring.</em></h2>
+  <h2 class="sec-h fu d1" style="max-width:560px;">One stream active today.<br/><em>More planned.</em></h2>
   <div class="rev-grid fu d2">
     <div>
       <div class="rev-stream">
-        <div class="rev-item"><div><div class="rev-name">Consumer Monthly</div><div class="rev-sub">Free tier converts · core product</div></div><div class="rev-price">$9.99/mo</div></div>
-        <div class="rev-item"><div><div class="rev-name">Consumer Annual</div><div class="rev-sub">2 months free · higher retention</div></div><div class="rev-price">$79.99/yr</div></div>
-        <div class="rev-item"><div><div class="rev-name">Employer Benefit</div><div class="rev-sub">Four tiers · B2B · highest LTV</div></div><div class="rev-price">$4–14/seat</div></div>
-        <div class="rev-item"><div><div class="rev-name">Marketplace Referrals</div><div class="rev-sub">HYSA · index fund · insurance</div></div><div class="rev-price">Rev share</div></div>
+        <div class="rev-item"><div><div class="rev-name">Consumer Monthly</div><div class="rev-sub">Free tier converts · core product · active</div></div><div class="rev-price">$9.99/mo</div></div>
+        <div class="rev-item"><div><div class="rev-name">Consumer Annual</div><div class="rev-sub">2 months free · higher retention · active</div></div><div class="rev-price">$79.99/yr</div></div>
+        <div class="rev-item"><div><div class="rev-name">Employer Benefit</div><div class="rev-sub">Locked · unlocks at 10,000 users</div></div><div class="rev-price" style="color:var(--tt);">$4–14/seat</div></div>
+        <div class="rev-item"><div><div class="rev-name">Marketplace Referrals</div><div class="rev-sub">HYSA · index fund · insurance · planned</div></div><div class="rev-price" style="color:var(--tt);">Rev share</div></div>
       </div>
     </div>
     <div>
-      <p style="font-family:var(--Fb);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tt);margin-bottom:20px;">3-year projections</p>
-      <div class="proj-row"><span class="proj-label">Year 1 · ending ARR</span><span class="proj-val">$72K</span></div>
-      <div class="proj-row"><span class="proj-label">Year 2 · total revenue</span><span class="proj-val">$137K</span></div>
-      <div class="proj-row"><span class="proj-label">Year 3 · total revenue</span><span class="proj-val">$643K</span></div>
-      <div class="proj-row"><span class="proj-label">$1M ARR milestone</span><span class="proj-val" style="color:var(--gb);">Month 30</span></div>
+      <p style="font-family:var(--Fb);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tt);margin-bottom:20px;">3-year model · hypothesis, not forecast</p>
+      <div class="proj-row"><span class="proj-label">Year 1 · ending ARR target</span><span class="proj-val">$72K</span></div>
+      <div class="proj-row"><span class="proj-label">Year 2 · total revenue target</span><span class="proj-val">$137K</span></div>
+      <div class="proj-row"><span class="proj-label">Year 3 · total revenue target</span><span class="proj-val">$643K</span></div>
+      <div class="proj-row"><span class="proj-label">$1M ARR milestone target</span><span class="proj-val" style="color:var(--gb);">Month 30</span></div>
     </div>
   </div>
 </section>
 
 <section class="sec">
   <p class="sec-label fu">The moat</p>
-  <h2 class="sec-h fu d1" style="max-width:560px;">Five things that cannot<br/><em>be bought or copied.</em></h2>
+  <h2 class="sec-h fu d1" style="max-width:560px;">Five things that are<br/><em>difficult to replicate.</em></h2>
   <div class="moats fu d2">
-    <div class="moat"><div class="moat-t">Patented IP</div><p class="moat-b">The Archetype Classification System, Financial Vitals Monitoring System, and Behavioral Financial Health Scoring — three provisional patents filed at USPTO. Not easily replicated without both the framework and the behavioral intelligence built on top of it.</p></div>
-    <div class="moat"><div class="moat-t">The Voice</div><p class="moat-b">The older sibling voice is a product philosophy — not a writing style. Built on genuine understanding of the emotional experience of financial struggle. Cannot be manufactured, purchased, or trained into a model.</p></div>
-    <div class="moat"><div class="moat-t">Data Advantage</div><p class="moat-b">Behavioral financial identity data compounds over time. The longer users stay, the deeper the intelligence. The better every product gets. This moat grows every day we are live — and starts from a dataset no one else has.</p></div>
-    <div class="moat"><div class="moat-t">Community Trust</div><p class="moat-b">Trust built through years of EAARA workshop delivery cannot be manufactured. Those relationships are the founding community, the distribution channel, and the product proof of concept — simultaneously.</p></div>
-    <div class="moat moat-full"><div class="moat-t">Mission Authenticity</div><p class="moat-b">Built by someone from the community, for the community. Not performed. Not positioned. True. This is the most durable moat because it cannot be acquired. It is either real or it isn't.</p></div>
+    <div class="moat"><div class="moat-t">Patented IP</div><p class="moat-b">The Archetype Classification System, Financial Vitals Monitoring System, and Behavioral Financial Health Scoring — three provisional patents filed at USPTO. Difficult to replicate without both the framework and the behavioral intelligence built on top of it.</p></div>
+    <div class="moat"><div class="moat-t">The Voice</div><p class="moat-b">The older sibling voice is a product philosophy — not a writing style. Built on genuine understanding of the emotional experience of financial struggle. Difficult to manufacture or train into a model without that lived understanding.</p></div>
+    <div class="moat"><div class="moat-t">Data Advantage</div><p class="moat-b">Behavioral financial identity data compounds over time. The longer users stay, the deeper the intelligence — and the better every product gets. This advantage grows every day we are live, starting from a dataset few others are building.</p></div>
+    <div class="moat"><div class="moat-t">Community Trust</div><p class="moat-b">Trust built through years of EAARA workshop delivery takes years to build — which is exactly why it's hard to replicate quickly. Those relationships are the founding community, the distribution channel, and the product proof of concept simultaneously.</p></div>
+    <div class="moat moat-full"><div class="moat-t">Mission Authenticity</div><p class="moat-b">Built by someone from the community, for the community. Not performed. Not positioned. This is durable because it's a fact about the founder, not a claim about the company — and facts like that don't transfer with an acquisition.</p></div>
   </div>
 </section>
 
@@ -193,9 +194,9 @@
 
 <footer>
   <div class="ft">
-    <div><a href="/" class="ft-brand">mun<span class="ft-brand-e">ē</span></a><p class="ft-tag">Financial identity technology by Mune Technologies. The knowledge you were never given.</p></div>
-    <div><p class="ft-cl">Product</p><a href="/mune" class="ft-lk">munē</a><a href="https://app.getmune.com/quiz" class="ft-lk">Take the quiz</a><a href="https://app.getmune.com" class="ft-lk">Open app</a><a href="https://app.getmune.com/signin" class="ft-lk">Sign in</a></div>
-    <div><p class="ft-cl">Company</p><a href="/company" class="ft-lk">About</a><a href="/platform" class="ft-lk">Platform</a><a href="/solutions" class="ft-lk">Solutions</a><a href="/investors" class="ft-lk">Investors</a></div>
+    <div><a href="/" class="ft-brand">Mune Technologies</a><p class="ft-tag">Building the operating system for financial behavior.<br/>Our first product is munē.</p></div>
+    <div><p class="ft-cl">Product</p><a href="/mune" class="ft-lk">mun<span class="ft-brand-e">ē</span></a><a href="https://app.getmune.com/quiz" class="ft-lk">Take the quiz</a><a href="https://app.getmune.com" class="ft-lk">Open app</a><a href="https://app.getmune.com/signin" class="ft-lk">Sign in</a></div>
+    <div><p class="ft-cl">Company</p><a href="/company" class="ft-lk">About</a><a href="/platform" class="ft-lk">Platform</a><a href="/investors" class="ft-lk">Investors</a><a href="/commitments" class="ft-lk">Commitments</a></div>
     <div><p class="ft-cl">Legal</p><a href="/privacy" class="ft-lk">Privacy</a><a href="/terms" class="ft-lk">Terms</a><a href="/commitments" class="ft-lk">Commitments</a></div>
     <div><p class="ft-cl">Contact</p><a href="mailto:sam@getmune.com" class="ft-lk">sam@getmune.com</a></div>
   </div>

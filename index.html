@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mune Technologies — Financial Identity Technology</title>
-  <meta name="description" content="When people understand who they are with money, everything changes."/>
+  <title>Mune Technologies — Building the operating system for financial behavior.</title>
+  <meta name="description" content="Mune Technologies is building the operating system for financial behavior. Our first product is munē."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -12,10 +12,10 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
     :root{
-      --bg:#060606;
+      --bg:#103D29;
       --tp:#F2F0EC;
-      --ts:rgba(242,240,236,.48);
-      --tt:rgba(242,240,236,.2);
+      --ts:rgba(242,240,236,.72);
+      --tt:rgba(242,240,236,.42);
       --teal:#2A9D8F;
       --tl:#38B5A5;
       --gold:#C4A66E;
@@ -40,8 +40,8 @@
       mix-blend-mode:normal;
     }
     .nav-wm{
-      font-family:var(--Fd);font-size:22px;font-weight:400;
-      color:var(--tp);text-decoration:none;letter-spacing:-.01em;
+      font-family:var(--Fb);font-size:14px;font-weight:500;
+      color:var(--tp);text-decoration:none;letter-spacing:.02em;
       display:flex;align-items:center;
     }
     .nav-wm-e{color:var(--gb);}
@@ -121,6 +121,19 @@
       margin-top:60px;
       flex-wrap:wrap;gap:32px;
     }
+    .hero-first-product{
+      font-family:var(--Fb);font-size:14px;font-weight:400;
+      color:var(--tt);letter-spacing:.04em;
+      margin-top:36px;margin-bottom:8px;
+    }
+    .hero-mune-link{
+      font-family:var(--Fd);font-size:32px;font-weight:400;
+      color:var(--tp);text-decoration:none;letter-spacing:-.01em;
+      margin-left:6px;transition:opacity .2s;
+    }
+    .hero-mune-link:hover{opacity:.8;}
+    .hero-mune-e{color:var(--gb);animation:glow 4s ease infinite;}
+    @keyframes glow{0%,100%{opacity:.6}50%{opacity:1}}
     .hero-sub{
       font-family:var(--Fb);font-size:16px;font-weight:300;
       color:var(--ts);line-height:1.8;max-width:400px;
@@ -157,7 +170,7 @@
 
     /* ── PRODUCT SECTION ── */
     #product{
-      background:#080E0C;
+      background:#0D2E1F;
       border-top:1px solid var(--border);
     }
 
@@ -230,9 +243,9 @@
 
     .step-list{display:flex;flex-direction:column;gap:0;}
     .step{
-      display:grid;grid-template-columns:40px 1fr;gap:0;
+      display:grid;grid-template-columns:40px 1fr 132px;gap:24px;
       padding:32px 0;border-bottom:1px solid var(--border);
-      align-items:start;
+      align-items:center;
     }
     .step:last-child{border-bottom:none;}
     .step-n{
@@ -248,9 +261,52 @@
       color:var(--ts);line-height:1.78;
     }
 
+    /* ── MINI SCREEN MOCKUPS ── */
+    .step-shot{
+      width:132px;height:160px;border-radius:10px;overflow:hidden;
+      border:1px solid var(--border);background:var(--bg);
+      box-shadow:0 16px 40px -12px rgba(0,0,0,.5);
+      flex-shrink:0;
+    }
+    .shot-bar{height:16px;background:#0D2E1F;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:3px;padding:0 8px;}
+    .shot-dot{width:4px;height:4px;border-radius:50%;background:rgba(242,240,236,.12);}
+    .shot-body{padding:12px 10px;display:flex;flex-direction:column;height:calc(100% - 16px);}
+    .shot-eyebrow{font-family:var(--Fb);font-size:6px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tt);margin-bottom:6px;}
+
+    /* archetype reveal mini */
+    .shot-arc{position:relative;width:100%;height:60px;display:flex;align-items:center;justify-content:center;margin:6px 0;}
+    .shot-ring{position:absolute;border-radius:50%;border:1px solid rgba(42,157,143,.18);}
+    .shot-ring.r1{width:78px;height:78px;}
+    .shot-ring.r2{width:58px;height:58px;border-color:rgba(42,157,143,.28);}
+    .shot-ring.r3{width:38px;height:38px;border-color:rgba(196,166,110,.3);}
+    .shot-arc-name{font-family:var(--Fd);font-size:13px;font-weight:400;color:var(--gb);position:relative;z-index:2;}
+    .shot-arc-tags{display:flex;gap:3px;flex-wrap:wrap;margin-top:auto;}
+    .shot-tag{font-family:var(--Fb);font-size:6px;font-weight:400;color:var(--tt);border:1px solid var(--border);border-radius:100px;padding:2px 6px;}
+    .shot-arc-path{font-family:var(--Fb);font-size:6px;font-weight:500;color:var(--teal);letter-spacing:.06em;text-transform:uppercase;margin-top:8px;}
+
+    /* blueprint mini */
+    .shot-bp-row{margin-bottom:8px;}
+    .shot-bp-label{display:flex;justify-content:space-between;font-family:var(--Fb);font-size:7px;color:var(--ts);margin-bottom:3px;}
+    .shot-bp-track{height:3px;border-radius:100px;background:rgba(242,240,236,.06);overflow:hidden;}
+    .shot-bp-fill{height:100%;border-radius:100px;}
+    .shot-bp-fill.f1{width:55%;background:var(--teal);}
+    .shot-bp-fill.f2{width:15%;background:var(--gold);}
+    .shot-bp-fill.f3{width:20%;background:var(--tl);}
+    .shot-bp-rule{margin-top:auto;padding:8px;border:1px solid rgba(42,157,143,.18);border-radius:4px;background:rgba(42,157,143,.05);}
+    .shot-bp-rule-label{font-family:var(--Fb);font-size:6px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;}
+    .shot-bp-rule-text{font-family:var(--Fd);font-size:9px;font-style:italic;color:var(--tp);line-height:1.3;}
+
+    /* receipt mini */
+    .shot-rc{margin:auto 0;border:1px solid var(--border);border-radius:4px;padding:12px 8px;text-align:center;background:rgba(242,240,236,.015);position:relative;}
+    .shot-rc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+    .shot-rc-stamp{font-family:var(--Fb);font-size:6px;font-weight:500;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;}
+    .shot-rc-l1{font-family:var(--Fd);font-size:8px;font-style:italic;color:var(--ts);line-height:1.35;margin-bottom:6px;}
+    .shot-rc-l2{font-family:var(--Fd);font-size:14px;font-weight:400;color:var(--tp);line-height:1.1;margin-bottom:5px;}
+    .shot-rc-meta{font-family:var(--Fb);font-size:5px;font-weight:300;color:var(--tt);letter-spacing:.06em;text-transform:uppercase;}
+
     /* ── ARCHETYPE SECTION ── */
     #archetypes{
-      background:var(--bg);
+      background:#0D2E1F;
       border-top:1px solid var(--border);
       padding:100px 52px;
       min-height:auto;
@@ -305,7 +361,7 @@
 
     /* ── PLATFORM HUB ── */
     #platform{
-      background:#080E0C;
+      background:#0D2E1F;
       border-top:1px solid var(--border);
     }
 
@@ -323,7 +379,7 @@
 
     .platform-items{display:flex;flex-direction:column;gap:1px;background:var(--border);}
     .pi{
-      background:#080E0C;
+      background:#0D2E1F;
       display:grid;grid-template-columns:200px 1fr 200px;
       align-items:center;gap:40px;
       padding:32px 48px;
@@ -393,7 +449,7 @@
 
     /* ── RECEIPT ── */
     #receipt{
-      background:#080E0C;
+      background:var(--bg);
       border-top:1px solid var(--border);
       justify-content:center;text-align:center;
     }
@@ -473,7 +529,7 @@
       display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;
       gap:48px;padding-bottom:40px;border-bottom:1px solid var(--border);
     }
-    .ft-brand{font-family:var(--Fd);font-size:22px;font-weight:400;color:var(--tp);text-decoration:none;}
+    .ft-brand{font-family:var(--Fb);font-size:15px;font-weight:500;color:var(--tp);text-decoration:none;letter-spacing:.02em;}
     .ft-brand-e{color:var(--gb);}
     .ft-tag{font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);line-height:1.75;margin-top:12px;max-width:240px;}
     .ft-soc{display:flex;gap:16px;margin-top:20px;}
@@ -483,9 +539,9 @@
     .ft-lk{display:block;font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);text-decoration:none;margin-bottom:11px;transition:color .15s;}
     .ft-lk:hover{color:var(--tp);}
     .ft-bot{max-width:1400px;margin:28px auto 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
-    .ft-copy{font-family:var(--Fb);font-size:11px;color:rgba(242,240,236,.15);line-height:1.7;}
+    .ft-copy{font-family:var(--Fb);font-size:11px;color:rgba(242,240,236,.35);line-height:1.7;}
     .ft-legal-links{display:flex;gap:20px;}
-    .ft-ll{font-family:var(--Fb);font-size:11px;font-weight:300;color:rgba(242,240,236,.2);text-decoration:none;transition:color .15s;}
+    .ft-ll{font-family:var(--Fb);font-size:11px;font-weight:300;color:rgba(242,240,236,.42);text-decoration:none;transition:color .15s;}
     .ft-ll:hover{color:var(--tp);}
 
     /* ── ANIMATIONS ── */
@@ -500,6 +556,8 @@
       .product-grid{grid-template-columns:1fr;gap:60px;}
       .product-left{padding-right:0;border-right:none;border-bottom:1px solid var(--border);padding-bottom:52px;}
       .product-right{padding-left:0;}
+      .step{grid-template-columns:40px 1fr;}
+      .step-shot{grid-column:1/-1;width:100%;max-width:200px;height:200px;margin-top:16px;justify-self:start;margin-left:64px;}
       .arch-strip{grid-template-columns:repeat(3,1fr);}
       .arch-header{flex-direction:column;align-items:flex-start;gap:16px;}
       .arch-sub{text-align:left;}
@@ -517,6 +575,7 @@
       .ft{grid-template-columns:1fr;}
       .final-btns{flex-direction:column;}
       .platform-header{margin-bottom:40px;}
+      .step-shot{margin-left:0;max-width:160px;height:170px;}
     }
   </style>
 </head>
@@ -526,20 +585,20 @@
 
 <!-- NAV -->
 <nav>
-  <a href="/" class="nav-wm">mun<span class="nav-wm-e">ē</span></a>
+  <a href="/" class="nav-wm">Mune Technologies</a>
   <div class="nav-links">
-    <a href="/mune"      class="nav-link">munē</a>
-    <a href="/solutions" class="nav-link">Solutions</a>
-    <a href="/platform"  class="nav-link">Platform</a>
-    <a href="/company"   class="nav-link">Company</a>
-    <a href="/investors" class="nav-link">Investors</a>
+    <a href="/mune"        class="nav-link">munē</a>
+    <a href="/platform"    class="nav-link">Platform</a>
+    <a href="/company"     class="nav-link">Company</a>
+    <a href="/commitments" class="nav-link">Commitments</a>
+    <a href="/investors"   class="nav-link">Investors</a>
   </div>
   <a href="https://app.getmune.com/quiz" class="nav-cta">Open munē</a>
 </nav>
 
 <!-- ── HERO ── -->
 <section id="hero">
-  <div class="hero-bg-text">identity</div>
+  <div class="hero-bg-text">behavior</div>
 
   <div class="hero-eyebrow fade-up">
     <span class="hero-eyebrow-line"></span>
@@ -547,14 +606,18 @@
   </div>
 
   <h1 class="hero-h1 fade-up d1">
-    Building a new<br/>
-    <em>category.</em>
+    Building the operating<br/>
+    system for <em>financial behavior.</em>
   </h1>
 
-  <div class="hero-bottom fade-up d2">
-    <p class="hero-sub">Financial identity technology. When people understand who they are with money, everything changes. We build the products that make that possible.</p>
+  <p class="hero-first-product fade-up d2">
+    Our first product is <a href="/mune" class="hero-mune-link">mun<span class="hero-mune-e">ē</span></a>
+  </p>
+
+  <div class="hero-bottom fade-up d3">
+    <p class="hero-sub">munē helps people understand and change their financial behavior — through identity, one daily rule, and a permanent record proving what changed.</p>
     <div class="hero-actions">
-      <a href="https://app.getmune.com/quiz" class="btn-hero">Find your financial identity →</a>
+      <a href="https://app.getmune.com/quiz" class="btn-hero">Find your munē type →</a>
       <p class="hero-note">FREE TO START · APP.GETMUNE.COM</p>
     </div>
   </div>
@@ -590,12 +653,51 @@
             <p class="step-t">Find your pattern</p>
             <p class="step-b">Six financial archetypes. Five questions. Two minutes. The specific behavioral driver running your money — named in plain language. This is not a personality test. It is a mirror.</p>
           </div>
+          <div class="step-shot">
+            <div class="shot-bar"><span class="shot-dot"></span><span class="shot-dot"></span><span class="shot-dot"></span></div>
+            <div class="shot-body">
+              <p class="shot-eyebrow">Your munē type</p>
+              <div class="shot-arc">
+                <div class="shot-ring r1"></div>
+                <div class="shot-ring r2"></div>
+                <div class="shot-ring r3"></div>
+                <p class="shot-arc-name">The Fog</p>
+              </div>
+              <div class="shot-arc-tags">
+                <span class="shot-tag">Gentle</span>
+                <span class="shot-tag">Patient</span>
+              </div>
+              <p class="shot-arc-path">→ The Tide</p>
+            </div>
+          </div>
         </div>
         <div class="step">
           <span class="step-n">02</span>
           <div>
             <p class="step-t">Follow one rule</p>
             <p class="step-b">One behavioral instruction per day. Drawn from your archetype, your real statement data, your Blueprint. One thing. Every day. That is the entire system.</p>
+          </div>
+          <div class="step-shot">
+            <div class="shot-bar"><span class="shot-dot"></span><span class="shot-dot"></span><span class="shot-dot"></span></div>
+            <div class="shot-body">
+              <p class="shot-eyebrow">Blueprint</p>
+              <div class="shot-bp-row">
+                <div class="shot-bp-label"><span>Obligations</span><span>55%</span></div>
+                <div class="shot-bp-track"><div class="shot-bp-fill f1"></div></div>
+              </div>
+              <div class="shot-bp-row">
+                <div class="shot-bp-label"><span>Savings</span><span>15%</span></div>
+                <div class="shot-bp-track"><div class="shot-bp-fill f2"></div></div>
+              </div>
+              <div class="shot-bp-row">
+                <div class="shot-bp-label"><span>Goals</span><span>20%</span></div>
+                <div class="shot-bp-track"><div class="shot-bp-fill f3"></div></div>
+              </div>
+              <div class="shot-bp-rule">
+                <p class="shot-bp-rule-label">Today's rule</p>
+                <p class="shot-bp-rule-text">"Move $25 to savings first."</p>
+              </div>
+            </div>
           </div>
         </div>
         <div class="step">
@@ -604,16 +706,39 @@
             <p class="step-t">See the proof</p>
             <p class="step-b">The Receipt. Permanent. Timestamped. When enough entries stack — the system names your arc. Where you started. What shifted. Yours forever. Shareable when you are ready.</p>
           </div>
+          <div class="step-shot">
+            <div class="shot-bar"><span class="shot-dot"></span><span class="shot-dot"></span><span class="shot-dot"></span></div>
+            <div class="shot-body" style="justify-content:center;">
+              <p class="shot-eyebrow" style="text-align:center;">The Receipt</p>
+              <div class="shot-rc">
+                <p class="shot-rc-stamp">Day 14</p>
+                <p class="shot-rc-l1">"I was afraid I'd never feel safe with money."</p>
+                <p class="shot-rc-l2">Now I have room.</p>
+                <p class="shot-rc-meta">The Fog → The Tide</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ── RECEIPT ── -->
+<section id="receipt">
+  <p class="receipt-label fade-up">The Receipt · What the system produces</p>
+  <div class="receipt-card fade-up d1">
+    <p class="receipt-l1">"I was afraid I'd never feel safe with money."</p>
+    <p class="receipt-l2">Now I have room.</p>
+    <p class="receipt-meta">14 days · One rule · The Fog → The Tide</p>
+    <div class="receipt-wm">munē</div>
+  </div>
+</section>
+
 <!-- ── ARCHETYPES ── -->
 <section id="archetypes">
   <div class="arch-header fade-up">
-    <h2 class="arch-h2">One of these is you.<br/><em>You already know which one.</em></h2>
+    <h2 class="arch-h2">One of these is you.<br/><em>You may not know which one yet.</em></h2>
     <p class="arch-sub">Six archetypes. Each one the entry point to a different system.</p>
   </div>
   <div class="arch-strip fade-up d2">
@@ -653,52 +778,6 @@
   </div>
 </section>
 
-<!-- ── PLATFORM HUB ── -->
-<section id="platform">
-  <div class="platform-header fade-up">
-    <h2 class="platform-h2">Everything we build.<br/><em>One category.</em></h2>
-    <p class="platform-sub">Financial identity technology — built for every entry point. Consumer, employer, analytics, community. One belief underneath all of it.</p>
-  </div>
-  <div class="platform-items fade-up d1">
-    <a href="/mune" class="pi">
-      <div class="pi-status sl-live"><span class="pi-dot"></span>Live now</div>
-      <div>
-        <p class="pi-name">mun<span class="e">ē</span></p>
-        <p class="pi-name-sub">Consumer · Financial identity app</p>
-      </div>
-      <p class="pi-desc">Archetype system, Blueprint, Daily Edge, Ask munē, The Receipt. Free and Personal tiers.</p>
-      <p class="pi-arrow">Explore <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></p>
-    </a>
-    <a href="/solutions" class="pi">
-      <div class="pi-status sl-live"><span class="pi-dot"></span>Available now</div>
-      <div>
-        <p class="pi-name">Solutions</p>
-        <p class="pi-name-sub">Employer · Workshops · Education</p>
-      </div>
-      <p class="pi-desc">Workforce financial wellness benefit, community workshops, after-school programs.</p>
-      <p class="pi-arrow">Explore <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></p>
-    </a>
-    <a href="/platform" class="pi">
-      <div class="pi-status sl-build"><span class="pi-dot"></span>Building · Year 2</div>
-      <div>
-        <p class="pi-name">Mune Analytics</p>
-        <p class="pi-name-sub">Data · Behavioral intelligence</p>
-      </div>
-      <p class="pi-desc">The behavioral financial dataset built on the identity layer that powers munē.</p>
-      <p class="pi-arrow">See roadmap <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></p>
-    </a>
-    <a href="/platform" class="pi">
-      <div class="pi-status sl-hor"><span class="pi-dot"></span>On the horizon</div>
-      <div>
-        <p class="pi-name">Community Empowerment</p>
-        <p class="pi-name-sub">Movement · The Bridge</p>
-      </div>
-      <p class="pi-desc">Transformed users return as educators. Someone held the door. You hold it next.</p>
-      <p class="pi-arrow">See roadmap <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></p>
-    </a>
-  </div>
-</section>
-
 <!-- ── BELIEF ── -->
 <section id="belief">
   <p class="belief-pull fade-up">
@@ -716,17 +795,6 @@
   </div>
   <div style="text-align:center;" class="fade-up d3">
     <a href="/company" class="btn-outline">Our story →</a>
-  </div>
-</section>
-
-<!-- ── RECEIPT ── -->
-<section id="receipt">
-  <p class="receipt-label fade-up">The Receipt · What the system produces</p>
-  <div class="receipt-card fade-up d1">
-    <p class="receipt-l1">"I was afraid I'd never feel safe with money."</p>
-    <p class="receipt-l2">Now I have room.</p>
-    <p class="receipt-meta">14 days · One rule · The Fog → The Tide</p>
-    <div class="receipt-wm">munē</div>
   </div>
 </section>
 
@@ -748,8 +816,8 @@
 <footer>
   <div class="ft">
     <div>
-      <a href="/" class="ft-brand">mun<span class="ft-brand-e">ē</span></a>
-      <p class="ft-tag">Financial identity technology by Mune Technologies. The knowledge you were never given. Finally made for you.</p>
+      <a href="/" class="ft-brand">Mune Technologies</a>
+      <p class="ft-tag">Building the operating system for financial behavior.<br/>Our first product is munē.</p>
       <div class="ft-soc">
         <a href="https://instagram.com/getmuneapp" target="_blank" rel="noopener" class="ft-sl">Instagram</a>
         <a href="https://x.com/getmuneapp" target="_blank" rel="noopener" class="ft-sl">X</a>
@@ -758,17 +826,17 @@
     </div>
     <div>
       <p class="ft-cl">Product</p>
-      <a href="/mune"                          class="ft-lk">munē</a>
+      <a href="/mune"                          class="ft-lk">mun<span class="ft-brand-e">ē</span></a>
       <a href="https://app.getmune.com/quiz"   class="ft-lk">Take the quiz</a>
       <a href="https://app.getmune.com"        class="ft-lk">Open app</a>
       <a href="https://app.getmune.com/signin" class="ft-lk">Sign in</a>
     </div>
     <div>
       <p class="ft-cl">Company</p>
-      <a href="/company"   class="ft-lk">About</a>
-      <a href="/platform"  class="ft-lk">Platform</a>
-      <a href="/solutions" class="ft-lk">Solutions</a>
-      <a href="/investors" class="ft-lk">Investors</a>
+      <a href="/company"     class="ft-lk">About</a>
+      <a href="/platform"    class="ft-lk">Platform</a>
+      <a href="/investors"   class="ft-lk">Investors</a>
+      <a href="/commitments" class="ft-lk">Commitments</a>
     </div>
     <div>
       <p class="ft-cl">Legal</p>
@@ -780,7 +848,6 @@
       <p class="ft-cl">Contact</p>
       <a href="mailto:sam@getmune.com" class="ft-lk">sam@getmune.com</a>
       <a href="/investors"             class="ft-lk">Investor inquiries</a>
-      <a href="/solutions"             class="ft-lk">Employer solutions</a>
     </div>
   </div>
   <div class="ft-bot">

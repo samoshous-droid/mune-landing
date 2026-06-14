@@ -9,15 +9,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    :root{--black:#080808;--off:#0F0F0F;--border:#202020;--border2:#2A2A2A;--tp:#EFEFEF;--ts:rgba(239,239,239,.55);--tt:rgba(239,239,239,.26);--teal:#2A9D8F;--tl:#33B09F;--gold:#C4A66E;--gb:#E8C97A;--Fd:'Cormorant Garamond',Georgia,serif;--Fb:'Outfit',sans-serif;}
+    :root{--black:#103D29;--off:#0D3526;--border:#202020;--border2:#2A2A2A;--tp:#EFEFEF;--ts:rgba(239,239,239,.75);--tt:rgba(239,239,239,.45);--teal:#2A9D8F;--tl:#33B09F;--gold:#C4A66E;--gb:#E8C97A;--Fd:'Cormorant Garamond',Georgia,serif;--Fb:'Outfit',sans-serif;}
     html{scroll-behavior:smooth;}
     body{background:var(--black);color:var(--tp);font-family:var(--Fb);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
     @keyframes glow{0%,100%{opacity:.6}50%{opacity:1}}
     nav{position:fixed;top:0;left:0;right:0;z-index:300;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(8,8,8,.97);backdrop-filter:blur(28px);border-bottom:1px solid var(--border);}
-    .wm{font-family:var(--Fd);font-size:22px;font-weight:400;color:var(--tp);text-decoration:none;letter-spacing:-.01em;display:flex;align-items:center;gap:11px;}
-    .wm-e{color:var(--gb);animation:glow 4s ease infinite;}
+    .wm{font-family:var(--Fb);font-size:14px;font-weight:500;color:var(--tp);text-decoration:none;letter-spacing:.02em;display:flex;align-items:center;gap:11px;}
+    .wm-e{color:var(--gb);animation:glow 4s ease infinite;font-family:var(--Fd);font-size:18px;}
+    .wm-mune{font-family:var(--Fd);font-size:18px;color:var(--tt);}
     .wm-sep{width:1px;height:14px;background:var(--border2);flex-shrink:0;}
-    .wm-co{font-family:var(--Fb);font-size:10px;font-weight:400;color:var(--tt);letter-spacing:.06em;text-transform:uppercase;}
+    .wm-co{font-family:var(--Fb);font-size:14px;font-weight:500;color:var(--tp);letter-spacing:.02em;}
     .nav-r{display:flex;align-items:center;gap:10px;}
     .nb-g{font-family:var(--Fb);font-size:13px;font-weight:400;color:var(--ts);background:none;border:1px solid var(--border2);border-radius:8px;padding:7px 15px;cursor:pointer;text-decoration:none;transition:all .15s;}
     .nb-g:hover{color:var(--tp);}
@@ -37,20 +38,20 @@
     .legal-contact{background:var(--off);border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-top:48px;text-align:center;}
     .legal-contact p{font-family:var(--Fb);font-size:14px;font-weight:300;color:var(--ts);line-height:1.75;margin-bottom:12px;}
     .legal-contact a{color:var(--teal);text-decoration:none;}
-    footer{background:#050505;border-top:1px solid var(--border);padding:40px 48px 28px;}
+    footer{background:#0D2E1F;border-top:1px solid var(--border);padding:40px 48px 28px;}
     .ft{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
-    .ft-brand{font-family:var(--Fd);font-size:18px;font-weight:400;color:var(--tp);text-decoration:none;}
+    .ft-brand{font-family:var(--Fb);font-size:14px;font-weight:500;color:var(--tp);text-decoration:none;letter-spacing:.02em;}
     .ft-brand-e{color:var(--gb);}
-    .ft-copy{font-family:var(--Fb);font-size:11px;color:rgba(255,255,255,.18);line-height:1.7;}
+    .ft-copy{font-family:var(--Fb);font-size:11px;color:rgba(255,255,255,.35);line-height:1.7;}
     .ft-links{display:flex;gap:20px;}
-    .ft-lk{font-family:var(--Fb);font-size:12px;font-weight:300;color:rgba(255,255,255,.28);text-decoration:none;transition:color .15s;}
+    .ft-lk{font-family:var(--Fb);font-size:12px;font-weight:300;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;}
     .ft-lk:hover{color:var(--tp);}
     @media(max-width:760px){nav{padding:0 20px;}.wm-sep,.wm-co{display:none;}.legal-wrap{padding:100px 24px 80px;}footer{padding:32px 24px 24px;}.ft{flex-direction:column;align-items:flex-start;gap:12px;}}
   </style>
 </head>
 <body>
 <nav>
-  <a href="/" class="wm">mun<span class="wm-e">ē</span><span class="wm-sep"></span><span class="wm-co">Mune Technologies Inc.</span></a>
+  <a href="/" class="wm"><span class="wm-co">Mune Technologies</span><span class="wm-sep"></span><span class="wm-mune">mun<span class="wm-e">ē</span></span></a>
   <div class="nav-r">
     <a href="https://app.getmune.com/signin" class="nb-g">Sign in</a>
     <a href="https://app.getmune.com/quiz"   class="nb-p">Open munē →</a>
@@ -132,7 +133,7 @@
 
 <footer>
   <div class="ft">
-    <a href="/" class="ft-brand">mun<span class="ft-brand-e">ē</span></a>
+    <a href="/" class="ft-brand">Mune Technologies <span style="color:var(--tt);font-weight:300;">· mun<span class="ft-brand-e">ē</span></span></a>
     <div class="ft-links">
       <a href="/privacy"     class="ft-lk">Privacy</a>
       <a href="/terms"       class="ft-lk">Terms</a>

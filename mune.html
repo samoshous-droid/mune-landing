@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>munē — Financial Identity Technology</title>
+  <title>munē — Mune Technologies</title>
   <meta name="description" content="munē identifies the behavioral pattern behind your money, gives you one rule to follow, and creates a permanent record proving what changed."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    :root{--bg:#060606;--tp:#F2F0EC;--ts:rgba(242,240,236,.48);--tt:rgba(242,240,236,.2);--teal:#2A9D8F;--tl:#38B5A5;--gold:#C4A66E;--gb:#E8C97A;--border:rgba(242,240,236,.08);--Fd:'Cormorant Garamond',Georgia,serif;--Fb:'Outfit',sans-serif;}
+    :root{--bg:#103D29;--tp:#F2F0EC;--ts:rgba(242,240,236,.72);--tt:rgba(242,240,236,.42);--teal:#2A9D8F;--tl:#38B5A5;--gold:#C4A66E;--gb:#E8C97A;--border:rgba(242,240,236,.08);--Fd:'Cormorant Garamond',Georgia,serif;--Fb:'Outfit',sans-serif;}
     html{scroll-behavior:smooth;}
     body{background:var(--bg);color:var(--tp);font-family:var(--Fb);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;}
     #cursor{position:fixed;width:8px;height:8px;background:var(--teal);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;mix-blend-mode:screen;}
@@ -20,7 +20,7 @@
     @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
     nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:60px;}
-    .wm{font-family:var(--Fd);font-size:22px;font-weight:400;color:var(--tp);text-decoration:none;letter-spacing:-.01em;}
+    .wm{font-family:var(--Fb);font-size:14px;font-weight:500;color:var(--tp);text-decoration:none;letter-spacing:.02em;}
     .wm-e{color:var(--gb);animation:glow 4s ease infinite;}
     .nav-links{display:flex;align-items:center;gap:0;}
     .nl{font-family:var(--Fb);font-size:12px;font-weight:400;color:var(--tt);text-decoration:none;padding:8px 16px;letter-spacing:.06em;transition:color .25s;text-transform:uppercase;}
@@ -96,15 +96,15 @@
     /* FOOTER */
     footer{background:var(--bg);border-top:1px solid var(--border);padding:52px;}
     .ft{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid var(--border);}
-    .ft-brand{font-family:var(--Fd);font-size:22px;font-weight:400;color:var(--tp);text-decoration:none;}
+    .ft-brand{font-family:var(--Fb);font-size:15px;font-weight:500;color:var(--tp);text-decoration:none;letter-spacing:.02em;}
     .ft-brand-e{color:var(--gb);}
     .ft-tag{font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);line-height:1.75;margin-top:12px;max-width:240px;}
     .ft-cl{font-family:var(--Fb);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tt);margin-bottom:18px;opacity:.6;}
     .ft-lk{display:block;font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);text-decoration:none;margin-bottom:11px;transition:color .15s;}
     .ft-lk:hover{color:var(--tp);}
     .ft-bot{max-width:1400px;margin:28px auto 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
-    .ft-copy{font-family:var(--Fb);font-size:11px;color:rgba(242,240,236,.15);line-height:1.7;}
-    .ft-ll{font-family:var(--Fb);font-size:11px;font-weight:300;color:rgba(242,240,236,.2);text-decoration:none;margin-left:20px;transition:color .15s;}
+    .ft-copy{font-family:var(--Fb);font-size:11px;color:rgba(242,240,236,.35);line-height:1.7;}
+    .ft-ll{font-family:var(--Fb);font-size:11px;font-weight:300;color:rgba(242,240,236,.42);text-decoration:none;margin-left:20px;transition:color .15s;}
     .ft-ll:hover{color:var(--tp);}
 
     .fu{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);}
@@ -127,13 +127,13 @@
 <body>
 <div id="cursor"></div>
 <nav>
-  <a href="/" class="wm">mun<span class="wm-e">ē</span></a>
+  <a href="/" class="wm">Mune Technologies</a>
   <div class="nav-links">
-    <a href="/mune"      class="nl act">munē</a>
-    <a href="/solutions" class="nl">Solutions</a>
-    <a href="/platform"  class="nl">Platform</a>
-    <a href="/company"   class="nl">Company</a>
-    <a href="/investors" class="nl">Investors</a>
+    <a href="/mune"        class="nl act">munē</a>
+    <a href="/platform"    class="nl">Platform</a>
+    <a href="/company"     class="nl">Company</a>
+    <a href="/commitments" class="nl">Commitments</a>
+    <a href="/investors"   class="nl">Investors</a>
   </div>
   <a href="https://app.getmune.com/quiz" class="nav-cta">Open munē</a>
 </nav>
@@ -141,7 +141,7 @@
 <div class="ph">
   <div class="ph-bg">munē</div>
   <div class="ph-badge fu"><span class="ph-dot"></span>Live now · app.getmune.com</div>
-  <p class="ph-label fu d1">Financial identity technology · Consumer product</p>
+  <p class="ph-label fu d1">Mune Technologies · Our first product</p>
   <div class="ph-name fu d1"><span class="ph-mun">mun</span><span class="ph-e">ē</span></div>
   <p class="ph-tag fu d2">The knowledge you were never given.</p>
   <div class="ph-bottom fu d3">
@@ -225,11 +225,11 @@
 
 <footer>
   <div class="ft">
-    <div><a href="/" class="ft-brand">mun<span class="ft-brand-e">ē</span></a><p class="ft-tag">Financial identity technology by Mune Technologies. The knowledge you were never given.</p></div>
-    <div><p class="ft-cl">Product</p><a href="/mune" class="ft-lk">munē</a><a href="https://app.getmune.com/quiz" class="ft-lk">Take the quiz</a><a href="https://app.getmune.com" class="ft-lk">Open app</a><a href="https://app.getmune.com/signin" class="ft-lk">Sign in</a></div>
-    <div><p class="ft-cl">Company</p><a href="/company" class="ft-lk">About</a><a href="/platform" class="ft-lk">Platform</a><a href="/solutions" class="ft-lk">Solutions</a><a href="/investors" class="ft-lk">Investors</a></div>
+    <div><a href="/" class="ft-brand">Mune Technologies</a><p class="ft-tag">Building the operating system for financial behavior.<br/>Our first product is munē.</p></div>
+    <div><p class="ft-cl">Product</p><a href="/mune" class="ft-lk">mun<span class="ft-brand-e">ē</span></a><a href="https://app.getmune.com/quiz" class="ft-lk">Take the quiz</a><a href="https://app.getmune.com" class="ft-lk">Open app</a><a href="https://app.getmune.com/signin" class="ft-lk">Sign in</a></div>
+    <div><p class="ft-cl">Company</p><a href="/company" class="ft-lk">About</a><a href="/platform" class="ft-lk">Platform</a><a href="/investors" class="ft-lk">Investors</a><a href="/commitments" class="ft-lk">Commitments</a></div>
     <div><p class="ft-cl">Legal</p><a href="/privacy" class="ft-lk">Privacy</a><a href="/terms" class="ft-lk">Terms</a><a href="/commitments" class="ft-lk">Commitments</a></div>
-    <div><p class="ft-cl">Contact</p><a href="mailto:sam@getmune.com" class="ft-lk">sam@getmune.com</a><a href="/investors" class="ft-lk">Investor inquiries</a><a href="/solutions" class="ft-lk">Solutions</a></div>
+    <div><p class="ft-cl">Contact</p><a href="mailto:sam@getmune.com" class="ft-lk">sam@getmune.com</a><a href="/investors" class="ft-lk">Investor inquiries</a></div>
   </div>
   <div class="ft-bot">
     <p class="ft-copy">© 2026 Mune Technologies Inc. · getmune.com</p>
