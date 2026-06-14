@@ -63,6 +63,63 @@
     }
     .nav-cta:hover{background:var(--teal);color:#fff;}
 
+    /* ── MOBILE NAV (hamburger + slide-down menu) ── */
+    .nav-burger{
+      display:none;
+      width:40px;height:40px;
+      align-items:center;justify-content:center;
+      background:none;border:none;cursor:pointer;
+      flex-shrink:0;padding:0;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .nav-burger span{
+      display:block;width:20px;height:1.5px;
+      background:var(--tp);border-radius:1px;
+      position:relative;
+      transition:transform .25s ease,opacity .25s ease;
+    }
+    .nav-burger span::before,.nav-burger span::after{
+      content:'';position:absolute;left:0;
+      width:20px;height:1.5px;border-radius:1px;
+      background:var(--tp);
+      transition:transform .25s ease,opacity .25s ease;
+    }
+    .nav-burger span::before{top:-6px;}
+    .nav-burger span::after{top:6px;}
+    .nav-burger.open span{background:transparent;}
+    .nav-burger.open span::before{transform:translateY(6px) rotate(45deg);}
+    .nav-burger.open span::after{transform:translateY(-6px) rotate(-45deg);}
+
+    .nav-mobile-menu{
+      position:fixed;top:60px;left:0;right:0;z-index:499;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+      max-height:0;overflow:hidden;
+      transition:max-height .35s cubic-bezier(.22,1,.36,1);
+    }
+    .nav-mobile-menu.open{max-height:calc(100vh - 60px);overflow-y:auto;}
+    .nav-mobile-menu-inner{
+      display:flex;flex-direction:column;
+      padding:8px 28px 28px;
+    }
+    .nav-mobile-link{
+      font-family:var(--Fb);font-size:15px;font-weight:400;
+      color:var(--ts);text-decoration:none;
+      padding:16px 0;letter-spacing:.04em;
+      border-bottom:1px solid var(--border);
+      text-transform:uppercase;
+      transition:color .2s;
+    }
+    .nav-mobile-link:hover{color:var(--tp);}
+    .nav-mobile-cta{
+      font-family:var(--Fb);font-size:14px;font-weight:500;
+      color:var(--bg);background:var(--tp);
+      border:none;border-radius:100px;
+      padding:14px 24px;cursor:pointer;text-decoration:none;
+      text-align:center;
+      margin-top:20px;letter-spacing:.04em;
+    }
+
     /* ── FULL SECTIONS ── */
     section{
       min-height:100vh;
@@ -569,6 +626,10 @@
       nav{padding:0 28px;}
       body{cursor:auto;}
       #cursor{display:none;}
+
+      /* Collapse nav links + CTA into hamburger menu */
+      .nav-links,.nav-cta{display:none;}
+      .nav-burger{display:flex;}
     }
     @media(max-width:640px){
       .arch-strip{grid-template-columns:repeat(2,1fr);}
@@ -576,6 +637,10 @@
       .final-btns{flex-direction:column;}
       .platform-header{margin-bottom:40px;}
       .step-shot{margin-left:0;max-width:160px;height:170px;}
+
+      /* Footer bottom row: stack legal links + copy on narrow screens */
+      .ft-bot{flex-direction:column;align-items:flex-start;gap:16px;}
+      .ft-legal-links{flex-wrap:wrap;gap:14px 20px;}
     }
   </style>
 </head>
@@ -594,7 +659,22 @@
     <a href="/investors"   class="nav-link">Investors</a>
   </div>
   <a href="https://app.getmune.com/quiz" class="nav-cta">Open munē</a>
+  <button id="navBurger" class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="navMobileMenu">
+    <span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div id="navMobileMenu" class="nav-mobile-menu">
+  <div class="nav-mobile-menu-inner">
+    <a href="/mune"        class="nav-mobile-link">munē</a>
+    <a href="/platform"    class="nav-mobile-link">Platform</a>
+    <a href="/company"     class="nav-mobile-link">Company</a>
+    <a href="/commitments" class="nav-mobile-link">Commitments</a>
+    <a href="/investors"   class="nav-mobile-link">Investors</a>
+    <a href="https://app.getmune.com/quiz" class="nav-mobile-cta">Open munē</a>
+  </div>
+</div>
 
 <!-- ── HERO ── -->
 <section id="hero">
@@ -882,6 +962,26 @@
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
   },{threshold:0.12});
   document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+  // Mobile nav menu
+  const navBurger = document.getElementById('navBurger');
+  const navMobileMenu = document.getElementById('navMobileMenu');
+  function closeMobileMenu(){
+    navBurger.classList.remove('open');
+    navBurger.setAttribute('aria-expanded','false');
+    navMobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function toggleMobileMenu(){
+    const isOpen = navBurger.classList.toggle('open');
+    navBurger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    navMobileMenu.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+  navBurger.addEventListener('click', toggleMobileMenu);
+  navMobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMobileMenu));
+  // Close (and reset state) if viewport grows back past the mobile breakpoint
+  window.addEventListener('resize', ()=>{ if(window.innerWidth > 1024) closeMobileMenu(); });
 </script>
 
 </body>
