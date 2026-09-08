@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Organizations — Mune Technologies</title>
+  <meta name="description" content="Financial literacy workshops taught directly by the founder of munē, built on the same framework that powers the app."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--bg:#103D29;--tp:#F2F0EC;--ts:rgba(242,240,236,.72);--tt:rgba(242,240,236,.42);--teal:#2A9D8F;--tl:#38B5A5;--gold:#C4A66E;--gb:#E8C97A;--border:rgba(242,240,236,.08);--Fd:'Cormorant Garamond',Georgia,serif;--Fb:'Outfit',sans-serif;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--tp);font-family:var(--Fb);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;}
+    #cursor{position:fixed;width:8px;height:8px;background:var(--teal);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:screen;}
+    #cursor.expand{width:40px;height:40px;background:rgba(42,157,143,.15);border:1px solid var(--teal);}
+    @keyframes glow{0%,100%{opacity:.6}50%{opacity:1}}
+    nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:60px;}
+    .wm{font-family:var(--Fb);font-size:14px;font-weight:500;color:var(--tp);text-decoration:none;letter-spacing:.02em;}
+    .wm-e{color:var(--gb);animation:glow 4s ease infinite;}
+    .nav-links{display:flex;align-items:center;}
+    .nl{font-family:var(--Fb);font-size:12px;font-weight:400;color:var(--tt);text-decoration:none;padding:8px 16px;letter-spacing:.06em;transition:color .25s;text-transform:uppercase;}
+    .nl:hover,.nl.act{color:var(--tp);}
+    .nav-cta{font-family:var(--Fb);font-size:12px;font-weight:500;color:var(--bg);background:var(--tp);border:none;border-radius:100px;padding:9px 22px;cursor:pointer;text-decoration:none;transition:all .2s;letter-spacing:.04em;}
+    .nav-cta:hover{background:var(--teal);color:#fff;}
+
+    /* HERO */
+    .ph{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:140px 52px 80px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+    .ph-bg{position:absolute;top:50%;right:-40px;transform:translateY(-50%);font-family:var(--Fd);font-size:clamp(200px,30vw,420px);font-weight:400;font-style:italic;color:rgba(242,240,236,.018);pointer-events:none;user-select:none;letter-spacing:-.03em;line-height:1;}
+    .ph-label{font-family:var(--Fb);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;opacity:.85;}
+    .ph-h1{font-family:var(--Fd);font-size:clamp(48px,7vw,96px);font-weight:400;line-height:1.0;letter-spacing:-.025em;color:var(--tp);margin-bottom:28px;max-width:800px;}
+    .ph-h1 em{font-style:italic;color:var(--ts);}
+    .ph-sub{font-family:var(--Fb);font-size:16px;font-weight:300;color:var(--ts);line-height:1.82;max-width:520px;}
+
+    /* SECTIONS */
+    .sec{padding:100px 52px;border-bottom:1px solid var(--border);}
+    .sec-label{font-family:var(--Fb);font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--tt);margin-bottom:14px;}
+    .sec-h{font-family:var(--Fd);font-size:clamp(34px,4.6vw,56px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:var(--tp);}
+    .sec-h em{font-style:italic;color:var(--ts);}
+
+    /* STORY / FOUNDER */
+    .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:56px;}
+    .pull{font-family:var(--Fd);font-size:clamp(24px,3.2vw,38px);font-weight:400;font-style:italic;line-height:1.28;letter-spacing:-.01em;color:var(--tp);margin-bottom:28px;}
+    .story-p{font-family:var(--Fb);font-size:15px;font-weight:300;color:var(--ts);line-height:1.85;margin-bottom:20px;}
+    .btn-link{font-family:var(--Fb);font-size:14px;font-weight:400;color:var(--teal);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:opacity .15s;}
+    .btn-link:hover{opacity:.7;}
+
+    /* INCLUDES LIST */
+    .includes{display:flex;flex-direction:column;gap:1px;background:var(--border);margin-top:52px;}
+    .inc{background:var(--bg);padding:32px 36px;display:grid;grid-template-columns:40px 1fr;gap:24px;align-items:start;transition:background .2s;}
+    .inc:hover{background:rgba(42,157,143,.03);}
+    .inc-n{font-family:var(--Fd);font-size:15px;color:var(--gold);padding-top:2px;}
+    .inc-t{font-family:var(--Fd);font-size:22px;font-weight:400;color:var(--tp);margin-bottom:7px;line-height:1.15;}
+    .inc-b{font-family:var(--Fb);font-size:14px;font-weight:300;color:var(--ts);line-height:1.8;}
+
+    /* SCOPE NOTE */
+    .scope-note{
+      background:rgba(196,166,110,.05);border:1px solid rgba(196,166,110,.16);
+      padding:36px 40px;margin-top:52px;position:relative;
+    }
+    .scope-note::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+    .scope-note-t{font-family:var(--Fd);font-size:20px;font-style:italic;color:var(--gold);margin-bottom:8px;}
+    .scope-note-b{font-family:var(--Fb);font-size:14px;font-weight:300;color:var(--ts);line-height:1.8;max-width:640px;}
+
+    /* CONTACT */
+    .contact-card{background:rgba(42,157,143,.04);border:1px solid rgba(42,157,143,.12);padding:60px;text-align:center;margin-top:0;position:relative;}
+    .contact-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--teal),transparent);}
+    .contact-h{font-family:var(--Fd);font-size:clamp(32px,4.5vw,56px);font-weight:400;font-style:italic;color:var(--tp);margin-bottom:14px;line-height:1.1;}
+    .contact-s{font-family:var(--Fb);font-size:15px;font-weight:300;color:var(--ts);line-height:1.8;max-width:460px;margin:0 auto 32px;}
+    .btn-p{font-family:var(--Fb);font-size:14px;font-weight:500;color:#fff;background:var(--teal);border:none;border-radius:100px;padding:14px 30px;cursor:pointer;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-p:hover{background:var(--tl);}
+
+    footer{background:var(--bg);border-top:1px solid var(--border);padding:52px;}
+    .ft{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid var(--border);}
+    .ft-brand{font-family:var(--Fb);font-size:15px;font-weight:500;color:var(--tp);text-decoration:none;letter-spacing:.02em;}
+    .ft-brand-e{color:var(--gb);}
+    .ft-tag{font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);line-height:1.75;margin-top:12px;max-width:240px;}
+    .ft-cl{font-family:var(--Fb);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tt);margin-bottom:18px;opacity:.6;}
+    .ft-lk{display:block;font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);text-decoration:none;margin-bottom:11px;transition:color .15s;}
+    .ft-lk:hover{color:var(--tp);}
+    .ft-bot{max-width:1400px;margin:28px auto 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+    .ft-copy{font-family:var(--Fb);font-size:11px;color:rgba(242,240,236,.35);line-height:1.7;}
+    .ft-ll{font-family:var(--Fb);font-size:11px;font-weight:300;color:rgba(242,240,236,.42);text-decoration:none;margin-left:20px;transition:color .15s;}
+    .ft-ll:hover{color:var(--tp);}
+
+    .fu{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);}
+    .fu.in{opacity:1;transform:translateY(0);}
+    .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+    @media(max-width:1024px){
+      nav,.ph,.sec,footer{padding-left:28px;padding-right:28px;}
+      .story-grid{grid-template-columns:1fr;gap:40px;}
+      .ft{grid-template-columns:1fr 1fr;gap:36px;}
+      .contact-card{padding:40px 28px;}
+      .scope-note{padding:28px;}
+      body{cursor:auto;}#cursor{display:none;}
+    }
+    @media(max-width:640px){.ft{grid-template-columns:1fr;}.inc{grid-template-columns:32px 1fr;padding:26px 20px;}}
+  </style>
+</head>
+<body>
+<div id="cursor"></div>
+<nav>
+  <a href="/" class="wm">Mune Technologies</a>
+  <div class="nav-links">
+    <a href="/mune"        class="nl">munē</a>
+    <a href="/platform"    class="nl">Platform</a>
+    <a href="/company"     class="nl">Company</a>
+    <a href="/commitments" class="nl">Commitments</a>
+    <a href="/investors"   class="nl">Investors</a>
+  </div>
+  <a href="https://app.getmune.com/quiz" class="nav-cta">Open munē</a>
+</nav>
+
+<div class="ph">
+  <div class="ph-bg">taught</div>
+  <p class="ph-label fu">For organizations</p>
+  <h1 class="ph-h1 fu d1">Financial literacy,<br/><em>taught in the room.</em></h1>
+  <p class="ph-sub fu d2">Your people may already have access to financial resources. What's usually missing isn't more information — it's knowing what to do with it. This is that, taught directly, by the person who built munē.</p>
+</div>
+
+<section class="sec">
+  <p class="sec-label fu">Who teaches it</p>
+  <div class="story-grid">
+    <div class="fu d1">
+      <p class="pull">"The workshops came first. The app grew out of them."</p>
+      <a href="/company" class="btn-link">Read the full story →</a>
+    </div>
+    <div class="fu d2">
+      <p class="story-p">Every workshop is taught directly by the founder of Mune Technologies — the same person who built the six-archetype framework, the Munē Score, and the app itself. This isn't outsourced to a training team or delivered from a script written by someone else.</p>
+      <p class="story-p">The content was tested in person, with real people navigating real financial pressure, long before a single line of app code existed. The app is the workshop, systemized. The workshop is the app, taught live.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <p class="sec-label fu">What it actually is</p>
+  <h2 class="sec-h fu d1" style="max-width:600px;">Not a benefits package.<br/><em>A session, and a system to keep.</em></h2>
+  <div class="includes fu d2">
+    <div class="inc">
+      <div class="inc-n">01</div>
+      <div><p class="inc-t">A single session, taught live</p><p class="inc-b">In person or virtual. Built on the same identity-first approach that runs the app — this isn't a generic budgeting seminar, it starts with who your people are with money before what they should do about it.</p></div>
+    </div>
+    <div class="inc">
+      <div class="inc-n">02</div>
+      <div><p class="inc-t">Individual munē access for every participant</p><p class="inc-b">Everyone leaves with their own account on the same app every munē user has — same free tier, same $9.99/mo Personal tier. Not a separate enterprise product. The same system, so the room doesn't end when the workshop does.</p></div>
+    </div>
+    <div class="inc">
+      <div class="inc-n">03</div>
+      <div><p class="inc-t">No dashboards, no individual data shared with your organization</p><p class="inc-b">What happens in someone's munē account is theirs. Your organization gets the workshop and the goodwill of having offered it — not a window into anyone's finances.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="border-bottom:none;">
+  <div class="scope-note fu">
+    <p class="scope-note-t">A small number, on purpose.</p>
+    <p class="scope-note-b">This is taught personally, which means it doesn't scale the way software does. Mune Technologies is currently taking on a limited number of organizations at a time. If the timing doesn't work out immediately, it's capacity, not disinterest.</p>
+  </div>
+  <div class="contact-card fu d1" style="margin-top:52px;">
+    <p class="contact-h">Bring this to your team.</p>
+    <p class="contact-s">Tell me a little about your organization and what you're hoping to cover. We'll go from there.</p>
+    <a href="mailto:sam@getmune.com?subject=Workshop%20inquiry" class="btn-p">sam@getmune.com →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div><a href="/" class="ft-brand">Mune Technologies</a><p class="ft-tag">Building the operating system for financial behavior.<br/>Our first product is munē.</p></div>
+    <div><p class="ft-cl">Product</p><a href="/mune" class="ft-lk">mun<span class="ft-brand-e">ē</span></a><a href="https://app.getmune.com/quiz" class="ft-lk">Take the quiz</a><a href="https://app.getmune.com" class="ft-lk">Open app</a><a href="https://app.getmune.com/signin" class="ft-lk">Sign in</a></div>
+    <div><p class="ft-cl">Company</p><a href="/company" class="ft-lk">About</a><a href="/platform" class="ft-lk">Platform</a><a href="/investors" class="ft-lk">Investors</a><a href="/commitments" class="ft-lk">Commitments</a></div>
+    <div><p class="ft-cl">Legal</p><a href="/privacy" class="ft-lk">Privacy</a><a href="/terms" class="ft-lk">Terms</a><a href="/commitments" class="ft-lk">Commitments</a></div>
+    <div><p class="ft-cl">Contact</p><a href="mailto:sam@getmune.com" class="ft-lk">sam@getmune.com</a></div>
+  </div>
+  <div class="ft-bot">
+    <p class="ft-copy">© 2026 Mune Technologies Inc. · getmune.com</p>
+    <div><a href="/privacy" class="ft-ll">Privacy</a><a href="/terms" class="ft-ll">Terms</a><a href="/commitments" class="ft-ll">Commitments</a></div>
+    <p class="ft-copy">munē is financial education — not financial advice.</p>
+  </div>
+</footer>
+
+<script>
+  const cursor=document.getElementById('cursor');let mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  function a(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;cursor.style.left=cx+'px';cursor.style.top=cy+'px';requestAnimationFrame(a);}a();
+  document.querySelectorAll('a,button,.inc').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('expand'));el.addEventListener('mouseleave',()=>cursor.classList.remove('expand'));});
+  const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target);}});},{threshold:.1});
+  document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
