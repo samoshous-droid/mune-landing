@@ -4,6 +4,7 @@
     { "source": "/company",     "destination": "/company.html"     },
     { "source": "/platform",    "destination": "/platform.html"    },
     { "source": "/investors",   "destination": "/investors.html"   },
+    { "source": "/workshops",   "destination": "/workshops.html"   },
     { "source": "/privacy",     "destination": "/privacy.html"     },
     { "source": "/terms",       "destination": "/terms.html"       },
     { "source": "/commitments", "destination": "/commitments.html" }
