@@ -1,1 +1,1 @@
-body{margin:0;background:#08110d;color:#f3efe5;font-family:Arial,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:#08110d;color:#f3efe5;font-family:Arial,sans-serif}a{color:inherit}.container{width:min(1180px,calc(100% - 40px));margin:auto}.nav{position:sticky;top:0;background:#08110d;border-bottom:1px solid rgba(255,255,255,.12);z-index:50}.nav-inner{height:72px;display:flex;align-items:center;justify-content:space-between}.brand{font-size:30px;text-decoration:none}.btn{padding:14px 22px;border-radius:999px;text-decoration:none;background:#d6b06d;color:#17120b}
