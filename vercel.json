@@ -12,5 +12,10 @@
     { "source": "/terms", "destination": "/terms.html" },
     { "source": "/quiz", "destination": "/quiz.html" },
     { "source": "/mune", "destination": "/mune.html" }
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/how-it-works", "destination": "/how-it-works.html" },
+    { "source": "/resources", "destination": "/resources.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/terms", "destination": "/terms.html" }
   ]
 }
