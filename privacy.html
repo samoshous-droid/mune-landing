@@ -1,178 +1,121 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Privacy Policy — Mune Technologies Inc.</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    :root{--black:#103D29;--off:#0D3526;--border:#202020;--border2:#2A2A2A;--tp:#EFEFEF;--ts:rgba(239,239,239,.75);--tt:rgba(239,239,239,.45);--teal:#2A9D8F;--tl:#33B09F;--gold:#C4A66E;--gb:#E8C97A;--Fd:'Cormorant Garamond',Georgia,serif;--Fb:'Outfit',sans-serif;}
-    html{scroll-behavior:smooth;}
-    body{background:var(--black);color:var(--tp);font-family:var(--Fb);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
-    @keyframes glow{0%,100%{opacity:.6}50%{opacity:1}}
-    nav{position:fixed;top:0;left:0;right:0;z-index:300;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(8,8,8,.97);backdrop-filter:blur(28px);border-bottom:1px solid var(--border);}
-    .wm{font-family:var(--Fb);font-size:14px;font-weight:500;color:var(--tp);text-decoration:none;letter-spacing:.02em;display:flex;align-items:center;gap:11px;}
-    .wm-e{color:var(--gb);animation:glow 4s ease infinite;font-family:var(--Fd);font-size:18px;}
-    .wm-mune{font-family:var(--Fd);font-size:18px;color:var(--tt);}
-    .wm-sep{width:1px;height:14px;background:var(--border2);flex-shrink:0;}
-    .wm-co{font-family:var(--Fb);font-size:14px;font-weight:500;color:var(--tp);letter-spacing:.02em;}
-    .nav-r{display:flex;align-items:center;gap:10px;}
-    .nb-g{font-family:var(--Fb);font-size:13px;font-weight:400;color:var(--ts);background:none;border:1px solid var(--border2);border-radius:8px;padding:7px 15px;cursor:pointer;text-decoration:none;transition:all .15s;}
-    .nb-g:hover{color:var(--tp);}
-    .nb-p{font-family:var(--Fb);font-size:13px;font-weight:500;color:#fff;background:var(--teal);border:none;border-radius:8px;padding:8px 18px;cursor:pointer;text-decoration:none;transition:all .15s;}
-    .nb-p:hover{background:var(--tl);}
-
-    .legal-wrap{max-width:760px;margin:0 auto;padding:120px 48px 100px;}
-    .legal-label{font-family:var(--Fb);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;opacity:.85;}
-    .legal-h1{font-family:var(--Fd);font-size:clamp(36px,5vw,64px);font-weight:400;line-height:1.0;letter-spacing:-.02em;color:var(--tp);margin-bottom:12px;}
-    .legal-date{font-family:var(--Fb);font-size:13px;font-weight:300;color:var(--tt);margin-bottom:48px;}
-    .legal-intro{font-family:var(--Fb);font-size:16px;font-weight:300;color:var(--ts);line-height:1.85;margin-bottom:48px;padding:24px 28px;background:var(--off);border:1px solid var(--border);border-radius:14px;border-left:3px solid var(--teal);}
-    .legal-sec{margin-bottom:44px;}
-    .legal-h2{font-family:var(--Fd);font-size:26px;font-weight:400;color:var(--tp);margin-bottom:14px;line-height:1.1;padding-top:44px;border-top:1px solid var(--border);}
-    .legal-h2:first-child{border-top:none;padding-top:0;}
-    .legal-p{font-family:var(--Fb);font-size:15px;font-weight:300;color:var(--ts);line-height:1.85;margin-bottom:16px;}
-    .legal-ul{list-style:none;margin-bottom:16px;}
-    .legal-ul li{font-family:var(--Fb);font-size:15px;font-weight:300;color:var(--ts);line-height:1.85;margin-bottom:8px;padding-left:18px;position:relative;}
-    .legal-ul li::before{content:'·';position:absolute;left:0;color:var(--teal);}
-    .legal-highlight{background:rgba(42,157,143,.06);border:1px solid rgba(42,157,143,.15);border-radius:10px;padding:18px 22px;margin:20px 0;font-family:var(--Fb);font-size:14px;font-weight:300;color:var(--ts);line-height:1.8;}
-    .legal-contact{background:var(--off);border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-top:48px;text-align:center;}
-    .legal-contact p{font-family:var(--Fb);font-size:14px;font-weight:300;color:var(--ts);line-height:1.75;margin-bottom:12px;}
-    .legal-contact a{color:var(--teal);text-decoration:none;}
-    .legal-contact a:hover{opacity:.7;}
-
-    footer{background:#0D2E1F;border-top:1px solid var(--border);padding:40px 48px 28px;}
-    .ft{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
-    .ft-brand{font-family:var(--Fb);font-size:14px;font-weight:500;color:var(--tp);text-decoration:none;letter-spacing:.02em;}
-    .ft-brand-e{color:var(--gb);}
-    .ft-copy{font-family:var(--Fb);font-size:11px;color:rgba(255,255,255,.35);line-height:1.7;}
-    .ft-links{display:flex;gap:20px;}
-    .ft-lk{font-family:var(--Fb);font-size:12px;font-weight:300;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;}
-    .ft-lk:hover{color:var(--tp);}
-
-    @media(max-width:760px){nav{padding:0 20px;}.wm-sep,.wm-co{display:none;}.legal-wrap{padding:100px 24px 80px;}footer{padding:32px 24px 24px;}.ft{flex-direction:column;align-items:flex-start;gap:12px;}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>munē — Privacy Policy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#F7F3EE;color:#1A1C19;font-family:'Manrope',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+:root{--F:'Cormorant Garamond',Georgia,serif;--B:'Manrope',system-ui,sans-serif;--teal:#2A8F82;--gold:#C6A15B;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:68px;border-bottom:1px solid rgba(26,28,25,0.09);background:#F7F3EE;}
+.nav-logo{font-family:var(--F);font-size:22px;font-weight:400;color:#1A1C19;}
+.nav-logo em{font-style:normal;color:var(--gold);}
+.nav-home{font-family:var(--B);font-size:12px;font-weight:300;color:#8A8880;transition:color 0.2s;}
+.nav-home:hover{color:#1A1C19;}
+.content{max-width:720px;margin:0 auto;padding:80px 40px 120px;}
+.page-lbl{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:#8A8880;margin-bottom:16px;}
+h1{font-family:var(--F);font-size:clamp(36px,4vw,54px);font-weight:400;line-height:1.06;letter-spacing:-0.025em;color:#1A1C19;margin-bottom:12px;}
+.updated{font-family:var(--B);font-size:12px;font-weight:300;color:#8A8880;margin-bottom:56px;}
+h2{font-family:var(--F);font-size:24px;font-weight:400;color:#1A1C19;margin:48px 0 14px;letter-spacing:-0.01em;}
+p{font-family:var(--B);font-size:14px;font-weight:300;color:#4A4A44;line-height:1.88;margin-bottom:16px;letter-spacing:0.01em;}
+ul{margin:0 0 16px 20px;}
+li{font-family:var(--B);font-size:14px;font-weight:300;color:#4A4A44;line-height:1.88;margin-bottom:8px;letter-spacing:0.01em;}
+strong{font-weight:500;color:#1A1C19;}
+.highlight{background:rgba(42,143,130,0.06);border:1px solid rgba(42,143,130,0.14);border-radius:8px;padding:20px 24px;margin:24px 0;}
+.highlight p{margin:0;color:#1A1C19;}
+footer-strip{display:block;text-align:center;padding:40px;border-top:1px solid rgba(26,28,25,0.09);font-family:var(--B);font-size:12px;font-weight:300;color:#8A8880;}
+@media(max-width:768px){nav{padding:0 20px;}.content{padding:60px 20px 80px;}}
+</style>
 </head>
 <body>
 <nav>
-  <a href="/" class="wm"><span class="wm-co">Mune Technologies</span><span class="wm-sep"></span><span class="wm-mune">mun<span class="wm-e">ē</span></span></a>
-  <div class="nav-r">
-    <a href="https://app.getmune.com/signin" class="nb-g">Sign in</a>
-    <a href="https://app.getmune.com/quiz"   class="nb-p">Open munē →</a>
-  </div>
+  <a href="/" class="nav-logo">mun<em>ē</em></a>
+  <a href="/" class="nav-home">← Back to munē</a>
 </nav>
+<div class="content">
+  <p class="page-lbl">Legal</p>
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: September 2026 · Mune Technologies Inc.</p>
 
-<div class="legal-wrap">
-  <p class="legal-label">Mune Technologies Inc.</p>
-  <h1 class="legal-h1">Privacy Policy</h1>
-  <p class="legal-date">Last updated: June 2026 · Effective immediately</p>
+  <div class="highlight"><p><strong>The short version:</strong> Your financial data is yours. We never sell it, share it with employers or third parties without your consent, or use it to target you with ads. Bank statements are deleted the moment we finish reading them. This policy explains exactly what we collect, why, and how you can remove it.</p></div>
 
-  <div class="legal-intro">
-    We handle your financial data with the seriousness it deserves. This policy explains exactly what we collect, why we collect it, and what we will never do with it. If you upload a bank statement to munē, it is used to analyze your financial pattern and then deleted. We do not sell your data. We do not share your individual data with anyone. Full stop.
-  </div>
+  <h2>Who we are</h2>
+  <p>Mune Technologies Inc. ("munē," "we," "us") is a Delaware C-Corporation that operates the munē financial wellness platform at getmune.com and app.getmune.com. This Privacy Policy applies to all munē products and services.</p>
 
-  <div class="legal-sec">
-    <h2 class="legal-h2">Who we are</h2>
-    <p class="legal-p">Mune Technologies Inc. is a Delaware C-Corp operating under the brand munē. Our primary product is the munē financial wellness application, accessible at app.getmune.com. Our company site is getmune.com.</p>
-    <p class="legal-p">For all privacy matters, contact us at <a href="mailto:sam@getmune.com" style="color:var(--teal);text-decoration:none;">sam@getmune.com</a>.</p>
-  </div>
+  <h2>What we collect</h2>
+  <p><strong>Information you provide directly:</strong></p>
+  <ul>
+    <li>Your name and email address when you create an account</li>
+    <li>Your quiz responses — behavioral questions only, no financial data at this stage</li>
+    <li>Bank statements you upload for Moment analysis</li>
+    <li>Information you share with munē Chat</li>
+    <li>Blueprint allocations and goal information you enter</li>
+  </ul>
+  <p><strong>Information we derive from your data:</strong></p>
+  <ul>
+    <li>Your Munē Type — derived from quiz responses and behavioral patterns</li>
+    <li>Financial pattern analysis — derived from statement uploads</li>
+    <li>Blueprint recommendations — derived from your income and allocation inputs</li>
+  </ul>
+  <p><strong>Information collected automatically:</strong></p>
+  <ul>
+    <li>Usage data — which features you use and how often</li>
+    <li>Device and browser information for security and compatibility</li>
+    <li>Authentication tokens to keep you signed in securely</li>
+  </ul>
 
-  <div class="legal-sec">
-    <h2 class="legal-h2">What we collect</h2>
-    <p class="legal-p">We collect only what we need to deliver the product and nothing more.</p>
-    <ul class="legal-ul">
-      <li><strong>Account information:</strong> Your email address, first name, and the archetype and Floor number you set during onboarding.</li>
-      <li><strong>Financial data you provide:</strong> Bank statements you upload for Munē Moment analysis. These are processed by our AI system to extract pattern data and are deleted immediately after analysis is complete.</li>
-      <li><strong>Behavioral data:</strong> Your Blueprint allocation, Daily Edge responses, check-in history, Vision destinations, and Receipt entries. This is the behavioral data that powers your personalized experience.</li>
-      <li><strong>Usage data:</strong> Standard app usage information — screens visited, features used, session duration. Used to improve the product, never sold.</li>
-      <li><strong>Device information:</strong> Browser type, device type, and approximate location (city-level only). GPS is never collected or stored.</li>
-    </ul>
-  </div>
+  <h2>Bank statements</h2>
+  <p><strong>We delete your bank statement the moment we finish reading it.</strong> munē does not store raw financial documents. We extract patterns and figures from your statement, then immediately delete the original file. We do not access your bank accounts directly unless you explicitly connect them.</p>
 
-  <div class="legal-sec">
-    <h2 class="legal-h2">Bank statements and financial documents</h2>
-    <div class="legal-highlight">
-      When you upload a bank statement or financial document to munē, it is transmitted securely to our AI processing system, analyzed to extract your spending pattern, income, and merchant data, and then permanently deleted. We do not store the original document. We do not retain the raw transaction data beyond what is necessary to generate your pattern analysis. The extracted pattern data — not the raw statement — is what powers your experience.
-    </div>
-    <p class="legal-p">This deletion is permanent and automatic. You can verify the deletion timestamp in your Receipt. We built this process deliberately because we believe your financial documents are among the most sensitive data you have, and they should never live on a server longer than absolutely necessary.</p>
-  </div>
+  <h2>How we use your information</h2>
+  <ul>
+    <li>To provide and personalize your munē experience</li>
+    <li>To generate your Munē Type, Blueprint, and behavioral analysis</li>
+    <li>To power munē Chat with context about your financial situation</li>
+    <li>To send transactional emails — account verification, receipts, important updates</li>
+    <li>To improve the munē system through aggregate, anonymized usage patterns</li>
+  </ul>
+  <p>We do not use your data to target you with advertising. munē does not sell your data. munē does not share your individual financial data with employers, even if your employer sponsors your access.</p>
 
-  <div class="legal-sec">
-    <h2 class="legal-h2">How we use your data</h2>
-    <ul class="legal-ul">
-      <li>To personalize your munē experience — your archetype, Blueprint, Daily Edge, and Advisor responses.</li>
-      <li>To calculate your Munē Score across six financial health categories.</li>
-      <li>To generate your Receipt and track your behavioral progress over time.</li>
-      <li>To send you transactional emails — onboarding, billing, and product updates. Never marketing emails without your explicit consent.</li>
-      <li>To improve the product — anonymized, aggregate behavioral patterns help us build better features.</li>
-    </ul>
-  </div>
+  <h2>Data sharing</h2>
+  <p>We share data only in these limited circumstances:</p>
+  <ul>
+    <li><strong>Service providers:</strong> Supabase (database and authentication), Resend (transactional email), Stripe (payment processing), Anthropic (AI processing). Each is bound by data processing agreements.</li>
+    <li><strong>Legal requirements:</strong> If required by law, court order, or to protect the rights and safety of munē users.</li>
+    <li><strong>Business transfers:</strong> If munē is acquired, your data will transfer to the acquiring entity under equivalent privacy protections.</li>
+  </ul>
+  <p>We do not share your individual financial data, Munē Type, Blueprint, conversation history, or personal profile with any employer, organization, or third party for any commercial purpose.</p>
 
-  <div class="legal-sec">
-    <h2 class="legal-h2">What we will never do</h2>
-    <div class="legal-highlight">
-      We will never sell your personal data. We will never share your individual financial data with advertisers, data brokers, or third parties for marketing purposes. We will never use your AI conversations for model training. We will never make your data visible to your employer if you access munē through an employer benefit — employers see only aggregate, anonymized reports.
-    </div>
-  </div>
+  <h2>Organizational accounts</h2>
+  <p>If your munē access is sponsored by an employer, ERG, or organization, they receive only aggregate, anonymized program data — engagement rates, wellness trends, and educational interest patterns across the participant group. They never see your individual data, financial situation, Munē Type, Blueprint allocations, munē Chat conversations, or personal goals.</p>
 
-  <div class="legal-sec">
-    <h2 class="legal-h2">Third-party services we use</h2>
-    <p class="legal-p">We work with a small number of trusted third-party services to deliver munē:</p>
-    <ul class="legal-ul">
-      <li><strong>Supabase:</strong> Database and authentication. Your data is encrypted at rest and in transit.</li>
-      <li><strong>Anthropic:</strong> AI processing for Ask munē and Munē Moment analysis. AI conversations are not used for model training.</li>
-      <li><strong>Stripe:</strong> Payment processing. We never store your payment card information directly.</li>
-      <li><strong>Resend:</strong> Transactional email delivery.</li>
-      <li><strong>Plaid (future):</strong> Bank account connection for automatic transaction sync. Deferred to a future product phase.</li>
-    </ul>
-  </div>
+  <h2>Your rights</h2>
+  <ul>
+    <li><strong>Access:</strong> You can request a copy of your data at any time</li>
+    <li><strong>Correction:</strong> You can update your information in your account settings</li>
+    <li><strong>Deletion:</strong> You can delete your account and all associated data at any time</li>
+    <li><strong>Portability:</strong> You can request your data in a portable format</li>
+    <li><strong>Opt out:</strong> You can opt out of non-transactional communications at any time</li>
+  </ul>
+  <p>To exercise any of these rights, contact us at <a href="mailto:privacy@getmune.com" style="color:var(--teal);">privacy@getmune.com</a>.</p>
 
-  <div class="legal-sec">
-    <h2 class="legal-h2">Your rights</h2>
-    <ul class="legal-ul">
-      <li><strong>Access:</strong> You can request a copy of all data we hold about you at any time.</li>
-      <li><strong>Deletion:</strong> You can delete your account and all associated data at any time. Deletion is processed within 30 days. This includes your Receipt — which is permanent within the product but will be deleted upon account deletion request.</li>
-      <li><strong>Correction:</strong> You can correct your account information at any time through your Profile settings.</li>
-      <li><strong>Export:</strong> You can export your behavioral data and Receipt entries at any time.</li>
-      <li><strong>Cancel:</strong> You can cancel your subscription at any time. Three taps. No questions asked. Your data remains accessible until the end of your billing period.</li>
-    </ul>
-  </div>
+  <h2>Data security</h2>
+  <p>We use industry-standard security practices including encryption in transit and at rest, row-level security on all database tables, and authentication through Supabase's secure auth system. We do not store API keys or sensitive credentials in client-side code.</p>
 
-  <div class="legal-sec">
-    <h2 class="legal-h2">Data security</h2>
-    <p class="legal-p">All data is encrypted in transit using TLS and encrypted at rest. We use Row Level Security on all database tables — meaning your data is only accessible to you and cannot be accessed by other users. We do not store plain text passwords. Authentication uses magic links and one-time passwords.</p>
-    <p class="legal-p">We are not yet SOC 2 certified. We plan to begin SOC 2 Type 1 readiness in Year 2 through Vanta. We are honest about where we are in the compliance journey.</p>
-  </div>
+  <h2>Children's privacy</h2>
+  <p>munē is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you believe we have collected information from a child under 13, contact us immediately at <a href="mailto:privacy@getmune.com" style="color:var(--teal);">privacy@getmune.com</a>.</p>
 
-  <div class="legal-sec">
-    <h2 class="legal-h2">Children's privacy</h2>
-    <p class="legal-p">The munē consumer application is designed for users 18 and older. munē Jr., our financial literacy program for children ages 5–17, is operated under strict COPPA compliance. Children's accounts are controlled by a parent or guardian. We collect only the minimum information necessary for educational features and never use children's data for any commercial purpose.</p>
-  </div>
+  <h2>Changes to this policy</h2>
+  <p>We will notify you of material changes to this policy by email and by posting a notice in the app. Continued use of munē after the effective date of any changes constitutes acceptance of the updated policy.</p>
 
-  <div class="legal-sec">
-    <h2 class="legal-h2">Changes to this policy</h2>
-    <p class="legal-p">We will notify you by email at least 30 days before making any material changes to this Privacy Policy. We will never retroactively apply a weaker privacy policy to data already collected. If you do not agree with a change, you have 30 days to export your data and delete your account before the change takes effect.</p>
-  </div>
-
-  <div class="legal-contact">
-    <p>Questions about this policy or how we handle your data?</p>
-    <p><a href="mailto:sam@getmune.com">sam@getmune.com</a> · We respond within 48 hours.</p>
-  </div>
+  <h2>Contact</h2>
+  <p>Questions about this policy: <a href="mailto:privacy@getmune.com" style="color:var(--teal);">privacy@getmune.com</a><br>Mune Technologies Inc. · getmune.com</p>
 </div>
-
-<footer>
-  <div class="ft">
-    <a href="/" class="ft-brand">Mune Technologies <span style="color:var(--tt);font-weight:300;">· mun<span class="ft-brand-e">ē</span></span></a>
-    <div class="ft-links">
-      <a href="/privacy"     class="ft-lk">Privacy</a>
-      <a href="/terms"       class="ft-lk">Terms</a>
-      <a href="/commitments" class="ft-lk">Commitments</a>
-      <a href="/company"     class="ft-lk">Company</a>
-    </div>
-    <p class="ft-copy">© 2026 Mune Technologies Inc. · All rights reserved.</p>
-  </div>
-</footer>
+<footer-strip>© 2026 Mune Technologies Inc. · <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> · getmune.com</footer-strip>
 </body>
 </html>

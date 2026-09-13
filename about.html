@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>munē — About</title>
+<meta name="description" content="munē was built by someone from the community, for the community. The knowledge you were never given, finally built into a system for you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:#07130E;color:#F2EFE7;font-family:'Manrope',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+:root{
+  --forest:#07130E;--forest-2:#0D2A1D;--forest-3:#183D2B;
+  --ivory:#F2EFE7;--parchment:#E7E0D2;--parchment-2:#DDD5C4;
+  --text:#1A1C19;--text-2:#4A4A44;--text-3:#8A8880;
+  --gold:#C6A15B;--gold-2:#D7BC82;--teal:#2A8F82;--teal-2:#3BA898;
+  --bd-dark:rgba(242,239,231,0.07);--bd-light:rgba(26,28,25,0.09);
+  --F:'Cormorant Garamond',Georgia,serif;--B:'Manrope',system-ui,sans-serif;
+}
+.container{max-width:1200px;margin:0 auto;padding:0 60px;}
+.container--narrow{max-width:880px;margin:0 auto;padding:0 60px;}
+nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:72px;background:rgba(7,19,14,0.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--bd-dark);}
+.nav-logo{font-family:var(--F);font-size:24px;font-weight:400;color:var(--ivory);}
+.nav-logo em{font-style:normal;color:var(--gold-2);}
+.nav-center{display:flex;gap:2px;}
+.nav-center a{font-family:var(--B);font-size:12px;font-weight:300;color:rgba(242,239,231,0.45);padding:8px 16px;border-radius:5px;transition:color 0.2s;letter-spacing:0.01em;}
+.nav-center a:hover{color:var(--ivory);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.nav-login{font-family:var(--B);font-size:12px;font-weight:300;color:rgba(242,239,231,0.38);padding:8px 14px;}
+.nav-cta{font-family:var(--B);font-size:12px;font-weight:500;color:var(--text);background:var(--ivory);padding:9px 22px;border-radius:5px;transition:background 0.2s;}
+.nav-cta:hover{background:var(--parchment);}
+.btn-gold{font-family:var(--B);font-size:14px;font-weight:500;color:var(--text);background:var(--gold-2);padding:15px 34px;border-radius:4px;display:inline-block;letter-spacing:0.04em;transition:background 0.18s;}
+.btn-gold:hover{background:#DFCA90;}
+.btn-ghost{font-family:var(--B);font-size:13px;font-weight:300;color:rgba(242,239,231,0.42);border:1px solid rgba(242,239,231,0.14);padding:14px 28px;border-radius:4px;display:inline-block;letter-spacing:0.04em;transition:all 0.2s;}
+.btn-ghost:hover{color:var(--ivory);border-color:rgba(242,239,231,0.35);}
+
+/* HERO — dark, text-forward */
+#hero{background:var(--forest);padding:180px 0 120px;border-bottom:1px solid var(--bd-dark);}
+.hero-tag{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:32px;display:flex;align-items:center;gap:14px;}
+.hero-tag::before{content:'';display:block;width:28px;height:1px;background:var(--gold);opacity:0.55;}
+.hero-h{font-family:var(--F);font-size:clamp(52px,6vw,88px);font-weight:400;line-height:1.0;letter-spacing:-0.03em;color:var(--ivory);margin-bottom:32px;}
+.hero-h em{font-style:italic;color:var(--gold-2);font-weight:300;}
+.hero-p{font-family:var(--B);font-size:18px;font-weight:300;line-height:1.88;color:rgba(242,239,231,0.45);max-width:560px;letter-spacing:0.01em;}
+
+/* ORIGIN — parchment */
+#origin{background:var(--parchment);padding:140px 0;position:relative;}
+#origin::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");pointer-events:none;}
+.origin-inner{position:relative;}
+.origin-lbl{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.24em;text-transform:uppercase;color:var(--text-3);margin-bottom:32px;}
+.origin-body{display:flex;flex-direction:column;gap:28px;max-width:720px;}
+.origin-body p{font-family:var(--F);font-size:clamp(22px,2.4vw,30px);font-weight:300;line-height:1.55;color:var(--text);letter-spacing:-0.01em;}
+.origin-body p em{font-style:italic;color:var(--teal);}
+
+/* FOUNDER — dark */
+#founder{background:var(--forest-2);padding:140px 0;border-top:1px solid var(--bd-dark);border-bottom:1px solid var(--bd-dark);}
+.founder-grid{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start;}
+.founder-left .f-lbl{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.24em;text-transform:uppercase;color:rgba(198,161,91,0.4);margin-bottom:24px;}
+.founder-left h2{font-family:var(--F);font-size:clamp(34px,3.8vw,52px);font-weight:400;line-height:1.06;letter-spacing:-0.025em;color:var(--ivory);margin-bottom:20px;}
+.founder-left h2 em{font-style:italic;color:var(--gold-2);font-weight:300;}
+.founder-right p{font-family:var(--B);font-size:14px;font-weight:300;color:rgba(242,239,231,0.38);line-height:1.92;letter-spacing:0.01em;margin-bottom:20px;}
+.founder-right p:last-child{margin-bottom:0;}
+.founder-name{font-family:var(--F);font-size:22px;font-weight:400;color:var(--ivory);margin-top:32px;margin-bottom:4px;}
+.founder-title{font-family:var(--B);font-size:12px;font-weight:300;color:rgba(242,239,231,0.3);letter-spacing:0.04em;}
+
+/* MISSION STATS — parchment */
+#mission{background:var(--parchment);padding:140px 0;position:relative;}
+#mission::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");pointer-events:none;}
+.mission-inner{position:relative;}
+.m-lbl{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.24em;text-transform:uppercase;color:var(--text-3);margin-bottom:24px;}
+.m-h{font-family:var(--F);font-size:clamp(34px,3.8vw,52px);font-weight:400;line-height:1.06;letter-spacing:-0.025em;color:var(--text);margin-bottom:64px;max-width:640px;}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--bd-light);border-radius:3px;overflow:hidden;}
+.stat-cell{padding:48px 40px;border-right:1px solid var(--bd-light);}
+.stat-cell:last-child{border-right:none;}
+.stat-n{font-family:var(--F);font-size:clamp(44px,5vw,64px);font-weight:300;color:var(--teal);display:block;line-height:1;margin-bottom:12px;letter-spacing:-0.03em;}
+.stat-l{font-family:var(--B);font-size:13px;font-weight:300;color:var(--text-2);line-height:1.65;letter-spacing:0.01em;}
+
+/* MOATS — dark */
+#moats{background:var(--forest-3);padding:140px 0;border-top:1px solid var(--bd-dark);border-bottom:1px solid var(--bd-dark);}
+.moat-top{margin-bottom:72px;}
+.moat-lbl{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.24em;text-transform:uppercase;color:rgba(198,161,91,0.4);margin-bottom:20px;}
+.moat-h{font-family:var(--F);font-size:clamp(34px,3.8vw,52px);font-weight:400;line-height:1.06;letter-spacing:-0.025em;color:var(--ivory);}
+.moat-list{display:flex;flex-direction:column;gap:0;}
+.moat-item{display:grid;grid-template-columns:48px 1fr;gap:24px;padding:28px 0;border-bottom:1px solid var(--bd-dark);align-items:start;}
+.moat-item:last-child{border-bottom:none;}
+.moat-n{font-family:var(--F);font-size:18px;font-weight:300;color:rgba(198,161,91,0.3);padding-top:2px;}
+.moat-title{font-family:var(--B);font-size:14px;font-weight:500;color:var(--ivory);margin-bottom:6px;letter-spacing:0.01em;}
+.moat-body{font-family:var(--B);font-size:13px;font-weight:300;color:rgba(242,239,231,0.32);line-height:1.75;letter-spacing:0.01em;}
+
+/* FINAL */
+#final{background:var(--forest);padding:160px 0;text-align:center;border-top:1px solid var(--bd-dark);position:relative;overflow:hidden;}
+#final::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(24,61,43,0.45) 0%,transparent 70%);pointer-events:none;}
+.final-inner{position:relative;z-index:2;}
+.final-rule{width:36px;height:1px;background:var(--gold);opacity:0.4;margin:0 auto 40px;}
+.final-h{font-family:var(--F);font-size:clamp(38px,4.5vw,64px);font-weight:400;line-height:1.04;letter-spacing:-0.03em;color:var(--ivory);margin-bottom:18px;}
+.final-h em{font-style:italic;color:var(--gold-2);font-weight:300;}
+.final-p{font-family:var(--B);font-size:15px;font-weight:300;color:rgba(242,239,231,0.32);max-width:380px;margin:0 auto 48px;line-height:1.88;letter-spacing:0.01em;}
+.final-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+
+footer{background:var(--parchment);padding:60px 0 44px;border-top:1px solid var(--bd-light);}
+.footer-inner{display:flex;justify-content:space-between;gap:48px;flex-wrap:wrap;margin-bottom:48px;}
+.footer-brand .logo{font-family:var(--F);font-size:21px;font-weight:400;color:var(--text);display:inline-block;margin-bottom:10px;}
+.footer-brand .logo em{font-style:normal;color:var(--gold);}
+.footer-brand p{font-family:var(--B);font-size:12px;font-weight:300;color:var(--text-3);max-width:200px;line-height:1.72;margin-top:6px;}
+.footer-cols{display:flex;gap:64px;flex-wrap:wrap;}
+.footer-col h4{font-family:var(--B);font-size:9px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px;}
+.footer-col a{display:block;font-family:var(--B);font-size:12px;font-weight:300;color:var(--text-2);margin-bottom:10px;transition:color 0.2s;}
+.footer-col a:hover{color:var(--text);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--bd-light);flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-family:var(--B);font-size:11px;font-weight:300;color:rgba(26,28,25,0.22);}
+.footer-soc{display:flex;gap:20px;}
+.footer-soc a{font-family:var(--B);font-size:11px;font-weight:300;color:var(--text-3);transition:color 0.2s;}
+.footer-soc a:hover{color:var(--text);}
+
+@media(max-width:1024px){.container,.container--narrow{padding:0 40px;}nav{padding:0 40px;}.founder-grid{grid-template-columns:1fr;gap:48px;}.stat-grid{grid-template-columns:1fr;}.stat-cell{border-right:none;border-bottom:1px solid var(--bd-light);}.stat-cell:last-child{border-bottom:none;}}
+@media(max-width:768px){nav{padding:0 20px;}.nav-center{display:none;}.container,.container--narrow{padding:0 24px;}.moat-item{grid-template-columns:32px 1fr;gap:16px;}.footer-inner{flex-direction:column;}.footer-cols{gap:36px;}.footer-bottom{flex-direction:column;text-align:center;}}
+@media(max-width:540px){.final-btns{flex-direction:column;align-items:center;}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">mun<em>ē</em></a>
+  <div class="nav-center"><a href="/personal">Personal</a><a href="/organizations">Organizations</a><a href="/community">Community</a><a href="/how-it-works">How It Works</a><a href="/resources">Resources</a></div>
+  <div class="nav-right"><a href="https://mune-app.vercel.app/signin" class="nav-login">Log In</a><a href="https://mune-app.vercel.app/quiz" class="nav-cta">Get Started</a></div>
+</nav>
+
+<section id="hero">
+  <div class="container--narrow">
+    <p class="hero-tag">About munē</p>
+    <h1 class="hero-h">Built by someone<br>from the community,<br><em>for the community.</em></h1>
+    <p class="hero-p">Most financial tools treat money as a math problem. munē treats it as a human one. That difference starts with who built it and why.</p>
+  </div>
+</section>
+
+<section id="origin">
+  <div class="container--narrow origin-inner">
+    <p class="origin-lbl">Where this comes from</p>
+    <div class="origin-body">
+      <p>Most people were never taught how money actually works. Not in school. Not at home. The information existed — it just was not available to everyone. It moved through certain families, certain advisors, certain zip codes. <em>Everyone else figured it out the hard way — or did not figure it out at all.</em></p>
+      <p>The communities that built this country — that did the work, raised the families, held the institutions together — are the same communities most financial tools were never designed for. Generic budgeting apps. Advice that assumes a financial advisor. Literacy programs that teach vocabulary without changing behavior.</p>
+      <p>munē exists because the problem is not knowledge. It is access. <em>The system was always possible. It just was not built for everyone.</em></p>
+    </div>
+  </div>
+</section>
+
+<section id="founder">
+  <div class="container">
+    <div class="founder-grid">
+      <div class="founder-left">
+        <p class="f-lbl">The founder</p>
+        <h2>15 years in finance.<br>A lifetime of watching<br><em>what gets left out.</em></h2>
+      </div>
+      <div class="founder-right">
+        <p>Sam Oshobukola has spent his career at the intersection of finance and the communities traditional finance ignores. Banking at Capital One. Tax preparation at H&R Block. Investing at Morgan Stanley. Stock exchanges at Nasdaq and NYSE. Insurance at Allianz. Corporate finance at Exelon.</p>
+        <p>Before building munē, he delivered financial literacy workshops directly to working communities — real people, real questions, real gaps in what they had been given access to. Those workshops are where munē started.</p>
+        <p>munē is the system he wished he could have handed every person who walked into those rooms.</p>
+        <div class="founder-name">Sam Oshobukola</div>
+        <div class="founder-title">Founder & CEO · Mune Technologies Inc.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="mission">
+  <div class="container mission-inner">
+    <p class="m-lbl">The mission in numbers</p>
+    <h2 class="m-h">The problem is not willpower. It is access.</h2>
+    <div class="stat-grid">
+      <div class="stat-cell"><span class="stat-n">63%</span><span class="stat-l">of Americans cannot cover a $400 emergency without borrowing or selling something</span></div>
+      <div class="stat-cell"><span class="stat-n">72%</span><span class="stat-l">say financial stress is their primary source of anxiety — more than health, relationships, or work</span></div>
+      <div class="stat-cell"><span class="stat-n">57M</span><span class="stat-l">Americans are financially underserved by the tools and institutions that currently exist</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="moats">
+  <div class="container">
+    <div class="moat-top">
+      <p class="moat-lbl">What makes munē different</p>
+      <h2 class="moat-h">Five things that cannot be purchased or copied.</h2>
+    </div>
+    <div class="moat-list">
+      <div class="moat-item"><span class="moat-n">01</span><div><div class="moat-title">Mission authenticity</div><div class="moat-body">Built by someone from the community, for the community. Not performed. The workshops came before the product. The belief came before the business.</div></div></div>
+      <div class="moat-item"><span class="moat-n">02</span><div><div class="moat-title">The voice</div><div class="moat-body">The calm older sibling who figured it out and came back to show you. That voice cannot be manufactured or purchased. It comes from lived experience — and it is the reason people trust what munē tells them.</div></div></div>
+      <div class="moat-item"><span class="moat-n">03</span><div><div class="moat-title">Patented behavioral IP</div><div class="moat-body">The Archetype Classification System, the Financial Vitals framework, and the Munē Score are proprietary — built on behavioral science, not generic financial categories.</div></div></div>
+      <div class="moat-item"><span class="moat-n">04</span><div><div class="moat-title">Community trust</div><div class="moat-body">Built through community workshops before the app existed. The community came first. The product followed. That order matters — and it cannot be reversed.</div></div></div>
+      <div class="moat-item"><span class="moat-n">05</span><div><div class="moat-title">Behavioral data advantage</div><div class="moat-body">Every interaction teaches munē something about how people actually manage money. That data compounds over time — creating a system that gets smarter the more it is used.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="final">
+  <div class="container final-inner">
+    <div class="final-rule"></div>
+    <h2 class="final-h">The knowledge you were<br>never given — <em>finally built.</em></h2>
+    <p class="final-p">Two minutes to find your Munē Type. A lifetime of having a system that actually works.</p>
+    <div class="final-btns">
+      <a href="https://mune-app.vercel.app/quiz" class="btn-gold" style="font-size:15px;padding:17px 44px;">Discover My Munē Type →</a>
+      <a href="/personal" class="btn-ghost">See the personal experience</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand"><a href="/" class="logo">mun<em>ē</em></a><p>The knowledge you were never given, finally built into a system for you.</p></div>
+      <div class="footer-cols">
+        <div class="footer-col"><h4>Product</h4><a href="/personal">Personal</a><a href="/how-it-works">How It Works</a><a href="https://mune-app.vercel.app/quiz">Take the Quiz</a><a href="/resources">Resources</a></div>
+        <div class="footer-col"><h4>For</h4><a href="/organizations">Organizations</a><a href="/community">Communities</a></div>
+        <div class="footer-col"><h4>Company</h4><a href="/about">About</a><a href="https://mune-app.vercel.app/signin">Log In</a></div>
+        <div class="footer-col"><h4>Legal</h4><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Mune Technologies Inc. · getmune.com</p><div class="footer-soc"><a href="#">Instagram</a><a href="#">X</a><a href="#">LinkedIn</a><a href="#">YouTube</a></div></div>
+  </div>
+</footer>
+</body>
+</html>
