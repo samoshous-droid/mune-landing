@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>munē for Organizations — Financial wellness that moves people forward.</title>
+<meta name="description" content="Give employees personalized financial support while measuring privacy-preserving program engagement. Individual data stays individual — always.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:#07130E;color:#F2EFE7;font-family:'Manrope',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+::-webkit-scrollbar{width:1px;}
+::-webkit-scrollbar-thumb{background:rgba(198,161,91,0.2);}
+
+:root{
+  --forest:#07130E;
+  --forest-2:#0D2A1D;
+  --forest-3:#183D2B;
+  --ivory:#F2EFE7;
+  --parchment:#E7E0D2;
+  --parchment-2:#DDD5C4;
+  --text:#1A1C19;
+  --text-2:#4A4A44;
+  --text-3:#8A8880;
+  --gold:#C6A15B;
+  --gold-2:#D7BC82;
+  --teal:#2A8F82;
+  --teal-2:#3BA898;
+  --bd-dark:rgba(242,239,231,0.07);
+  --bd-light:rgba(26,28,25,0.09);
+  --F:'Cormorant Garamond',Georgia,serif;
+  --B:'Manrope',system-ui,sans-serif;
+}
+
+.container{max-width:1200px;margin:0 auto;padding:0 60px;}
+.container--narrow{max-width:960px;margin:0 auto;padding:0 60px;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 60px;height:72px;
+  background:rgba(7,19,14,0.94);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--bd-dark);
+}
+.nav-logo{font-family:var(--F);font-size:24px;font-weight:400;color:var(--ivory);}
+.nav-logo em{font-style:normal;color:var(--gold-2);}
+.nav-center{display:flex;gap:2px;}
+.nav-center a{font-family:var(--B);font-size:12px;font-weight:300;color:rgba(242,239,231,0.45);padding:8px 16px;border-radius:5px;transition:color 0.2s;letter-spacing:0.01em;}
+.nav-center a:hover,.nav-center a.active{color:var(--ivory);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.nav-login{font-family:var(--B);font-size:12px;font-weight:300;color:rgba(242,239,231,0.38);padding:8px 14px;transition:color 0.2s;}
+.nav-login:hover{color:var(--ivory);}
+.nav-cta{font-family:var(--B);font-size:12px;font-weight:500;color:var(--text);background:var(--ivory);padding:9px 22px;border-radius:5px;letter-spacing:0.02em;transition:background 0.2s;}
+.nav-cta:hover{background:var(--parchment);}
+
+/* ── BUTTONS ── */
+.btn-gold{font-family:var(--B);font-size:14px;font-weight:500;color:var(--text);background:var(--gold-2);padding:15px 34px;border-radius:4px;display:inline-block;letter-spacing:0.04em;transition:background 0.18s;border:none;cursor:pointer;}
+.btn-gold:hover{background:#DFCA90;}
+.btn-ghost{font-family:var(--B);font-size:13px;font-weight:300;color:rgba(242,239,231,0.42);border:1px solid rgba(242,239,231,0.14);padding:14px 28px;border-radius:4px;display:inline-block;letter-spacing:0.04em;transition:all 0.2s;}
+.btn-ghost:hover{color:var(--ivory);border-color:rgba(242,239,231,0.35);}
+.btn-outline{font-family:var(--B);font-size:13px;font-weight:400;color:var(--text-2);border:1px solid var(--bd-light);padding:13px 26px;border-radius:4px;display:inline-block;letter-spacing:0.02em;transition:all 0.2s;}
+.btn-outline:hover{color:var(--text);border-color:rgba(26,28,25,0.25);}
+
+/* ── HERO ── */
+#hero{
+  position:relative;min-height:92vh;
+  display:flex;flex-direction:column;justify-content:center;
+  overflow:hidden;padding-top:72px;
+}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;}
+#hero::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(to top,rgba(7,19,14,0.92) 0%,rgba(7,19,14,0.60) 30%,rgba(7,19,14,0.22) 60%,rgba(7,19,14,0.10) 100%),
+    linear-gradient(to right,rgba(7,19,14,0.75) 0%,rgba(7,19,14,0.35) 45%,transparent 70%);
+}
+.hero-inner{position:relative;z-index:2;padding:80px 0 120px;}
+.hero-breadcrumb{font-family:var(--B);font-size:10px;font-weight:300;letter-spacing:0.2em;color:rgba(198,161,91,0.5);margin-bottom:28px;display:flex;align-items:center;gap:10px;}
+.hero-breadcrumb a{color:rgba(242,239,231,0.3);transition:color 0.2s;}
+.hero-breadcrumb a:hover{color:rgba(242,239,231,0.6);}
+.hero-breadcrumb span{color:rgba(198,161,91,0.3);}
+.hero-tag{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;display:flex;align-items:center;gap:14px;}
+.hero-tag::before{content:'';display:block;width:28px;height:1px;background:var(--gold);opacity:0.55;}
+.hero-h{font-family:var(--F);font-size:clamp(48px,5.5vw,84px);font-weight:400;line-height:1.0;letter-spacing:-0.025em;color:var(--ivory);margin-bottom:24px;max-width:780px;}
+.hero-h em{font-style:italic;color:var(--gold-2);font-weight:300;}
+.hero-p{font-family:var(--B);font-size:17px;font-weight:300;line-height:1.82;color:rgba(242,239,231,0.55);max-width:500px;margin-bottom:44px;letter-spacing:0.01em;}
+.hero-ctas{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+
+/* ── STATEMENT — dark ── */
+#statement{background:var(--forest-2);padding:120px 0;border-bottom:1px solid var(--bd-dark);}
+.st-grid{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:center;}
+.st-left .lbl{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.24em;text-transform:uppercase;color:rgba(198,161,91,0.4);margin-bottom:24px;}
+.st-left h2{font-family:var(--F);font-size:clamp(34px,3.8vw,54px);font-weight:400;line-height:1.06;letter-spacing:-0.025em;color:var(--ivory);}
+.st-left h2 em{font-style:italic;color:var(--gold-2);font-weight:300;}
+.st-right p{font-family:var(--B);font-size:15px;font-weight:300;color:rgba(242,239,231,0.38);line-height:1.92;letter-spacing:0.01em;margin-bottom:24px;}
+.st-right p:last-child{margin-bottom:0;}
+
+/* ── WHO IT SERVES — parchment ── */
+#who{background:var(--parchment);padding:140px 0;position:relative;}
+#who::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");pointer-events:none;}
+.who-inner{position:relative;}
+.who-header{margin-bottom:72px;}
+.who-lbl{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.24em;text-transform:uppercase;color:var(--text-3);margin-bottom:20px;}
+.who-h{font-family:var(--F);font-size:clamp(34px,3.8vw,54px);font-weight:400;line-height:1.06;letter-spacing:-0.025em;color:var(--text);max-width:560px;}
+.who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--bd-light);border-radius:3px;overflow:hidden;}
+.who-card{background:var(--ivory);padding:44px 36px;border-right:1px solid var(--bd-light);transition:background 0.25s;}
+.who-card:last-child{border-right:none;}
+.who-card:hover{background:var(--parchment-2);}
+.wc-tag{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-3);display:block;margin-bottom:24px;}
+.wc-h{font-family:var(--F);font-size:24px;font-weight:400;color:var(--text);margin-bottom:12px;line-height:1.2;letter-spacing:-0.01em;}
+.wc-p{font-family:var(--B);font-size:13px;font-weight:300;color:var(--text-2);line-height:1.82;letter-spacing:0.01em;}
+
+/* ── WHAT PARTICIPANTS GET — dark ── */
+#participants{background:var(--forest-3);padding:140px 0;border-top:1px solid var(--bd-dark);border-bottom:1px solid var(--bd-dark);}
+.part-grid{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start;}
+.part-left .p-lbl{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.24em;text-transform:uppercase;color:rgba(198,161,91,0.4);margin-bottom:20px;}
+.part-left h2{font-family:var(--F);font-size:clamp(34px,3.8vw,52px);font-weight:400;line-height:1.06;letter-spacing:-0.025em;color:var(--ivory);margin-bottom:18px;}
+.part-left p{font-family:var(--B);font-size:15px;font-weight:300;color:rgba(242,239,231,0.38);line-height:1.88;max-width:400px;letter-spacing:0.01em;}
+.part-right{display:flex;flex-direction:column;gap:0;}
+.part-item{padding:24px 0;border-bottom:1px solid var(--bd-dark);display:grid;grid-template-columns:24px 1fr;gap:18px;align-items:start;}
+.part-item:first-child{padding-top:0;}
+.part-item:last-child{border-bottom:none;}
+.part-dot{width:5px;height:5px;border-radius:50%;background:var(--teal-2);margin-top:7px;flex-shrink:0;}
+.part-title{font-family:var(--B);font-size:14px;font-weight:500;color:var(--ivory);margin-bottom:6px;letter-spacing:0.01em;}
+.part-body{font-family:var(--B);font-size:13px;font-weight:300;color:rgba(242,239,231,0.35);line-height:1.75;letter-spacing:0.01em;}
+
+/* ── WHAT ORGS GET — parchment ── */
+#orgs{background:var(--parchment);padding:140px 0;position:relative;}
+#orgs::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");pointer-events:none;}
+.orgs-inner{position:relative;}
+.orgs-grid{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start;}
+.orgs-left .o-lbl{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.24em;text-transform:uppercase;color:var(--text-3);margin-bottom:20px;}
+.orgs-left h2{font-family:var(--F);font-size:clamp(34px,3.8vw,52px);font-weight:400;line-height:1.06;letter-spacing:-0.025em;color:var(--text);margin-bottom:18px;}
+.orgs-left p{font-family:var(--B);font-size:15px;font-weight:300;color:var(--text-2);line-height:1.88;max-width:400px;letter-spacing:0.01em;}
+.orgs-right{display:flex;flex-direction:column;gap:0;}
+.org-item{padding:24px 0;border-bottom:1px solid var(--bd-light);display:grid;grid-template-columns:24px 1fr;gap:18px;align-items:start;}
+.org-item:first-child{padding-top:0;}
+.org-item:last-child{border-bottom:none;}
+.org-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);margin-top:7px;flex-shrink:0;}
+.org-title{font-family:var(--B);font-size:14px;font-weight:500;color:var(--text);margin-bottom:6px;letter-spacing:0.01em;}
+.org-body{font-family:var(--B);font-size:13px;font-weight:300;color:var(--text-2);line-height:1.75;letter-spacing:0.01em;}
+
+/* ── PRIVACY — dark, prominent ── */
+#privacy{
+  background:var(--forest-2);
+  padding:140px 0;
+  border-top:1px solid var(--bd-dark);
+  border-bottom:1px solid var(--bd-dark);
+  text-align:center;
+}
+.priv-inner{max-width:700px;margin:0 auto;}
+.priv-rule{width:36px;height:1px;background:var(--gold);opacity:0.4;margin:0 auto 40px;}
+.priv-lbl{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.24em;text-transform:uppercase;color:rgba(198,161,91,0.4);margin-bottom:20px;}
+.priv-h{font-family:var(--F);font-size:clamp(32px,3.8vw,52px);font-weight:400;line-height:1.1;letter-spacing:-0.025em;color:var(--ivory);margin-bottom:20px;}
+.priv-h em{font-style:italic;color:var(--gold-2);font-weight:300;}
+.priv-p{font-family:var(--B);font-size:15px;font-weight:300;color:rgba(242,239,231,0.38);line-height:1.92;margin-bottom:48px;letter-spacing:0.01em;}
+.priv-items{display:flex;flex-direction:column;gap:0;text-align:left;border:1px solid var(--bd-dark);border-radius:3px;overflow:hidden;}
+.priv-item{
+  padding:22px 28px;border-bottom:1px solid var(--bd-dark);
+  display:grid;grid-template-columns:18px 1fr;gap:16px;align-items:center;
+}
+.priv-item:last-child{border-bottom:none;}
+.priv-check{width:14px;height:14px;flex-shrink:0;}
+.priv-check svg{width:14px;height:14px;stroke:var(--teal-2);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.priv-text{font-family:var(--B);font-size:13px;font-weight:300;color:rgba(242,239,231,0.45);letter-spacing:0.01em;line-height:1.6;}
+.priv-text strong{font-weight:500;color:rgba(242,239,231,0.7);}
+
+/* ── USE CASES — parchment ── */
+#usecases{background:var(--parchment);padding:140px 0;position:relative;}
+#usecases::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");pointer-events:none;}
+.uc-inner{position:relative;}
+.uc-header{margin-bottom:72px;}
+.uc-lbl{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.24em;text-transform:uppercase;color:var(--text-3);margin-bottom:20px;}
+.uc-h{font-family:var(--F);font-size:clamp(34px,3.8vw,52px);font-weight:400;line-height:1.06;letter-spacing:-0.025em;color:var(--text);}
+.uc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--bd-light);border-radius:3px;overflow:hidden;margin-bottom:20px;}
+.uc-row2{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:1px solid var(--bd-light);border-radius:3px;overflow:hidden;border-top:none;border-radius:0 0 3px 3px;}
+.uc-card{background:var(--ivory);padding:40px 34px;border-right:1px solid var(--bd-light);border-bottom:1px solid var(--bd-light);transition:background 0.25s;}
+.uc-card:last-child{border-right:none;}
+.uc-card:hover{background:var(--parchment-2);}
+.uc-grid .uc-card:nth-child(n+4){border-bottom:none;}
+.uc-row2 .uc-card{border-bottom:none;}
+.uc-tag{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-3);display:block;margin-bottom:20px;}
+.uc-name{font-family:var(--F);font-size:22px;font-weight:400;color:var(--text);margin-bottom:10px;letter-spacing:-0.01em;line-height:1.2;}
+.uc-body{font-family:var(--B);font-size:13px;font-weight:300;color:var(--text-2);line-height:1.78;letter-spacing:0.01em;}
+
+/* ── FINAL CTA — dark ── */
+#final{background:var(--forest);padding:168px 0;text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--bd-dark);}
+#final::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(24,61,43,0.45) 0%,transparent 70%);pointer-events:none;}
+.final-inner{position:relative;z-index:2;}
+.final-rule{width:36px;height:1px;background:var(--gold);opacity:0.4;margin:0 auto 40px;}
+.final-h{font-family:var(--F);font-size:clamp(40px,5vw,68px);font-weight:400;line-height:1.02;letter-spacing:-0.03em;color:var(--ivory);margin-bottom:18px;}
+.final-h em{font-style:italic;color:var(--gold-2);font-weight:300;}
+.final-p{font-family:var(--B);font-size:15px;font-weight:300;color:rgba(242,239,231,0.32);max-width:400px;margin:0 auto 52px;line-height:1.88;letter-spacing:0.01em;}
+.final-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+
+/* ── FOOTER ── */
+footer{background:var(--parchment);padding:60px 0 44px;border-top:1px solid var(--bd-light);}
+.footer-inner{display:flex;justify-content:space-between;gap:48px;flex-wrap:wrap;margin-bottom:48px;}
+.footer-brand .logo{font-family:var(--F);font-size:21px;font-weight:400;color:var(--text);display:inline-block;margin-bottom:10px;}
+.footer-brand .logo em{font-style:normal;color:var(--gold);}
+.footer-brand p{font-family:var(--B);font-size:12px;font-weight:300;color:var(--text-3);max-width:200px;line-height:1.72;letter-spacing:0.01em;margin-top:6px;}
+.footer-cols{display:flex;gap:64px;flex-wrap:wrap;}
+.footer-col h4{font-family:var(--B);font-size:9px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px;}
+.footer-col a{display:block;font-family:var(--B);font-size:12px;font-weight:300;color:var(--text-2);margin-bottom:10px;transition:color 0.2s;letter-spacing:0.01em;}
+.footer-col a:hover{color:var(--text);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--bd-light);flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-family:var(--B);font-size:11px;font-weight:300;color:rgba(26,28,25,0.22);letter-spacing:0.02em;}
+.footer-soc{display:flex;gap:20px;}
+.footer-soc a{font-family:var(--B);font-size:11px;font-weight:300;color:var(--text-3);transition:color 0.2s;}
+.footer-soc a:hover{color:var(--text);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .container,.container--narrow{padding:0 40px;}
+  nav{padding:0 40px;}
+  .st-grid,.part-grid,.orgs-grid{grid-template-columns:1fr;gap:48px;}
+  .who-grid,.uc-grid{grid-template-columns:1fr;}
+  .who-card,.uc-card{border-right:none;border-bottom:1px solid var(--bd-light);}
+  .uc-row2{grid-template-columns:1fr;border-radius:0 0 3px 3px;}
+}
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .nav-center{display:none;}
+  .container,.container--narrow{padding:0 24px;}
+  .footer-inner{flex-direction:column;}
+  .footer-cols{gap:36px;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+}
+@media(max-width:540px){
+  .hero-ctas{flex-direction:column;align-items:flex-start;}
+  .final-btns{flex-direction:column;align-items:center;}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">mun<em>ē</em></a>
+  <div class="nav-center">
+    <a href="/personal">Personal</a>
+    <a href="/organizations" class="active">Organizations</a>
+    <a href="/community">Community</a>
+    <a href="/how-it-works">How It Works</a>
+    <a href="/resources">Resources</a>
+  </div>
+  <div class="nav-right">
+    <a href="https://mune-app.vercel.app/signin" class="nav-login">Log In</a>
+    <a href="/organizations#contact" class="nav-cta">Request a Demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <!-- Professional group in a meeting, warm, diverse, real -->
+  <img class="hero-bg"
+    src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=2200&fit=crop"
+    alt="" fetchpriority="high">
+  <div class="hero-inner">
+    <div class="container">
+      <div class="hero-breadcrumb">
+        <a href="/">munē</a>
+        <span>/</span>
+        Organizations
+      </div>
+      <p class="hero-tag">For employers &amp; organizations</p>
+      <h1 class="hero-h">
+        Financial wellness that<br>
+        <em>moves people forward.</em>
+      </h1>
+      <p class="hero-p">Give your employees or members a personalized financial system — while gaining privacy-preserving program insights that show whether it is working. Individual data stays individual. Always.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-gold">Request a Demo →</a>
+        <a href="#who" class="btn-ghost">See who it serves</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section id="statement">
+  <div class="container">
+    <div class="st-grid">
+      <div class="st-left">
+        <p class="lbl">What makes this different</p>
+        <h2>Your people already have<br>access to financial apps.<br><em>They need a system<br>that actually changes things.</em></h2>
+      </div>
+      <div class="st-right">
+        <p>Most employer financial wellness programs give employees a list of resources and call it support. munē gives each person a personalized financial system — built around their actual income, their behavioral pattern, and their specific goals.</p>
+        <p>The result is not just engagement. It is measurable change in how people manage their money — which shows up in reduced financial stress, better focus, and real progress toward goals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT SERVES -->
+<section id="who">
+  <div class="container who-inner">
+    <div class="who-header">
+      <p class="who-lbl">Who brings munē to their people</p>
+      <h2 class="who-h">Built for organizations that take financial wellbeing seriously.</h2>
+    </div>
+    <div class="who-grid">
+      <div class="who-card">
+        <span class="wc-tag">Employers</span>
+        <h3 class="wc-h">HR, Benefits &amp; Total Rewards teams</h3>
+        <p class="wc-p">Add munē as an employee benefit. Every employee gets their own private financial system. You see aggregate wellness trends — never individual data.</p>
+      </div>
+      <div class="who-card">
+        <span class="wc-tag">ERGs &amp; Associations</span>
+        <h3 class="wc-h">Employee Resource Groups</h3>
+        <p class="wc-p">Bring munē to your ERG as a member benefit. Financial wellness that speaks to the specific realities of your community — not one-size advice.</p>
+      </div>
+      <div class="who-card">
+        <span class="wc-tag">Nonprofits &amp; Institutions</span>
+        <h3 class="wc-h">Member organizations &amp; associations</h3>
+        <p class="wc-p">Give members access to a financial system that meets them where they are. From unions to professional associations to faith-based institutions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT PARTICIPANTS GET -->
+<section id="participants">
+  <div class="container">
+    <div class="part-grid">
+      <div class="part-left">
+        <p class="p-lbl">What participants receive</p>
+        <h2>Their own private munē — the full personal experience.</h2>
+        <p>Every participant gets the complete munē Personal system. Private, personalized, and entirely their own. The organization never sees their individual data.</p>
+      </div>
+      <div class="part-right">
+        <div class="part-item">
+          <div class="part-dot"></div>
+          <div>
+            <div class="part-title">Their Munē Type</div>
+            <div class="part-body">A behavioral assessment that names their pattern and shapes everything the system builds for them.</div>
+          </div>
+        </div>
+        <div class="part-item">
+          <div class="part-dot"></div>
+          <div>
+            <div class="part-title">A personalized Blueprint</div>
+            <div class="part-body">Built from their real income and obligations — not a generic budget template. One rule. Thirty days. Measurable.</div>
+          </div>
+        </div>
+        <div class="part-item">
+          <div class="part-dot"></div>
+          <div>
+            <div class="part-title">Moment — statement intelligence</div>
+            <div class="part-body">Upload a statement and see exactly where money went — merchant by merchant, habit by habit — with pattern recognition that names what is actually happening.</div>
+          </div>
+        </div>
+        <div class="part-item">
+          <div class="part-dot"></div>
+          <div>
+            <div class="part-title">munē Chat</div>
+            <div class="part-body">A financial guide that knows their pattern, their Blueprint, and their goals. Not generic advice — their situation, answered.</div>
+          </div>
+        </div>
+        <div class="part-item">
+          <div class="part-dot"></div>
+          <div>
+            <div class="part-title">Journey, Vision &amp; the Receipt</div>
+            <div class="part-body">Behavioral progress tracking, goal planning, and permanent proof of what has changed. The system that shows the work is working.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT ORGS GET -->
+<section id="orgs">
+  <div class="container orgs-inner">
+    <div class="orgs-grid">
+      <div class="orgs-left">
+        <p class="o-lbl">What your organization receives</p>
+        <h2>Program intelligence — not individual data.</h2>
+        <p>You see whether the program is working. You never see how any individual is managing their money. That line is not a feature — it is the foundation of trust that makes this work.</p>
+      </div>
+      <div class="orgs-right">
+        <div class="org-item">
+          <div class="org-dot"></div>
+          <div>
+            <div class="org-title">Enrollment &amp; engagement metrics</div>
+            <div class="org-body">How many people are using munē, how often, and which experiences they are engaging with most.</div>
+          </div>
+        </div>
+        <div class="org-item">
+          <div class="org-dot"></div>
+          <div>
+            <div class="org-title">Aggregate wellness trends</div>
+            <div class="org-body">Financial stress indicators, Blueprint adherence rates, and goal-setting patterns — across your population, never per individual.</div>
+          </div>
+        </div>
+        <div class="org-item">
+          <div class="org-dot"></div>
+          <div>
+            <div class="org-title">Educational needs signals</div>
+            <div class="org-body">Which financial topics your population is engaging with most — so you can align programming to what people actually need.</div>
+          </div>
+        </div>
+        <div class="org-item">
+          <div class="org-dot"></div>
+          <div>
+            <div class="org-title">Outcome indicators over time</div>
+            <div class="org-body">Behavioral progress trends that show whether financial wellness is improving across your organization — measured, not assumed.</div>
+          </div>
+        </div>
+        <div class="org-item">
+          <div class="org-dot"></div>
+          <div>
+            <div class="org-title">Program reporting</div>
+            <div class="org-body">Clean, readable reports for HR, leadership, and benefits committees. What the program is doing and whether it is worth continuing.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section id="privacy">
+  <div class="container">
+    <div class="priv-inner">
+      <div class="priv-rule"></div>
+      <p class="priv-lbl">Privacy — non-negotiable</p>
+      <h2 class="priv-h">Individual financial data<br>stays <em>individual.</em></h2>
+      <p class="priv-p">This is not a compliance statement. It is the reason people will actually use the program. When employees trust that their financial life is private, they engage honestly. That is what creates real change.</p>
+      <div class="priv-items">
+        <div class="priv-item">
+          <div class="priv-check"><svg viewBox="0 0 14 14"><polyline points="2 7 5.5 10.5 12 3"/></svg></div>
+          <div class="priv-text"><strong>Organizations never see individual transactions, balances, or debts.</strong></div>
+        </div>
+        <div class="priv-item">
+          <div class="priv-check"><svg viewBox="0 0 14 14"><polyline points="2 7 5.5 10.5 12 3"/></svg></div>
+          <div class="priv-text"><strong>Blueprint allocations, munē Chat conversations, and personal goals are never shared</strong> with employers, managers, or HR.</div>
+        </div>
+        <div class="priv-item">
+          <div class="priv-check"><svg viewBox="0 0 14 14"><polyline points="2 7 5.5 10.5 12 3"/></svg></div>
+          <div class="priv-text"><strong>Munē Types and behavioral patterns remain private.</strong> Aggregate pattern trends are available — individual classifications are not.</div>
+        </div>
+        <div class="priv-item">
+          <div class="priv-check"><svg viewBox="0 0 14 14"><polyline points="2 7 5.5 10.5 12 3"/></svg></div>
+          <div class="priv-text"><strong>Participants own their data.</strong> When someone leaves the organization, their munē account remains entirely theirs.</div>
+        </div>
+        <div class="priv-item">
+          <div class="priv-check"><svg viewBox="0 0 14 14"><polyline points="2 7 5.5 10.5 12 3"/></svg></div>
+          <div class="priv-text"><strong>Bank statements are deleted immediately</strong> after analysis. munē never stores raw financial documents.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section id="usecases">
+  <div class="container uc-inner">
+    <div class="uc-header">
+      <p class="uc-lbl">Where it works</p>
+      <h2 class="uc-h">munē fits where financial wellbeing matters.</h2>
+    </div>
+    <div class="uc-grid">
+      <div class="uc-card">
+        <span class="uc-tag">Employers</span>
+        <div class="uc-name">Employee benefit programs</div>
+        <p class="uc-body">Add munē to your benefits stack. Reduce financial stress that affects focus, retention, and healthcare utilization — with measurable program outcomes.</p>
+      </div>
+      <div class="uc-card">
+        <span class="uc-tag">ERGs</span>
+        <div class="uc-name">Resource group programming</div>
+        <p class="uc-body">Financial wellness that speaks to the specific realities of your community — not one-size corporate advice. Built for the people your ERG actually serves.</p>
+      </div>
+      <div class="uc-card">
+        <span class="uc-tag">Unions</span>
+        <div class="uc-name">Member financial support</div>
+        <p class="uc-body">Give members a tool that understands irregular income, variable pay, and the financial realities of trades and contract work.</p>
+      </div>
+    </div>
+    <div class="uc-row2">
+      <div class="uc-card">
+        <span class="uc-tag">Nonprofits</span>
+        <div class="uc-name">Staff &amp; volunteer financial wellness</div>
+        <p class="uc-body">Your staff choose mission work over higher salaries. Give them a financial system that helps them make the most of what they have.</p>
+      </div>
+      <div class="uc-card">
+        <span class="uc-tag">Associations</span>
+        <div class="uc-name">Member benefit &amp; value-add</div>
+        <p class="uc-body">Differentiate your membership by giving members access to a financial system that actually changes how they manage their money.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="contact" style="background:var(--forest);padding:168px 0;text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--bd-dark);">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(24,61,43,0.45) 0%,transparent 70%);pointer-events:none;"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="final-rule"></div>
+    <h2 class="final-h">Ready to bring munē<br>to your <em>organization?</em></h2>
+    <p class="final-p">Tell us about your organization and we will show you exactly how munē would work for your people.</p>
+    <div class="final-btns">
+      <a href="mailto:sam@getmune.com?subject=munē%20Organizations%20Demo%20Request" class="btn-gold" style="font-size:15px;padding:17px 44px;">Request a Demo →</a>
+      <a href="/personal" class="btn-ghost">See the personal experience</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="logo">mun<em>ē</em></a>
+        <p>The knowledge you were never given, finally built into a system for you.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><h4>Product</h4><a href="/personal">Personal</a><a href="/how-it-works">How It Works</a><a href="https://mune-app.vercel.app/quiz">Take the Quiz</a><a href="/resources">Resources</a></div>
+        <div class="footer-col"><h4>For</h4><a href="/organizations">Organizations</a><a href="/community">Communities</a></div>
+        <div class="footer-col"><h4>Company</h4><a href="/about">About</a><a href="https://mune-app.vercel.app/signin">Log In</a></div>
+        <div class="footer-col"><h4>Legal</h4><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Mune Technologies Inc. · getmune.com</p>
+      <div class="footer-soc"><a href="#">Instagram</a><a href="#">X</a><a href="#">LinkedIn</a><a href="#">YouTube</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
