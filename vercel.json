@@ -4,18 +4,10 @@
     { "source": "/organizations", "destination": "/organizations.html" },
     { "source": "/community", "destination": "/community.html" },
     { "source": "/how-it-works", "destination": "/how-it-works.html" },
-    { "source": "/resources", "destination": "/resources.html" },
     { "source": "/about", "destination": "/about.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/terms", "destination": "/terms.html" },
-    { "source": "/investors", "destination": "/investors.html" },
-    { "source": "/commitments", "destination": "/commitments.html" },
-    { "source": "/quiz", "destination": "/quiz.html" }
-  ],
-  "redirects": [
-    { "source": "/platform", "destination": "/personal", "permanent": true },
-    { "source": "/workshops", "destination": "/community", "permanent": true },
-    { "source": "/company", "destination": "/about", "permanent": true },
-    { "source": "/mune", "destination": "/", "permanent": true }
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/resources", "destination": "/resources.html" }
   ]
 }
