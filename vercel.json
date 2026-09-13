@@ -1,12 +1,16 @@
 {
   "rewrites": [
-    { "source": "/mune",        "destination": "/mune.html"        },
-    { "source": "/company",     "destination": "/company.html"     },
-    { "source": "/platform",    "destination": "/platform.html"    },
-    { "source": "/investors",   "destination": "/investors.html"   },
-    { "source": "/workshops",   "destination": "/workshops.html"   },
-    { "source": "/privacy",     "destination": "/privacy.html"     },
-    { "source": "/terms",       "destination": "/terms.html"       },
-    { "source": "/commitments", "destination": "/commitments.html" }
+    { "source": "/personal", "destination": "/personal.html" },
+    { "source": "/organizations", "destination": "/organizations.html" },
+    { "source": "/community", "destination": "/community.html" },
+    { "source": "/platform", "destination": "/platform.html" },
+    { "source": "/company", "destination": "/company.html" },
+    { "source": "/investors", "destination": "/investors.html" },
+    { "source": "/commitments", "destination": "/commitments.html" },
+    { "source": "/workshops", "destination": "/workshops.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/quiz", "destination": "/quiz.html" },
+    { "source": "/mune", "destination": "/mune.html" }
   ]
 }
