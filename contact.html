@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>munē — Get in Touch</title>
+<meta name="description" content="Bring munē to your organization or community. Tell us about your situation and we will reach out.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:#07130E;color:#F2EFE7;font-family:'Manrope',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+:root{
+  --forest:#07130E;--forest-2:#0D2A1D;--forest-3:#183D2B;
+  --ivory:#F2EFE7;--parchment:#E7E0D2;--parchment-2:#DDD5C4;
+  --text:#1A1C19;--text-2:#4A4A44;--text-3:#8A8880;
+  --gold:#C6A15B;--gold-2:#D7BC82;--teal:#2A8F82;--teal-2:#3BA898;
+  --bd-dark:rgba(242,239,231,0.07);--bd-light:rgba(26,28,25,0.09);
+  --F:'Cormorant Garamond',Georgia,serif;--B:'Manrope',system-ui,sans-serif;
+}
+.container{max-width:1200px;margin:0 auto;padding:0 60px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:72px;background:rgba(7,19,14,0.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--bd-dark);}
+.nav-logo{font-family:var(--F);font-size:24px;font-weight:400;color:var(--ivory);}
+.nav-logo em{font-style:normal;color:var(--gold-2);}
+.nav-center{display:flex;gap:2px;}
+.nav-center a{font-family:var(--B);font-size:12px;font-weight:300;color:rgba(242,239,231,0.45);padding:8px 16px;border-radius:5px;transition:color 0.2s;letter-spacing:0.01em;}
+.nav-center a:hover{color:var(--ivory);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.nav-login{font-family:var(--B);font-size:12px;font-weight:300;color:rgba(242,239,231,0.38);padding:8px 14px;transition:color 0.2s;}
+.nav-login:hover{color:var(--ivory);}
+.nav-cta{font-family:var(--B);font-size:12px;font-weight:500;color:var(--text);background:var(--ivory);padding:9px 22px;border-radius:5px;transition:background 0.2s;}
+.nav-cta:hover{background:var(--parchment);}
+
+/* PAGE LAYOUT */
+.page-wrap{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  padding-top:72px;
+}
+
+/* LEFT — context */
+.left-panel{
+  background:var(--forest-2);
+  padding:80px 64px 80px 60px;
+  display:flex;flex-direction:column;justify-content:center;
+  border-right:1px solid var(--bd-dark);
+  position:sticky;top:72px;height:calc(100vh - 72px);
+}
+.left-tag{font-family:var(--B);font-size:10px;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;display:flex;align-items:center;gap:14px;}
+.left-tag::before{content:'';display:block;width:28px;height:1px;background:var(--gold);opacity:0.55;}
+.left-h{font-family:var(--F);font-size:clamp(36px,3.8vw,54px);font-weight:400;line-height:1.06;letter-spacing:-0.025em;color:var(--ivory);margin-bottom:20px;}
+.left-h em{font-style:italic;color:var(--gold-2);font-weight:300;}
+.left-p{font-family:var(--B);font-size:15px;font-weight:300;color:rgba(242,239,231,0.42);line-height:1.82;max-width:400px;margin-bottom:48px;letter-spacing:0.01em;}
+/* Three paths */
+.paths{display:flex;flex-direction:column;gap:0;}
+.path-item{
+  display:grid;grid-template-columns:28px 1fr;gap:14px;
+  padding:18px 0;border-bottom:1px solid var(--bd-dark);
+  align-items:start;
+}
+.path-item:last-child{border-bottom:none;}
+.path-dot{width:5px;height:5px;border-radius:50%;background:var(--teal-2);margin-top:7px;flex-shrink:0;}
+.path-title{font-family:var(--B);font-size:13px;font-weight:500;color:var(--ivory);margin-bottom:4px;letter-spacing:0.01em;}
+.path-body{font-family:var(--B);font-size:12px;font-weight:300;color:rgba(242,239,231,0.32);line-height:1.65;letter-spacing:0.01em;}
+
+/* RIGHT — form */
+.right-panel{
+  background:var(--parchment);
+  padding:72px 60px 80px;
+  overflow-y:auto;
+}
+
+/* Toggle */
+.toggle-wrap{display:flex;gap:0;margin-bottom:52px;background:rgba(26,28,25,0.07);border-radius:6px;padding:4px;}
+.toggle-btn{
+  flex:1;font-family:var(--B);font-size:12px;font-weight:400;
+  color:var(--text-3);padding:10px 16px;border-radius:4px;
+  border:none;background:transparent;cursor:pointer;
+  transition:all 0.2s;letter-spacing:0.02em;
+}
+.toggle-btn.active{background:var(--ivory);color:var(--text);font-weight:500;box-shadow:0 1px 4px rgba(26,28,25,0.1);}
+
+/* Form heading */
+.form-h{font-family:var(--F);font-size:clamp(28px,3vw,40px);font-weight:400;line-height:1.06;letter-spacing:-0.02em;color:var(--text);margin-bottom:10px;}
+.form-h em{font-style:italic;color:var(--teal);}
+.form-sub{font-family:var(--B);font-size:14px;font-weight:300;color:var(--text-3);margin-bottom:40px;line-height:1.65;letter-spacing:0.01em;}
+
+/* Form fields */
+form{display:flex;flex-direction:column;gap:20px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.field{display:flex;flex-direction:column;gap:6px;}
+label{font-family:var(--B);font-size:11px;font-weight:400;color:var(--text-2);letter-spacing:0.08em;text-transform:uppercase;}
+input,select,textarea{
+  font-family:var(--B);font-size:14px;font-weight:300;
+  color:var(--text);
+  background:var(--ivory);
+  border:1px solid var(--bd-light);
+  border-radius:4px;padding:13px 16px;
+  transition:border-color 0.2s,box-shadow 0.2s;
+  outline:none;
+  letter-spacing:0.01em;
+  width:100%;
+}
+input::placeholder,textarea::placeholder{color:var(--text-3);}
+input:focus,select:focus,textarea:focus{
+  border-color:rgba(42,143,130,0.4);
+  box-shadow:0 0 0 3px rgba(42,143,130,0.08);
+}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%238A8880' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:12px;padding-right:36px;cursor:pointer;}
+textarea{resize:vertical;min-height:100px;line-height:1.65;}
+
+/* Checkbox group */
+.checkbox-group{display:flex;flex-direction:column;gap:10px;}
+.checkbox-item{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.checkbox-item input[type="checkbox"]{width:16px;height:16px;flex-shrink:0;accent-color:var(--teal);cursor:pointer;}
+.checkbox-item span{font-family:var(--B);font-size:13px;font-weight:300;color:var(--text-2);letter-spacing:0.01em;}
+
+/* Submit */
+.submit-btn{
+  font-family:var(--B);font-size:14px;font-weight:500;
+  color:var(--text);background:var(--gold-2);
+  padding:16px 32px;border-radius:4px;border:none;
+  cursor:pointer;letter-spacing:0.04em;
+  transition:background 0.18s;
+  margin-top:8px;
+  align-self:flex-start;
+}
+.submit-btn:hover{background:#DFCA90;}
+
+/* Success state */
+.success-msg{
+  display:none;
+  background:rgba(42,143,130,0.08);
+  border:1px solid rgba(42,143,130,0.2);
+  border-radius:8px;padding:28px 28px;
+  margin-top:8px;
+}
+.success-msg h3{font-family:var(--F);font-size:26px;font-weight:400;color:var(--text);margin-bottom:10px;}
+.success-msg p{font-family:var(--B);font-size:14px;font-weight:300;color:var(--text-2);line-height:1.75;}
+
+/* Form sections (toggled) */
+.form-section{display:none;}
+.form-section.active{display:contents;}
+
+/* Divider */
+.field-divider{height:1px;background:var(--bd-light);margin:4px 0;}
+
+/* Note */
+.form-note{font-family:var(--B);font-size:11px;font-weight:300;color:var(--text-3);line-height:1.65;letter-spacing:0.01em;font-style:italic;}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .page-wrap{grid-template-columns:1fr;}
+  .left-panel{position:static;height:auto;padding:80px 40px 60px;}
+  .right-panel{padding:60px 40px 80px;}
+}
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .nav-center{display:none;}
+  .left-panel{padding:60px 20px 48px;}
+  .right-panel{padding:48px 20px 64px;}
+  .field-row{grid-template-columns:1fr;}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">mun<em>ē</em></a>
+  <div class="nav-center">
+    <a href="/personal">Personal</a>
+    <a href="/organizations">Organizations</a>
+    <a href="/community">Community</a>
+    <a href="/how-it-works">How It Works</a>
+    <a href="/resources">Resources</a>
+  </div>
+  <div class="nav-right">
+    <a href="https://mune-app.vercel.app/signin" class="nav-login">Log In</a>
+    <a href="https://mune-app.vercel.app/quiz" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+
+  <!-- LEFT — context panel -->
+  <div class="left-panel">
+    <p class="left-tag">Let's talk</p>
+    <h1 class="left-h">Tell us about<br>who you serve.<br><em>We'll build from there.</em></h1>
+    <p class="left-p">munē is not a one-size program. Every organization and community is different. Tell us your situation and we will come back with exactly what makes sense for your people.</p>
+    <div class="paths">
+      <div class="path-item">
+        <div class="path-dot"></div>
+        <div>
+          <div class="path-title">For Organizations</div>
+          <div class="path-body">Employers, HR teams, ERGs, associations, and nonprofits. Financial wellness for your employees or members — with privacy-preserving program insights for you.</div>
+        </div>
+      </div>
+      <div class="path-item">
+        <div class="path-dot"></div>
+        <div>
+          <div class="path-title">For Communities</div>
+          <div class="path-body">Churches, schools, youth programs, community organizations. Workshops, series, sponsored access, and community challenges — in person or virtual.</div>
+        </div>
+      </div>
+      <div class="path-item">
+        <div class="path-dot"></div>
+        <div>
+          <div class="path-title">What happens next</div>
+          <div class="path-body">Sam will reach out within 48 hours to learn more and talk through what a program would look like for your specific situation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT — form panel -->
+  <div class="right-panel">
+
+    <!-- Toggle -->
+    <div class="toggle-wrap">
+      <button class="toggle-btn active" onclick="showForm('org')">For Organizations</button>
+      <button class="toggle-btn" onclick="showForm('community')">For Communities</button>
+    </div>
+
+    <!-- ORG FORM -->
+    <div id="org-form">
+      <h2 class="form-h">Request a <em>demo.</em></h2>
+      <p class="form-sub">Tell us about your organization. We will reach out within 48 hours.</p>
+      <form
+        action="https://formspree.io/f/xbgjvllv"
+        method="POST"
+        onsubmit="handleSubmit(event, 'org-success')"
+      >
+        <input type="hidden" name="_subject" value="munē — Organization Demo Request">
+        <input type="hidden" name="_replyto" value="">
+        <input type="text" name="_gotcha" style="display:none">
+
+        <div class="field-row">
+          <div class="field">
+            <label for="org-name">Your name</label>
+            <input type="text" id="org-name" name="name" placeholder="Sam Oshobukola" required>
+          </div>
+          <div class="field">
+            <label for="org-title">Your title</label>
+            <input type="text" id="org-title" name="title" placeholder="Head of Benefits">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="org-org">Organization name</label>
+          <input type="text" id="org-org" name="organization" placeholder="Acme Corporation" required>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="org-type">Organization type</label>
+            <select id="org-type" name="org_type" required>
+              <option value="" disabled selected>Select one</option>
+              <option>Employer</option>
+              <option>Employee Resource Group (ERG)</option>
+              <option>Nonprofit organization</option>
+              <option>Professional association</option>
+              <option>Union</option>
+              <option>Financial institution</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="org-size">Number of employees / members</label>
+            <select id="org-size" name="size">
+              <option value="" disabled selected>Select range</option>
+              <option>Under 50</option>
+              <option>50 – 250</option>
+              <option>251 – 1,000</option>
+              <option>1,001 – 5,000</option>
+              <option>5,000+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>What are you trying to solve?</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox" name="goals" value="Reduce financial stress among employees/members"><span>Reduce financial stress among employees or members</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="goals" value="Add a meaningful financial wellness benefit"><span>Add a meaningful financial wellness benefit</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="goals" value="Measure program outcomes and engagement"><span>Measure program outcomes and engagement</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="goals" value="Support a specific community or ERG"><span>Support a specific community or ERG</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="goals" value="Other"><span>Something else</span></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="org-message">Anything else we should know?</label>
+          <textarea id="org-message" name="message" placeholder="Tell us about your current benefits setup, timeline, specific communities you serve, or anything that helps us understand your situation."></textarea>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="org-email">Best email to reach you</label>
+            <input type="email" id="org-email" name="email" placeholder="sam@company.com" required>
+          </div>
+          <div class="field">
+            <label for="org-phone">Phone (optional)</label>
+            <input type="tel" id="org-phone" name="phone" placeholder="+1 (555) 000-0000">
+          </div>
+        </div>
+
+        <p class="form-note">We will not add you to any mailing list. This goes directly to Sam.</p>
+        <button type="submit" class="submit-btn">Send →</button>
+      </form>
+      <div id="org-success" class="success-msg">
+        <h3>Got it. Talk soon.</h3>
+        <p>Sam will reach out within 48 hours to learn more about your organization and what a munē program could look like for your people.</p>
+      </div>
+    </div>
+
+    <!-- COMMUNITY FORM -->
+    <div id="community-form" style="display:none;">
+      <h2 class="form-h">Bring munē to your <em>community.</em></h2>
+      <p class="form-sub">Tell us about who you serve. We will reach out within 48 hours.</p>
+      <form
+        action="https://formspree.io/f/mnpqknne"
+        method="POST"
+        onsubmit="handleSubmit(event, 'community-success')"
+      >
+        <input type="hidden" name="_subject" value="munē — Community Program Inquiry">
+        <input type="text" name="_gotcha" style="display:none">
+
+        <div class="field-row">
+          <div class="field">
+            <label for="com-name">Your name</label>
+            <input type="text" id="com-name" name="name" placeholder="Sam Oshobukola" required>
+          </div>
+          <div class="field">
+            <label for="com-role">Your role</label>
+            <input type="text" id="com-role" name="role" placeholder="Pastor / Director / Coordinator">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="com-org">Organization or community name</label>
+          <input type="text" id="com-org" name="organization" placeholder="New Hope Church / Lincoln High School" required>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="com-type">Community type</label>
+            <select id="com-type" name="community_type" required>
+              <option value="" disabled selected>Select one</option>
+              <option>Church or faith community</option>
+              <option>School or university</option>
+              <option>Nonprofit organization</option>
+              <option>Youth program or after-school</option>
+              <option>Employee Resource Group (ERG)</option>
+              <option>Community organization</option>
+              <option>Foundation</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="com-size">How many people do you serve?</label>
+            <select id="com-size" name="community_size">
+              <option value="" disabled selected>Approximate number</option>
+              <option>Under 50</option>
+              <option>50 – 200</option>
+              <option>201 – 500</option>
+              <option>501 – 2,000</option>
+              <option>2,000+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>What programs are you interested in?</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox" name="programs" value="munē Workshop (single session)"><span>munē Workshop — single session, 60–90 minutes</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="programs" value="Financial Wellness Series (multi-session)"><span>Financial Wellness Series — 4–8 week program</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="programs" value="munē Access (continued app access)"><span>munē Access — continued access after the workshop</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="programs" value="Community Challenge (30–90 day initiative)"><span>Community Challenge — 30–90 day behavioral initiative</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="programs" value="Sponsored Access (fund access for community)"><span>Sponsored Access — fund munē access for my community</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="programs" value="Not sure yet"><span>Not sure yet — tell me what makes sense</span></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="com-delivery">Delivery preference</label>
+          <select id="com-delivery" name="delivery">
+            <option value="" disabled selected>Select one</option>
+            <option>In person</option>
+            <option>Virtual / video</option>
+            <option>Either works</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="com-timeline">When are you thinking?</label>
+          <select id="com-timeline" name="timeline">
+            <option value="" disabled selected>Rough timeline</option>
+            <option>As soon as possible</option>
+            <option>Within the next month</option>
+            <option>1–3 months</option>
+            <option>3–6 months</option>
+            <option>Planning for next year</option>
+            <option>Just exploring for now</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="com-message">Tell us about your community</label>
+          <textarea id="com-message" name="message" placeholder="What is the financial reality your community is navigating? What have you tried before? What would success look like for you?"></textarea>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="com-email">Best email to reach you</label>
+            <input type="email" id="com-email" name="email" placeholder="you@organization.org" required>
+          </div>
+          <div class="field">
+            <label for="com-phone">Phone (optional)</label>
+            <input type="tel" id="com-phone" name="phone" placeholder="+1 (555) 000-0000">
+          </div>
+        </div>
+
+        <p class="form-note">We will not add you to any mailing list. This goes directly to Sam.</p>
+        <button type="submit" class="submit-btn">Send →</button>
+      </form>
+      <div id="community-success" class="success-msg">
+        <h3>Got it. Talk soon.</h3>
+        <p>Sam will reach out within 48 hours to learn more about your community and what a munē program could look like for the people you serve.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Auto-select tab based on URL param
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search)
+  const type = params.get('type')
+  if (type === 'community') showForm('community')
+})
+
+function showForm(type) {
+  document.getElementById('org-form').style.display = type === 'org' ? 'block' : 'none'
+  document.getElementById('community-form').style.display = type === 'community' ? 'block' : 'none'
+  document.querySelectorAll('.toggle-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', (type === 'org' && i === 0) || (type === 'community' && i === 1))
+  })
+}
+
+function handleSubmit(e, successId) {
+  e.preventDefault()
+  const form = e.target
+  const data = new FormData(form)
+
+  fetch(form.action, {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(res => {
+    if (res.ok) {
+      form.style.display = 'none'
+      document.getElementById(successId).style.display = 'block'
+    } else {
+      alert('Something went wrong. Please email sam@getmune.com directly.')
+    }
+  }).catch(() => {
+    alert('Something went wrong. Please email sam@getmune.com directly.')
+  })
+}
+</script>
+
+</body>
+</html>
