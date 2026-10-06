@@ -1,14 +1,24 @@
 {
+  "redirects": [
+    { "source": "/personal", "destination": "/work-with-mune#personal", "permanent": false },
+    { "source": "/personal.html", "destination": "/work-with-mune#personal", "permanent": false },
+    { "source": "/organizations", "destination": "/work-with-mune#organization", "permanent": false },
+    { "source": "/organizations.html", "destination": "/work-with-mune#organization", "permanent": false },
+    { "source": "/community", "destination": "/work-with-mune#community", "permanent": false },
+    { "source": "/community.html", "destination": "/work-with-mune#community", "permanent": false },
+    { "source": "/contact", "destination": "/work-with-mune", "permanent": false },
+    { "source": "/contact.html", "destination": "/work-with-mune", "permanent": false },
+    { "source": "/investors", "destination": "/about", "permanent": false },
+    { "source": "/investors.html", "destination": "/about", "permanent": false },
+    { "source": "/commitments", "destination": "/how-it-works", "permanent": false },
+    { "source": "/commitments.html", "destination": "/how-it-works", "permanent": false }
+  ],
   "rewrites": [
-    { "source": "/personal", "destination": "/personal.html" },
-    { "source": "/organizations", "destination": "/organizations.html" },
-    { "source": "/community", "destination": "/community.html" },
-    { "source": "/how-it-works", "destination": "/how-it-works.html" },
     { "source": "/work-with-mune", "destination": "/work-with-mune.html" },
+    { "source": "/how-it-works", "destination": "/how-it-works.html" },
     { "source": "/about", "destination": "/about.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/terms", "destination": "/terms.html" },
-    { "source": "/contact", "destination": "/contact.html" },
     { "source": "/resources", "destination": "/resources.html" }
   ]
 }
