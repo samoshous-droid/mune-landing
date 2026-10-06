@@ -4,6 +4,7 @@
     { "source": "/organizations", "destination": "/organizations.html" },
     { "source": "/community", "destination": "/community.html" },
     { "source": "/how-it-works", "destination": "/how-it-works.html" },
+    { "source": "/work-with-mune", "destination": "/work-with-mune.html" },
     { "source": "/about", "destination": "/about.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/terms", "destination": "/terms.html" },
