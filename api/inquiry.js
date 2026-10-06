@@ -13,10 +13,30 @@ function escapeHtml(value) {
     .replaceAll("'", '&#039;');
 }
 
-function subjectFor(type, name, organization) {
+function subjectFor(type, name, organization, issue) {
   if (type === 'organization') return `ORGANIZATION — Munē Organization Inquiry — ${organization || name}`;
   if (type === 'community') return `COMMUNITY — Munē Community Inquiry — ${organization || name}`;
-  return `PERSONAL — Munē Personal Inquiry — ${name}`;
+  return `PERSONAL — Munē Personal Inquiry — ${name}${issue ? ` — ${issue}` : ''}`;
+}
+
+const recentByIp = new Map();
+function tooManyRequests(ip) {
+  if (!ip) return false;
+  const now = Date.now();
+  const windowMs = 10 * 60 * 1000;
+  const limit = 5;
+  const recent = (recentByIp.get(ip) || []).filter(ts => now - ts < windowMs);
+  if (recent.length >= limit) return true;
+  recent.push(now);
+  recentByIp.set(ip, recent);
+  if (recentByIp.size > 1000) {
+    for (const [key, times] of recentByIp) {
+      const live = times.filter(ts => now - ts < windowMs);
+      if (live.length) recentByIp.set(key, live);
+      else recentByIp.delete(key);
+    }
+  }
+  return false;
 }
 
 export default async function handler(req, res) {
@@ -39,7 +59,13 @@ export default async function handler(req, res) {
   if (clean(body.website, 200)) return res.status(200).json({ ok: true });
 
   const startedAt = Number(body.startedAt || 0);
-  if (startedAt && Date.now() - startedAt < 1800) return res.status(400).json({ error: 'Please wait a moment and try again.' });
+  if (!startedAt || !Number.isFinite(startedAt)) return res.status(400).json({ error: 'Please refresh the form and try again.' });
+  const elapsed = Date.now() - startedAt;
+  if (elapsed < 1800 || elapsed > 2 * 60 * 60 * 1000) return res.status(400).json({ error: 'Please refresh the form and try again.' });
+
+  const forwarded = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim();
+  const ip = forwarded || req.socket?.remoteAddress || '';
+  if (tooManyRequests(ip)) return res.status(429).json({ error: 'Too many requests. Please wait and try again.' });
 
   const name = clean(body.name, 120);
   const email = clean(body.email, 180);
@@ -89,7 +115,7 @@ export default async function handler(req, res) {
       from,
       to: ['sam@getmune.com'],
       reply_to: email,
-      subject: subjectFor(type, name, organization),
+      subject: subjectFor(type, name, organization, issue),
       html
     })
   });
