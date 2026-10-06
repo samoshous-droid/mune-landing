@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work With Munē — Personal, organization and community support</title>
+<meta name="description" content="Work with Munē through personal support, your organization, or your community.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--black-green:#0D2A1D;--deep-forest:#0D2A1D;--heritage:#183D2B;--ivory:#F2EFE7;--parchment:#E7E0D2;--gold:#C6A15B;--gold-light:#D7BC82;--charcoal:#1A1C19;--F:'Cormorant Garamond',Georgia,serif;--B:'Manrope',system-ui,sans-serif;--bd-dark:rgba(242,239,231,.08)}
+html{scroll-behavior:smooth}body{background:var(--black-green);color:var(--ivory);font-family:var(--B);font-weight:300;-webkit-font-smoothing:antialiased}a{color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:68px;background:rgba(7,19,14,.90);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd-dark)}
+.nav-wordmark{font-family:var(--F);font-size:26px;font-weight:400;text-decoration:none}.nav-wordmark span{color:var(--gold-light)}.nav-links{display:none}.nav-right{display:flex;align-items:center;gap:10px}.nav-links a,.nav-login{font-size:13px;color:rgba(242,239,231,.48);text-decoration:none;padding:8px 14px}.nav-links a:hover,.nav-login:hover{color:var(--ivory)}.nav-cta,.btn-gold{font-family:var(--B);font-size:13px;font-weight:500;color:var(--charcoal);background:var(--gold-light);text-decoration:none;padding:11px 20px;border-radius:4px;display:inline-block;border:0;cursor:pointer}.btn-gold{font-size:14px;padding:15px 30px}.nav-cta:hover,.btn-gold:hover{background:#EDCC78}.btn-ghost{font-size:14px;color:rgba(242,239,231,.68);border:1px solid rgba(242,239,231,.22);padding:14px 28px;border-radius:4px;text-decoration:none;display:inline-block}
+@media(min-width:900px){.nav-links{display:flex;align-items:center;gap:2px}}@media(max-width:600px){nav{padding:0 22px}.nav-login{display:none}}
+.hero{position:relative;min-height:66vh;display:flex;align-items:center;overflow:hidden;padding-top:68px}.hero-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=2400&q=80');background-size:cover;background-position:center 38%;filter:brightness(.23)}.hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(7,19,14,.58),rgba(7,19,14,.30),rgba(7,19,14,.72))}.hero-inner{position:relative;z-index:1;max-width:1160px;margin:auto;padding:72px 48px;width:100%}.eyebrow,.label{font-size:11px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-light);margin-bottom:20px}.hero h1{font-family:var(--F);font-size:clamp(44px,6vw,76px);font-weight:400;line-height:1;letter-spacing:-.025em;max-width:800px;margin-bottom:22px}.hero h1 em{font-style:italic;color:var(--gold-light)}.hero p{font-size:16px;line-height:1.82;color:rgba(242,239,231,.60);max-width:650px}
+.section{padding:108px 0}.section.alt{background:var(--heritage)}.inner{max-width:1160px;margin:auto;padding:0 48px}.narrow{max-width:900px;margin:auto;padding:0 48px}.h2{font-family:var(--F);font-size:clamp(34px,4vw,54px);font-weight:400;line-height:1.08;letter-spacing:-.02em;margin-bottom:18px}.lede{font-size:15px;line-height:1.82;color:rgba(242,239,231,.50);max-width:670px}
+@media(max-width:700px){.hero-inner,.inner,.narrow{padding-left:24px;padding-right:24px}.section{padding:84px 0}}
+footer{background:var(--black-green);border-top:1px solid var(--bd-dark);padding:44px 48px}.footer-inner{max-width:1160px;margin:auto;display:flex;justify-content:space-between;gap:28px;align-items:flex-start;flex-wrap:wrap}.footer-wordmark{font-family:var(--F);font-size:23px}.footer-wordmark span{color:var(--gold-light)}.footer-tag{font-family:var(--F);font-style:italic;font-size:14px;color:rgba(242,239,231,.38);margin-top:5px}.footer-links{display:flex;gap:22px;flex-wrap:wrap}.footer-links a,.career-line{font-size:11px;color:rgba(242,239,231,.33);text-decoration:none}.career-line{width:100%;max-width:1160px;margin:28px auto 0;padding-top:22px;border-top:1px solid var(--bd-dark)}.career-line a{color:var(--gold-light);text-decoration:none}@media(max-width:600px){footer{padding:38px 24px}}
+
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}.choice{display:block;background:var(--deep-forest);border:1px solid var(--bd-dark);padding:34px;text-decoration:none}.choice:hover{border-color:rgba(198,161,91,.28)}.choice h3{font-family:var(--F);font-size:28px;font-weight:400;margin-bottom:10px}.choice p{font-size:13px;line-height:1.75;color:rgba(242,239,231,.43);margin-bottom:22px}.choice span{font-size:12px;color:var(--gold-light)}
+.form-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:start}.form-copy .lede{margin-bottom:18px}.form-card{background:var(--deep-forest);border:1px solid var(--bd-dark);padding:38px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{display:flex;flex-direction:column;gap:8px}.field.full{grid-column:1/-1}.field label{font-size:11px;letter-spacing:.06em;color:rgba(242,239,231,.55)}input,select,textarea{width:100%;background:rgba(242,239,231,.035);border:1px solid rgba(242,239,231,.12);color:var(--ivory);font-family:var(--B);font-size:13px;padding:14px;border-radius:4px;outline:none}select option{color:#111}textarea{min-height:135px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:rgba(215,188,130,.55)}.hint{font-size:10px;line-height:1.6;color:rgba(242,239,231,.30)}.form-footer{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:22px}.status{font-size:12px;color:rgba(242,239,231,.48);min-height:18px}.status.ok{color:var(--gold-light)}.status.err{color:#e0a596}.legal{font-size:10px!important;line-height:1.65!important;color:rgba(242,239,231,.28)!important;margin-top:18px}.hp{position:absolute!important;left:-9999px!important;opacity:0!important;pointer-events:none!important}
+@media(max-width:850px){.choices{grid-template-columns:1fr}.form-wrap{grid-template-columns:1fr}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}}
+</style></head><body><nav>
+  <a href="/" class="nav-wordmark">mun<span>ē</span></a>
+  <div class="nav-links"><a href="/how-it-works">How It Works</a><a href="/work-with-mune">Work With Munē</a><a href="/about">About</a></div>
+  <div class="nav-right"><a href="https://mune-app.vercel.app/signin" class="nav-login">Sign In</a><a href="https://mune-app.vercel.app/quiz" class="nav-cta">Get Started</a></div>
+</nav>
+<section class="hero"><div class="hero-bg"></div><div class="hero-overlay"></div><div class="hero-inner"><p class="eyebrow">Work With Munē</p><h1>How can Munē <em>help?</em></h1><p>Choose the path that fits what you are trying to solve. Keep it simple. We will start from there.</p></div></section>
+
+<section class="section"><div class="inner"><p class="label">Choose a path</p><h2 class="h2">One Munē. Three ways to work together.</h2>
+<div class="choices"><a class="choice" href="#personal"><h3>Personal Support</h3><p>For a situation that needs more conversation, context, or human support.</p><span>Tell us what you're working through →</span></a>
+<a class="choice" href="#organization"><h3>Organization</h3><p>For employers, associations and organizations interested in bringing Munē to their people.</p><span>Bring Munē to my team →</span></a>
+<a class="choice" href="#community"><h3>Community</h3><p>For churches, schools, nonprofits, associations and community-serving groups.</p><span>Bring Munē to my community →</span></a></div></div></section>
+
+<section class="section alt" id="personal"><div class="inner form-wrap"><div class="form-copy"><p class="label">Personal Support</p><h2 class="h2">Tell us what you're working through.</h2><p class="lede">Sometimes the financial behavior, the numbers, and the life around them need to be looked at together. A Munē Partner can help you understand the situation and build the next step with you.</p><p class="lede">Starting to invest. Preparing for retirement. A financial reset. Running a business. A major life change.</p></div>
+<div class="form-card"><form class="inquiry-form" data-type="personal">
+<input class="hp" type="text" name="website" tabindex="-1" autocomplete="off">
+<input type="hidden" name="startedAt" value="">
+<div class="fields">
+<div class="field"><label for="p-name">Name</label><input id="p-name" name="name" required autocomplete="name"></div>
+<div class="field"><label for="p-email">Email</label><input id="p-email" name="email" type="email" required autocomplete="email"></div>
+<div class="field"><label for="p-phone">Phone <span style="opacity:.5">optional</span></label><input id="p-phone" name="phone" type="tel" autocomplete="tel"></div>
+<div class="field"><label for="p-issue">What are you working through?</label><select id="p-issue" name="issue" required><option value="">Choose one</option><option>Getting my money under control</option><option>Starting to invest</option><option>Preparing for retirement</option><option>Business / self-employment</option><option>Financial reset</option><option>Major life change</option><option>Something else</option><option>Not sure</option></select></div>
+<div class="field full"><label for="p-note">Tell us a little about what's going on.</label><textarea id="p-note" name="note" required maxlength="2500"></textarea><p class="hint">Please do not include account numbers, Social Security numbers, passwords, or other sensitive financial information.</p></div>
+</div><div class="form-footer"><button class="btn-gold" type="submit">Tell Us What You're Working Through</button><span class="status" aria-live="polite"></span></div>
+<p class="legal">Munē provides financial education and financial behavior support, not investment, tax, or legal advice.</p></form></div></div></section>
+
+<section class="section" id="organization"><div class="inner form-wrap"><div class="form-copy"><p class="label">Organizations</p><h2 class="h2">Bring Munē to your team.</h2><p class="lede">Tell us what you want to provide or solve. We are keeping organization partnerships flexible while we learn what creates the most useful financial behavior support.</p></div>
+<div class="form-card"><form class="inquiry-form" data-type="organization">
+<input class="hp" type="text" name="website" tabindex="-1" autocomplete="off"><input type="hidden" name="startedAt" value="">
+<div class="fields">
+<div class="field"><label for="o-name">Name</label><input id="o-name" name="name" required autocomplete="name"></div>
+<div class="field"><label for="o-email">Email</label><input id="o-email" name="email" type="email" required autocomplete="email"></div>
+<div class="field"><label for="o-org">Organization</label><input id="o-org" name="organization" required></div>
+<div class="field"><label for="o-size">Approximate organization size</label><input id="o-size" name="size" placeholder="e.g. 250 employees"></div>
+<div class="field full"><label for="o-goal">What are you trying to provide or solve?</label><textarea id="o-goal" name="note" required maxlength="2500"></textarea></div>
+</div><div class="form-footer"><button class="btn-gold" type="submit">Bring Munē to My Team</button><span class="status" aria-live="polite"></span></div></form></div></div></section>
+
+<section class="section alt" id="community"><div class="inner form-wrap"><div class="form-copy"><p class="label">Community</p><h2 class="h2">Bring Munē to your community.</h2><p class="lede">For churches, nonprofits, schools, associations, professional groups and other community-serving organizations. Programs can be paid, sponsored, grant-supported, or structured through an approved Munē initiative.</p></div>
+<div class="form-card"><form class="inquiry-form" data-type="community">
+<input class="hp" type="text" name="website" tabindex="-1" autocomplete="off"><input type="hidden" name="startedAt" value="">
+<div class="fields">
+<div class="field"><label for="c-name">Name</label><input id="c-name" name="name" required autocomplete="name"></div>
+<div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
+<div class="field"><label for="c-org">Organization / community</label><input id="c-org" name="organization" required></div>
+<div class="field"><label for="c-audience">Audience</label><input id="c-audience" name="audience" placeholder="Who would this serve?"></div>
+<div class="field"><label for="c-size">Approximate group size</label><input id="c-size" name="size"></div>
+<div class="field"><label for="c-time">Preferred timeframe</label><input id="c-time" name="timeframe" placeholder="e.g. January 2027"></div>
+<div class="field full"><label for="c-goal">What would you like Munē to help with?</label><textarea id="c-goal" name="note" required maxlength="2500"></textarea></div>
+</div><div class="form-footer"><button class="btn-gold" type="submit">Bring Munē to My Community</button><span class="status" aria-live="polite"></span></div></form></div></div></section>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-wordmark">mun<span>ē</span></div><div class="footer-tag">The knowledge you were never given.</div></div>
+    <div class="footer-links"><a href="/how-it-works">How It Works</a><a href="/work-with-mune">Work With Munē</a><a href="/about">About</a><a href="https://mune-app.vercel.app/signin">Sign In</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
+  </div>
+  <div class="career-line">Interested in becoming a Munē Partner? <a href="mailto:sam@getmune.com?subject=Mun%C4%93%20Partner%20Interest">Email us.</a></div>
+</footer>
+<script>
+const forms = document.querySelectorAll('.inquiry-form');
+forms.forEach(form => {
+  const started = form.querySelector('input[name="startedAt"]');
+  started.value = String(Date.now());
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const button = form.querySelector('button[type="submit"]');
+    const status = form.querySelector('.status');
+    button.disabled = true;
+    status.className = 'status';
+    status.textContent = 'Sending…';
+    const data = Object.fromEntries(new FormData(form).entries());
+    data.type = form.dataset.type;
+    try {
+      const response = await fetch('/api/inquiry', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(data)
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || 'Unable to send your message.');
+      form.reset();
+      started.value = String(Date.now());
+      status.className = 'status ok';
+      status.textContent = "We received it. We'll be in touch with the next step.";
+    } catch (error) {
+      status.className = 'status err';
+      status.textContent = error.message || 'Unable to send right now. Please try again.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+});
+</script></body></html>
