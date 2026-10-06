@@ -1,16 +1,8 @@
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xbgjvllv';
 
 function clean(value, max = 2500) {
   return String(value || '').trim().slice(0, max);
-}
-
-function escapeHtml(value) {
-  return clean(value)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
 }
 
 function subjectFor(type, name, organization, issue) {
@@ -83,46 +75,32 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Please include your organization or community.' });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.RESEND_FROM_EMAIL;
-  if (!apiKey || !from) {
-    console.error('Inquiry email is not configured: missing RESEND_API_KEY or RESEND_FROM_EMAIL.');
-    return res.status(503).json({ error: 'Inquiry delivery is being configured. Please email sam@getmune.com for now.' });
-  }
+  const payload = new URLSearchParams();
+  payload.set('_subject', subjectFor(type, name, organization, issue));
+  payload.set('_replyto', email);
+  payload.set('type', type);
+  payload.set('name', name);
+  payload.set('email', email);
+  if (phone) payload.set('phone', phone);
+  if (issue) payload.set('issue', issue);
+  if (organization) payload.set('organization', organization);
+  if (size) payload.set('size', size);
+  if (audience) payload.set('audience', audience);
+  if (timeframe) payload.set('timeframe', timeframe);
+  payload.set('message', note);
 
-  const lines = [
-    ['Type', type],
-    ['Name', name],
-    ['Email', email],
-    ['Phone', phone],
-    ['Issue', issue],
-    ['Organization / Community', organization],
-    ['Size', size],
-    ['Audience', audience],
-    ['Timeframe', timeframe],
-    ['Message', note],
-  ].filter(([, value]) => value);
-
-  const html = `<div style="font-family:Arial,sans-serif;line-height:1.6">
-    <h2>New Munē website inquiry</h2>
-    ${lines.map(([label, value]) => `<p><strong>${escapeHtml(label)}:</strong><br>${escapeHtml(value).replace(/\n/g, '<br>')}</p>`).join('')}
-  </div>`;
-
-  const response = await fetch('https://api.resend.com/emails', {
+  const response = await fetch(FORMSPREE_ENDPOINT, {
     method: 'POST',
-    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from,
-      to: ['sam@getmune.com'],
-      reply_to: email,
-      subject: subjectFor(type, name, organization, issue),
-      html
-    })
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    },
+    body: payload.toString()
   });
 
   if (!response.ok) {
     const detail = await response.text();
-    console.error('Resend inquiry failure:', response.status, detail.slice(0, 500));
+    console.error('Formspree inquiry failure:', response.status, detail.slice(0, 500));
     return res.status(502).json({ error: 'Unable to send right now. Please try again.' });
   }
 
