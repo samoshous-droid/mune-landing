@@ -1,5 +1,8 @@
 {
   "redirects": [
+    { "source": "/quiz", "destination": "https://mune-app.vercel.app/quiz", "permanent": false },
+    { "source": "/quiz.html", "destination": "https://mune-app.vercel.app/quiz", "permanent": false },
+
     { "source": "/personal", "destination": "/work-with-mune#personal", "permanent": false },
     { "source": "/personal.html", "destination": "/work-with-mune#personal", "permanent": false },
     { "source": "/organizations", "destination": "/work-with-mune#organization", "permanent": false },
@@ -11,14 +14,24 @@
     { "source": "/investors", "destination": "/about", "permanent": false },
     { "source": "/investors.html", "destination": "/about", "permanent": false },
     { "source": "/commitments", "destination": "/how-it-works", "permanent": false },
-    { "source": "/commitments.html", "destination": "/how-it-works", "permanent": false }
+    { "source": "/commitments.html", "destination": "/how-it-works", "permanent": false },
+
+    { "source": "/mune", "destination": "/", "permanent": false },
+    { "source": "/mune.html", "destination": "/", "permanent": false },
+    { "source": "/platform", "destination": "/", "permanent": false },
+    { "source": "/platform.html", "destination": "/", "permanent": false },
+    { "source": "/company", "destination": "/about", "permanent": false },
+    { "source": "/company.html", "destination": "/about", "permanent": false },
+    { "source": "/workshops", "destination": "/work-with-mune#community", "permanent": false },
+    { "source": "/workshops.html", "destination": "/work-with-mune#community", "permanent": false },
+    { "source": "/resources", "destination": "/", "permanent": false },
+    { "source": "/resources.html", "destination": "/", "permanent": false }
   ],
   "rewrites": [
     { "source": "/work-with-mune", "destination": "/work-with-mune.html" },
     { "source": "/how-it-works", "destination": "/how-it-works.html" },
     { "source": "/about", "destination": "/about.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
-    { "source": "/terms", "destination": "/terms.html" },
-    { "source": "/resources", "destination": "/resources.html" }
+    { "source": "/terms", "destination": "/terms.html" }
   ]
 }
