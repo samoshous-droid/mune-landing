@@ -1,13 +1,67 @@
 {
   "rewrites": [
-    { "source": "/personal", "destination": "/personal.html" },
-    { "source": "/organizations", "destination": "/organizations.html" },
-    { "source": "/community", "destination": "/community.html" },
-    { "source": "/how-it-works", "destination": "/how-it-works.html" },
-    { "source": "/about", "destination": "/about.html" },
-    { "source": "/privacy", "destination": "/privacy.html" },
-    { "source": "/terms", "destination": "/terms.html" },
-    { "source": "/contact", "destination": "/contact.html" },
-    { "source": "/resources", "destination": "/resources.html" }
+    {
+      "source": "/personal",
+      "destination": "/personal.html"
+    },
+    {
+      "source": "/organizations",
+      "destination": "/organizations.html"
+    },
+    {
+      "source": "/community",
+      "destination": "/community.html"
+    },
+    {
+      "source": "/how-it-works",
+      "destination": "/how-it-works.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/resources",
+      "destination": "/resources.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'none'; object-src 'none'; base-uri 'self'"
+        }
+      ]
+    }
   ]
 }
